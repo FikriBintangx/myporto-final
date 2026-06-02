@@ -856,3 +856,18 @@ a {
 .drag-hint .arrow {
     margin-bottom: 2px;
 }
+
+@media (max-width: 768px) {
+    .draggable-wrapper {
+        flex-direction: column !important;
+        gap: 0.25rem;
+    }
+    .drag-hint .arrow {
+        display: none;
+    }
+    .layout-left .drag-hint,
+    .layout-right .drag-hint {
+        align-items: center;
+        font-size: 0.6rem;
+    }
+}
