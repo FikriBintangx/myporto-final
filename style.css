@@ -806,15 +806,21 @@ a {
 
 .draggable-wrapper {
     position: absolute;
-    width: clamp(100px, 15vw, 220px);
     cursor: grab;
     z-index: 100;
     user-select: none;
     -webkit-user-drag: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+}
+
+.draggable-wrapper.layout-left {
+    flex-direction: row;
+}
+
+.draggable-wrapper.layout-right {
+    flex-direction: row;
 }
 
 .draggable-wrapper:active {
@@ -822,7 +828,7 @@ a {
 }
 
 .draggable-asset {
-    width: 100%;
+    width: clamp(100px, 15vw, 220px);
     mix-blend-mode: multiply;
     pointer-events: none; /* Let wrapper handle drag */
     filter: drop-shadow(4px 4px 0px rgba(51, 153, 255, 0.2));
@@ -830,19 +836,23 @@ a {
 
 .drag-hint {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     color: var(--text-primary);
     opacity: 0.6;
     letter-spacing: 1px;
-    border-bottom: 1px dashed var(--text-primary);
-    padding-bottom: 2px;
+    display: flex;
+    flex-direction: column;
     pointer-events: none;
 }
 
-.drag-hint::before {
-    content: '< - - ';
+.layout-right .drag-hint {
+    align-items: flex-end;
 }
 
-.drag-hint::after {
-    content: ' - - >';
+.layout-left .drag-hint {
+    align-items: flex-start;
+}
+
+.drag-hint .arrow {
+    margin-bottom: 2px;
 }
