@@ -838,19 +838,27 @@ a {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--text-primary);
-    opacity: 0.6;
+    opacity: 0;
     letter-spacing: 1px;
     display: flex;
     flex-direction: column;
     pointer-events: none;
-}
-
-.layout-right .drag-hint {
-    align-items: flex-end;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(10px);
 }
 
 .layout-left .drag-hint {
     align-items: flex-start;
+    transform: translateX(-10px);
+}
+
+.draggable-wrapper:hover .drag-hint {
+    opacity: 0.8;
+    transform: translateX(0);
+}
+
+.layout-right .drag-hint {
+    align-items: flex-end;
 }
 
 .drag-hint .arrow {
