@@ -273,12 +273,10 @@ scrambleTargets.forEach(el=>{
 
 window.addEventListener('scroll',()=>{
 
-    const bg =
-    document.querySelector('.bg-image');
-
+    const bg = document.querySelector('.bg-image');
     const y = window.scrollY;
 
-    bg.style.transform =
-    `translateY(${y * 0.15}px)`;
+    // Use backgroundPosition to allow infinite repeating without gaps
+    bg.style.backgroundPositionY = `${y * 0.15}px`;
 
 });

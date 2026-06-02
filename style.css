@@ -47,6 +47,7 @@
     background-image: url('images/bg.png');
     background-size: cover;
     background-position: center;
+    background-repeat: repeat;
     opacity: 0.35;
     z-index: -1;
 }
@@ -784,7 +785,7 @@ a {
 /* hero parallax */
 
 .bg-image {
-    transition: transform .2s linear;
+    /* transition removed to use backgroundPosition in JS */
 }
 
 /* scramble text */
