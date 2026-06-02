@@ -804,21 +804,45 @@ a {
         0 0 40px rgba(0,128,255,.15);
 }
 
-/* =========================
-   DRAGGABLE ASSET
-========================= */
-
-.draggable-asset {
+.draggable-wrapper {
     position: absolute;
-    width: clamp(150px, 20vw, 300px);
+    width: clamp(100px, 15vw, 220px);
     cursor: grab;
     z-index: 100;
-    mix-blend-mode: multiply;
     user-select: none;
     -webkit-user-drag: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.draggable-wrapper:active {
+    cursor: grabbing;
+}
+
+.draggable-asset {
+    width: 100%;
+    mix-blend-mode: multiply;
+    pointer-events: none; /* Let wrapper handle drag */
     filter: drop-shadow(4px 4px 0px rgba(51, 153, 255, 0.2));
 }
 
-.draggable-asset:active {
-    cursor: grabbing;
+.drag-hint {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-primary);
+    opacity: 0.6;
+    letter-spacing: 1px;
+    border-bottom: 1px dashed var(--text-primary);
+    padding-bottom: 2px;
+    pointer-events: none;
+}
+
+.drag-hint::before {
+    content: '< - - ';
+}
+
+.drag-hint::after {
+    content: ' - - >';
 }

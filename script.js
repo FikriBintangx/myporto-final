@@ -285,7 +285,7 @@ window.addEventListener('scroll',()=>{
    DRAGGABLE ASSETS
 ========================= */
 
-const draggables = document.querySelectorAll('.draggable-asset');
+const draggables = document.querySelectorAll('.draggable-wrapper');
 
 draggables.forEach(draggable => {
     let isDragging = false;
@@ -314,7 +314,8 @@ draggables.forEach(draggable => {
             initialY = e.clientY - yOffset;
         }
 
-        if (e.target === draggable) {
+        // Only start dragging if we target the wrapper or its children
+        if (draggable.contains(e.target)) {
             isDragging = true;
             // Bring to front
             draggables.forEach(d => d.style.zIndex = 100);
@@ -343,15 +344,7 @@ draggables.forEach(draggable => {
             xOffset = currentX;
             yOffset = currentY;
 
-            // Maintain the initial translateY if it exists (for the first statue)
-            const style = draggable.getAttribute('style') || '';
-            const hasTranslateY = style.includes('translateY(-50%)');
-            
-            if (hasTranslateY) {
-                draggable.style.transform = `translate(${currentX}px, ${currentY}px) translateY(-50%)`;
-            } else {
-                draggable.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            }
+            draggable.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
     }
 });
