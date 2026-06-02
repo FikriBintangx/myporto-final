@@ -280,3 +280,66 @@ window.addEventListener('scroll',()=>{
     bg.style.backgroundPositionY = `${y * 0.15}px`;
 
 });
+
+/* =========================
+   DRAGGABLE ASSET
+========================= */
+
+const draggable = document.getElementById('draggable-statue');
+let isDragging = false;
+let currentX;
+let currentY;
+let initialX;
+let initialY;
+let xOffset = 0;
+let yOffset = 0;
+
+if (draggable) {
+    draggable.addEventListener('mousedown', dragStart);
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('mousemove', drag);
+
+    // Touch support for mobile
+    draggable.addEventListener('touchstart', dragStart, {passive: false});
+    document.addEventListener('touchend', dragEnd);
+    document.addEventListener('touchmove', drag, {passive: false});
+}
+
+function dragStart(e) {
+    if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+    } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+    }
+
+    if (e.target === draggable) {
+        isDragging = true;
+    }
+}
+
+function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+    isDragging = false;
+}
+
+function drag(e) {
+    if (isDragging) {
+        e.preventDefault();
+    
+        if (e.type === "touchmove") {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+        } else {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        draggable.style.transform = `translate(${currentX}px, ${currentY}px) translateY(-50%)`;
+    }
+}

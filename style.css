@@ -803,3 +803,25 @@ a {
         0 0 20px rgba(0,128,255,.2),
         0 0 40px rgba(0,128,255,.15);
 }
+
+/* =========================
+   DRAGGABLE ASSET
+========================= */
+
+.draggable-asset {
+    position: absolute;
+    width: clamp(150px, 20vw, 300px);
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    cursor: grab;
+    z-index: 100;
+    mix-blend-mode: multiply;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: drop-shadow(4px 4px 0px rgba(51, 153, 255, 0.2));
+}
+
+.draggable-asset:active {
+    cursor: grabbing;
+}
