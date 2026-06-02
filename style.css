@@ -811,9 +811,6 @@ a {
 .draggable-asset {
     position: absolute;
     width: clamp(150px, 20vw, 300px);
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
     cursor: grab;
     z-index: 100;
     mix-blend-mode: multiply;

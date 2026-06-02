@@ -282,19 +282,20 @@ window.addEventListener('scroll',()=>{
 });
 
 /* =========================
-   DRAGGABLE ASSET
+   DRAGGABLE ASSETS
 ========================= */
 
-const draggable = document.getElementById('draggable-statue');
-let isDragging = false;
-let currentX;
-let currentY;
-let initialX;
-let initialY;
-let xOffset = 0;
-let yOffset = 0;
+const draggables = document.querySelectorAll('.draggable-asset');
 
-if (draggable) {
+draggables.forEach(draggable => {
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
     draggable.addEventListener('mousedown', dragStart);
     document.addEventListener('mouseup', dragEnd);
     document.addEventListener('mousemove', drag);
@@ -303,43 +304,54 @@ if (draggable) {
     draggable.addEventListener('touchstart', dragStart, {passive: false});
     document.addEventListener('touchend', dragEnd);
     document.addEventListener('touchmove', drag, {passive: false});
-}
 
-function dragStart(e) {
-    if (e.type === "touchstart") {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-    } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-    }
-
-    if (e.target === draggable) {
-        isDragging = true;
-    }
-}
-
-function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
-    isDragging = false;
-}
-
-function drag(e) {
-    if (isDragging) {
-        e.preventDefault();
-    
-        if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
+    function dragStart(e) {
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
         } else {
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
         }
 
-        xOffset = currentX;
-        yOffset = currentY;
-
-        draggable.style.transform = `translate(${currentX}px, ${currentY}px) translateY(-50%)`;
+        if (e.target === draggable) {
+            isDragging = true;
+            // Bring to front
+            draggables.forEach(d => d.style.zIndex = 100);
+            draggable.style.zIndex = 101;
+        }
     }
-}
+
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        isDragging = false;
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+        
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            } else {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+            }
+
+            xOffset = currentX;
+            yOffset = currentY;
+
+            // Maintain the initial translateY if it exists (for the first statue)
+            const style = draggable.getAttribute('style') || '';
+            const hasTranslateY = style.includes('translateY(-50%)');
+            
+            if (hasTranslateY) {
+                draggable.style.transform = `translate(${currentX}px, ${currentY}px) translateY(-50%)`;
+            } else {
+                draggable.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
+        }
+    }
+});
