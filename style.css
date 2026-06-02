@@ -658,4 +658,147 @@ a {
         border-right: none;
         border-bottom: 1px solid var(--border-color);
     }
+
+    /* =========================
+   SCROLL ANIMATIONS
+========================= */
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(60px);
+        transition:
+            opacity .8s ease,
+            transform .8s ease;
+    }
+
+    .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reveal-left {
+        opacity: 0;
+        transform: translateX(-80px);
+        transition: all .8s ease;
+    }
+
+    .reveal-left.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .reveal-right {
+        opacity: 0;
+        transform: translateX(80px);
+        transition: all .8s ease;
+    }
+
+    .reveal-right.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* stagger project cards */
+
+    .project-card {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+
+    .project-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* hero parallax */
+
+    .bg-image {
+        transition: transform .2s linear;
+    }
+
+    /* scramble text */
+
+    .scramble {
+        display: inline-block;
+    }
+
+    /* glow */
+
+    .hero-title {
+        text-shadow:
+            0 0 20px rgba(0, 128, 255, .2),
+            0 0 40px rgba(0, 128, 255, .15);
+    }
+}
+/* =========================
+   SCROLL ANIMATIONS
+========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all .8s ease;
+}
+
+.reveal-left.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all .8s ease;
+}
+
+.reveal-right.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* stagger project cards */
+
+.project-card {
+    opacity: 0;
+    transform: translateY(80px);
+}
+
+.project-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* hero parallax */
+
+.bg-image {
+    transition: transform .2s linear;
+}
+
+/* scramble text */
+
+.scramble {
+    display: inline-block;
+}
+
+/* glow */
+
+.hero-title {
+    font-size: clamp(4rem, 9vw, 8rem) !important;
+    letter-spacing: -0.05em;
+    text-shadow:
+        0 0 20px rgba(0,128,255,.2),
+        0 0 40px rgba(0,128,255,.15);
 }

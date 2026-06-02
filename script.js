@@ -135,3 +135,150 @@ console.log("Status: Ready to learn and build");`;
         });
     });
 });
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements = document.querySelectorAll(
+    '.reveal,.reveal-left,.reveal-right'
+);
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+
+    });
+},{
+    threshold:0.15
+});
+
+revealElements.forEach(el=>{
+    revealObserver.observe(el);
+});
+
+
+/* =========================
+   PROJECT STAGGER
+========================= */
+
+const cards = document.querySelectorAll('.project-card');
+
+const cardObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            cards.forEach((card,index)=>{
+
+                setTimeout(()=>{
+
+                    card.classList.add('show');
+
+                }, index * 180);
+
+            });
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+cards.forEach(card=>{
+    cardObserver.observe(card);
+});
+
+
+/* =========================
+   SCRAMBLE TEXT ON SCROLL
+========================= */
+
+const chars =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+
+function scramble(element){
+
+    const finalText = element.innerText;
+
+    let iteration = 0;
+
+    const interval = setInterval(()=>{
+
+        element.innerText = finalText
+        .split("")
+        .map((letter,index)=>{
+
+            if(index < iteration){
+                return finalText[index];
+            }
+
+            return chars[
+                Math.floor(
+                    Math.random()*chars.length
+                )
+            ];
+
+        })
+        .join("");
+
+        if(iteration >= finalText.length){
+            clearInterval(interval);
+        }
+
+        iteration += 0.4;
+
+    },30);
+
+}
+
+const scrambleTargets =
+document.querySelectorAll('.scramble');
+
+const scrambleObserver =
+new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            scramble(entry.target);
+
+            scrambleObserver.unobserve(
+                entry.target
+            );
+
+        }
+
+    });
+
+},{
+    threshold:0.5
+});
+
+scrambleTargets.forEach(el=>{
+    scrambleObserver.observe(el);
+});
+
+
+/* =========================
+   PARALLAX BACKGROUND
+========================= */
+
+window.addEventListener('scroll',()=>{
+
+    const bg =
+    document.querySelector('.bg-image');
+
+    const y = window.scrollY;
+
+    bg.style.transform =
+    `translateY(${y * 0.15}px)`;
+
+});
