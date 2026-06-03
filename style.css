@@ -518,6 +518,12 @@ a {
     background-color: transparent;
     overflow: hidden;
     border: 1px solid var(--text-primary);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover .glitch-wrapper {
+    box-shadow: 0 0 15px rgba(51, 153, 255, 0.4), inset 0 0 10px rgba(51, 153, 255, 0.2);
+    border-color: rgba(51, 153, 255, 1);
 }
 
 .glitch-image {
@@ -540,10 +546,21 @@ a {
     background: repeating-linear-gradient(0deg,
             transparent,
             transparent 2px,
-            rgba(255, 255, 255, 0.1) 3px);
+            rgba(255, 255, 255, 0.15) 3px);
     pointer-events: none;
     z-index: 2;
-    opacity: 0.4;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .scanlines {
+    opacity: 0.7;
+    animation: scanline-scroll 3s linear infinite;
+}
+
+@keyframes scanline-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 30px; }
 }
 
 .project-card h4 {
