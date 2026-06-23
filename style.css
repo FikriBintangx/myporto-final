@@ -362,6 +362,33 @@ a {
 
 .section-header {
     padding-right: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.slider-btn {
+    background: transparent;
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slider-btn:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-color);
 }
 
 /* Terminal */

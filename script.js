@@ -134,6 +134,42 @@ console.log("Status: Ready to learn and build");`;
             }, 30);
         });
     });
+
+    // Project slider controls and wheel horizontal scroll
+    const sliderContainer = document.querySelector('.projects-slider-container');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (sliderContainer) {
+        // Handle wheel scrolling: convert vertical wheel scroll to horizontal
+        sliderContainer.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                sliderContainer.scrollBy({
+                    left: e.deltaY * 1.5,
+                    behavior: 'auto'
+                });
+            }
+        }, { passive: false });
+
+        // Handle Prev/Next buttons
+        if (prevBtn && nextBtn) {
+            const scrollAmount = 420; // 380px (card) + 40px (gap)
+            prevBtn.addEventListener('click', () => {
+                sliderContainer.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                sliderContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    }
 });
 
 /* =========================
