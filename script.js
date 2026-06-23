@@ -170,6 +170,185 @@ console.log("Status: Ready to learn and build");`;
             });
         }
     }
+
+    // ==========================================
+    // PROJECT DETAIL MODAL LOGIC
+    // ==========================================
+    const projectData = {
+        'jurnal-ku': {
+            title: 'JURNAL KU',
+            tags: ['React', 'Node.js', 'Vercel'],
+            description: `
+                <p><strong>JURNAL KU</strong> is a high-performance academic library search engine designed to streamline research and literature reviews.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Intelligent full-text and metadata searching across thousands of academic entries</li>
+                    <li>Categorized digital journal archiving with easy-to-use directory structure</li>
+                    <li>Fast citation generation and exporting tools for various referencing formats</li>
+                    <li>Clean, user-friendly interface optimized for reading and long study sessions</li>
+                </ul>
+            `,
+            link: 'https://dejurnal.vercel.app/',
+            images: ['images/project1.png']
+        },
+        'kiise-coffee': {
+            title: 'KIISE COFFEE',
+            tags: ['HTML', 'CSS', 'JavaScript'],
+            description: `
+                <p><strong>KIISE COFFEE</strong> is a modern e-commerce application built for artisanal coffee brands with a highly custom, bold Neo-Brutalist design language.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Responsive interactive product catalog with high-contrast UI components</li>
+                    <li>Dynamic shopping cart with real-time recalculations and instant checkout flow</li>
+                    <li>Interactive promotional banners and special discount manager</li>
+                    <li>Custom micro-animations and physics-based transitions matching the brand's premium identity</li>
+                </ul>
+            `,
+            link: 'https://kiisecoff.ti24se1.my.id/',
+            images: ['images/project2.png']
+        },
+        'marimacha': {
+            title: 'MARIMACHA',
+            tags: ['CodeIgniter 3', 'Supabase', 'MySQL'],
+            description: `
+                <p><strong>MARIMACHA</strong> is a premium e-commerce storefront for matcha products, utilizing CodeIgniter 3 for backend routing and Supabase for cloud integration.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Automated payment verification system utilizing Xendit API integration</li>
+                    <li>Rich administrator dashboard tracking real-time order states and inventory thresholds</li>
+                    <li>Secure proof-of-payment uploads handled directly via Supabase Storage buckets</li>
+                    <li>User review & rating system with interactive stars</li>
+                </ul>
+            `,
+            link: 'https://macha-two.vercel.app',
+            images: ['images/project3.png']
+        },
+        'fkkmbt': {
+            title: 'FKKMBT',
+            tags: ['PHP', 'MySQL', 'Bootstrap'],
+            description: `
+                <p><strong>FKKMBT</strong> is a citizen coordination and residential services portal built specifically for the Bukit Tiara community.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Digital citizen registration, profile management, and administrative tracking</li>
+                    <li>Residential maintenance fee billing, payment submission, and financial auditing</li>
+                    <li>Digital notice board for neighborhood announcements and urgent notifications</li>
+                    <li>Admin dashboard for managing residential files and coordinates</li>
+                </ul>
+            `,
+            link: 'https://fkkmbt.ti24se1.my.id/',
+            images: ['images/project4.png']
+        },
+        'mobilku': {
+            title: 'MOBILKU',
+            tags: ['CodeIgniter 3', 'MySQL', 'Bootstrap'],
+            description: `
+                <p><strong>MOBILKU</strong> is an end-to-end web application facilitating automotive buying, selling, and status tracking.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Advanced car catalog filter matching make, model, price, and booking availability</li>
+                    <li>Customer valuation request form for trading in existing vehicles</li>
+                    <li>Official print-ready invoice and payment receipt generation</li>
+                    <li>Multi-step transaction flow tracking: Booking Fee, Down Payment, and Final Payment</li>
+                    <li>Real-time shipment tracking with courier assignments and status logs</li>
+                </ul>
+            `,
+            link: 'https://github.com/FikriBintangx',
+            images: [
+                'images/project_mobilku.png',
+                'images/screenshots/mobilku_1.png',
+                'images/screenshots/mobilku_2.png',
+                'images/screenshots/mobilku_3.png',
+                'images/screenshots/mobilku_4.png'
+            ]
+        },
+        'ourscontent': {
+            title: 'OURSCONTENT',
+            tags: ['Java Swing', 'FlatLaf', 'PostgreSQL'],
+            description: `
+                <p><strong>OURSCONTENT</strong> is a desktop creator portal and content management application built with Java Swing and PostgreSQL.</p>
+                <p>Key features of the system include:</p>
+                <ul>
+                    <li>Modern FlatLaf dark-mode styling with a premium user experience</li>
+                    <li>Centralized content tracker for multi-platform planning (YouTube, TikTok, etc.)</li>
+                    <li>Performance metrics logger showing user analytics over time</li>
+                    <li>Custom PDF reports generation utilizing JasperReports integration</li>
+                    <li>Secure role-based authentication and user account management</li>
+                </ul>
+            `,
+            link: 'https://github.com/FikriBintangx',
+            images: [
+                'images/project_ourscontent.png',
+                'images/screenshots/ourscontent_1.png',
+                'images/screenshots/ourscontent_2.png',
+                'images/screenshots/ourscontent_3.png',
+                'images/screenshots/ourscontent_4.png'
+            ]
+        }
+    };
+
+    const modal = document.getElementById('project-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalTags = document.getElementById('modal-tags');
+    const modalDescription = document.getElementById('modal-description');
+    const modalGallery = document.getElementById('modal-gallery');
+    const modalLink = document.getElementById('modal-link');
+
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.classList.contains('project-btn')) {
+                e.preventDefault();
+            }
+            
+            const projectId = card.dataset.project;
+            const data = projectData[projectId];
+            if (data) {
+                modalTitle.innerText = data.title;
+                
+                modalTags.innerHTML = '';
+                data.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'project-tag';
+                    tagEl.innerText = tag;
+                    modalTags.appendChild(tagEl);
+                });
+                
+                modalDescription.innerHTML = data.description;
+                
+                modalLink.href = data.link;
+                if (data.link === '#' || data.link.includes('github.com')) {
+                    modalLink.innerText = '[ VIEW SOURCE ON GITHUB ]';
+                } else {
+                    modalLink.innerText = '[ VISIT LIVE SITE ]';
+                }
+
+                modalGallery.innerHTML = '';
+                data.images.forEach(imgSrc => {
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = `${data.title} Screenshot`;
+                    modalGallery.appendChild(img);
+                });
+
+                modal.classList.add('show');
+                scramble(modalTitle);
+            }
+        });
+    });
+
+    if (modalClose) {
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
 });
 
 /* =========================
