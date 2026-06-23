@@ -266,6 +266,22 @@ a {
     max-width: 600px;
 }
 
+.hero-description {
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.hero-ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* Install/Contact Block */
 .install-block {
     width: 100%;
@@ -523,7 +539,7 @@ a {
 
 .project-card {
     scroll-snap-align: start;
-    width: 380px;
+    width: clamp(280px, 85vw, 380px);
     background-color: transparent;
     border: 1px solid var(--text-primary);
     padding: 1.5rem;
@@ -674,7 +690,35 @@ a {
 
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .hero-description {
+        font-size: 1rem !important;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        padding: 0 1rem;
+        text-transform: none;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+        padding: 0 1rem;
+    }
+
+    .hero-ctas .cta-button {
+        width: 100%;
+        text-align: center;
+        display: block;
+        padding: 0.75rem 1rem;
+    }
+
+    .draggable-wrapper {
+        display: none !important;
     }
 
     .grid-section {
