@@ -220,7 +220,7 @@ console.log("Status: Ready to learn and build");`;
                     <li>User review & rating system with interactive stars</li>
                 </ul>
             `,
-            link: 'https://macha-two.vercel.app',
+            link: 'https://marimatcha.vercel.app/',
             images: ['images/project3.png']
         },
         'fkkmbt': {
