@@ -252,6 +252,42 @@ a {
     background-color: var(--text-primary);
 }
 
+/* Language Switcher */
+.lang-switcher {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1.5rem;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 0.15rem 0.35rem;
+    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+}
+
+.lang-btn.active {
+    background-color: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.lang-btn:hover:not(.active) {
+    background-color: rgba(var(--primary-rgb), 0.15);
+}
+
+.lang-separator {
+    color: var(--border-color);
+    font-size: 0.75rem;
+    user-select: none;
+}
+
 /* Hero Section */
 .hero-section {
     padding: 6rem 0;

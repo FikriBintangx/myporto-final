@@ -38,20 +38,25 @@
                 </a>
             </div>
             <div class="header-nav col-border-right">
-                <a href="#home" class="nav-link nav-glitch active" data-text="HOME">HOME <span
+                <a href="#home" class="nav-link nav-glitch active" data-translate="nav-home" data-text="HOME">HOME <span
                         class="blink cursor"></span></a>
             </div>
             <div class="header-nav col-border-right">
-                <a href="#about" class="nav-link nav-glitch" data-text="ABOUT">ABOUT <span
+                <a href="#about" class="nav-link nav-glitch" data-translate="nav-about" data-text="ABOUT">ABOUT <span
                         class="blink cursor"></span></a>
             </div>
             <div class="header-nav col-border-right">
-                <a href="#projects" class="nav-link nav-glitch" data-text="PROJECTS">PROJECTS <span
+                <a href="#projects" class="nav-link nav-glitch" data-translate="nav-projects" data-text="PROJECTS">PROJECTS <span
                         class="blink cursor"></span></a>
             </div>
             <div class="header-nav col-border-right header-nav-split">
-                <a href="#skills" class="nav-link nav-glitch" data-text="SKILLS">SKILLS <span
+                <a href="#skills" class="nav-link nav-glitch" data-translate="nav-skills" data-text="SKILLS">SKILLS <span
                         class="blink cursor"></span></a>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <span class="lang-separator">/</span>
+                    <button class="lang-btn" data-lang="id">ID</button>
+                </div>
                 <a href="https://github.com/FikriBintangx" target="_blank" class="nav-link github-icon" title="GitHub">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -100,16 +105,16 @@
             </div>
 
             <div class="hero-content">
-                <span class="badge">FULL STACK DEVELOPER &bull; AI ENTHUSIAST</span>
+                <span class="badge" data-translate="hero-badge">FULL STACK DEVELOPER &bull; AI ENTHUSIAST</span>
                 <h2 class="hero-title scramble">FIKRI BINTANG PURNOMO</h2>
-                <p class="hero-description">
+                <p class="hero-description" data-translate="hero-desc">
                     Building scalable systems, AI-powered applications, and modern web experiences.<br>
                     Informatics Engineering student focused on enterprise software and experimental UI.
                 </p>
                 <div class="hero-ctas">
-                    <a href="#projects" class="cta-button primary">[ View Projects ]</a>
-                    <a href="Porto Bintang.pdf" target="_blank" class="cta-button secondary">[ Print Portfolio ]</a>
-                    <a href="mailto:fikbintang01@gmail.com" class="cta-button secondary">[ Contact Me ]</a>
+                    <a href="#projects" class="cta-button primary" data-translate="btn-projects">[ View Projects ]</a>
+                    <a href="Porto Bintang.pdf" target="_blank" class="cta-button secondary" data-translate="btn-print">[ Print Portfolio ]</a>
+                    <a href="mailto:fikbintang01@gmail.com" class="cta-button secondary" data-translate="btn-contact">[ Contact Me ]</a>
                 </div>
             </div>
         </section>
@@ -117,7 +122,7 @@
         <!-- Terminal / About Section -->
         <section id="about" class="grid-section reveal">
             <div class="section-header col-border-right col-span-1">
-                <h3>SEE IT IN ACTION</h3>
+                <h3 data-translate="about-header">SEE IT IN ACTION</h3>
             </div>
             <div class="terminal-container col-span-3">
                 <div class="terminal-window">
@@ -125,7 +130,7 @@
                         <div class="dots">
                             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                         </div>
-                        <span class="terminal-title">ABOUT ME</span>
+                        <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
                     </div>
                     <div class="terminal-body">
                         <p>> Executing profile fetch...</p>
@@ -139,7 +144,7 @@
         <!-- Projects Section -->
         <section id="projects" class="grid-section projects-section reveal" style="overflow: hidden;">
             <div class="section-header col-border-right col-span-1">
-                <h3>PROJECTS</h3>
+                <h3 data-translate="projects-header">PROJECTS</h3>
                 <div class="slider-controls">
                     <button class="slider-btn prev-btn" title="Previous Project">&lt;</button>
                     <button class="slider-btn next-btn" title="Next Project">&gt;</button>
@@ -155,14 +160,14 @@
                             <img src="images/project1.png" alt="JURNAL KU" class="glitch-image">
                         </div>
                         <h4>JURNAL KU</h4>
-                        <p>A comprehensive digital library and journal search engine designed for academics and
+                        <p data-translate="proj-1-desc">A comprehensive digital library and journal search engine designed for academics and
                             researchers to discover peer-reviewed publications efficiently.</p>
                         <div class="project-tags">
                             <span class="project-tag">React</span>
                             <span class="project-tag">Node.js</span>
                             <span class="project-tag">Vercel</span>
                         </div>
-                        <a href="https://dejurnal.vercel.app/" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://dejurnal.vercel.app/" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                     <!-- Project 2 -->
@@ -172,14 +177,14 @@
                             <img src="images/project2.png" alt="KIISE COFFEE" class="glitch-image">
                         </div>
                         <h4>KIISE COFFEE</h4>
-                        <p>A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering
+                        <p data-translate="proj-2-desc">A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering
                             system and interactive menu for coffee enthusiasts.</p>
                         <div class="project-tags">
                             <span class="project-tag">HTML</span>
                             <span class="project-tag">CSS</span>
                             <span class="project-tag">JavaScript</span>
                         </div>
-                        <a href="https://kiisecoff.ti24se1.my.id/" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://kiisecoff.ti24se1.my.id/" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                     <!-- Project 3 -->
@@ -189,14 +194,14 @@
                             <img src="images/project3.png" alt="MARIMACHA" class="glitch-image">
                         </div>
                         <h4>MARIMACHA</h4>
-                        <p>A specialized online storefront for premium matcha products, highlighting seamless checkout
+                        <p data-translate="proj-3-desc">A specialized online storefront for premium matcha products, highlighting seamless checkout
                             and visually appealing product displays.</p>
                         <div class="project-tags">
                             <span class="project-tag">CodeIgniter 3</span>
                             <span class="project-tag">Supabase</span>
                             <span class="project-tag">MySQL</span>
                         </div>
-                        <a href="https://marimatcha.vercel.app/" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://marimatcha.vercel.app/" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                     <!-- Project 4 -->
@@ -206,14 +211,14 @@
                             <img src="images/project4.png" alt="FKKMBT" class="glitch-image">
                         </div>
                         <h4>FKKMBT</h4>
-                        <p>A robust community management system for Bukit Tiara residents, streamlining data
+                        <p data-translate="proj-4-desc">A robust community management system for Bukit Tiara residents, streamlining data
                             administration, announcements, and residential services.</p>
                         <div class="project-tags">
                             <span class="project-tag">PHP</span>
                             <span class="project-tag">MySQL</span>
                             <span class="project-tag">Bootstrap</span>
                         </div>
-                        <a href="https://fkkmbt.ti24se1.my.id/" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://fkkmbt.ti24se1.my.id/" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                     <!-- Project 5: MOBILKU -->
@@ -223,13 +228,13 @@
                             <img src="images/project_mobilku.png" alt="MOBILKU" class="glitch-image">
                         </div>
                         <h4>MOBILKU</h4>
-                        <p>An integrated web-based platform for buying and selling cars, featuring an interactive vehicle catalog, customer offering system, delivery monitoring, and a comprehensive admin panel for transactions and report generation.</p>
+                        <p data-translate="proj-5-desc">An integrated web-based platform for buying and selling cars, featuring an interactive vehicle catalog, customer offering system, delivery monitoring, and a comprehensive admin panel for transactions and report generation.</p>
                         <div class="project-tags">
                             <span class="project-tag">CodeIgniter 3</span>
                             <span class="project-tag">MySQL</span>
                             <span class="project-tag">Bootstrap</span>
                         </div>
-                        <a href="https://github.com/FikriBintangx" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://github.com/FikriBintangx" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                     <!-- Project 6: OURSCONTENT -->
@@ -239,13 +244,13 @@
                             <img src="images/project_ourscontent.png" alt="OURSCONTENT" class="glitch-image">
                         </div>
                         <h4>OURSCONTENT</h4>
-                        <p>A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.</p>
+                        <p data-translate="proj-6-desc">A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.</p>
                         <div class="project-tags">
                             <span class="project-tag">Java Swing</span>
                             <span class="project-tag">FlatLaf</span>
                             <span class="project-tag">PostgreSQL</span>
                         </div>
-                        <a href="https://github.com/FikriBintangx" target="_blank" class="project-btn">VIEW PROJECT ↗</a>
+                        <a href="https://github.com/FikriBintangx" target="_blank" class="project-btn" data-translate="btn-view-project">VIEW PROJECT ↗</a>
                     </div>
 
                 </div>
@@ -255,34 +260,34 @@
         <!-- Skills Grid Section -->
         <section id="skills" class="grid-section feature-section reveal">
             <div class="section-title-full">
-                <h3>SKILLS & EXPERIENCE</h3>
+                <h3 data-translate="skills-header">SKILLS & EXPERIENCE</h3>
             </div>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h4>PROGRAMMING & DEV</h4>
-                    <p>Flutter, Java, HTML, CSS, JavaScript, REST API Integration</p>
+                    <h4 data-translate="skill-prog-title">PROGRAMMING & DEV</h4>
+                    <p data-translate="skill-prog-desc">Flutter, Java, HTML, CSS, JavaScript, REST API Integration</p>
                 </div>
                 <div class="feature-card">
-                    <h4>DATABASES & TOOLS</h4>
-                    <p>MySQL, MariaDB, PostgreSQL, Git & GitHub, Figma</p>
+                    <h4 data-translate="skill-db-title">DATABASES & TOOLS</h4>
+                    <p data-translate="skill-db-desc">MySQL, MariaDB, PostgreSQL, Git & GitHub, Figma</p>
                 </div>
                 <div class="feature-card">
-                    <h4>SOFT SKILLS</h4>
-                    <p>Problem Solving, Crisis Management, Creative Thinking, Data Analysis, Strategic Planning</p>
+                    <h4 data-translate="skill-soft-title">SOFT SKILLS</h4>
+                    <p data-translate="skill-soft-desc">Problem Solving, Crisis Management, Creative Thinking, Data Analysis, Strategic Planning</p>
                 </div>
                 <div class="feature-card">
                     <h4>ID EXPRESS</h4>
-                    <p>Delivery Administration Staff (2022 - 2024). Managed shipment data, tracking information, and
+                    <p data-translate="skill-job1-desc">Delivery Administration Staff (2022 - 2024). Managed shipment data, tracking information, and
                         monitored delivery operations.</p>
                 </div>
                 <div class="feature-card">
                     <h4>PT.SURYA SHUENN YUEHH</h4>
-                    <p>Machine Operator (2024 - 2025). Operated manufacturing machines, ensured product quality, and
+                    <p data-translate="skill-job2-desc">Machine Operator (2024 - 2025). Operated manufacturing machines, ensured product quality, and
                         maintained workplace safety.</p>
                 </div>
                 <div class="feature-card">
                     <h4>RESTAURANT OPERATIONS</h4>
-                    <p>Customer Service & Operations (2025 - 2026). Assisted in food preparation, customer service, and
+                    <p data-translate="skill-job3-desc">Customer Service & Operations (2025 - 2026). Assisted in food preparation, customer service, and
                         maintained cleanliness.</p>
                 </div>
             </div>
@@ -292,8 +297,8 @@
         <footer class="grid-footer">
             <div class="col-border-right"><span class="footer-text">FIKRI BINTANG PURNOMO PORTFOLIO</span></div>
             <div class="col-border-right"><span class="footer-text v-text">v1.0.0</span></div>
-            <div class="col-border-right"><a href="CV.pdf" target="_blank" class="footer-link">PRINT CV ↗</a></div>
-            <div class="col-border-right"><a href="https://myportofoliothree.vercel.app/" class="footer-link">PORTFOLIO
+            <div class="col-border-right"><a href="CV.pdf" target="_blank" class="footer-link" data-translate="footer-cv">PRINT CV ↗</a></div>
+            <div class="col-border-right"><a href="https://myportofoliothree.vercel.app/" class="footer-link" data-translate="footer-porto">PORTFOLIO
                     ↗</a></div>
             <div><span class="footer-text">2026</span></div>
         </footer>
