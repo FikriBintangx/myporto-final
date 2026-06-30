@@ -17,11 +17,12 @@
 :root {
     --bg-color: #f1f5f9;
     /* Light gray-blue background */
-    --text-primary: #3399ff;
-    /* Light blue */
-    --text-secondary: rgba(51, 153, 255, 0.6);
-    --border-color: rgba(0, 128, 255, 0.559);
-    --terminal-bg: rgba(51, 153, 255, 0.05);
+    --primary-rgb: 0, 82, 204;
+    /* More saturated, higher contrast cobalt blue */
+    --text-primary: rgb(var(--primary-rgb));
+    --text-secondary: rgba(var(--primary-rgb), 0.7);
+    --border-color: rgba(var(--primary-rgb), 0.55);
+    --terminal-bg: rgba(var(--primary-rgb), 0.05);
 
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'Courier Prime', monospace;
@@ -565,8 +566,8 @@ a {
 }
 
 .project-card:hover .glitch-wrapper {
-    box-shadow: 0 0 15px rgba(51, 153, 255, 0.4), inset 0 0 10px rgba(51, 153, 255, 0.2);
-    border-color: rgba(51, 153, 255, 1);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.4), inset 0 0 10px rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 1);
 }
 
 .glitch-image {
@@ -631,7 +632,7 @@ a {
     padding: 0.2rem 0.5rem;
     border: 1px dashed var(--border-color);
     color: var(--text-primary);
-    background-color: rgba(51, 153, 255, 0.05);
+    background-color: rgba(var(--primary-rgb), 0.05);
 }
 
 .project-btn {
@@ -826,8 +827,8 @@ a {
 
     .hero-title {
         text-shadow:
-            0 0 20px rgba(0, 128, 255, .2),
-            0 0 40px rgba(0, 128, 255, .15);
+            0 0 20px rgba(var(--primary-rgb), .2),
+            0 0 40px rgba(var(--primary-rgb), .15);
     }
 }
 /* =========================
@@ -930,7 +931,7 @@ a {
     width: clamp(100px, 15vw, 220px);
     mix-blend-mode: multiply;
     pointer-events: none; /* Let wrapper handle drag */
-    filter: drop-shadow(4px 4px 0px rgba(51, 153, 255, 0.2));
+    filter: drop-shadow(4px 4px 0px rgba(var(--primary-rgb), 0.2));
 }
 
 .drag-hint {
@@ -1007,7 +1008,7 @@ a {
 .modal-content {
     background-color: var(--bg-color);
     border: 2px solid var(--text-primary);
-    box-shadow: 0 0 30px rgba(51, 153, 255, 0.3);
+    box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.3);
     width: 90%;
     max-width: 1000px;
     max-height: 85vh;
