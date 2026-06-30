@@ -130,12 +130,28 @@
                         <div class="dots">
                             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                         </div>
+                        <div class="terminal-tabs">
+                            <button class="terminal-tab active" data-mode="intro" data-translate="term-tab-intro">INTRO</button>
+                            <button class="terminal-tab" data-mode="qa" data-translate="term-tab-qa">Q&A CLI</button>
+                        </div>
                         <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
                     </div>
-                    <div class="terminal-body">
-                        <p>> Executing profile fetch...</p>
+                    <div class="terminal-body" id="terminal-body-intro">
+                        <p class="terminal-system-text">> Executing profile fetch...</p>
                         <br>
                         <p class="typewriter-text" id="typewriter"></p>
+                    </div>
+                    <div class="terminal-body" id="terminal-body-qa" style="display: none;">
+                        <div class="terminal-history" id="terminal-history">
+                            <p class="terminal-system-text" data-translate="qa-welcome">Welcome to Fikri's Q&A CLI. Type your question or click a suggestion below! Type 'help' for commands.</p>
+                        </div>
+                        <div class="terminal-suggestions" id="terminal-suggestions">
+                            <!-- Dynamic suggestion tags will be rendered here -->
+                        </div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">guest@fikribintang:~$</span>
+                            <input type="text" id="terminal-input" autocomplete="off" placeholder="Type a question or 'help'..." data-translate-placeholder="qa-input-placeholder">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -326,6 +342,20 @@
                         <a id="modal-link" href="#" target="_blank" class="cta-button primary">[ VISIT PROJECT ]</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdf-modal" class="modal">
+        <div class="modal-content pdf-modal-content">
+            <span class="modal-close pdf-modal-close">&times;</span>
+            <div class="pdf-modal-header">
+                <h3 id="pdf-modal-title" style="font-family: var(--font-mono); margin: 0; font-size: 1.5rem;" data-translate="pdf-viewer-title">PDF VIEWER</h3>
+                <a id="pdf-download-btn" href="#" download class="cta-button primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" data-translate="pdf-download">[ DOWNLOAD PDF ]</a>
+            </div>
+            <div class="pdf-frame-container">
+                <iframe id="pdf-iframe" src="" frameborder="0" style="width: 100%; height: 100%; border: 1px solid var(--border-color); background: white;"></iframe>
             </div>
         </div>
     </div>

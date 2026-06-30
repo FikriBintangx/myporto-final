@@ -1173,3 +1173,173 @@ a {
         max-height: none;
     }
 }
+
+/* Terminal Tabs */
+.terminal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-right: auto;
+}
+
+.terminal-tab {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.terminal-tab:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.terminal-tab.active {
+    background-color: var(--text-primary);
+    color: var(--bg-color);
+    border-color: var(--text-primary);
+}
+
+/* Terminal Q&A CLI Mode */
+#terminal-body-qa {
+    display: flex;
+    flex-direction: column;
+    height: 380px;
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: none;
+}
+
+.terminal-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.terminal-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.terminal-history::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+}
+
+.terminal-system-text {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.terminal-user-entry {
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.terminal-response {
+    color: var(--text-primary);
+    padding-left: 1rem;
+    border-left: 2px solid var(--border-color);
+    margin-bottom: 0.5rem;
+}
+
+.terminal-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    max-height: 90px;
+    overflow-y: auto;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 0.5rem;
+}
+
+.terminal-suggestions::-webkit-scrollbar {
+    width: 4px;
+}
+
+.terminal-suggestions::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+}
+
+.suggestion-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    background-color: rgba(var(--primary-rgb), 0.05);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.suggestion-tag:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    background-color: rgba(var(--primary-rgb), 0.15);
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.5rem;
+}
+
+.terminal-prompt {
+    color: var(--text-secondary);
+    font-weight: bold;
+    user-select: none;
+}
+
+#terminal-input {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+/* PDF Modal Styling */
+.pdf-modal-content {
+    max-width: 900px;
+    width: 85%;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    padding-right: 3rem; /* Leave room for close button */
+}
+
+.pdf-frame-container {
+    flex-grow: 1;
+    width: 100%;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .pdf-modal-content {
+        width: 95%;
+        height: 90vh;
+    }
+}
