@@ -1343,4 +1343,46 @@ draggables.forEach(draggable => {
             draggable.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
     }
+
+    // ==========================================
+    // LEAFLET MAP INTEGRATION (NO API KEY REQUIRED)
+    // ==========================================
+    if (document.getElementById('map-container')) {
+        // Inisialisasi map dengan Leaflet, set ke Cikupa, Tangerang
+        const map = L.map('map-container', {
+            center: [-6.2361, 106.5186], // [latitude, longitude] untuk Leaflet
+            zoom: 12,
+            zoomControl: false // Kita bikin custom zoom control di posisi lain biar estetik
+        });
+
+        // Pakai CartoDB Dark Matter (gratis, tanpa API key, tampilan dark mode elegan)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Pindahkan zoom control ke kanan atas
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
+
+        // Custom Marker (Pakai divIcon Leaflet untuk styling pakai CSS)
+        const customIcon = L.divIcon({
+            className: 'custom-leaflet-marker',
+            html: '<div class="pulse-dot" style="background-color: var(--text-primary); border: 2px solid var(--bg-color); width: 14px; height: 14px; margin-left: -7px; margin-top: -7px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);"></div>',
+            iconSize: [0, 0] // Center
+        });
+
+        // Tambahkan marker ke map
+        const marker = L.marker([-6.2361, 106.5186], { icon: customIcon }).addTo(map);
+
+        // Tambahkan popup kecil
+        marker.bindPopup('<h4 style="font-family: var(--font-mono); margin:0; font-size:14px; color: var(--text-primary);">FIKRI\'S BASE</h4><p style="margin:0; font-size:12px; color: var(--text-secondary);">Cikupa, Tangerang</p>', {
+            offset: [0, -10],
+            closeButton: false,
+            className: 'custom-leaflet-popup'
+        });
+    }
+
 });
