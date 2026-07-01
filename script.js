@@ -1352,7 +1352,8 @@ draggables.forEach(draggable => {
         const map = L.map('map-container', {
             center: [-6.2361, 106.5186], // [latitude, longitude] untuk Leaflet
             zoom: 12,
-            zoomControl: false // Kita bikin custom zoom control di posisi lain biar estetik
+            zoomControl: false, // Kita bikin custom zoom control di posisi lain biar estetik
+            attributionControl: false // Menyembunyikan tulisan watermark Leaflet di pojok bawah
         });
 
         // Pakai CartoDB Dark Matter (gratis, tanpa API key, tampilan dark mode elegan)
