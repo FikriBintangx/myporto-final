@@ -1159,6 +1159,14 @@ console.log("Status: Siap belajar dan membangun");`;
         
         heatmapGrid.innerHTML = '';
         
+        // Setup custom tooltip
+        let tooltip = document.getElementById('heatmap-tooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('div');
+            tooltip.id = 'heatmap-tooltip';
+            document.body.appendChild(tooltip);
+        }
+        
         try {
             // Ubah text description saat loading
             const descEl = document.querySelector('[data-translate="activity-desc"]');
@@ -1198,10 +1206,28 @@ console.log("Status: Siap belajar dan membangun");`;
                     
                     square.dataset.level = level;
                     
-                    // Format the tooltip
+                    // Format the tooltip data
                     const dateObj = new Date(day.date);
                     const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                    square.title = `${day.contributionCount === 0 ? 'No' : day.contributionCount} contributions on ${dateStr}`;
+                    const tooltipText = `${day.contributionCount === 0 ? 'No' : day.contributionCount} contributions on ${dateStr}`;
+                    
+                    // Remove default title
+                    square.removeAttribute('title');
+                    
+                    // Add interactivity
+                    square.addEventListener('mouseenter', (e) => {
+                        tooltip.textContent = tooltipText;
+                        tooltip.classList.add('show');
+                        tooltip.style.left = e.clientX + 'px';
+                        tooltip.style.top = e.clientY + 'px';
+                    });
+                    square.addEventListener('mousemove', (e) => {
+                        tooltip.style.left = e.clientX + 'px';
+                        tooltip.style.top = e.clientY + 'px';
+                    });
+                    square.addEventListener('mouseleave', () => {
+                        tooltip.classList.remove('show');
+                    });
                     
                     heatmapGrid.appendChild(square);
                 });
