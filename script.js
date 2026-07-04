@@ -35,6 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'proj-6-desc': 'A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.',
             'term-tab-intro': 'INTRO',
             'term-tab-qa': 'Q&A CLI',
+            'term-tab-activity': 'ACTIVITY',
+            'activity-desc': '> Fetching GitHub contribution history...',
+            'activity-title': 'CONTRIBUTIONS',
+            'activity-contribs': 'Contributions in the last year',
+            'activity-less': 'Less',
+            'activity-more': 'More',
             'qa-welcome': 'Welcome to Fikri\'s Q&A CLI. Type your question or click a suggestion below! Type "help" for commands.',
             'qa-input-placeholder': 'Type a question or "help"...',
             'pdf-viewer-title': 'PDF VIEWER',
@@ -74,6 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'proj-6-desc': 'Sistem manajemen konten (CMS) dan dasbor kinerja kreator yang dibuat untuk proyek Pemrograman Berorientasi Objek (PBO) Semester 4, memungkinkan administrasi akun, metrik platform, dan pelaporan.',
             'term-tab-intro': 'INTRO',
             'term-tab-qa': 'TANYA JAWAB',
+            'term-tab-activity': 'AKTIVITAS',
+            'activity-desc': '> Mengambil riwayat kontribusi GitHub...',
+            'activity-title': 'KONTRIBUSI',
+            'activity-contribs': 'Kontribusi dalam setahun terakhir',
+            'activity-less': 'Sedikit',
+            'activity-more': 'Banyak',
             'qa-welcome': 'Selamat datang di Q&A CLI Fikri. Ketik pertanyaan Anda atau klik saran di bawah! Ketik "help" untuk perintah.',
             'qa-input-placeholder': 'Ketik pertanyaan atau "help"...',
             'pdf-viewer-title': 'PRATINJAU PDF',
@@ -922,6 +934,7 @@ console.log("Status: Siap belajar dan membangun");`;
     const termInput = document.getElementById('terminal-input');
     const termHistory = document.getElementById('terminal-history');
     const termSuggestions = document.getElementById('terminal-suggestions');
+    const activityBody = document.getElementById('terminal-body-activity');
 
     // Categories list for suggestions header
     const categories = ['personal', 'education', 'skills', 'projects', 'career'];
@@ -937,9 +950,15 @@ console.log("Status: Siap belajar dan membangun");`;
             if (mode === 'intro') {
                 introBody.style.display = 'block';
                 qaBody.style.display = 'none';
+                activityBody.style.display = 'none';
+            } else if (mode === 'activity') {
+                introBody.style.display = 'none';
+                qaBody.style.display = 'none';
+                activityBody.style.display = 'block';
             } else {
                 introBody.style.display = 'none';
                 qaBody.style.display = 'flex';
+                activityBody.style.display = 'none';
                 renderSuggestions();
                 termInput.focus();
             }
@@ -1130,6 +1149,51 @@ console.log("Status: Siap belajar dan membangun");`;
             pdfIframe.src = '';
         }
     });
+
+    // ==========================================
+    // HEATMAP GENERATOR
+    // ==========================================
+    function generateHeatmap() {
+        const heatmapGrid = document.getElementById('heatmap-grid');
+        if (!heatmapGrid) return;
+        
+        heatmapGrid.innerHTML = '';
+        
+        // 52 weeks * 7 days
+        const totalWeeks = 52;
+        
+        for (let week = 0; week < totalWeeks; week++) {
+            for (let day = 0; day < 7; day++) {
+                const square = document.createElement('div');
+                square.className = 'heatmap-square';
+                
+                // Randomly assign a contribution level (0 to 4)
+                // We want mostly 0s and 1s, and fewer higher levels
+                let level = 0;
+                const rand = Math.random();
+                if (rand > 0.6) level = 1;
+                if (rand > 0.8) level = 2;
+                if (rand > 0.9) level = 3;
+                if (rand > 0.96) level = 4;
+                
+                square.dataset.level = level;
+                
+                // Optional: Add tooltip with random date and count
+                square.title = `${level > 0 ? (level * Math.floor(Math.random() * 5) + 1) : 'No'} contributions on ${new Date(2025, 0, (week * 7) + day).toDateString()}`;
+                
+                heatmapGrid.appendChild(square);
+            }
+        }
+        
+        // Ensure we scroll to the end (most recent activity)
+        const scrollContainer = document.querySelector('.heatmap-scroll');
+        if (scrollContainer) {
+            scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+        }
+    }
+    
+    // Call the generator once on load
+    generateHeatmap();
 });
 
 /* =========================
