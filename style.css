@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Editorial New';
     src: url('fonts/PPEditorialNew-Ultrabold.woff2') format('woff2'),
         url('fonts/PPEditorialNew-Ultrabold.otf') format('opentype');
@@ -1578,3 +1578,4 @@ a {
 #heatmap-tooltip.show {
     opacity: 1;
 }
+

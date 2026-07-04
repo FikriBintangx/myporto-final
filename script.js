@@ -1179,6 +1179,9 @@ console.log("Status: Siap belajar dan membangun");`;
             
             const data = await response.json();
             
+            // Hapus teks loading jika berhasil
+            if (descEl) descEl.textContent = '';
+            
             // Update the total contributions text
             const totalTextEl = document.querySelector('.heatmap-stats .highlight');
             if (totalTextEl && data.totalContributions !== undefined) {
