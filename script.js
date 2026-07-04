@@ -1153,43 +1153,79 @@ console.log("Status: Siap belajar dan membangun");`;
     // ==========================================
     // HEATMAP GENERATOR
     // ==========================================
-    function generateHeatmap() {
+    async function generateHeatmap() {
         const heatmapGrid = document.getElementById('heatmap-grid');
         if (!heatmapGrid) return;
         
         heatmapGrid.innerHTML = '';
         
-        // 52 weeks * 7 days
-        const totalWeeks = 52;
-        
-        for (let week = 0; week < totalWeeks; week++) {
-            for (let day = 0; day < 7; day++) {
+        try {
+            // Ubah text description saat loading
+            const descEl = document.querySelector('[data-translate="activity-desc"]');
+            const originalText = descEl ? descEl.textContent : '';
+            
+            // Fetch real data from public Deno API wrapper
+            const response = await fetch('https://github-contributions-api.deno.dev/FikriBintangx.json');
+            
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const data = await response.json();
+            
+            // Update the total contributions text
+            const totalTextEl = document.querySelector('.heatmap-stats .highlight');
+            if (totalTextEl && data.totalContributions !== undefined) {
+                totalTextEl.textContent = data.totalContributions;
+            }
+
+            // data.contributions is an array of weeks, each week is an array of days
+            const weeks = data.contributions;
+            
+            weeks.forEach(week => {
+                week.forEach(day => {
+                    const square = document.createElement('div');
+                    square.className = 'heatmap-square';
+                    
+                    // Map GitHub's contributionLevel to our 0-4 scale
+                    let level = 0;
+                    switch (day.contributionLevel) {
+                        case 'NONE': level = 0; break;
+                        case 'FIRST_QUARTILE': level = 1; break;
+                        case 'SECOND_QUARTILE': level = 2; break;
+                        case 'THIRD_QUARTILE': level = 3; break;
+                        case 'FOURTH_QUARTILE': level = 4; break;
+                        default: level = 0;
+                    }
+                    
+                    square.dataset.level = level;
+                    
+                    // Format the tooltip
+                    const dateObj = new Date(day.date);
+                    const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    square.title = `${day.contributionCount === 0 ? 'No' : day.contributionCount} contributions on ${dateStr}`;
+                    
+                    heatmapGrid.appendChild(square);
+                });
+            });
+            
+        } catch (error) {
+            console.error('Failed to fetch GitHub contributions:', error);
+            // Fallback to empty squares or basic error state if API fails
+            for (let i = 0; i < 52 * 7; i++) {
                 const square = document.createElement('div');
                 square.className = 'heatmap-square';
-                
-                // Randomly assign a contribution level (0 to 4)
-                // We want mostly 0s and 1s, and fewer higher levels
-                let level = 0;
-                const rand = Math.random();
-                if (rand > 0.6) level = 1;
-                if (rand > 0.8) level = 2;
-                if (rand > 0.9) level = 3;
-                if (rand > 0.96) level = 4;
-                
-                square.dataset.level = level;
-                
-                // Optional: Add tooltip with random date and count
-                square.title = `${level > 0 ? (level * Math.floor(Math.random() * 5) + 1) : 'No'} contributions on ${new Date(2025, 0, (week * 7) + day).toDateString()}`;
-                
+                square.dataset.level = 0;
+                square.title = 'Data unavailable';
                 heatmapGrid.appendChild(square);
             }
         }
         
         // Ensure we scroll to the end (most recent activity)
-        const scrollContainer = document.querySelector('.heatmap-scroll');
-        if (scrollContainer) {
-            scrollContainer.scrollLeft = scrollContainer.scrollWidth;
-        }
+        setTimeout(() => {
+            const scrollContainer = document.querySelector('.heatmap-scroll');
+            if (scrollContainer) {
+                scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+            }
+        }, 100);
     }
     
     // Call the generator once on load
