@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // Localization translations dictionary
     const translations = {
         en: {
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-about': 'ABOUT',
             'nav-projects': 'PROJECTS',
             'nav-skills': 'SKILLS',
-            'hero-badge': 'FULL STACK DEVELOPER • AI ENTHUSIAST',
+            'hero-badge': 'FULL STACK DEVELOPER â€¢ AI ENTHUSIAST',
             'hero-desc': 'Building scalable systems, AI-powered applications, and modern web experiences.<br>Informatics Engineering student focused on enterprise software and experimental UI.',
             'btn-projects': '[ View Projects ]',
             'btn-print': '[ Print Portfolio ]',
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'about-header': 'SEE IT IN ACTION',
             'terminal-title': 'ABOUT ME',
             'projects-header': 'PROJECTS',
-            'btn-view-project': 'VIEW PROJECT ↗',
+            'btn-view-project': 'VIEW PROJECT â†—',
             'skills-header': 'SKILLS & EXPERIENCE',
             'skill-prog-title': 'PROGRAMMING & DEV',
             'skill-prog-desc': 'Flutter, Java, HTML, CSS, JavaScript, REST API Integration',
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'skill-job1-desc': 'Delivery Administration Staff (2022 - 2024). Managed shipment data, tracking information, and monitored delivery operations.',
             'skill-job2-desc': 'Machine Operator (2024 - 2025). Operated manufacturing machines, ensured product quality, and maintained workplace safety.',
             'skill-job3-desc': 'Customer Service & Operations (2025 - 2026). Assisted in food preparation, customer service, and maintained cleanliness.',
-            'footer-cv': 'PRINT CV ↗',
-            'footer-porto': 'PORTFOLIO ↗',
+            'footer-cv': 'PRINT CV â†—',
+            'footer-porto': 'PORTFOLIO â†—',
             'proj-1-desc': 'A comprehensive digital library and journal search engine designed for academics and researchers to discover peer-reviewed publications efficiently.',
             'proj-2-desc': 'A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering system and interactive menu for coffee enthusiasts.',
             'proj-3-desc': 'A specialized online storefront for premium matcha products, highlighting seamless checkout and visually appealing product displays.',
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-about': 'TENTANG',
             'nav-projects': 'PROYEK',
             'nav-skills': 'KEAHLIAN',
-            'hero-badge': 'PENGEMBANG FULL STACK • ANTUSIAS AI',
+            'hero-badge': 'PENGEMBANG FULL STACK â€¢ ANTUSIAS AI',
             'hero-desc': 'Membangun sistem yang scalable, aplikasi berbasis AI, dan pengalaman web modern.<br>Mahasiswa Teknik Informatika yang berfokus pada perangkat lunak perusahaan dan UI eksperimental.',
             'btn-projects': '[ Lihat Proyek ]',
             'btn-print': '[ Cetak Portofolio ]',
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'about-header': 'LIHAT AKSI NYA',
             'terminal-title': 'TENTANG SAYA',
             'projects-header': 'PROYEK',
-            'btn-view-project': 'LIHAT PROYEK ↗',
+            'btn-view-project': 'LIHAT PROYEK â†—',
             'skills-header': 'KEAHLIAN & PENGALAMAN',
             'skill-prog-title': 'PEMROGRAMAN & PENGEMBANGAN',
             'skill-prog-desc': 'Flutter, Java, HTML, CSS, JavaScript, Integrasi REST API',
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'skill-job1-desc': 'Staf Administrasi Pengiriman (2022 - 2024). Mengelola data pengiriman, informasi pelacakan, dan memantau operasional pengiriman.',
             'skill-job2-desc': 'Operator Mesin (2024 - 2025). Mengoperasikan mesin manufaktur, memastikan kualitas produk, dan menjaga keselamatan kerja.',
             'skill-job3-desc': 'Layanan Pelanggan & Operasional (2025 - 2026). Membantu persiapan makanan, layanan pelanggan, dan menjaga kebersihan.',
-            'footer-cv': 'CETAK CV ↗',
-            'footer-porto': 'PORTOFOLIO ↗',
+            'footer-cv': 'CETAK CV â†—',
+            'footer-porto': 'PORTOFOLIO â†—',
             'proj-1-desc': 'Mesin pencari perpustakaan akademik dan jurnal digital komprehensif yang dirancang bagi akademisi dan peneliti untuk menemukan publikasi ilmiah secara efisien.',
             'proj-2-desc': 'Platform e-commerce modern untuk kafe artisan, menampilkan sistem pemesanan online yang intuitif dan menu interaktif bagi pecinta kopi.',
             'proj-3-desc': 'Toko online khusus untuk produk matcha premium, menyoroti alur checkout yang mulus dan tampilan produk yang menarik secara visual.',
@@ -1153,7 +1153,7 @@ console.log("Status: Siap belajar dan membangun");`;
     // ==========================================
     // HEATMAP GENERATOR
     // ==========================================
-    async function generateHeatmap() {
+    async function generateHeatmap(year = '') {
         const heatmapGrid = document.getElementById('heatmap-grid');
         if (!heatmapGrid) return;
         
@@ -1175,7 +1175,8 @@ console.log("Status: Siap belajar dan membangun");`;
             
             // Fetch real data from our new local Astro API
             // This API will handle token logic, fallback, and year filtering on the server
-            const response = await fetch('/api/github');
+            const apiUrl = year ? `/api/github?year=${year}` : '/api/github';
+            const response = await fetch(apiUrl);
             
             if (!response.ok) throw new Error('Network response was not ok');
             
@@ -1185,7 +1186,7 @@ console.log("Status: Siap belajar dan membangun");`;
             if (descEl) descEl.textContent = '';
             
             // Update the total contributions text
-            const totalTextEl = document.querySelector('.heatmap-stats .highlight');
+            const totalTextEl = document.getElementById('total-contributions-text');
             if (totalTextEl && data.totalContributions !== undefined) {
                 totalTextEl.textContent = data.totalContributions;
             }
@@ -1518,3 +1519,4 @@ draggables.forEach(draggable => {
     }
 
 });
+
