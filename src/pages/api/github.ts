@@ -2,8 +2,8 @@ import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request }) => {
     const username = 'FikriBintangx';
-    // Get token from Astro environment variables (.env)
-    const token = import.meta.env.GITHUB_TOKEN;
+    // Get token from Astro environment variables (.env) or Vercel runtime
+    const token = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
     
     // Parse URL parameters
     const url = new URL(request.url);
