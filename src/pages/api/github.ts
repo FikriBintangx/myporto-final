@@ -67,6 +67,7 @@ export const GET: APIRoute = async ({ request }) => {
             headers: {
                 'Authorization': `bearer ${token}`,
                 'Content-Type': 'application/json',
+                'User-Agent': 'Portfolio-Hermes'
             },
             body: JSON.stringify({ query })
         });
