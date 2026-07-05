@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Localization translations dictionary
     const translations = {
         en: {
@@ -153,7 +153,15 @@ console.log("Status: Siap belajar dan membangun");`;
         document.querySelectorAll('[data-translate]').forEach(el => {
             const key = el.dataset.translate;
             if (translations[lang] && translations[lang][key] !== undefined) {
-                if (el.classList.contains('nav-glitch')) {
+                if (key === 'activity-contribs') {
+                    const yearFilter = document.getElementById('heatmap-year-filter');
+                    const year = yearFilter ? yearFilter.value : '';
+                    if (year) {
+                        el.innerHTML = lang === 'id' ? `Kontribusi pada tahun ${year}` : `Contributions in ${year}`;
+                    } else {
+                        el.innerHTML = translations[lang][key];
+                    }
+                } else if (el.classList.contains('nav-glitch')) {
                     el.dataset.text = translations[lang][key];
                     el.innerHTML = `${translations[lang][key]} <span class="blink cursor"></span>`;
                 } else {
@@ -1262,6 +1270,27 @@ console.log("Status: Siap belajar dan membangun");`;
     
     // Call the generator once on load
     generateHeatmap();
+
+    // Add event listener for year filter
+    const yearFilter = document.getElementById('heatmap-year-filter');
+    if (yearFilter) {
+        yearFilter.addEventListener('change', (e) => {
+            generateHeatmap(e.target.value);
+            updateActivityText(e.target.value);
+        });
+    }
+
+    function updateActivityText(year) {
+        const lang = localStorage.getItem('portfolio-lang') || 'id';
+        const contribTextEl = document.querySelector('[data-translate="activity-contribs"]');
+        if (contribTextEl) {
+            if (year) {
+                contribTextEl.textContent = lang === 'id' ? `Kontribusi pada tahun ${year}` : `Contributions in ${year}`;
+            } else {
+                contribTextEl.textContent = lang === 'id' ? 'Kontribusi dalam setahun terakhir' : 'Contributions in the last year';
+            }
+        }
+    }
 });
 
 /* =========================
