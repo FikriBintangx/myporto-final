@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
     font-family: 'Editorial New';
     src: url('fonts/PPEditorialNew-Ultrabold.woff2') format('woff2'),
         url('fonts/PPEditorialNew-Ultrabold.otf') format('opentype');
@@ -780,6 +780,18 @@ a {
 
     .terminal-container {
         padding-left: 0;
+        min-width: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .terminal-window {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .terminal-header {
+        flex-wrap: wrap;
     }
 
     .terminal-body {
@@ -1449,6 +1461,13 @@ a {
     align-items: flex-end;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
+}
+
+.heatmap-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .heatmap-title {
