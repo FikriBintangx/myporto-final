@@ -1509,6 +1509,11 @@ draggables.forEach(draggable => {
     // LEAFLET MAP INTEGRATION (NO API KEY REQUIRED)
     // ==========================================
     if (document.getElementById('map-container')) {
+        // Safeguard to prevent Map container is already initialized error
+        if (window.mapInstance) {
+            window.mapInstance.remove();
+        }
+
         // Inisialisasi map dengan Leaflet, set ke Cikupa, Tangerang
         const map = L.map('map-container', {
             center: [-6.2361, 106.5186], // [latitude, longitude] untuk Leaflet
@@ -1516,6 +1521,8 @@ draggables.forEach(draggable => {
             zoomControl: false, // Kita bikin custom zoom control di posisi lain biar estetik
             attributionControl: false // Menyembunyikan tulisan watermark Leaflet di pojok bawah
         });
+        
+        window.mapInstance = map;
 
         // Pakai CartoDB Dark Matter (gratis, tanpa API key, tampilan dark mode elegan)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {

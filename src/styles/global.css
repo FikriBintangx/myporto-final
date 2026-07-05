@@ -19,7 +19,8 @@
     /* Light gray-blue background */
     --primary-rgb: 0, 82, 204;
     /* More saturated, higher contrast cobalt blue */
-    --text-primary: rgb(var(--primary-rgb));
+    --primary-color: rgb(var(--primary-rgb));
+    --text-primary: var(--primary-color);
     --text-secondary: rgba(var(--primary-rgb), 0.7);
     --border-color: rgba(var(--primary-rgb), 0.55);
     --terminal-bg: rgba(var(--primary-rgb), 0.05);
