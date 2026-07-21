@@ -23,3 +23,12 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# test/scratch files (may contain tokens)
+test.js
+test.ts
+
+# Python cache
+**/__pycache__/
+*.pyc
+*.pyo

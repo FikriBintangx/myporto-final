@@ -909,70 +909,40 @@ a {
     }
 }
 /* =========================
-   SCROLL ANIMATIONS
+   SCROLL ANIMATIONS — Motion.dev controlled
+   (opacity/transform set by JS, fallback here)
 ========================= */
 
+/* Motion.dev controls these — keep for non-JS fallback */
 .reveal {
-    opacity: 0;
-    transform: translateY(60px);
     transition:
-        opacity .8s ease,
-        transform .8s ease;
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.show {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
-.reveal-left {
-    opacity: 0;
-    transform: translateX(-80px);
-    transition: all .8s ease;
-}
-
-.reveal-left.show {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.reveal-right {
-    opacity: 0;
-    transform: translateX(80px);
-    transition: all .8s ease;
-}
-
-.reveal-right.show {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* stagger project cards */
-
+/* Project cards — Motion.dev will set initial opacity */
 .project-card {
-    opacity: 0;
-    transform: translateY(80px);
-}
-
-.project-card.show {
-    opacity: 1;
-    transform: translateY(0);
+    /* Initial opacity set by motion.js */
+    transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
 /* hero parallax */
-
 .bg-image {
     /* transition removed to use backgroundPosition in JS */
 }
 
 /* scramble text */
-
 .scramble {
     display: inline-block;
 }
 
 /* glow */
-
 .hero-title {
     font-size: clamp(2rem, 6vw, 5rem) !important;
     letter-spacing: -0.05em;
@@ -1599,3 +1569,155 @@ a {
     opacity: 1;
 }
 
+/* ==========================================================
+   MOTION.DEV ENHANCEMENTS
+   Timing, easing tokens, cursor, reduced-motion
+========================================================== */
+
+:root {
+    /* Motion timing tokens from UI/UX Pro Max design system */
+    --ease-expo-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-expo-in:   cubic-bezier(0.4, 0, 1, 1);
+    --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-fast:  150ms;
+    --duration-base:  250ms;
+    --duration-slow:  450ms;
+    --duration-page:  700ms;
+}
+
+/* Improved button/link transitions using expo easing */
+.cta-button,
+.project-btn,
+.nav-link,
+.slider-btn,
+.lang-btn,
+.terminal-tab {
+    transition-timing-function: var(--ease-expo-out);
+    transition-duration: var(--duration-base);
+    will-change: transform;
+}
+
+/* Card hover enhancement */
+.project-card:hover {
+    box-shadow: 0 8px 32px rgba(var(--primary-rgb), 0.15),
+                0 2px 8px  rgba(var(--primary-rgb), 0.08);
+}
+
+/* Feature card hover */
+.feature-card {
+    transition: background 0.25s var(--ease-expo-out),
+                box-shadow 0.25s var(--ease-expo-out),
+                transform  0.25s var(--ease-expo-out);
+    will-change: transform;
+}
+
+.feature-card:hover {
+    background-color: rgba(var(--primary-rgb), 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.1);
+}
+
+/* cursor: default to none on desktop when custom cursor active */
+@media (hover: hover) and (pointer: fine) {
+    body:has(#motion-cursor) {
+        cursor: none;
+    }
+    body:has(#motion-cursor) a,
+    body:has(#motion-cursor) button,
+    body:has(#motion-cursor) input,
+    body:has(#motion-cursor) .project-card {
+        cursor: none;
+    }
+}
+
+/* Modal transition improvement */
+.modal-content {
+    will-change: transform, opacity;
+}
+
+/* Badge pulse animation */
+.badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(var(--primary-rgb), 0.12),
+        transparent
+    );
+    animation: badge-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes badge-shimmer {
+    0%   { left: -100%; }
+    50%  { left: 100%;  }
+    100% { left: 100%;  }
+}
+
+/* Map overlay pulse glow */
+.pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    animation: pulse-glow 2s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
+}
+
+@keyframes pulse-glow {
+    0%   { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7); }
+    70%  { box-shadow: 0 0 0 8px rgba(var(--primary-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);  }
+}
+
+/* ========== Accessibility: Respect prefers-reduced-motion ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .badge::after {
+        animation: none;
+    }
+
+    .pulse-dot {
+        animation: none;
+        box-shadow: none;
+    }
+
+    #motion-cursor,
+    #motion-cursor-ring {
+        display: none !important;
+    }
+
+    /* Ensure hidden elements are visible without animation */
+    .reveal,
+    .project-card,
+    .feature-card,
+    .badge,
+    .hero-title,
+    .hero-description,
+    .hero-ctas,
+    .draggable-wrapper,
+    .grid-header,
+    .grid-footer {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
