@@ -1,0 +1,10 @@
+{
+  "id": "ourscontent",
+  "title": "OURSCONTENT",
+  "shortDescEn": "A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.",
+  "shortDescId": "Sistem manajemen konten (CMS) dan dasbor kinerja kreator yang dibuat untuk proyek Pemrograman Berorientasi Objek (PBO) Semester 4, memungkinkan administrasi akun, metrik platform, dan pelaporan.",
+  "tags": ["Java Swing", "FlatLaf", "PostgreSQL"],
+  "link": "https://github.com/FikriBintangx",
+  "descriptionEn": "<p><strong>OURSCONTENT</strong> is a desktop creator portal and content management application built with Java Swing and PostgreSQL.</p><p>Key features of the system include:</p><ul><li>Modern FlatLaf dark-mode styling with a premium user experience</li><li>Centralized content tracker for multi-platform planning (YouTube, TikTok, etc.)</li><li>Performance metrics logger showing user analytics over time</li><li>Custom PDF reports generation utilizing JasperReports integration</li><li>Secure role-based authentication and user account management</li></ul>",
+  "descriptionId": "<p><strong>OURSCONTENT</strong> adalah aplikasi portal pembuat konten desktop dan manajemen konten yang dibangun dengan Java Swing dan PostgreSQL.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Gaya mode gelap FlatLaf modern dengan pengalaman pengguna yang premium</li><li>Pelacak konten terpusat untuk perencanaan multi-platform (YouTube, TikTok, dll.)</li><li>Pencatat metrik kinerja yang menampilkan analitik pengguna dari waktu ke waktu</li><li>Pembuatan laporan PDF khusus menggunakan integrasi JasperReports</li><li>Autentikasi aman berbasis peran dan manajemen akun pengguna</li></ul>"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "mobilku",
+  "title": "MOBILKU",
+  "shortDescEn": "An integrated web-based platform for buying and selling cars, featuring an interactive vehicle catalog, customer offering system, delivery monitoring, and a comprehensive admin panel for transactions and report generation.",
+  "shortDescId": "Platform web terintegrasi untuk pembelian dan penjualan mobil, menampilkan katalog kendaraan interaktif, sistem penawaran pelanggan, pemantauan pengiriman, dan panel admin komprehensif untuk transaksi serta pembuatan laporan.",
+  "tags": ["CodeIgniter 3", "MySQL", "Bootstrap"],
+  "link": "https://github.com/FikriBintangx",
+  "descriptionEn": "<p><strong>MOBILKU</strong> is an end-to-end web application facilitating automotive buying, selling, and status tracking.</p><p>Key features of the system include:</p><ul><li>Advanced car catalog filter matching make, model, price, and booking availability</li><li>Customer valuation request form for trading in existing vehicles</li><li>Official print-ready invoice and payment receipt generation</li><li>Multi-step transaction flow tracking: Booking Fee, Down Payment, and Final Payment</li><li>Real-time shipment tracking with courier assignments and status logs</li></ul>",
+  "descriptionId": "<p><strong>MOBILKU</strong> adalah aplikasi web end-to-end yang memfasilitasi transaksi jual beli mobil serta pelacakan status pesanan.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Filter katalog mobil canggih yang mencocokkan merek, model, harga, dan ketersediaan pemesanan</li><li>Formulir permintaan penilaian pelanggan untuk tukar tambah kendaraan</li><li>Pembuatan faktur dan tanda terima pembayaran resmi siap cetak</li><li>Pelacakan alur transaksi multi-tahap: Biaya Pemesanan, Uang Muka, dan Pembayaran Akhir</li><li>Pelacakan pengiriman real-time dengan penugasan kurir dan catatan status</li></ul>"
+}

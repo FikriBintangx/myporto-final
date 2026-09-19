@@ -1,0 +1,10 @@
+{
+  "id": "marimacha",
+  "title": "MARIMACHA",
+  "shortDescEn": "A specialized online storefront for premium matcha products, highlighting seamless checkout and visually appealing product displays.",
+  "shortDescId": "Toko online khusus untuk produk matcha premium, menyoroti alur checkout yang mulus dan tampilan produk yang menarik secara visual.",
+  "tags": ["CodeIgniter 3", "Supabase", "MySQL"],
+  "link": "https://marimatcha.vercel.app/",
+  "descriptionEn": "<p><strong>MARIMACHA</strong> is a premium e-commerce storefront for matcha products, utilizing CodeIgniter 3 for backend routing and Supabase for cloud integration.</p><p>Key features of the system include:</p><ul><li>Automated payment verification system utilizing Xendit API integration</li><li>Rich administrator dashboard tracking real-time order states and inventory thresholds</li><li>Secure proof-of-payment uploads handled directly via Supabase Storage buckets</li><li>User review & rating system with interactive stars</li></ul>",
+  "descriptionId": "<p><strong>MARIMACHA</strong> adalah toko online premium untuk produk matcha, memanfaatkan CodeIgniter 3 untuk perutean backend dan Supabase untuk integrasi cloud.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Sistem verifikasi pembayaran otomatis yang memanfaatkan integrasi API Xendit</li><li>Dasbor administrator yang kaya untuk memantau status pesanan real-time dan ambang batas inventaris</li><li>Unggah bukti pembayaran yang aman yang ditangani langsung melalui bucket Supabase Storage</li><li>Sistem ulasan & penilaian pengguna dengan bintang interaktif</li></ul>"
+}

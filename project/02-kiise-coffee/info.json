@@ -1,0 +1,10 @@
+{
+  "id": "kiise-coffee",
+  "title": "KIISE COFFEE",
+  "shortDescEn": "A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering system and interactive menu for coffee enthusiasts.",
+  "shortDescId": "Platform e-commerce modern untuk kafe artisan, menampilkan sistem pemesanan online yang intuitif dan menu interaktif bagi pecinta kopi.",
+  "tags": ["HTML", "CSS", "JavaScript"],
+  "link": "https://kiisecoff.ti24se1.my.id/",
+  "descriptionEn": "<p><strong>KIISE COFFEE</strong> is a modern e-commerce application built for artisanal coffee brands with a highly custom, bold Neo-Brutalist design language.</p><p>Key features of the system include:</p><ul><li>Responsive interactive product catalog with high-contrast UI components</li><li>Dynamic shopping cart with real-time recalculations and instant checkout flow</li><li>Interactive promotional banners and special discount manager</li><li>Custom micro-animations and physics-based transitions matching the brand's premium identity</li></ul>",
+  "descriptionId": "<p><strong>KIISE COFFEE</strong> adalah aplikasi e-commerce modern yang dirancang untuk merek kopi artisan dengan bahasa desain Neo-Brutalist yang kustom dan berani.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Katalog produk interaktif yang responsif dengan komponen UI kontras tinggi</li><li>Keranjang belanja dinamis dengan kalkulasi ulang real-time dan alur pembayaran instan</li><li>Banner promosi interaktif dan pengelola diskon khusus</li><li>Mikro-animasi kustom dan transisi berbasis fisika yang mencerminkan identitas premium merek</li></ul>"
+}

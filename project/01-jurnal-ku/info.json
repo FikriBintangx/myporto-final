@@ -1,0 +1,10 @@
+{
+  "id": "jurnal-ku",
+  "title": "JURNAL KU",
+  "shortDescEn": "A comprehensive digital library and journal search engine designed for academics and researchers to discover peer-reviewed publications efficiently.",
+  "shortDescId": "Mesin pencari perpustakaan akademik dan jurnal digital komprehensif yang dirancang bagi akademisi dan peneliti untuk menemukan publikasi ilmiah secara efisien.",
+  "tags": ["React", "Node.js", "Vercel"],
+  "link": "https://dejurnal.vercel.app/",
+  "descriptionEn": "<p><strong>JURNAL KU</strong> is a high-performance academic library search engine designed to streamline research and literature reviews.</p><p>Key features of the system include:</p><ul><li>Intelligent full-text and metadata searching across thousands of academic entries</li><li>Categorized digital journal archiving with easy-to-use directory structure</li><li>Fast citation generation and exporting tools for various referencing formats</li><li>Clean, user-friendly interface optimized for reading and long study sessions</li></ul>",
+  "descriptionId": "<p><strong>JURNAL KU</strong> adalah mesin pencari perpustakaan akademik berkinerja tinggi yang dirancang untuk menyederhanakan penelitian dan tinjauan literatur ilmiah.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Pencarian teks lengkap dan metadata yang cerdas di ribuan entri akademik</li><li>Pengarsipan jurnal digital yang dikategorikan dengan struktur direktori yang mudah digunakan</li><li>Pembuatan kutipan cepat dan alat pengekspor untuk berbagai format referensi</li><li>Antarmuka bersih dan ramah pengguna yang dioptimalkan untuk kenyamanan membaca</li></ul>"
+}

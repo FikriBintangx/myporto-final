@@ -1,0 +1,10 @@
+{
+  "id": "fkkmbt",
+  "title": "FKKMBT",
+  "shortDescEn": "A robust community management system for Bukit Tiara residents, streamlining data administration, announcements, and residential services.",
+  "shortDescId": "Sistem manajemen komunitas yang kuat bagi warga Bukit Tiara, menyederhanakan administrasi data, pengumuman, dan layanan residensial.",
+  "tags": ["PHP", "MySQL", "Bootstrap"],
+  "link": "https://fkkmbt.ti24se1.my.id/",
+  "descriptionEn": "<p><strong>FKKMBT</strong> is a citizen coordination and residential services portal built specifically for the Bukit Tiara community.</p><p>Key features of the system include:</p><ul><li>Digital citizen registration, profile management, and administrative tracking</li><li>Residential maintenance fee billing, payment submission, and financial auditing</li><li>Digital notice board for neighborhood announcements and urgent notifications</li><li>Admin dashboard for managing residential files and coordinates</li></ul>",
+  "descriptionId": "<p><strong>FKKMBT</strong> adalah portal koordinasi warga dan layanan perumahan yang dibangun khusus untuk komunitas Bukit Tiara.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Pendaftaran warga digital, manajemen profil, dan pelacakan administratif</li><li>Penagihan iuran pemeliharaan lingkungan, pengiriman pembayaran, dan audit keuangan</li><li>Papan pengumuman digital untuk informasi lingkungan dan pemberitahuan penting</li><li>Dasbor admin untuk mengelola berkas dan koordinat perumahan warga</li></ul>"
+}

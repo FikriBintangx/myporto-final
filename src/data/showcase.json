@@ -1,0 +1,165 @@
+{
+  "updatedAt": "2026-09-19T05:22:50.574Z",
+  "totalItems": 6,
+  "projects": [
+    {
+      "id": "project-jurnal-ku",
+      "slug": "jurnal-ku",
+      "title": "JURNAL KU",
+      "type": "project",
+      "image": "/uploads/project/jurnal-ku/cover.png",
+      "location": [
+        -6.2361,
+        106.5186
+      ],
+      "anchorName": "Tangerang",
+      "rotation": "-3deg"
+    },
+    {
+      "id": "project-kiise-coffee",
+      "slug": "kiise-coffee",
+      "title": "KIISE COFFEE",
+      "type": "project",
+      "image": "/uploads/project/kiise-coffee/cover.png",
+      "location": [
+        35.6762,
+        139.6503
+      ],
+      "anchorName": "Tokyo",
+      "rotation": "4deg"
+    },
+    {
+      "id": "project-marimacha",
+      "slug": "marimacha",
+      "title": "MARIMACHA",
+      "type": "project",
+      "image": "/uploads/project/marimacha/cover.png",
+      "location": [
+        37.7749,
+        -122.4194
+      ],
+      "anchorName": "San Francisco",
+      "rotation": "-2deg"
+    },
+    {
+      "id": "project-fkkmbt",
+      "slug": "fkkmbt",
+      "title": "FKKMBT",
+      "type": "project",
+      "image": "/uploads/project/fkkmbt/cover.png",
+      "location": [
+        51.5074,
+        -0.1278
+      ],
+      "anchorName": "London",
+      "rotation": "3deg"
+    },
+    {
+      "id": "project-mobilku",
+      "slug": "mobilku",
+      "title": "MOBILKU",
+      "type": "project",
+      "image": "/uploads/project/mobilku/cover.png",
+      "location": [
+        -33.8688,
+        151.2093
+      ],
+      "anchorName": "Sydney",
+      "rotation": "-4deg"
+    },
+    {
+      "id": "project-ourscontent",
+      "slug": "ourscontent",
+      "title": "OURSCONTENT",
+      "type": "project",
+      "image": "/uploads/project/ourscontent/cover.png",
+      "location": [
+        40.7128,
+        -74.006
+      ],
+      "anchorName": "New York",
+      "rotation": "2deg"
+    }
+  ],
+  "certificates": [],
+  "items": [
+    {
+      "id": "project-jurnal-ku",
+      "slug": "jurnal-ku",
+      "title": "JURNAL KU",
+      "type": "project",
+      "image": "/uploads/project/jurnal-ku/cover.png",
+      "location": [
+        -6.2361,
+        106.5186
+      ],
+      "anchorName": "Tangerang",
+      "rotation": "-3deg"
+    },
+    {
+      "id": "project-kiise-coffee",
+      "slug": "kiise-coffee",
+      "title": "KIISE COFFEE",
+      "type": "project",
+      "image": "/uploads/project/kiise-coffee/cover.png",
+      "location": [
+        35.6762,
+        139.6503
+      ],
+      "anchorName": "Tokyo",
+      "rotation": "4deg"
+    },
+    {
+      "id": "project-marimacha",
+      "slug": "marimacha",
+      "title": "MARIMACHA",
+      "type": "project",
+      "image": "/uploads/project/marimacha/cover.png",
+      "location": [
+        37.7749,
+        -122.4194
+      ],
+      "anchorName": "San Francisco",
+      "rotation": "-2deg"
+    },
+    {
+      "id": "project-fkkmbt",
+      "slug": "fkkmbt",
+      "title": "FKKMBT",
+      "type": "project",
+      "image": "/uploads/project/fkkmbt/cover.png",
+      "location": [
+        51.5074,
+        -0.1278
+      ],
+      "anchorName": "London",
+      "rotation": "3deg"
+    },
+    {
+      "id": "project-mobilku",
+      "slug": "mobilku",
+      "title": "MOBILKU",
+      "type": "project",
+      "image": "/uploads/project/mobilku/cover.png",
+      "location": [
+        -33.8688,
+        151.2093
+      ],
+      "anchorName": "Sydney",
+      "rotation": "-4deg"
+    },
+    {
+      "id": "project-ourscontent",
+      "slug": "ourscontent",
+      "title": "OURSCONTENT",
+      "type": "project",
+      "image": "/uploads/project/ourscontent/cover.png",
+      "location": [
+        40.7128,
+        -74.006
+      ],
+      "anchorName": "New York",
+      "rotation": "2deg"
+    }
+  ]
+}

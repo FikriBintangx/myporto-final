@@ -1,3 +1,5 @@
+import projectsData from '../data/projects.json';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Localization translations dictionary
     const translations = {
@@ -6,27 +8,32 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-about': 'ABOUT',
             'nav-projects': 'PROJECTS',
             'nav-skills': 'SKILLS',
-            'hero-badge': 'FULL STACK DEVELOPER â€¢ AI ENTHUSIAST',
-            'hero-desc': 'Building scalable systems, AI-powered applications, and modern web experiences.<br>Informatics Engineering student focused on enterprise software and experimental UI.',
+            'hero-badge': 'FULL STACK & SOFTWARE DEVELOPER',
+            'hero-desc': 'Building scalable web systems, robust backend architectures, and modern digital applications.<br>Informatics Engineering student focused on software craftsmanship and interactive UI.',
             'btn-projects': '[ View Projects ]',
             'btn-print': '[ Print Portfolio ]',
             'btn-contact': '[ Contact Me ]',
             'about-header': 'SEE IT IN ACTION',
             'terminal-title': 'ABOUT ME',
             'projects-header': 'PROJECTS',
-            'btn-view-project': 'VIEW PROJECT â†—',
+            'btn-view-project': 'VIEW PROJECT ↗',
             'skills-header': 'SKILLS & EXPERIENCE',
-            'skill-prog-title': 'PROGRAMMING & DEV',
-            'skill-prog-desc': 'Flutter, Java, HTML, CSS, JavaScript, REST API Integration',
-            'skill-db-title': 'DATABASES & TOOLS',
-            'skill-db-desc': 'MySQL, MariaDB, PostgreSQL, Git & GitHub, Figma',
+            'skills-tech-title': 'TECHNICAL STACK',
+            'skills-exp-title': 'WORK EXPERIENCE',
+            'skill-frontend-title': 'FRONTEND & MOBILE',
+            'skill-backend-title': 'BACKEND & APIS',
+            'skill-db-title': 'DATABASES & CLOUD',
+            'skill-tools-title': 'TOOLS & ARCHITECTURE',
             'skill-soft-title': 'SOFT SKILLS',
             'skill-soft-desc': 'Problem Solving, Crisis Management, Creative Thinking, Data Analysis, Strategic Planning',
-            'skill-job1-desc': 'Delivery Administration Staff (2022 - 2024). Managed shipment data, tracking information, and monitored delivery operations.',
-            'skill-job2-desc': 'Machine Operator (2024 - 2025). Operated manufacturing machines, ensured product quality, and maintained workplace safety.',
-            'skill-job3-desc': 'Customer Service & Operations (2025 - 2026). Assisted in food preparation, customer service, and maintained cleanliness.',
-            'footer-cv': 'PRINT CV â†—',
-            'footer-porto': 'PORTFOLIO â†—',
+            'skill-job1-role': 'Delivery Administration Staff',
+            'skill-job1-desc': 'Managed shipment routing records, tracking information, and monitored daily delivery operations.',
+            'skill-job2-role': 'Machine Operator',
+            'skill-job2-desc': 'Operated manufacturing machinery, ensured strict product quality thresholds, and maintained workplace safety.',
+            'skill-job3-role': 'Customer Service & Operations',
+            'skill-job3-desc': 'Assisted in food preparation, customer service satisfaction, and maintained high cleanliness standards.',
+            'footer-cv': 'PRINT CV ↗',
+            'footer-porto': 'PORTFOLIO ↗',
             'proj-1-desc': 'A comprehensive digital library and journal search engine designed for academics and researchers to discover peer-reviewed publications efficiently.',
             'proj-2-desc': 'A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering system and interactive menu for coffee enthusiasts.',
             'proj-3-desc': 'A specialized online storefront for premium matcha products, highlighting seamless checkout and visually appealing product displays.',
@@ -51,27 +58,32 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-about': 'TENTANG',
             'nav-projects': 'PROYEK',
             'nav-skills': 'KEAHLIAN',
-            'hero-badge': 'PENGEMBANG FULL STACK â€¢ ANTUSIAS AI',
-            'hero-desc': 'Membangun sistem yang scalable, aplikasi berbasis AI, dan pengalaman web modern.<br>Mahasiswa Teknik Informatika yang berfokus pada perangkat lunak perusahaan dan UI eksperimental.',
+            'hero-badge': 'PENGEMBANG FULL STACK & PERANGKAT LUNAK',
+            'hero-desc': 'Membangun sistem web yang scalable, arsitektur backend yang tangguh, dan aplikasi digital modern.<br>Mahasiswa Teknik Informatika yang berfokus pada rekayasa perangkat lunak dan UI interaktif.',
             'btn-projects': '[ Lihat Proyek ]',
             'btn-print': '[ Cetak Portofolio ]',
             'btn-contact': '[ Hubungi Saya ]',
             'about-header': 'LIHAT AKSI NYA',
             'terminal-title': 'TENTANG SAYA',
             'projects-header': 'PROYEK',
-            'btn-view-project': 'LIHAT PROYEK â†—',
+            'btn-view-project': 'LIHAT PROYEK ↗',
             'skills-header': 'KEAHLIAN & PENGALAMAN',
-            'skill-prog-title': 'PEMROGRAMAN & PENGEMBANGAN',
-            'skill-prog-desc': 'Flutter, Java, HTML, CSS, JavaScript, Integrasi REST API',
-            'skill-db-title': 'DATABASE & TOOLS',
-            'skill-db-desc': 'MySQL, MariaDB, PostgreSQL, Git & GitHub, Figma',
+            'skills-tech-title': 'STACK TEKNIS',
+            'skills-exp-title': 'PENGALAMAN KERJA',
+            'skill-frontend-title': 'FRONTEND & MOBILE',
+            'skill-backend-title': 'BACKEND & APIS',
+            'skill-db-title': 'DATABASE & CLOUD',
+            'skill-tools-title': 'TOOLS & ARSITEKTUR',
             'skill-soft-title': 'KEMAMPUAN INTERPERSONAL',
             'skill-soft-desc': 'Pemecahan Masalah, Manajemen Krisis, Berpikir Kreatif, Analisis Data, Perencanaan Strategis',
-            'skill-job1-desc': 'Staf Administrasi Pengiriman (2022 - 2024). Mengelola data pengiriman, informasi pelacakan, dan memantau operasional pengiriman.',
-            'skill-job2-desc': 'Operator Mesin (2024 - 2025). Mengoperasikan mesin manufaktur, memastikan kualitas produk, dan menjaga keselamatan kerja.',
-            'skill-job3-desc': 'Layanan Pelanggan & Operasional (2025 - 2026). Membantu persiapan makanan, layanan pelanggan, dan menjaga kebersihan.',
-            'footer-cv': 'CETAK CV â†—',
-            'footer-porto': 'PORTOFOLIO â†—',
+            'skill-job1-role': 'Staf Administrasi Pengiriman',
+            'skill-job1-desc': 'Mengelola pencatatan rute pengiriman, informasi pelacakan, dan memantau operasional pengiriman harian.',
+            'skill-job2-role': 'Operator Mesin',
+            'skill-job2-desc': 'Mengoperasikan mesin manufaktur, memastikan standar kualitas produk, dan menjaga keselamatan kerja.',
+            'skill-job3-role': 'Layanan Pelanggan & Operasional',
+            'skill-job3-desc': 'Membantu persiapan makanan, kepuasan layanan pelanggan, dan menjaga standar kebersihan kerja.',
+            'footer-cv': 'CETAK CV ↗',
+            'footer-porto': 'PORTOFOLIO ↗',
             'proj-1-desc': 'Mesin pencari perpustakaan akademik dan jurnal digital komprehensif yang dirancang bagi akademisi dan peneliti untuk menemukan publikasi ilmiah secara efisien.',
             'proj-2-desc': 'Platform e-commerce modern untuk kafe artisan, menampilkan sistem pemesanan online yang intuitif dan menu interaktif bagi pecinta kopi.',
             'proj-3-desc': 'Toko online khusus untuk produk matcha premium, menyoroti alur checkout yang mulus dan tampilan produk yang menarik secara visual.',
@@ -169,6 +181,38 @@ console.log("Status: Siap belajar dan membangun");`;
                 }
             }
         });
+
+        // Update dynamic project card short descriptions from projectsData
+        document.querySelectorAll('.project-card').forEach(card => {
+            const pid = card.dataset.project;
+            const pdata = projectData[pid];
+            if (pdata) {
+                const descEl = card.querySelector('.project-card-desc');
+                if (descEl) {
+                    descEl.innerHTML = lang === 'id'
+                        ? (pdata.shortDescId || pdata.shortDescEn || '')
+                        : (pdata.shortDescEn || pdata.shortDescId || '');
+                }
+            }
+        });
+
+        // Refresh modal content if currently open
+        if (modal && modal.classList.contains('show')) {
+            const activeTitle = modalTitle ? modalTitle.innerText : '';
+            const matchedProject = Object.values(projectData).find(p => p.title === activeTitle);
+            if (matchedProject) {
+                if (modalDescription) {
+                    modalDescription.innerHTML = (lang === 'id' ? (matchedProject.descriptionId || matchedProject.descriptionEn) : (matchedProject.descriptionEn || matchedProject.descriptionId)) || '';
+                }
+                if (modalLink) {
+                    if (!matchedProject.link || matchedProject.link === '#' || matchedProject.link.includes('github.com')) {
+                        modalLink.innerText = lang === 'id' ? '[ LIHAT SOURCE CODE DI GITHUB ]' : '[ VIEW SOURCE ON GITHUB ]';
+                    } else {
+                        modalLink.innerText = lang === 'id' ? '[ KUNJUNGI WEBSITE ]' : '[ VISIT LIVE SITE ]';
+                    }
+                }
+            }
+        }
         
         // Update terminal text
         startTypewriter(lang);
@@ -224,14 +268,15 @@ console.log("Status: Siap belajar dan membangun");`;
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5 // trigger when 50% of the section is visible
+        threshold: 0.35 // trigger when section is in view
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
-                // Remove active class from all links
+                // Remove active class from all desktop and mobile pill links
                 navLinks.forEach(link => link.classList.remove('active'));
+                document.querySelectorAll('.mobile-pill-link').forEach(link => link.classList.remove('active'));
                 
                 // Add active class to corresponding link
                 const id = entry.target.getAttribute('id');
@@ -239,12 +284,30 @@ console.log("Status: Siap belajar dan membangun");`;
                 if(activeLink) {
                     activeLink.classList.add('active');
                 }
+                const activePill = document.querySelector(`.mobile-pill-link[href="#${id}"]`);
+                if(activePill) {
+                    activePill.classList.add('active');
+                }
             }
         });
     }, observerOptions);
 
     // Observe all sections
     sections.forEach(section => observer.observe(section));
+
+    // Smooth scroll for mobile pill navigation
+    document.querySelectorAll('.mobile-pill-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                if(targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
 
     // Mouse tracking for glitch effect
     const glitchWrappers = document.querySelectorAll('.glitch-wrapper');
@@ -334,182 +397,9 @@ console.log("Status: Siap belajar dan membangun");`;
     }
 
     // ==========================================
-    // PROJECT DETAIL MODAL LOGIC
+    // PROJECT DETAIL MODAL LOGIC (Dynamic from project/ folder)
     // ==========================================
-    const projectData = {
-        'jurnal-ku': {
-            title: 'JURNAL KU',
-            tags: ['React', 'Node.js', 'Vercel'],
-            descriptionEn: `
-                <p><strong>JURNAL KU</strong> is a high-performance academic library search engine designed to streamline research and literature reviews.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Intelligent full-text and metadata searching across thousands of academic entries</li>
-                    <li>Categorized digital journal archiving with easy-to-use directory structure</li>
-                    <li>Fast citation generation and exporting tools for various referencing formats</li>
-                    <li>Clean, user-friendly interface optimized for reading and long study sessions</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>JURNAL KU</strong> adalah mesin pencari perpustakaan akademik berkinerja tinggi yang dirancang untuk menyederhanakan penelitian dan tinjauan literatur ilmiah.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Pencarian teks lengkap dan metadata yang cerdas di ribuan entri akademik</li>
-                    <li>Pengarsipan jurnal digital yang dikategorikan dengan struktur direktori yang mudah digunakan</li>
-                    <li>Pembuatan kutipan cepat dan alat pengekspor untuk berbagai format referensi</li>
-                    <li>Antarmuka bersih dan ramah pengguna yang dioptimalkan untuk kenyamanan membaca</li>
-                </ul>
-            `,
-            link: 'https://dejurnal.vercel.app/',
-            images: ['images/project1.png']
-        },
-        'kiise-coffee': {
-            title: 'KIISE COFFEE',
-            tags: ['HTML', 'CSS', 'JavaScript'],
-            descriptionEn: `
-                <p><strong>KIISE COFFEE</strong> is a modern e-commerce application built for artisanal coffee brands with a highly custom, bold Neo-Brutalist design language.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Responsive interactive product catalog with high-contrast UI components</li>
-                    <li>Dynamic shopping cart with real-time recalculations and instant checkout flow</li>
-                    <li>Interactive promotional banners and special discount manager</li>
-                    <li>Custom micro-animations and physics-based transitions matching the brand's premium identity</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>KIISE COFFEE</strong> adalah aplikasi e-commerce modern yang dirancang untuk merek kopi artisan dengan bahasa desain Neo-Brutalist yang kustom dan berani.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Katalog produk interaktif yang responsif dengan komponen UI kontras tinggi</li>
-                    <li>Keranjang belanja dinamis dengan kalkulasi ulang real-time dan alur pembayaran instan</li>
-                    <li>Banner promosi interaktif dan pengelola diskon khusus</li>
-                    <li>Mikro-animasi kustom dan transisi berbasis fisika yang mencerminkan identitas premium merek</li>
-                </ul>
-            `,
-            link: 'https://kiisecoff.ti24se1.my.id/',
-            images: ['images/project2.png']
-        },
-        'marimacha': {
-            title: 'MARIMACHA',
-            tags: ['CodeIgniter 3', 'Supabase', 'MySQL'],
-            descriptionEn: `
-                <p><strong>MARIMACHA</strong> is a premium e-commerce storefront for matcha products, utilizing CodeIgniter 3 for backend routing and Supabase for cloud integration.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Automated payment verification system utilizing Xendit API integration</li>
-                    <li>Rich administrator dashboard tracking real-time order states and inventory thresholds</li>
-                    <li>Secure proof-of-payment uploads handled directly via Supabase Storage buckets</li>
-                    <li>User review & rating system with interactive stars</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>MARIMACHA</strong> adalah toko online premium untuk produk matcha, memanfaatkan CodeIgniter 3 untuk perutean backend dan Supabase untuk integrasi cloud.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Sistem verifikasi pembayaran otomatis yang memanfaatkan integrasi API Xendit</li>
-                    <li>Dasbor administrator yang kaya untuk memantau status pesanan real-time dan ambang batas inventaris</li>
-                    <li>Unggah bukti pembayaran yang aman yang ditangani langsung melalui bucket Supabase Storage</li>
-                    <li>Sistem ulasan & penilaian pengguna dengan bintang interaktif</li>
-                </ul>
-            `,
-            link: 'https://marimatcha.vercel.app/',
-            images: ['images/project3.png']
-        },
-        'fkkmbt': {
-            title: 'FKKMBT',
-            tags: ['PHP', 'MySQL', 'Bootstrap'],
-            descriptionEn: `
-                <p><strong>FKKMBT</strong> is a citizen coordination and residential services portal built specifically for the Bukit Tiara community.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Digital citizen registration, profile management, and administrative tracking</li>
-                    <li>Residential maintenance fee billing, payment submission, and financial auditing</li>
-                    <li>Digital notice board for neighborhood announcements and urgent notifications</li>
-                    <li>Admin dashboard for managing residential files and coordinates</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>FKKMBT</strong> adalah portal koordinasi warga dan layanan perumahan yang dibangun khusus untuk komunitas Bukit Tiara.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Pendaftaran warga digital, manajemen profil, dan pelacakan administratif</li>
-                    <li>Penagihan iuran pemeliharaan lingkungan, pengiriman pembayaran, dan audit keuangan</li>
-                    <li>Papan pengumuman digital untuk informasi lingkungan dan pemberitahuan penting</li>
-                    <li>Dasbor admin untuk mengelola berkas dan koordinat perumahan warga</li>
-                </ul>
-            `,
-            link: 'https://fkkmbt.ti24se1.my.id/',
-            images: ['images/project4.png']
-        },
-        'mobilku': {
-            title: 'MOBILKU',
-            tags: ['CodeIgniter 3', 'MySQL', 'Bootstrap'],
-            descriptionEn: `
-                <p><strong>MOBILKU</strong> is an end-to-end web application facilitating automotive buying, selling, and status tracking.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Advanced car catalog filter matching make, model, price, and booking availability</li>
-                    <li>Customer valuation request form for trading in existing vehicles</li>
-                    <li>Official print-ready invoice and payment receipt generation</li>
-                    <li>Multi-step transaction flow tracking: Booking Fee, Down Payment, and Final Payment</li>
-                    <li>Real-time shipment tracking with courier assignments and status logs</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>MOBILKU</strong> adalah aplikasi web end-to-end yang memfasilitasi transaksi jual beli mobil serta pelacakan status pesanan.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Filter katalog mobil canggih yang mencocokkan merek, model, harga, dan ketersediaan pemesanan</li>
-                    <li>Formulir permintaan penilaian pelanggan untuk tukar tambah kendaraan</li>
-                    <li>Pembuatan faktur dan tanda terima pembayaran resmi siap cetak</li>
-                    <li>Pelacakan alur transaksi multi-tahap: Biaya Pemesanan, Uang Muka, dan Pembayaran Akhir</li>
-                    <li>Pelacakan pengiriman real-time dengan penugasan kurir dan catatan status</li>
-                </ul>
-            `,
-            link: 'https://github.com/FikriBintangx',
-            images: [
-                'images/project_mobilku.png',
-                'images/screenshots/mobilku_1.png',
-                'images/screenshots/mobilku_2.png',
-                'images/screenshots/mobilku_3.png',
-                'images/screenshots/mobilku_4.png'
-            ]
-        },
-        'ourscontent': {
-            title: 'OURSCONTENT',
-            tags: ['Java Swing', 'FlatLaf', 'PostgreSQL'],
-            descriptionEn: `
-                <p><strong>OURSCONTENT</strong> is a desktop creator portal and content management application built with Java Swing and PostgreSQL.</p>
-                <p>Key features of the system include:</p>
-                <ul>
-                    <li>Modern FlatLaf dark-mode styling with a premium user experience</li>
-                    <li>Centralized content tracker for multi-platform planning (YouTube, TikTok, etc.)</li>
-                    <li>Performance metrics logger showing user analytics over time</li>
-                    <li>Custom PDF reports generation utilizing JasperReports integration</li>
-                    <li>Secure role-based authentication and user account management</li>
-                </ul>
-            `,
-            descriptionId: `
-                <p><strong>OURSCONTENT</strong> adalah aplikasi portal pembuat konten desktop dan manajemen konten yang dibangun dengan Java Swing dan PostgreSQL.</p>
-                <p>Fitur utama dari sistem ini meliputi:</p>
-                <ul>
-                    <li>Gaya mode gelap FlatLaf modern dengan pengalaman pengguna yang premium</li>
-                    <li>Pelacak konten terpusat untuk perencanaan multi-platform (YouTube, TikTok, dll.)</li>
-                    <li>Pencatat metrik kinerja yang menampilkan analitik pengguna dari waktu ke waktu</li>
-                    <li>Pembuatan laporan PDF khusus menggunakan integrasi JasperReports</li>
-                    <li>Autentikasi aman berbasis peran dan manajemen akun pengguna</li>
-                </ul>
-            `,
-            link: 'https://github.com/FikriBintangx',
-            images: [
-                'images/project_ourscontent.png',
-                'images/screenshots/ourscontent_1.png',
-                'images/screenshots/ourscontent_2.png',
-                'images/screenshots/ourscontent_3.png',
-                'images/screenshots/ourscontent_4.png'
-            ]
-        }
-    };
+    const projectData = projectsData;
 
     const modal = document.getElementById('project-modal');
     const modalClose = document.querySelector('.modal-close');
@@ -519,6 +409,65 @@ console.log("Status: Siap belajar dan membangun");`;
     const modalGallery = document.getElementById('modal-gallery');
     const modalLink = document.getElementById('modal-link');
 
+    function openProjectModal(projectId) {
+        const data = projectData[projectId];
+        if (!data || !modal) return;
+
+        if (modalTitle) modalTitle.innerText = data.title;
+        
+        if (modalTags) {
+            modalTags.innerHTML = '';
+            (data.tags || []).forEach(tag => {
+                const tagEl = document.createElement('span');
+                tagEl.className = 'project-tag';
+                tagEl.innerText = tag;
+                modalTags.appendChild(tagEl);
+            });
+        }
+        
+        const lang = localStorage.getItem('portfolio-lang') || 'id';
+        if (modalDescription) {
+            modalDescription.innerHTML = (lang === 'id' ? (data.descriptionId || data.descriptionEn) : (data.descriptionEn || data.descriptionId)) || '';
+        }
+        
+        if (modalLink) {
+            modalLink.href = data.link || '#';
+            if (!data.link || data.link === '#' || data.link.includes('github.com')) {
+                modalLink.innerText = lang === 'id' ? '[ LIHAT SOURCE CODE DI GITHUB ]' : '[ VIEW SOURCE ON GITHUB ]';
+            } else {
+                modalLink.innerText = lang === 'id' ? '[ KUNJUNGI WEBSITE ]' : '[ VISIT LIVE SITE ]';
+            }
+        }
+
+        if (modalGallery) {
+            modalGallery.innerHTML = '';
+            const galleryImages = (data.images && data.images.length > 0) ? data.images : (data.cover ? [data.cover] : []);
+            galleryImages.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `${data.title} Screenshot`;
+                img.loading = 'lazy';
+                modalGallery.appendChild(img);
+            });
+        }
+
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.scrollTop = 0;
+        }
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        console.log('[Modal] Successfully opened project modal for:', projectId);
+
+        if (modalTitle && typeof scramble === 'function') {
+            scramble(modalTitle);
+        }
+    }
+
+    // Expose globally so 3D globe and external interactions can invoke it
+    window.openProjectModal = openProjectModal;
+
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
@@ -527,51 +476,36 @@ console.log("Status: Siap belajar dan membangun");`;
             }
             
             const projectId = card.dataset.project;
-            const data = projectData[projectId];
-            if (data) {
-                modalTitle.innerText = data.title;
-                
-                modalTags.innerHTML = '';
-                data.tags.forEach(tag => {
-                    const tagEl = document.createElement('span');
-                    tagEl.className = 'project-tag';
-                    tagEl.innerText = tag;
-                    modalTags.appendChild(tagEl);
-                });
-                
-                const lang = localStorage.getItem('portfolio-lang') || 'id';
-                modalDescription.innerHTML = lang === 'id' ? data.descriptionId : data.descriptionEn;
-                
-                modalLink.href = data.link;
-                if (data.link === '#' || data.link.includes('github.com')) {
-                    modalLink.innerText = lang === 'id' ? '[ LIHAT SOURCE CODE DI GITHUB ]' : '[ VIEW SOURCE ON GITHUB ]';
-                } else {
-                    modalLink.innerText = lang === 'id' ? '[ KUNJUNGI WEBSITE ]' : '[ VISIT LIVE SITE ]';
-                }
-
-                modalGallery.innerHTML = '';
-                data.images.forEach(imgSrc => {
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.alt = `${data.title} Screenshot`;
-                    modalGallery.appendChild(img);
-                });
-
-                modal.classList.add('show');
-                scramble(modalTitle);
+            if (projectId) {
+                openProjectModal(projectId);
             }
         });
     });
 
+    function closeAllModals() {
+        if (modal) modal.classList.remove('show');
+        const pdfModal = document.getElementById('pdf-modal');
+        if (pdfModal) pdfModal.classList.remove('show');
+        const certModal = document.getElementById('cert-modal');
+        if (certModal) certModal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
     if (modalClose) {
         modalClose.addEventListener('click', () => {
-            modal.classList.remove('show');
+            closeAllModals();
         });
     }
 
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
-            modal.classList.remove('show');
+            closeAllModals();
+        }
+    });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAllModals();
         }
     });
 
@@ -1505,54 +1439,7 @@ draggables.forEach(draggable => {
         }
     }
 
-    // ==========================================
-    // LEAFLET MAP INTEGRATION (NO API KEY REQUIRED)
-    // ==========================================
-    if (document.getElementById('map-container')) {
-        // Safeguard to prevent Map container is already initialized error
-        if (window.mapInstance) {
-            window.mapInstance.remove();
-        }
 
-        // Inisialisasi map dengan Leaflet, set ke Cikupa, Tangerang
-        const map = L.map('map-container', {
-            center: [-6.2361, 106.5186], // [latitude, longitude] untuk Leaflet
-            zoom: 12,
-            zoomControl: false, // Kita bikin custom zoom control di posisi lain biar estetik
-            attributionControl: false // Menyembunyikan tulisan watermark Leaflet di pojok bawah
-        });
-        
-        window.mapInstance = map;
-
-        // Pakai CartoDB Dark Matter (gratis, tanpa API key, tampilan dark mode elegan)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
-        }).addTo(map);
-
-        // Pindahkan zoom control ke kanan atas
-        L.control.zoom({
-            position: 'topright'
-        }).addTo(map);
-
-        // Custom Marker (Pakai divIcon Leaflet untuk styling pakai CSS)
-        const customIcon = L.divIcon({
-            className: 'custom-leaflet-marker',
-            html: '<div class="pulse-dot" style="background-color: var(--text-primary); border: 2px solid var(--bg-color); width: 14px; height: 14px; margin-left: -7px; margin-top: -7px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);"></div>',
-            iconSize: [0, 0] // Center
-        });
-
-        // Tambahkan marker ke map
-        const marker = L.marker([-6.2361, 106.5186], { icon: customIcon }).addTo(map);
-
-        // Tambahkan popup kecil
-        marker.bindPopup('<h4 style="font-family: var(--font-mono); margin:0; font-size:14px; color: var(--text-primary);">FIKRI\'S BASE</h4><p style="margin:0; font-size:12px; color: var(--text-secondary);">Cikupa, Tangerang</p>', {
-            offset: [0, -10],
-            closeButton: false,
-            className: 'custom-leaflet-popup'
-        });
-    }
 
 });
 
