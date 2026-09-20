@@ -1422,11 +1422,12 @@ a {
 .globe-section-wrapper {
     position: relative;
     width: 100%;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 0 2.5rem 0;
+    min-height: 460px;
+    display: grid;
+    grid-template-columns: minmax(320px, 480px) 1fr;
+    align-items: start;
+    gap: 1.5rem;
+    padding: 0.5rem 0 2rem 0;
     overflow: visible;
     border-bottom: 1px solid var(--border-color);
 }
@@ -1435,11 +1436,11 @@ a {
 .globe-typography-side {
     position: relative;
     z-index: 10;
-    max-width: 540px;
-    flex-shrink: 0;
+    width: 100%;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
     padding: 0;
@@ -1567,22 +1568,22 @@ a {
     color: #16a34a !important;
 }
 
-/* Right Column: Globe Canvas Overlapping Typography (Saling Menimpa) */
+/* Right Column: Globe Canvas Beside Headline (Directly in marked area) */
 .globe-canvas-side {
     position: relative;
     z-index: 4;
-    flex: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    margin-left: -80px;
+    margin-top: -30px;
     pointer-events: auto;
+    width: 100%;
 }
 
 .globe-canvas-container {
     width: 100%;
-    max-width: 520px;
-    height: 520px;
+    max-width: 480px;
+    height: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1590,8 +1591,8 @@ a {
 }
 
 .cobe-canvas {
-    width: 500px;
-    height: 500px;
+    width: 480px;
+    height: 480px;
     max-width: 100%;
     aspect-ratio: 1 / 1;
     cursor: grab;
@@ -1672,10 +1673,9 @@ a {
     border: 1.5px solid var(--text-primary);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 700px) {
     .globe-section-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
+        grid-template-columns: 1fr;
         padding: 1.5rem 0;
         gap: 2rem;
     }
@@ -1683,17 +1683,17 @@ a {
         max-width: 100%;
     }
     .globe-canvas-side {
-        margin-left: 0;
+        margin-top: 0;
         width: 100%;
         justify-content: center;
     }
     .globe-canvas-container {
         max-width: 100%;
-        height: 400px;
+        height: 380px;
     }
     .cobe-canvas {
-        width: 400px;
-        height: 400px;
+        width: 380px;
+        height: 380px;
     }
     .globe-meta-grid {
         max-width: 100%;
