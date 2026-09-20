@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fikribintang.web.id/sitemap.xml
