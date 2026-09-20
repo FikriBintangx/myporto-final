@@ -1,6 +1,16 @@
 import projectsData from '../data/projects.json';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Project data & modal references (initialized upfront to prevent TDZ ReferenceError)
+    const projectData = projectsData;
+    const modal = document.getElementById('project-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalTags = document.getElementById('modal-tags');
+    const modalDescription = document.getElementById('modal-description');
+    const modalGallery = document.getElementById('modal-gallery');
+    const modalLink = document.getElementById('modal-link');
+
     // Localization translations dictionary
     const translations = {
         en: {
@@ -51,7 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'qa-welcome': 'Welcome to Fikri\'s Q&A CLI. Type your question or click a suggestion below! Type "help" for commands.',
             'qa-input-placeholder': 'Type a question or "help"...',
             'pdf-viewer-title': 'PDF VIEWER',
-            'pdf-download': '[ DOWNLOAD PDF ]'
+            'pdf-download': '[ DOWNLOAD PDF ]',
+            'globe-live-status': 'LIVE BASE • GMT+7 (WIB)',
+            'globe-desc': 'Engineering digital experiences, mobile applications, and resilient cloud systems locally from Tangerang, available for high-impact teams and clients worldwide.'
         },
         id: {
             'nav-home': 'BERANDA',
@@ -101,7 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'qa-welcome': 'Selamat datang di Q&A CLI Fikri. Ketik pertanyaan Anda atau klik saran di bawah! Ketik "help" untuk perintah.',
             'qa-input-placeholder': 'Ketik pertanyaan atau "help"...',
             'pdf-viewer-title': 'PRATINJAU PDF',
-            'pdf-download': '[ UNDUH PDF ]'
+            'pdf-download': '[ UNDUH PDF ]',
+            'globe-live-status': 'LOKASI AKTIF • GMT+7 (WIB)',
+            'globe-desc': 'Mengembangkan pengalaman digital, aplikasi mobile, dan sistem cloud tangguh dari Tangerang, siap berkolaborasi untuk proyek dan tim di seluruh dunia.'
         }
     };
 
@@ -133,6 +147,7 @@ console.log("Status: Siap belajar dan membangun");`;
         if (typewriterTimeout) {
             clearTimeout(typewriterTimeout);
         }
+        if (!typewriterEl) return;
         typewriterEl.innerHTML = '';
         const text = lang === 'id' ? terminalTextId : terminalTextEn;
         let charIndex = 0;
@@ -399,15 +414,6 @@ console.log("Status: Siap belajar dan membangun");`;
     // ==========================================
     // PROJECT DETAIL MODAL LOGIC (Dynamic from project/ folder)
     // ==========================================
-    const projectData = projectsData;
-
-    const modal = document.getElementById('project-modal');
-    const modalClose = document.querySelector('.modal-close');
-    const modalTitle = document.getElementById('modal-title');
-    const modalTags = document.getElementById('modal-tags');
-    const modalDescription = document.getElementById('modal-description');
-    const modalGallery = document.getElementById('modal-gallery');
-    const modalLink = document.getElementById('modal-link');
 
     function openProjectModal(projectId) {
         const data = projectData[projectId];

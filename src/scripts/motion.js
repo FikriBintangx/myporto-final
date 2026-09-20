@@ -4,7 +4,7 @@
  * Design: Modern Dark / Cinematic | Variance:7 Motion:8 Density:4
  * Easing: expo.out = cubic-bezier(0.16, 1, 0.3, 1)
  */
-import { animate, inView, stagger, spring } from 'https://cdn.jsdelivr.net/npm/motion@11/+esm';
+import { animate, inView, stagger, spring } from 'motion';
 
 // ─────────────────────────────────────────────
 // 0. Respect prefers-reduced-motion
@@ -62,31 +62,29 @@ function initHeroAnimations() {
 }
 
 // ─────────────────────────────────────────────
-// 3. Scroll Reveal — inView for all sections
+// 3. Section In-View Entrances (Scroll-triggered)
 // ─────────────────────────────────────────────
 function initScrollReveals() {
     if (prefersReduced) return;
 
-    // Generic sections with .reveal class
-    document.querySelectorAll('.grid-section.reveal').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(40px)';
-
-        inView(section, () => {
-            animate(section,
-                { opacity: [0, 1], y: [40, 0] },
+    // About terminal section
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection) {
+        aboutSection.style.opacity = '0';
+        aboutSection.style.transform = 'translateY(32px)';
+        inView(aboutSection, () => {
+            animate(aboutSection,
+                { opacity: [0, 1], y: [32, 0] },
                 { duration: DURATION, easing: EASE_EXPO }
             );
-        }, { margin: '-80px' });
-    });
+        }, { margin: '-60px' });
+    }
 
-    // Feature cards — stagger grid items
-    const featureSection = document.querySelector('.feature-section');
-    if (featureSection) {
-        const cards = featureSection.querySelectorAll('.feature-card');
-        cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(24px)'; });
-
-        inView(featureSection, () => {
+    // Skills section cards
+    const skillsSection = document.querySelector('#skills');
+    if (skillsSection) {
+        inView(skillsSection, () => {
+            const cards = skillsSection.querySelectorAll('.feature-card, .timeline-entry');
             animate(cards,
                 { opacity: [0, 1], y: [24, 0] },
                 { duration: 0.55, delay: stagger(0.07, { start: 0.1 }), easing: EASE_EXPO }
@@ -99,6 +97,16 @@ function initScrollReveals() {
     if (projectsSection) {
         projectsSection.style.opacity = '0';
         projectsSection.style.transform = 'translateY(32px)';
+
+        // Safety fallback: ensure cards are always revealed
+        setTimeout(() => {
+            if (projectsSection) {
+                projectsSection.style.opacity = '1';
+                projectsSection.style.transform = 'none';
+                const cards = projectsSection.querySelectorAll('.project-card');
+                cards.forEach(c => { c.style.opacity = '1'; });
+            }
+        }, 1200);
 
         inView(projectsSection, () => {
             animate(projectsSection,
