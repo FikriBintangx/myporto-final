@@ -1,6 +1,10 @@
 {
   "id": "kiise-coffee",
   "title": "KIISE COFFEE",
+  "showcaseTitle": "KIISE COFFEE",
+  "location": [10.0, 158.0],
+  "anchorName": "West Pacific",
+  "rotation": "4deg",
   "shortDescEn": "A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering system and interactive menu for coffee enthusiasts.",
   "shortDescId": "Platform e-commerce modern untuk kafe artisan, menampilkan sistem pemesanan online yang intuitif dan menu interaktif bagi pecinta kopi.",
   "tags": ["HTML", "CSS", "JavaScript"],

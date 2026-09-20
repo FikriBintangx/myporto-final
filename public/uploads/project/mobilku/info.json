@@ -1,6 +1,10 @@
 {
   "id": "mobilku",
   "title": "MOBILKU",
+  "showcaseTitle": "MOBILKU",
+  "location": [-28.0, 148.0],
+  "anchorName": "East Australia",
+  "rotation": "-4deg",
   "shortDescEn": "An integrated web-based platform for buying and selling cars, featuring an interactive vehicle catalog, customer offering system, delivery monitoring, and a comprehensive admin panel for transactions and report generation.",
   "shortDescId": "Platform web terintegrasi untuk pembelian dan penjualan mobil, menampilkan katalog kendaraan interaktif, sistem penawaran pelanggan, pemantauan pengiriman, dan panel admin komprehensif untuk transaksi serta pembuatan laporan.",
   "tags": ["CodeIgniter 3", "MySQL", "Bootstrap"],

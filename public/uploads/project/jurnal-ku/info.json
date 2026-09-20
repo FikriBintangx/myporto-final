@@ -1,6 +1,10 @@
 {
   "id": "jurnal-ku",
   "title": "JURNAL KU",
+  "showcaseTitle": "JURNAL KU",
+  "location": [-18.0, 92.0],
+  "anchorName": "Indian Ocean",
+  "rotation": "-2deg",
   "shortDescEn": "A comprehensive digital library and journal search engine designed for academics and researchers to discover peer-reviewed publications efficiently.",
   "shortDescId": "Mesin pencari perpustakaan akademik dan jurnal digital komprehensif yang dirancang bagi akademisi dan peneliti untuk menemukan publikasi ilmiah secara efisien.",
   "tags": ["React", "Node.js", "Vercel"],

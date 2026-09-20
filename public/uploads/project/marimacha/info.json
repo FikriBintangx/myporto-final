@@ -1,6 +1,10 @@
 {
   "id": "marimacha",
   "title": "MARIMACHA",
+  "showcaseTitle": "MARIMATCHA",
+  "location": [38.0, 136.0],
+  "anchorName": "East Asia",
+  "rotation": "3deg",
   "shortDescEn": "A specialized online storefront for premium matcha products, highlighting seamless checkout and visually appealing product displays.",
   "shortDescId": "Toko online khusus untuk produk matcha premium, menyoroti alur checkout yang mulus dan tampilan produk yang menarik secara visual.",
   "tags": ["CodeIgniter 3", "Supabase", "MySQL"],

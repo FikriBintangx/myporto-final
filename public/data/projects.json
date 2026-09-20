@@ -10,6 +10,13 @@
     "link": "https://dejurnal.vercel.app/",
     "descriptionEn": "<p><strong>JURNAL KU</strong> is a high-performance academic library search engine designed to streamline research and literature reviews.</p><p>Key features of the system include:</p><ul><li>Intelligent full-text and metadata searching across thousands of academic entries</li><li>Categorized digital journal archiving with easy-to-use directory structure</li><li>Fast citation generation and exporting tools for various referencing formats</li><li>Clean, user-friendly interface optimized for reading and long study sessions</li></ul>",
     "descriptionId": "<p><strong>JURNAL KU</strong> adalah mesin pencari perpustakaan akademik berkinerja tinggi yang dirancang untuk menyederhanakan penelitian dan tinjauan literatur ilmiah.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Pencarian teks lengkap dan metadata yang cerdas di ribuan entri akademik</li><li>Pengarsipan jurnal digital yang dikategorikan dengan struktur direktori yang mudah digunakan</li><li>Pembuatan kutipan cepat dan alat pengekspor untuk berbagai format referensi</li><li>Antarmuka bersih dan ramah pengguna yang dioptimalkan untuk kenyamanan membaca</li></ul>",
+    "showcaseTitle": "JURNAL KU",
+    "location": [
+      -18,
+      92
+    ],
+    "anchorName": "Indian Ocean",
+    "rotation": "-2deg",
     "shortDescEn": "A comprehensive digital library and journal search engine designed for academics and researchers to discover peer-reviewed publications efficiently.",
     "shortDescId": "Mesin pencari perpustakaan akademik dan jurnal digital komprehensif yang dirancang bagi akademisi dan peneliti untuk menemukan publikasi ilmiah secara efisien.",
     "images": [
@@ -28,6 +35,13 @@
     "link": "https://kiisecoff.ti24se1.my.id/",
     "descriptionEn": "<p><strong>KIISE COFFEE</strong> is a modern e-commerce application built for artisanal coffee brands with a highly custom, bold Neo-Brutalist design language.</p><p>Key features of the system include:</p><ul><li>Responsive interactive product catalog with high-contrast UI components</li><li>Dynamic shopping cart with real-time recalculations and instant checkout flow</li><li>Interactive promotional banners and special discount manager</li><li>Custom micro-animations and physics-based transitions matching the brand's premium identity</li></ul>",
     "descriptionId": "<p><strong>KIISE COFFEE</strong> adalah aplikasi e-commerce modern yang dirancang untuk merek kopi artisan dengan bahasa desain Neo-Brutalist yang kustom dan berani.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Katalog produk interaktif yang responsif dengan komponen UI kontras tinggi</li><li>Keranjang belanja dinamis dengan kalkulasi ulang real-time dan alur pembayaran instan</li><li>Banner promosi interaktif dan pengelola diskon khusus</li><li>Mikro-animasi kustom dan transisi berbasis fisika yang mencerminkan identitas premium merek</li></ul>",
+    "showcaseTitle": "KIISE COFFEE",
+    "location": [
+      10,
+      158
+    ],
+    "anchorName": "West Pacific",
+    "rotation": "4deg",
     "shortDescEn": "A modern e-commerce platform for an artisanal cafe, featuring an intuitive online ordering system and interactive menu for coffee enthusiasts.",
     "shortDescId": "Platform e-commerce modern untuk kafe artisan, menampilkan sistem pemesanan online yang intuitif dan menu interaktif bagi pecinta kopi.",
     "images": [
@@ -46,6 +60,13 @@
     "link": "https://marimatcha.vercel.app/",
     "descriptionEn": "<p><strong>MARIMACHA</strong> is a premium e-commerce storefront for matcha products, utilizing CodeIgniter 3 for backend routing and Supabase for cloud integration.</p><p>Key features of the system include:</p><ul><li>Automated payment verification system utilizing Xendit API integration</li><li>Rich administrator dashboard tracking real-time order states and inventory thresholds</li><li>Secure proof-of-payment uploads handled directly via Supabase Storage buckets</li><li>User review & rating system with interactive stars</li></ul>",
     "descriptionId": "<p><strong>MARIMACHA</strong> adalah toko online premium untuk produk matcha, memanfaatkan CodeIgniter 3 untuk perutean backend dan Supabase untuk integrasi cloud.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Sistem verifikasi pembayaran otomatis yang memanfaatkan integrasi API Xendit</li><li>Dasbor administrator yang kaya untuk memantau status pesanan real-time dan ambang batas inventaris</li><li>Unggah bukti pembayaran yang aman yang ditangani langsung melalui bucket Supabase Storage</li><li>Sistem ulasan & penilaian pengguna dengan bintang interaktif</li></ul>",
+    "showcaseTitle": "MARIMATCHA",
+    "location": [
+      38,
+      136
+    ],
+    "anchorName": "East Asia",
+    "rotation": "3deg",
     "shortDescEn": "A specialized online storefront for premium matcha products, highlighting seamless checkout and visually appealing product displays.",
     "shortDescId": "Toko online khusus untuk produk matcha premium, menyoroti alur checkout yang mulus dan tampilan produk yang menarik secara visual.",
     "images": [
@@ -64,6 +85,13 @@
     "link": "https://fkkmbt.ti24se1.my.id/",
     "descriptionEn": "<p><strong>FKKMBT</strong> is a citizen coordination and residential services portal built specifically for the Bukit Tiara community.</p><p>Key features of the system include:</p><ul><li>Digital citizen registration, profile management, and administrative tracking</li><li>Residential maintenance fee billing, payment submission, and financial auditing</li><li>Digital notice board for neighborhood announcements and urgent notifications</li><li>Admin dashboard for managing residential files and coordinates</li></ul>",
     "descriptionId": "<p><strong>FKKMBT</strong> adalah portal koordinasi warga dan layanan perumahan yang dibangun khusus untuk komunitas Bukit Tiara.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Pendaftaran warga digital, manajemen profil, dan pelacakan administratif</li><li>Penagihan iuran pemeliharaan lingkungan, pengiriman pembayaran, dan audit keuangan</li><li>Papan pengumuman digital untuk informasi lingkungan dan pemberitahuan penting</li><li>Dasbor admin untuk mengelola berkas dan koordinat perumahan warga</li></ul>",
+    "showcaseTitle": "FKRBT",
+    "location": [
+      36,
+      72
+    ],
+    "anchorName": "Central Asia",
+    "rotation": "-3deg",
     "shortDescEn": "A robust community management system for Bukit Tiara residents, streamlining data administration, announcements, and residential services.",
     "shortDescId": "Sistem manajemen komunitas yang kuat bagi warga Bukit Tiara, menyederhanakan administrasi data, pengumuman, dan layanan residensial.",
     "images": [
@@ -82,6 +110,13 @@
     "link": "https://github.com/FikriBintangx",
     "descriptionEn": "<p><strong>MOBILKU</strong> is an end-to-end web application facilitating automotive buying, selling, and status tracking.</p><p>Key features of the system include:</p><ul><li>Advanced car catalog filter matching make, model, price, and booking availability</li><li>Customer valuation request form for trading in existing vehicles</li><li>Official print-ready invoice and payment receipt generation</li><li>Multi-step transaction flow tracking: Booking Fee, Down Payment, and Final Payment</li><li>Real-time shipment tracking with courier assignments and status logs</li></ul>",
     "descriptionId": "<p><strong>MOBILKU</strong> adalah aplikasi web end-to-end yang memfasilitasi transaksi jual beli mobil serta pelacakan status pesanan.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Filter katalog mobil canggih yang mencocokkan merek, model, harga, dan ketersediaan pemesanan</li><li>Formulir permintaan penilaian pelanggan untuk tukar tambah kendaraan</li><li>Pembuatan faktur dan tanda terima pembayaran resmi siap cetak</li><li>Pelacakan alur transaksi multi-tahap: Biaya Pemesanan, Uang Muka, dan Pembayaran Akhir</li><li>Pelacakan pengiriman real-time dengan penugasan kurir dan catatan status</li></ul>",
+    "showcaseTitle": "MOBILKU",
+    "location": [
+      -28,
+      148
+    ],
+    "anchorName": "East Australia",
+    "rotation": "-4deg",
     "shortDescEn": "An integrated web-based platform for buying and selling cars, featuring an interactive vehicle catalog, customer offering system, delivery monitoring, and a comprehensive admin panel for transactions and report generation.",
     "shortDescId": "Platform web terintegrasi untuk pembelian dan penjualan mobil, menampilkan katalog kendaraan interaktif, sistem penawaran pelanggan, pemantauan pengiriman, dan panel admin komprehensif untuk transaksi serta pembuatan laporan.",
     "images": [
@@ -104,6 +139,7 @@
     "link": "https://github.com/FikriBintangx",
     "descriptionEn": "<p><strong>OURSCONTENT</strong> is a desktop creator portal and content management application built with Java Swing and PostgreSQL.</p><p>Key features of the system include:</p><ul><li>Modern FlatLaf dark-mode styling with a premium user experience</li><li>Centralized content tracker for multi-platform planning (YouTube, TikTok, etc.)</li><li>Performance metrics logger showing user analytics over time</li><li>Custom PDF reports generation utilizing JasperReports integration</li><li>Secure role-based authentication and user account management</li></ul>",
     "descriptionId": "<p><strong>OURSCONTENT</strong> adalah aplikasi portal pembuat konten desktop dan manajemen konten yang dibangun dengan Java Swing dan PostgreSQL.</p><p>Fitur utama dari sistem ini meliputi:</p><ul><li>Gaya mode gelap FlatLaf modern dengan pengalaman pengguna yang premium</li><li>Pelacak konten terpusat untuk perencanaan multi-platform (YouTube, TikTok, dll.)</li><li>Pencatat metrik kinerja yang menampilkan analitik pengguna dari waktu ke waktu</li><li>Pembuatan laporan PDF khusus menggunakan integrasi JasperReports</li><li>Autentikasi aman berbasis peran dan manajemen akun pengguna</li></ul>",
+    "showOnGlobe": false,
     "shortDescEn": "A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.",
     "shortDescId": "Sistem manajemen konten (CMS) dan dasbor kinerja kreator yang dibuat untuk proyek Pemrograman Berorientasi Objek (PBO) Semester 4, memungkinkan administrasi akun, metrik platform, dan pelaporan.",
     "images": [

@@ -128,18 +128,20 @@ function syncProjects() {
             info.cover = coverUrl;
             projectsMap[info.id] = info;
 
-            const anchor = GLOBE_ANCHORS[anchorIdx % GLOBE_ANCHORS.length];
-            showcaseItems.push({
-                id: `project-${info.id}`,
-                slug: info.id,
-                title: info.title,
-                type: 'project',
-                image: coverUrl,
-                location: anchor.location,
-                anchorName: anchor.name,
-                rotation: ROTATIONS[anchorIdx % ROTATIONS.length]
-            });
-            anchorIdx++;
+            if (info.showOnGlobe !== false) {
+                const anchor = GLOBE_ANCHORS[anchorIdx % GLOBE_ANCHORS.length];
+                showcaseItems.push({
+                    id: `project-${info.id}`,
+                    slug: info.id,
+                    title: info.showcaseTitle || info.title,
+                    type: 'project',
+                    image: coverUrl,
+                    location: info.location || anchor.location,
+                    anchorName: info.anchorName || anchor.name,
+                    rotation: info.rotation || ROTATIONS[anchorIdx % ROTATIONS.length]
+                });
+                anchorIdx++;
+            }
 
         } else if (entry.isFile() && VALID_IMG_EXT.has(path.extname(entry.name).toLowerCase())) {
             // Standalone image in project/

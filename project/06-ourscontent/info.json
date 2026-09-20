@@ -1,6 +1,7 @@
 {
   "id": "ourscontent",
   "title": "OURSCONTENT",
+  "showOnGlobe": false,
   "shortDescEn": "A content management system (CMS) and creator performance dashboard built for a Semester 4 Object-Oriented Programming (PBO) project, enabling account administration, platform metrics, and reporting.",
   "shortDescId": "Sistem manajemen konten (CMS) dan dasbor kinerja kreator yang dibuat untuk proyek Pemrograman Berorientasi Objek (PBO) Semester 4, memungkinkan administrasi akun, metrik platform, dan pelaporan.",
   "tags": ["Java Swing", "FlatLaf", "PostgreSQL"],

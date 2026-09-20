@@ -36,8 +36,8 @@ function initGlobe() {
     let width = container ? container.offsetWidth : (canvas.offsetWidth || 500);
     if (!width || width <= 0) width = 500;
 
-    let phi = 4.8; // Initial rotation angle
-    let theta = 0.15;
+    let phi = 4.76; // Initial rotation angle facing Southeast Asia / Tangerang
+    let theta = 0.12;
     let isDragging = false;
     let isHoveringPolaroid = false;
     let pointerStartX = 0;
@@ -60,12 +60,22 @@ function initGlobe() {
         };
     });
 
-    // Extract markers dynamically from showcase data
+    // Dedicated Tangerang base vector & element
+    const tangerangVec = toVector([-6.1783, 106.6319]);
+    const tangerangPin = document.getElementById('tangerang-pin');
+
+    // Extract markers dynamically from showcase data + Tangerang home base
     const markers = (showcaseData.items || []).map((item) => ({
         location: item.location,
         size: item.type === 'certificate' ? 0.05 : 0.045,
         id: item.id
     }));
+    // Add Tangerang base marker
+    markers.push({
+        location: [-6.1783, 106.6319],
+        size: 0.065,
+        id: 'marker-tangerang'
+    });
 
     const globe = createGlobe(canvas, {
         devicePixelRatio: dpr,
@@ -79,9 +89,9 @@ function initGlobe() {
         mapBrightness: 6,
         mapBaseBrightness: 0.04,
         baseColor: [1, 1, 1], // Pure white globe surface
-        markerColor: [0.12, 0.45, 0.95], // Vibrant blue markers
-        glowColor: [1, 1, 1], // Clean white glow
-        scale: 1.0,
+        markerColor: [0.0, 0.32, 0.85], // Vibrant cobalt blue markers
+        glowColor: [0.88, 0.94, 1.0], // Ice-blue soft glow
+        scale: 1.02,
         offset: [0, 0],
         markers: markers
     });
@@ -207,6 +217,23 @@ function initGlobe() {
             phi += 0.003;
         }
         globe.update({ phi, theta });
+
+        // Update dedicated Tangerang live pin badge position
+        if (tangerangPin) {
+            const tProj = projectPoint(tangerangVec, phi, theta);
+            tangerangPin.style.left = `${tProj.x * 100}%`;
+            tangerangPin.style.top = `${tProj.y * 100}%`;
+
+            if (tProj.visible) {
+                tangerangPin.style.opacity = '1';
+                tangerangPin.style.pointerEvents = 'auto';
+                tangerangPin.style.transform = 'translate(-50%, -50%) scale(1)';
+            } else {
+                tangerangPin.style.opacity = '0';
+                tangerangPin.style.pointerEvents = 'none';
+                tangerangPin.style.transform = 'translate(-50%, -50%) scale(0.6)';
+            }
+        }
 
         // Update polaroids positions directly via 3D projection
         polaroids.forEach((p) => {

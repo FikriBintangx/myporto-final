@@ -1,6 +1,10 @@
 {
   "id": "fkkmbt",
   "title": "FKKMBT",
+  "showcaseTitle": "FKRBT",
+  "location": [36.0, 72.0],
+  "anchorName": "Central Asia",
+  "rotation": "-3deg",
   "shortDescEn": "A robust community management system for Bukit Tiara residents, streamlining data administration, announcements, and residential services.",
   "shortDescId": "Sistem manajemen komunitas yang kuat bagi warga Bukit Tiara, menyederhanakan administrasi data, pengumuman, dan layanan residensial.",
   "tags": ["PHP", "MySQL", "Bootstrap"],

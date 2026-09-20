@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-20T16:18:02.226Z",
-  "totalItems": 6,
+  "updatedAt": "2026-09-20T16:29:28.754Z",
+  "totalItems": 5,
   "projects": [
     {
       "id": "project-jurnal-ku",
@@ -9,11 +9,11 @@
       "type": "project",
       "image": "/uploads/project/jurnal-ku/cover.png",
       "location": [
-        -6.2361,
-        106.5186
+        -18,
+        92
       ],
-      "anchorName": "Tangerang",
-      "rotation": "-3deg"
+      "anchorName": "Indian Ocean",
+      "rotation": "-2deg"
     },
     {
       "id": "project-kiise-coffee",
@@ -22,37 +22,37 @@
       "type": "project",
       "image": "/uploads/project/kiise-coffee/cover.png",
       "location": [
-        35.6762,
-        139.6503
+        10,
+        158
       ],
-      "anchorName": "Tokyo",
+      "anchorName": "West Pacific",
       "rotation": "4deg"
     },
     {
       "id": "project-marimacha",
       "slug": "marimacha",
-      "title": "MARIMACHA",
+      "title": "MARIMATCHA",
       "type": "project",
       "image": "/uploads/project/marimacha/cover.png",
       "location": [
-        37.7749,
-        -122.4194
+        38,
+        136
       ],
-      "anchorName": "San Francisco",
-      "rotation": "-2deg"
+      "anchorName": "East Asia",
+      "rotation": "3deg"
     },
     {
       "id": "project-fkkmbt",
       "slug": "fkkmbt",
-      "title": "FKKMBT",
+      "title": "FKRBT",
       "type": "project",
       "image": "/uploads/project/fkkmbt/cover.png",
       "location": [
-        51.5074,
-        -0.1278
+        36,
+        72
       ],
-      "anchorName": "London",
-      "rotation": "3deg"
+      "anchorName": "Central Asia",
+      "rotation": "-3deg"
     },
     {
       "id": "project-mobilku",
@@ -61,24 +61,11 @@
       "type": "project",
       "image": "/uploads/project/mobilku/cover.png",
       "location": [
-        -33.8688,
-        151.2093
+        -28,
+        148
       ],
-      "anchorName": "Sydney",
+      "anchorName": "East Australia",
       "rotation": "-4deg"
-    },
-    {
-      "id": "project-ourscontent",
-      "slug": "ourscontent",
-      "title": "OURSCONTENT",
-      "type": "project",
-      "image": "/uploads/project/ourscontent/cover.png",
-      "location": [
-        40.7128,
-        -74.006
-      ],
-      "anchorName": "New York",
-      "rotation": "2deg"
     }
   ],
   "certificates": [],
@@ -90,11 +77,11 @@
       "type": "project",
       "image": "/uploads/project/jurnal-ku/cover.png",
       "location": [
-        -6.2361,
-        106.5186
+        -18,
+        92
       ],
-      "anchorName": "Tangerang",
-      "rotation": "-3deg"
+      "anchorName": "Indian Ocean",
+      "rotation": "-2deg"
     },
     {
       "id": "project-kiise-coffee",
@@ -103,37 +90,37 @@
       "type": "project",
       "image": "/uploads/project/kiise-coffee/cover.png",
       "location": [
-        35.6762,
-        139.6503
+        10,
+        158
       ],
-      "anchorName": "Tokyo",
+      "anchorName": "West Pacific",
       "rotation": "4deg"
     },
     {
       "id": "project-marimacha",
       "slug": "marimacha",
-      "title": "MARIMACHA",
+      "title": "MARIMATCHA",
       "type": "project",
       "image": "/uploads/project/marimacha/cover.png",
       "location": [
-        37.7749,
-        -122.4194
+        38,
+        136
       ],
-      "anchorName": "San Francisco",
-      "rotation": "-2deg"
+      "anchorName": "East Asia",
+      "rotation": "3deg"
     },
     {
       "id": "project-fkkmbt",
       "slug": "fkkmbt",
-      "title": "FKKMBT",
+      "title": "FKRBT",
       "type": "project",
       "image": "/uploads/project/fkkmbt/cover.png",
       "location": [
-        51.5074,
-        -0.1278
+        36,
+        72
       ],
-      "anchorName": "London",
-      "rotation": "3deg"
+      "anchorName": "Central Asia",
+      "rotation": "-3deg"
     },
     {
       "id": "project-mobilku",
@@ -142,24 +129,11 @@
       "type": "project",
       "image": "/uploads/project/mobilku/cover.png",
       "location": [
-        -33.8688,
-        151.2093
+        -28,
+        148
       ],
-      "anchorName": "Sydney",
+      "anchorName": "East Australia",
       "rotation": "-4deg"
-    },
-    {
-      "id": "project-ourscontent",
-      "slug": "ourscontent",
-      "title": "OURSCONTENT",
-      "type": "project",
-      "image": "/uploads/project/ourscontent/cover.png",
-      "location": [
-        40.7128,
-        -74.006
-      ],
-      "anchorName": "New York",
-      "rotation": "2deg"
     }
   ]
 }
