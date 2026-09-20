@@ -456,6 +456,33 @@ a {
     gap: 1rem;
 }
 
+.terminal-header-controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.terminal-expand-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+}
+
+.terminal-expand-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
 .dots {
     display: flex;
     gap: 0.4rem;
@@ -466,14 +493,41 @@ a {
     height: 8px;
     border-radius: 50%;
     background-color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.dot:nth-child(2) {
-    opacity: 0.6;
+.dot:hover {
+    transform: scale(1.4);
 }
 
-.dot:nth-child(3) {
-    opacity: 0.3;
+.dot-max:hover {
+    background-color: #10b981;
+}
+
+.dot-close:hover {
+    background-color: #ef4444;
+}
+
+.terminal-window.terminal-focused {
+    position: fixed !important;
+    top: 3vh !important;
+    left: 4vw !important;
+    width: 92vw !important;
+    height: 94vh !important;
+    max-width: 1400px !important;
+    z-index: 10000 !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 9999px rgba(15, 23, 42, 0.8) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.terminal-window.terminal-focused .terminal-body {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    max-height: calc(94vh - 65px) !important;
 }
 
 .terminal-title {
@@ -1368,19 +1422,21 @@ a {
 .globe-section-wrapper {
     position: relative;
     width: 100%;
-    min-height: 480px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+    display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 1.5rem 0 2.5rem 0;
-    overflow: hidden;
-    background: radial-gradient(circle at 75% 50%, rgba(var(--primary-rgb), 0.06) 0%, transparent 65%);
+    justify-content: flex-start;
+    padding: 1rem 0 2.5rem 0;
+    overflow: visible;
     border-bottom: 1px solid var(--border-color);
 }
 
 /* Left Column: Big Typography & Tech Metadata (Rata Kiri Entok) */
 .globe-typography-side {
+    position: relative;
+    z-index: 10;
+    max-width: 540px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1388,7 +1444,7 @@ a {
     text-align: left;
     padding: 0;
     margin: 0;
-    z-index: 5;
+    pointer-events: auto;
 }
 
 .globe-status-pill {
@@ -1440,6 +1496,7 @@ a {
     color: var(--text-primary);
     width: fit-content;
     margin-bottom: 1rem;
+    cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -1510,19 +1567,22 @@ a {
     color: #16a34a !important;
 }
 
-/* Right Column: Globe Canvas */
+/* Right Column: Globe Canvas Overlapping Typography (Saling Menimpa) */
 .globe-canvas-side {
+    position: relative;
+    z-index: 4;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    position: relative;
+    margin-left: -80px;
+    pointer-events: auto;
 }
 
 .globe-canvas-container {
     width: 100%;
-    max-width: 480px;
-    height: 480px;
+    max-width: 520px;
+    height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1530,8 +1590,8 @@ a {
 }
 
 .cobe-canvas {
-    width: 480px;
-    height: 480px;
+    width: 500px;
+    height: 500px;
     max-width: 100%;
     aspect-ratio: 1 / 1;
     cursor: grab;
@@ -1612,28 +1672,28 @@ a {
     border: 1.5px solid var(--text-primary);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
     .globe-section-wrapper {
-        grid-template-columns: 1fr;
-        padding: 2rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 0;
         gap: 2rem;
     }
     .globe-typography-side {
-        order: 1;
-        align-items: flex-start;
-        padding: 0;
+        max-width: 100%;
     }
     .globe-canvas-side {
-        order: 2;
+        margin-left: 0;
+        width: 100%;
         justify-content: center;
-        padding: 0;
-    }
-    .globe-massive-title {
-        font-size: clamp(2rem, 7.5vw, 3rem);
     }
     .globe-canvas-container {
         max-width: 100%;
-        height: 380px;
+        height: 400px;
+    }
+    .cobe-canvas {
+        width: 400px;
+        height: 400px;
     }
     .globe-meta-grid {
         max-width: 100%;

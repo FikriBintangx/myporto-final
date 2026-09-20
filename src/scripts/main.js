@@ -913,6 +913,60 @@ console.log("Status: Siap belajar dan membangun");`;
         });
     });
 
+    // Terminal Focus / Fullscreen Mode
+    const terminalWindow = document.querySelector('.terminal-window');
+    const termExpandBtn = document.getElementById('term-expand-btn');
+    const termDotMax = document.getElementById('term-dot-max');
+    const termDotClose = document.getElementById('term-dot-close');
+
+    function toggleTerminalFocus() {
+        if (!terminalWindow) return;
+        const isFocused = terminalWindow.classList.toggle('terminal-focused');
+        const lang = localStorage.getItem('portfolio-lang') || 'id';
+        if (isFocused) {
+            document.body.style.overflow = 'hidden';
+            if (termExpandBtn) {
+                termExpandBtn.innerHTML = lang === 'id' 
+                    ? '<span class="expand-icon">✕</span> <span class="expand-text">[ KELUAR FOKUS ]</span>'
+                    : '<span class="expand-icon">✕</span> <span class="expand-text">[ EXIT FOCUS ]</span>';
+            }
+        } else {
+            document.body.style.overflow = '';
+            if (termExpandBtn) {
+                termExpandBtn.innerHTML = lang === 'id'
+                    ? '<span class="expand-icon">⛶</span> <span class="expand-text">[ FOKUS ]</span>'
+                    : '<span class="expand-icon">⛶</span> <span class="expand-text">[ FOCUS ]</span>';
+            }
+        }
+    }
+
+    if (termExpandBtn) termExpandBtn.addEventListener('click', toggleTerminalFocus);
+    if (termDotMax) termDotMax.addEventListener('click', toggleTerminalFocus);
+    if (termDotClose) {
+        termDotClose.addEventListener('click', () => {
+            if (terminalWindow && terminalWindow.classList.contains('terminal-focused')) {
+                toggleTerminalFocus();
+            }
+        });
+    }
+
+    // Globe Action Indicator click to expand active/first item
+    const globeActionIndicator = document.querySelector('.globe-action-indicator');
+    if (globeActionIndicator) {
+        globeActionIndicator.addEventListener('click', () => {
+            const firstPolaroid = document.querySelector('.showcase-polaroid');
+            if (firstPolaroid) {
+                firstPolaroid.click();
+            }
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && terminalWindow && terminalWindow.classList.contains('terminal-focused')) {
+            toggleTerminalFocus();
+        }
+    });
+
     // Suggestion tags rendering
     function renderSuggestions() {
         termSuggestions.innerHTML = '';

@@ -166,14 +166,22 @@ const projectList = Object.values(projectsData);
                 <div class="terminal-window">
                     <div class="terminal-header">
                         <div class="dots">
-                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            <span class="dot dot-close" id="term-dot-close" title="Tutup / Minimize"></span>
+                            <span class="dot dot-min" id="term-dot-min" title="Minimize"></span>
+                            <span class="dot dot-max" id="term-dot-max" title="Fokus / Expand Terminal"></span>
                         </div>
                         <div class="terminal-tabs">
                             <button class="terminal-tab active" data-mode="intro" data-translate="term-tab-intro">INTRO</button>
                             <button class="terminal-tab" data-mode="qa" data-translate="term-tab-qa">Q&A CLI</button>
                             <button class="terminal-tab" data-mode="activity" data-translate="term-tab-activity">ACTIVITY</button>
                         </div>
-                        <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
+                        <div class="terminal-header-controls">
+                            <button class="terminal-expand-btn" id="term-expand-btn" title="Expand / Mode Fokus">
+                                <span class="expand-icon">⛶</span>
+                                <span class="expand-text">[ FOKUS ]</span>
+                            </button>
+                            <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
+                        </div>
                     </div>
                     <div class="terminal-body" id="terminal-body-intro">
                         <p class="terminal-system-text">> Executing profile fetch...</p>
