@@ -1362,19 +1362,20 @@ a {
    3D COBE GLOBE & POLAROIDS
 #location {
     display: block !important;
+    scroll-margin-top: 4rem;
 }
 
 .globe-section-wrapper {
     position: relative;
     width: 100%;
-    min-height: 580px;
+    min-height: 480px;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 2rem;
-    padding: 3rem 0;
+    padding: 1.5rem 0 2.5rem 0;
     overflow: hidden;
-    background: radial-gradient(circle at 85% 50%, rgba(var(--primary-rgb), 0.06) 0%, transparent 65%);
+    background: radial-gradient(circle at 75% 50%, rgba(var(--primary-rgb), 0.06) 0%, transparent 65%);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -1394,7 +1395,7 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.35rem 0.85rem;
+    padding: 0.3rem 0.8rem;
     border: 1px solid var(--border-color);
     background: rgba(var(--primary-rgb), 0.04);
     font-family: var(--font-mono), monospace;
@@ -1403,18 +1404,18 @@ a {
     letter-spacing: 0.08em;
     color: var(--text-primary);
     width: fit-content;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
 }
 
 .globe-massive-title {
     font-family: var(--font-headline), Georgia, serif;
-    font-size: clamp(2.4rem, 4.3vw, 4.1rem);
+    font-size: clamp(2.2rem, 3.6vw, 3.4rem);
     font-weight: 900;
-    line-height: 1.04;
+    line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--text-primary);
     text-transform: uppercase;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1rem 0;
 }
 
 .globe-city-highlight {
@@ -1428,17 +1429,17 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
-    padding: 0.65rem 1.15rem;
+    padding: 0.55rem 1rem;
     background: var(--terminal-header);
     border: 1.5px solid var(--text-primary);
     box-shadow: 3px 3px 0 var(--text-primary);
     font-family: var(--font-mono), monospace;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     color: var(--text-primary);
     width: fit-content;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -1465,31 +1466,31 @@ a {
 
 .globe-side-desc {
     font-family: var(--font-sans), -apple-system, sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.55;
     color: var(--text-primary);
     opacity: 0.85;
-    max-width: 520px;
-    margin-bottom: 1.75rem;
+    max-width: 480px;
+    margin-bottom: 1.25rem;
 }
 
 .globe-meta-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    max-width: 520px;
+    gap: 0.6rem;
+    max-width: 480px;
 }
 
 .globe-meta-box {
     border: 1px solid var(--border-color);
-    padding: 0.55rem 0.85rem;
+    padding: 0.45rem 0.75rem;
     background: rgba(var(--primary-rgb), 0.02);
 }
 
 .globe-meta-box .meta-label {
     display: block;
     font-family: var(--font-mono), monospace;
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     color: var(--text-primary);
     opacity: 0.65;
     letter-spacing: 0.06em;
@@ -1499,10 +1500,10 @@ a {
 .globe-meta-box .meta-value {
     display: block;
     font-family: var(--font-mono), monospace;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-top: 0.2rem;
+    margin-top: 0.15rem;
 }
 
 .status-available {
@@ -1513,15 +1514,15 @@ a {
 .globe-canvas-side {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
     position: relative;
 }
 
 .globe-canvas-container {
     width: 100%;
-    max-width: 500px;
-    height: 500px;
+    max-width: 480px;
+    height: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1529,8 +1530,8 @@ a {
 }
 
 .cobe-canvas {
-    width: 500px;
-    height: 500px;
+    width: 480px;
+    height: 480px;
     max-width: 100%;
     aspect-ratio: 1 / 1;
     cursor: grab;
