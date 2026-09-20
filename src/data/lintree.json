@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "title": "JURNAL KU",
+        "url": "https://dejurnal.vercel.app/",
+        "type": "card",
+        "icon": "book-open",
+        "image_url": "images/project1.png"
+    },
+    {
+        "id": "3",
+        "title": "MARIMACHA",
+        "url": "https://macha.ti24se1.my.id",
+        "type": "card",
+        "icon": "shopping-bag",
+        "image_url": "images/project3.png"
+    },
+    {
+        "id": "6",
+        "title": "Interactive 3D Portfolio",
+        "url": "/portfolio",
+        "type": "link",
+        "icon": "globe"
+    },
+    {
+        "id": "5",
+        "title": "GitHub",
+        "url": "https://github.com/FikriBintangx",
+        "type": "link",
+        "icon": "github"
+    },
+    {
+        "id": "7",
+        "title": "Email Me",
+        "url": "mailto:fikbintang01@gmail.com",
+        "type": "link",
+        "icon": "mail"
+    },
+    {
+        "id": "8",
+        "title": "WhatsApp Direct",
+        "url": "https://wa.me/6281292870932",
+        "type": "link",
+        "icon": "message-circle"
+    }
+]

@@ -1,0 +1,14 @@
+---
+// Redirect /porto -> /portfolio
+return Astro.redirect('/portfolio', 301);
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0;url=/portfolio">
+    <title>Redirecting to Portfolio...</title>
+</head>
+<body>
+    <p>Redirecting to <a href="/portfolio">Portfolio</a>...</p>
+</body>
+</html>

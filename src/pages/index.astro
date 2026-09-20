@@ -1,525 +1,218 @@
 ---
-import '../styles/global.css';
-import showcaseData from '../data/showcase.json';
-import projectsData from '../data/projects.json';
+import lintreeData from '../data/lintree.json';
 
-const projectList = Object.values(projectsData);
+const links = lintreeData.filter(item => item.type === 'link');
+const cards = lintreeData.filter(item => item.type === 'card');
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fikri Bintang Purnomo — Portfolio</title>
-    <meta name="description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
+    <title>StaRr .CO | Fikri Bintang Purnomo — Links</title>
+    <meta name="description" content="Official link-in-bio of Fikri Bintang Purnomo (StaRr .CO) — Full Stack & Mobile Developer. Explore projects, contact channels, and interactive 3D portfolio.">
     <meta name="author" content="Fikri Bintang Purnomo">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://fikribintang.web.id/">
 
-    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Fikri Bintang Purnomo">
+    <meta property="og:site_name" content="StaRr .CO — Fikri Bintang Purnomo">
     <meta property="og:url" content="https://fikribintang.web.id/">
-    <meta property="og:title" content="Fikri Bintang Purnomo — Portfolio">
-    <meta property="og:description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
-    <meta property="og:image" content="https://fikribintang.web.id/images/logo.jpg">
+    <meta property="og:title" content="StaRr .CO | Fikri Bintang Purnomo — Links">
+    <meta property="og:description" content="Official link-in-bio of Fikri Bintang Purnomo — Explore projects, contact channels, and interactive 3D portfolio.">
+    <meta property="og:image" content="https://fikribintang.web.id/images/profile.jpg">
 
-    <!-- Twitter / X -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://fikribintang.web.id/">
-    <meta name="twitter:title" content="Fikri Bintang Purnomo — Portfolio">
-    <meta name="twitter:description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
-    <meta name="twitter:image" content="https://fikribintang.web.id/images/logo.jpg">
+    <meta name="twitter:title" content="StaRr .CO | Fikri Bintang Purnomo — Links">
+    <meta name="twitter:description" content="Official link-in-bio of Fikri Bintang Purnomo — Explore projects, contact channels, and interactive 3D portfolio.">
+    <meta name="twitter:image" content="https://fikribintang.web.id/images/profile.jpg">
 
     <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-    <link rel="apple-touch-icon" href="/images/logo.jpg">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,900&family=Inter:wght@400;700;900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="/lintree.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script is:inline src="https://unpkg.com/lucide@latest"></script>
 </head>
-
-<body class="theme-light">
-    <!-- Background Image with Opacity -->
-    <div class="bg-image"></div>
-
-    <!-- Texture Overlay -->
-    <div class="texture-overlay"></div>
-
+<body>
     <div class="container">
-        <!-- SVG Filter for Glitch Effect -->
-        <svg style="position: absolute; width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <defs>
-                <filter id="glitch">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.1 0.03" numOctaves="2" result="noise" />
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R"
-                        yChannelSelector="G" />
-                </filter>
-            </defs>
-        </svg>
         <!-- Header -->
-        <header class="grid-header">
-            <div class="header-logo col-border-right">
-                <a href="#home">
-                    <h1 class="logo-font">PORTOFOLIO</h1>
-                </a>
+        <header class="header">
+            <div class="creator-label">CREATOR PROFILE</div>
+            
+            <div class="profile-avatar-wrapper">
+                <img src="/images/profile.jpg" onerror="this.src='/images/logo.jpg'" alt="Fikri Bintang Purnomo" class="profile-avatar" />
             </div>
-            <div class="header-nav col-border-right">
-                <a href="#home" class="nav-link nav-glitch active" data-translate="nav-home" data-text="HOME">HOME <span
-                        class="blink cursor"></span></a>
-            </div>
-            <div class="header-nav col-border-right">
-                <a href="#about" class="nav-link nav-glitch" data-translate="nav-about" data-text="ABOUT">ABOUT <span
-                        class="blink cursor"></span></a>
-            </div>
-            <div class="header-nav col-border-right">
-                <a href="#projects" class="nav-link nav-glitch" data-translate="nav-projects" data-text="PROJECTS">PROJECTS <span
-                        class="blink cursor"></span></a>
-            </div>
-            <div class="header-nav col-border-right header-nav-split">
-                <a href="#skills" class="nav-link nav-glitch" data-translate="nav-skills" data-text="SKILLS">SKILLS <span
-                        class="blink cursor"></span></a>
-                <div class="lang-switcher">
-                    <button class="lang-btn" data-lang="en">EN</button>
-                    <span class="lang-separator">/</span>
-                    <button class="lang-btn" data-lang="id">ID</button>
+
+            <div class="logo-container">
+                <div class="logo" title="Click 3x to open Admin Mode">
+                    <h1>StaRr <span>.CO</span></h1>
+                    <div class="logo-sub">FIKRI BINTANG P.<br>WEB & APP DEV</div>
                 </div>
-                <a href="https://github.com/FikriBintangx" target="_blank" class="nav-link github-icon" title="GitHub">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                        </path>
-                    </svg>
-                </a>
             </div>
+            <p class="tagline">FULL STACK & MOBILE DEVELOPER • EST.2025</p>
         </header>
 
-        <!-- Hero Section -->
-        <section id="home" class="hero-section" style="position: relative;">
-            
-            <!-- Draggable Assets -->
-            <div class="draggable-wrapper layout-right" style="top: 10vh; right: 2vw;">
-                <div class="drag-hint">
-                    <div class="arrow">----------------&gt;</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-                <img src="images/statue.png" class="draggable-asset" alt="Draggable Statue">
-            </div>
-
-            <div class="draggable-wrapper layout-left" style="top: 15vh; left: 2vw;">
-                <img src="images/asset1.png" class="draggable-asset" alt="Phone Statue">
-                <div class="drag-hint">
-                    <div class="arrow">&lt;----------------</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-            </div>
-
-            <div class="draggable-wrapper layout-left" style="top: 75vh; left: 5vw;">
-                <img src="images/asset2.png" class="draggable-asset" alt="Pointing Statue">
-                <div class="drag-hint">
-                    <div class="arrow">&lt;----------------</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-            </div>
-
-            <div class="draggable-wrapper layout-right" style="top: 75vh; right: 5vw;">
-                <div class="drag-hint">
-                    <div class="arrow">----------------&gt;</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-                <img src="images/asset3.png" class="draggable-asset" alt="Chess Piece">
-            </div>
-
-            <div class="hero-content">
-                <span class="badge" data-translate="hero-badge">FULL STACK & SOFTWARE DEVELOPER</span>
-                <h2 class="hero-title scramble">FIKRI BINTANG PURNOMO</h2>
-                <p class="hero-description" data-translate="hero-desc">
-                    Building scalable web systems, robust backend architectures, and modern digital applications.<br>
-                    Informatics Engineering student focused on software craftsmanship and interactive UI.
-                </p>
-                <div class="hero-ctas">
-                    <a href="#projects" class="cta-button primary" data-translate="btn-projects">[ View Projects ]</a>
-                    <a href="Porto Bintang.pdf" target="_blank" class="cta-button secondary" data-translate="btn-print">[ Print Portfolio ]</a>
-                    <a href="mailto:fikbintang01@gmail.com" class="cta-button secondary" data-translate="btn-contact">[ Contact Me ]</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Terminal / About Section -->
-        <section id="about" class="grid-section reveal">
-            <div class="section-header col-border-right col-span-1">
-                <h3 data-translate="about-header">SEE IT IN ACTION</h3>
-            </div>
-            <div class="terminal-container col-span-3">
-                <div class="terminal-window">
-                    <div class="terminal-header">
-                        <div class="dots">
-                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <!-- Main Content -->
+        <main id="links-container" class="links-list">
+            {links.map(item => {
+                const isPortfolio = item.url.includes('portfolio') || item.url.includes('porto');
+                const isInternal = item.url.startsWith('/') || item.url.startsWith('#');
+                return (
+                    <a 
+                        href={item.url} 
+                        class={`link-item ${isPortfolio ? 'featured-portfolio-link' : ''}`}
+                        target={isInternal ? undefined : '_blank'}
+                        rel={isInternal ? undefined : 'noopener noreferrer'}
+                    >
+                        <div class="link-icon-wrapper">
+                            {item.icon === 'github' ? (
+                                <i data-lucide="github"></i>
+                            ) : item.icon === 'globe' ? (
+                                <i data-lucide="globe"></i>
+                            ) : item.icon === 'mail' ? (
+                                <i data-lucide="mail"></i>
+                            ) : item.icon === 'message-circle' || item.icon === 'whatsapp' ? (
+                                <i data-lucide="message-circle"></i>
+                            ) : item.image_url ? (
+                                <img src={item.image_url.startsWith('/') ? item.image_url : `/${item.image_url}`} class="custom-icon" alt="icon" onerror="this.src='https://api.iconify.design/lucide:link.svg'" />
+                            ) : (
+                                <i data-lucide={item.icon || 'arrow-right'}></i>
+                            )}
                         </div>
-                        <div class="terminal-tabs">
-                            <button class="terminal-tab active" data-mode="intro" data-translate="term-tab-intro">INTRO</button>
-                            <button class="terminal-tab" data-mode="qa" data-translate="term-tab-qa">Q&A CLI</button>
-                            <button class="terminal-tab" data-mode="activity" data-translate="term-tab-activity">ACTIVITY</button>
-                        </div>
-                        <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
-                    </div>
-                    <div class="terminal-body" id="terminal-body-intro">
-                        <p class="terminal-system-text">> Executing profile fetch...</p>
-                        <br>
-                        <p class="typewriter-text" id="typewriter"></p>
-                    </div>
-                    <div class="terminal-body" id="terminal-body-qa" style="display: none;">
-                        <div class="terminal-history" id="terminal-history">
-                            <p class="terminal-system-text" data-translate="qa-welcome">Welcome to Fikri's Q&A CLI. Type your question or click a suggestion below! Type 'help' for commands.</p>
-                        </div>
-                        <div class="terminal-suggestions" id="terminal-suggestions">
-                            <!-- Dynamic suggestion tags will be rendered here -->
-                        </div>
-                        <div class="terminal-input-line">
-                            <span class="terminal-prompt">guest@fikribintang:~$</span>
-                            <input type="text" id="terminal-input" autocomplete="off" placeholder="Type a question or 'help'..." data-translate-placeholder="qa-input-placeholder">
-                        </div>
-                    </div>
-                    <!-- Activity / Heatmap Tab -->
-                    <div class="terminal-body" id="terminal-body-activity" style="display: none;">
-                        <p class="terminal-system-text" style="margin-bottom: 1rem;" data-translate="activity-desc">> Fetching GitHub contribution history...</p>
-                        <div class="heatmap-wrapper">
-                            <div class="heatmap-header">
-                                <div class="heatmap-header-left">
-                                    <span class="heatmap-title" data-translate="activity-title">CONTRIBUTIONS</span>
-                                    <div class="heatmap-stats">
-                                        <span class="stat-item"><span class="highlight" id="total-contributions-text">0</span> <span data-translate="activity-contribs">Contributions</span></span>
-                                    </div>
-                                </div>
-                                <div class="heatmap-actions">
-                                    <select id="heatmap-year-filter" style="background: var(--bg-color); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.2rem 0.5rem; font-family: var(--font-mono); font-size: 0.8rem; cursor: pointer; outline: none;">
-                                        <option value="">Last Year</option>
-                                        <option value="2026">2026</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2023">2023</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="heatmap-scroll">
-                                <div class="heatmap-grid" id="heatmap-grid">
-                                    <!-- Squares will be generated by JS -->
-                                </div>
-                            </div>
-                            <div class="heatmap-legend">
-                                <span data-translate="activity-less">Less</span>
-                                <div class="legend-squares">
-                                    <div class="heatmap-square" data-level="0"></div>
-                                    <div class="heatmap-square" data-level="1"></div>
-                                    <div class="heatmap-square" data-level="2"></div>
-                                    <div class="heatmap-square" data-level="3"></div>
-                                    <div class="heatmap-square" data-level="4"></div>
-                                </div>
-                                <span data-translate="activity-more">More</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                        <span>{item.title}</span>
+                        {isPortfolio && <span class="featured-badge">EXPLORE ↗</span>}
+                    </a>
+                );
+            })}
+        </main>
 
-        <!-- Projects Section -->
-        <section id="projects" class="grid-section projects-section reveal" style="overflow: hidden;">
-            <div class="section-header col-border-right col-span-1">
-                <h3 data-translate="projects-header">PROJECTS</h3>
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" title="Previous Project">&lt;</button>
-                    <button class="slider-btn next-btn" title="Next Project">&gt;</button>
-                </div>
-            </div>
-            <div class="projects-slider-container col-span-3">
-                <div class="projects-track">
-                    {projectList.map((proj, idx) => (
-                        <div class="project-card" data-project={proj.id}>
-                            <div class="glitch-wrapper">
-                                <div class="scanlines"></div>
-                                <img src={proj.cover} alt={proj.title} class="glitch-image" loading="lazy" />
-                            </div>
-                            <h4>{proj.title}</h4>
-                            <p class="project-card-desc" data-translate={`proj-${idx + 1}-desc`}>
-                                {proj.shortDescId || proj.shortDescEn || ''}
-                            </p>
-                            <div class="project-tags">
-                                {(proj.tags || []).map((tag: string) => (
-                                    <span class="project-tag">{tag}</span>
-                                ))}
-                            </div>
-                            <a href={proj.link || '#'} target="_blank" rel="noopener noreferrer" class="project-btn" data-translate="btn-view-project">LIHAT PROYEK ↗</a>
+        <!-- Bottom Grid -->
+        <section id="cards-container" class="cards-grid">
+            {cards.map(item => {
+                const bgUrl = item.image_url ? (item.image_url.startsWith('/') ? item.image_url : `/${item.image_url}`) : '';
+                return (
+                    <a 
+                        href={item.url || '#'} 
+                        class={`card-item ${bgUrl ? 'has-bg' : ''}`}
+                        target={item.url && item.url.startsWith('http') ? '_blank' : undefined}
+                        rel={item.url && item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        style={bgUrl ? `background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('${bgUrl}')` : undefined}
+                    >
+                        <div class="card-icon">
+                            <i data-lucide={item.icon || 'layout'}></i>
                         </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills & Experience Section (Separated Stack & Timeline) -->
-        <section id="skills" class="grid-section feature-section reveal">
-            <div class="section-title-full">
-                <h3 data-translate="skills-header">SKILLS & EXPERIENCE</h3>
-            </div>
-            
-            <div class="skills-editorial-container">
-                <!-- Part 1: Technical Stack (Chips & Badges) -->
-                <div class="skills-block">
-                    <div class="block-header">
-                        <span class="block-kicker" data-translate="skills-tech-title">TECHNICAL STACK</span>
-                    </div>
-                    <div class="tech-stack-grid">
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-frontend-title">FRONTEND & MOBILE</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Flutter</span>
-                                <span class="tech-chip">Dart</span>
-                                <span class="tech-chip">JavaScript (ES6+)</span>
-                                <span class="tech-chip">HTML5 & CSS3</span>
-                                <span class="tech-chip">Responsive UI</span>
-                                <span class="tech-chip">Bootstrap</span>
-                            </div>
+                        <div class="card-info">
+                            <h3>{item.title}</h3>
+                            <p class="card-desc">Featured Project</p>
                         </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-backend-title">BACKEND & APIS</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Java</span>
-                                <span class="tech-chip">PHP</span>
-                                <span class="tech-chip">Node.js</span>
-                                <span class="tech-chip">CodeIgniter 3</span>
-                                <span class="tech-chip">RESTful APIs</span>
-                                <span class="tech-chip">OOP Patterns</span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-db-title">DATABASES & CLOUD</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">MySQL</span>
-                                <span class="tech-chip">PostgreSQL</span>
-                                <span class="tech-chip">MariaDB</span>
-                                <span class="tech-chip">Supabase</span>
-                                <span class="tech-chip">Vercel</span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-tools-title">TOOLS & ARCHITECTURE</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Git & GitHub</span>
-                                <span class="tech-chip">Figma</span>
-                                <span class="tech-chip">FlatLaf UI</span>
-                                <span class="tech-chip">Postman</span>
-                                <span class="tech-chip">MVC Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Part 2: Work Experience (Professional Timeline) -->
-                <div class="experience-block">
-                    <div class="block-header">
-                        <span class="block-kicker" data-translate="skills-exp-title">WORK EXPERIENCE</span>
-                    </div>
-                    <div class="experience-timeline">
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2025 — 2026</span>
-                                    <span class="timeline-org">RESTAURANT OPERATIONS</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job3-role">Customer Service & Operations</h4>
-                                <p class="timeline-text" data-translate="skill-job3-desc">
-                                    Assisted in food preparation, customer service satisfaction, and maintained high cleanliness standards.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2024 — 2025</span>
-                                    <span class="timeline-org">PT. SURYA SHUENN YUEHH</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job2-role">Machine Operator</h4>
-                                <p class="timeline-text" data-translate="skill-job2-desc">
-                                    Operated manufacturing machinery, ensured strict product quality thresholds, and maintained workplace safety.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2022 — 2024</span>
-                                    <span class="timeline-org">ID EXPRESS</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job1-role">Delivery Administration Staff</h4>
-                                <p class="timeline-text" data-translate="skill-job1-desc">
-                                    Managed shipment routing records, tracking information, and monitored daily delivery operations.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Location / 3D Globe Section -->
-        <section id="location" class="grid-section reveal">
-            <div class="section-title-full" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 0;">
-                <h3 data-translate="location-header">LOCATION</h3>
-            </div>
-            <div class="globe-section-wrapper col-span-4">
-                <div class="globe-canvas-container" id="globe-container">
-                    <canvas id="cobe-globe" class="cobe-canvas"></canvas>
-
-                    <!-- Dynamic Polaroid Cards for Projects & Certificates -->
-                    {showcaseData.items.map((item) => (
-                        <div
-                            class={`showcase-polaroid ${item.type === 'certificate' ? 'cert-polaroid' : 'project-polaroid'}`}
-                            data-anchor={item.id}
-                            data-project-slug={item.type === 'project' ? item.slug : undefined}
-                            data-cert-image={item.type === 'certificate' ? item.image : undefined}
-                            data-cert-title={item.type === 'certificate' ? item.title : undefined}
-                            data-rotate={item.rotation}
-                            title={`Klik untuk lihat detail ${item.title}`}
-                        >
-                            <img src={item.image} alt={item.title} loading="lazy" />
-                            <span class="showcase-polaroid-caption">{item.title}</span>
-                        </div>
-                    ))}
-                </div>
-                <div class="map-overlay-text globe-info-badge">
-                    <span class="pulse-dot"></span> BASED IN TANGERANG, INDONESIA
-                    <span class="globe-drag-hint">[ DRAG TO ROTATE &bull; CLICK ITEM TO EXPAND ]</span>
-                </div>
-            </div>
+                    </a>
+                );
+            })}
         </section>
 
         <!-- Footer -->
-        <footer class="grid-footer">
-            <div class="col-border-right"><span class="footer-text">FIKRI BINTANG PURNOMO PORTFOLIO</span></div>
-            <div class="col-border-right"><span class="footer-text v-text">v1.0.0</span></div>
-            <div class="col-border-right"><a href="CV.pdf" target="_blank" class="footer-link" data-translate="footer-cv">PRINT CV ↗</a></div>
-            <div class="col-border-right"><a href="Porto Bintang.pdf" class="footer-link" data-translate="footer-porto">PORTFOLIO
-                    ↗</a></div>
-            <div><span class="footer-text">2026</span></div>
+        <footer class="footer">
+            <div class="social-links">
+                <a href="https://github.com/FikriBintangx" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:fikbintang01@gmail.com">Email</a>
+                <a href="/portfolio">Portfolio</a>
+            </div>
+            <p class="copyright">&copy; 2025 StaRr .CO • Fikri Bintang Purnomo</p>
+            <p class="branding"><a href="/portfolio" style="color: inherit; text-decoration: none;">Explore 3D Interactive Portfolio ↗</a></p>
         </footer>
     </div>
 
-    <!-- Mobile Floating Navigation Pill with Frosted Blur -->
-    <nav class="mobile-nav-pill" aria-label="Mobile Navigation">
-        <a href="#home" class="mobile-pill-link active" title="Home">
-            <span class="pill-dot"></span>
-            <span class="pill-text" data-translate="nav-home">HOME</span>
-        </a>
-        <a href="#about" class="mobile-pill-link" title="About">
-            <span class="pill-dot"></span>
-            <span class="pill-text" data-translate="nav-about">ABOUT</span>
-        </a>
-        <a href="#projects" class="mobile-pill-link" title="Projects">
-            <span class="pill-dot"></span>
-            <span class="pill-text" data-translate="nav-projects">PROJECTS</span>
-        </a>
-        <a href="#skills" class="mobile-pill-link" title="Skills">
-            <span class="pill-dot"></span>
-            <span class="pill-text" data-translate="nav-skills">SKILLS</span>
-        </a>
-        <a href="#location" class="mobile-pill-link" title="Location">
-            <span class="pill-dot"></span>
-            <span class="pill-text" data-translate="location-header">LOCATION</span>
-        </a>
-        <div class="mobile-pill-divider"></div>
-        <div class="mobile-pill-lang">
-            <button class="mobile-lang-btn lang-btn" data-lang="en">EN</button>
-            <span class="mobile-lang-sep">/</span>
-            <button class="mobile-lang-btn lang-btn active" data-lang="id">ID</button>
-        </div>
-    </nav>
-
-    <!-- Project Detail Modal -->
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-grid">
-                <div class="modal-left">
-                    <div id="modal-gallery" class="modal-gallery">
-                        <!-- Images will be inserted here dynamically -->
-                    </div>
-                </div>
-                <div class="modal-right">
-                    <h3 id="modal-title" class="scramble" style="font-size: 2rem; margin-bottom: 0.5rem; font-family: var(--font-mono);">PROJECT TITLE</h3>
-                    <div id="modal-tags" class="project-tags" style="margin-bottom: 1.5rem;">
-                        <!-- Tags will be inserted here dynamically -->
-                    </div>
-                    <div id="modal-description" class="modal-description">
-                        <!-- Description will be inserted here dynamically -->
-                    </div>
-                    <div class="modal-actions">
-                        <a id="modal-link" href="#" target="_blank" class="cta-button primary">[ VISIT PROJECT ]</a>
-                    </div>
-                </div>
+    <!-- Dynamic Island Notification -->
+    <div id="dynamic-island-container">
+        <div id="dynamic-island">
+            <div class="island-content">
+                <i id="island-icon" data-lucide="info"></i>
+                <span id="island-text">Notification</span>
             </div>
         </div>
     </div>
 
-    <!-- PDF Viewer Modal -->
-    <div id="pdf-modal" class="modal">
-        <div class="modal-content pdf-modal-content">
-            <span class="modal-close pdf-modal-close">&times;</span>
-            <div class="pdf-modal-header">
-                <h3 id="pdf-modal-title" style="font-family: var(--font-mono); margin: 0; font-size: 1.5rem;" data-translate="pdf-viewer-title">PDF VIEWER</h3>
-                <a id="pdf-download-btn" href="#" download class="cta-button primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" data-translate="pdf-download">[ DOWNLOAD PDF ]</a>
+    <!-- Admin Dashboard (Sliding Panel) -->
+    <div id="admin-dashboard" class="admin-overlay">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <button id="close-admin" class="close-btn"><i data-lucide="x"></i></button>
             </div>
-            <div class="pdf-frame-container">
-                <iframe id="pdf-iframe" src="" frameborder="0" style="width: 100%; height: 100%; border: 1px solid var(--border-color); background: white;"></iframe>
-            </div>
-        </div>
-    </div>
+            
+            <div class="admin-layout">
+                <!-- Left: List -->
+                <div class="admin-list-pane">
+                    <div class="admin-actions">
+                        <button id="add-link-btn" class="primary-btn">
+                            <i data-lucide="plus"></i> Create New Link
+                        </button>
+                    </div>
+                    <div id="admin-links-list" class="admin-table">
+                        <!-- Admin items will be loaded here -->
+                    </div>
+                </div>
 
-    <!-- Certificate Viewer Modal -->
-    <div id="cert-modal" class="modal">
-        <div class="modal-content cert-modal-content">
-            <span class="modal-close cert-modal-close">&times;</span>
-            <div style="text-align: center; padding: 1rem;">
-                <h3 id="cert-modal-title" style="font-family: var(--font-mono); margin-bottom: 1rem; font-size: 1.5rem; text-transform: uppercase;">CERTIFICATE</h3>
-                <div style="display: flex; justify-content: center; align-items: center; max-height: 75vh;">
-                    <img id="cert-modal-image" src="" alt="Certificate" style="max-width: 100%; max-height: 70vh; object-fit: contain; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.25);" />
+                <!-- Right: Sliding Form Pane -->
+                <div id="admin-form-pane" class="admin-form-pane">
+                    <div class="form-header">
+                        <h3 id="form-title">Add New Link</h3>
+                        <button id="close-form" class="icon-btn"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                    <form id="add-link-form" class="premium-form">
+                        <input type="hidden" id="edit-id">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="title" required placeholder="e.g. My Portfolio">
+                        </div>
+                        <div class="form-group">
+                            <label>URL</label>
+                            <input type="text" id="url" required placeholder="example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="type">
+                                <option value="link">Standard Link</option>
+                                <option value="card">Grid Card</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Icon (Lucide name)</label>
+                            <input type="text" id="icon" placeholder="rocket, mail, instagram...">
+                            <div class="file-input-wrapper icon-upload" style="margin-top: 0.5rem; height: 40px;">
+                                <input type="file" id="icon-file" accept="image/*">
+                                <span>Or Upload/Paste Icon Image</span>
+                            </div>
+                            <img id="icon-preview" src="#" alt="Icon Preview" style="display:none; width: 44px; height: 44px; border-radius: 8px; margin-top: 0.5rem; object-fit: contain; border: 1px solid #eee; background: #f9f9f9;">
+                        </div>
+                        <div class="form-group">
+                            <label>Background Image</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="image-file" accept="image/*">
+                                <span>Choose Image</span>
+                            </div>
+                            <img id="image-preview" src="#" alt="Preview" style="display:none; width: 100%; border-radius: 12px; margin-top: 1rem; border: 1px solid #eee;">
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="save-btn">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/motion.js"></script>
-    <script src="../scripts/globe.js"></script>
+    <script is:inline src="/lintree.js"></script>
+    <script is:inline>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
 </body>
-
 </html>
