@@ -5,7 +5,8 @@
         "url": "https://dejurnal.vercel.app/",
         "type": "card",
         "icon": "book-open",
-        "image_url": "images/project1.png"
+        "category": "Web Platform",
+        "image_url": "/images/project1.png"
     },
     {
         "id": "3",
@@ -13,14 +14,23 @@
         "url": "https://macha.ti24se1.my.id",
         "type": "card",
         "icon": "shopping-bag",
-        "image_url": "images/project3.png"
+        "category": "E-Commerce",
+        "image_url": "/images/project3.png"
     },
     {
         "id": "6",
         "title": "Portofolio",
         "url": "/portfolio",
         "type": "link",
-        "icon": "globe"
+        "icon": "globe",
+        "featured": true
+    },
+    {
+        "id": "9",
+        "title": "Download CV / Resume",
+        "url": "/CV.pdf",
+        "type": "link",
+        "icon": "file-text"
     },
     {
         "id": "5",
@@ -30,17 +40,17 @@
         "icon": "github"
     },
     {
-        "id": "7",
-        "title": "Email Me",
-        "url": "mailto:fikbintang01@gmail.com",
-        "type": "link",
-        "icon": "mail"
-    },
-    {
         "id": "8",
         "title": "Instagram (@biru.css)",
         "url": "https://www.instagram.com/biru.css/",
         "type": "link",
         "icon": "instagram"
+    },
+    {
+        "id": "7",
+        "title": "Email Me",
+        "url": "mailto:fikbintang01@gmail.com",
+        "type": "link",
+        "icon": "mail"
     }
 ]

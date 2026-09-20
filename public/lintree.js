@@ -21,8 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIconBase64 = null;
     let currentBgBase64 = null;
 
+    const svgIcons = {
+        'globe': '<svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
+        'file-text': '<svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>',
+        'github': '<svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
+        'instagram': '<svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>',
+        'mail': '<svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+        'book-open': '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+        'shopping-bag': '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>'
+    };
+
     function renderIcon(iconName, className = '') {
         if (!iconName) return '';
+        if (svgIcons[iconName]) {
+            return svgIcons[iconName];
+        }
         const isUrl = iconName.startsWith('http') || 
                       iconName.startsWith('/') || 
                       iconName.startsWith('data:') || 
@@ -84,12 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     linkEl.target = '_blank';
                     linkEl.rel = 'noopener noreferrer';
                 }
+                const arrowHtml = isPortfolio 
+                    ? '<span class="featured-badge">EXPLORE ↗</span>'
+                    : '<span class="link-arrow"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>';
+
                 linkEl.innerHTML = `
                     <div class="link-icon-wrapper">
                         ${item.image_url ? renderIcon(item.image_url) : renderIcon(item.icon || 'arrow-right')}
                     </div>
-                    <span>${item.title}</span>
-                    ${isPortfolio ? '<span class="featured-badge">EXPLORE ↗</span>' : ''}
+                    <span class="link-title">${item.title}</span>
+                    ${arrowHtml}
                 `;
                 linksContainer.appendChild(linkEl);
             } else if (item.type === 'card') {
@@ -101,19 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     cardEl.rel = 'noopener noreferrer';
                 }
                 
-                const desc = 'Featured Project';
+                const category = item.category || 'Featured Project';
                 cardEl.innerHTML = `
                     <div class="card-icon">${renderIcon(item.icon || 'layout')}</div>
                     <div class="card-info">
+                        <span class="card-category">${category}</span>
                         <h3>${item.title}</h3>
-                        <p class="card-desc">${desc}</p>
                     </div>
                 `;
                 if (item.image_url) {
                     const bgUrl = item.image_url.startsWith('/') || item.image_url.startsWith('http') || item.image_url.startsWith('data:') 
                         ? item.image_url 
                         : `/${item.image_url}`;
-                    cardEl.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('${bgUrl}')`;
+                    cardEl.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.85)), url('${bgUrl}')`;
                     cardEl.classList.add('has-bg');
                 }
                 cardsContainer.appendChild(cardEl);
