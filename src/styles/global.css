@@ -1360,26 +1360,33 @@ a {
 /* =========================
 /* =========================
    3D COBE GLOBE & POLAROIDS
-========================= */
+#location {
+    display: block !important;
+}
+
 .globe-section-wrapper {
     position: relative;
     width: 100%;
     min-height: 580px;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
-    gap: 2.5rem;
-    padding: 3rem 2.5rem;
+    gap: 2rem;
+    padding: 3rem 0;
     overflow: hidden;
     background: radial-gradient(circle at 85% 50%, rgba(var(--primary-rgb), 0.06) 0%, transparent 65%);
     border-bottom: 1px solid var(--border-color);
 }
 
-/* Left Column: Big Typography & Tech Metadata */
+/* Left Column: Big Typography & Tech Metadata (Rata Kiri Entok) */
 .globe-typography-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+    margin: 0;
     z-index: 5;
 }
 
@@ -1506,7 +1513,7 @@ a {
 .globe-canvas-side {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
     position: relative;
 }
@@ -1607,15 +1614,18 @@ a {
 @media (max-width: 960px) {
     .globe-section-wrapper {
         grid-template-columns: 1fr;
-        padding: 2.5rem 1.25rem;
+        padding: 2rem 0;
         gap: 2rem;
     }
     .globe-typography-side {
         order: 1;
         align-items: flex-start;
+        padding: 0;
     }
     .globe-canvas-side {
         order: 2;
+        justify-content: center;
+        padding: 0;
     }
     .globe-massive-title {
         font-size: clamp(2rem, 7.5vw, 3rem);
