@@ -47,64 +47,66 @@ const projectList = Object.values(projectsData);
     <!-- Texture Overlay -->
     <div class="texture-overlay"></div>
 
-    <div class="container">
-        <!-- SVG Filter for Glitch Effect -->
-        <svg style="position: absolute; width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <defs>
-                <filter id="glitch">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.1 0.03" numOctaves="2" result="noise" />
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R"
-                        yChannelSelector="G" />
-                </filter>
-            </defs>
-        </svg>
-        <!-- Header -->
-        <header class="grid-header">
-            <div class="header-logo col-border-right">
+        <div class="nous-portal-layout">
+        <!-- LEFT SIDEBAR (Navigation & Branding) -->
+        <aside class="nous-sidebar-left desktop-only">
+            <div class="sidebar-brand">
                 <a href="#home">
                     <h1 class="logo-font">PORTOFOLIO</h1>
+                    <div class="brand-subtitle">// FIKRI BINTANG PURNOMO</div>
                 </a>
             </div>
-            <div class="header-nav col-border-right">
-                <a href="#home" class="nav-link nav-glitch active" data-translate="nav-home" data-text="HOME">HOME <span
-                        class="blink cursor"></span></a>
+            
+            <a href="/" class="nous-cta-btn">← EXPLORE BIO & LINKS</a>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-heading">// NAVIGATION</div>
+                <nav class="sidebar-nav">
+                    <a href="#home" class="nav-link nous-nav-item active"><span class="nous-nav-bullet">•</span> <span class="nous-nav-label" data-translate="nav-home">HOME</span></a>
+                    <a href="#about" class="nav-link nous-nav-item"><span class="nous-nav-bullet">•</span> <span class="nous-nav-label" data-translate="nav-about">ABOUT / CLI</span></a>
+                    <a href="#projects" class="nav-link nous-nav-item"><span class="nous-nav-bullet">•</span> <span class="nous-nav-label" data-translate="nav-projects">PROJECTS</span></a>
+                    <a href="#skills" class="nav-link nous-nav-item"><span class="nous-nav-bullet">•</span> <span class="nous-nav-label" data-translate="nav-skills">SKILLS & EXP</span></a>
+                    <a href="#location" class="nav-link nous-nav-item"><span class="nous-nav-bullet">•</span> <span class="nous-nav-label" data-translate="location-header">LOCATION / GLOBE</span></a>
+                </nav>
             </div>
-            <div class="header-nav col-border-right">
-                <a href="#about" class="nav-link nav-glitch" data-translate="nav-about" data-text="ABOUT">ABOUT <span
-                        class="blink cursor"></span></a>
+
+            <div class="sidebar-section">
+                <div class="sidebar-heading">// QUICK ACCESS</div>
+                <nav class="sidebar-nav">
+                    <a href="/CV.pdf" target="_blank" class="nous-nav-item"><span class="nous-nav-bullet">↗</span> <span class="nous-nav-label">Curriculum Vitae</span></a>
+                    <a href="Porto Bintang.pdf" target="_blank" class="nous-nav-item"><span class="nous-nav-bullet">↗</span> <span class="nous-nav-label">Print Portfolio</span></a>
+                </nav>
             </div>
-            <div class="header-nav col-border-right">
-                <a href="#projects" class="nav-link nav-glitch" data-translate="nav-projects" data-text="PROJECTS">PROJECTS <span
-                        class="blink cursor"></span></a>
-            </div>
-            <div class="header-nav col-border-right header-nav-split">
-                <a href="/" class="nav-link nav-links-btn" title="Quick Links & Bio" style="display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; font-weight: 700; border: 1px solid var(--border-color); padding: 0.25rem 0.6rem; border-radius: 4px; background: rgba(0, 82, 204, 0.05); color: var(--primary-color);">
-                    ← BIO
-                </a>
-                <a href="#skills" class="nav-link nav-glitch" data-translate="nav-skills" data-text="SKILLS">SKILLS <span
-                        class="blink cursor"></span></a>
+
+            <div class="sidebar-footer">
                 <div class="lang-switcher">
                     <button class="lang-btn" data-lang="en">EN</button>
                     <span class="lang-separator">/</span>
-                    <button class="lang-btn" data-lang="id">ID</button>
+                    <button class="lang-btn active" data-lang="id">ID</button>
                 </div>
-                <a href="https://github.com/FikriBintangx" target="_blank" class="nav-link github-icon" title="GitHub">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                        </path>
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/biru.css/" target="_blank" class="nav-link instagram-icon" title="Instagram (@biru.css)" style="display: inline-flex; align-items: center; margin-left: 0.35rem;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span> AVAILABLE FOR WORK
+                </div>
+                <div class="system-note">Astro Engine • v1.0.0</div>
             </div>
-        </header>
+        </aside>
+
+        <!-- MAIN CENTER CONTENT -->
+        <main class="nous-main-content container">
+            <!-- Mobile Header (Visible only on <1024px) -->
+            <header class="mobile-top-header mobile-only">
+                <div class="header-logo">
+                    <a href="#home">
+                        <h1 class="logo-font" style="font-size: 1.2rem; margin: 0; line-height: 1;">PORTOFOLIO</h1>
+                        <div class="brand-subtitle" style="font-size: 0.6rem; opacity: 0.7; letter-spacing: 0.1em;">// FIKRI BINTANG</div>
+                    </a>
+                </div>
+                <div class="mobile-top-actions">
+                    <a href="https://github.com/FikriBintangx" target="_blank" class="nav-link github-icon" title="GitHub" style="color: var(--text-primary);">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                </div>
+            </header>
 
         <!-- Hero Section -->
         <section id="home" class="hero-section" style="position: relative;">
@@ -574,7 +576,71 @@ const projectList = Object.values(projectsData);
             <div class="col-border-right"><a href="Porto Bintang.pdf" class="footer-link" data-translate="footer-porto">PORTFOLIO
                     ↗</a></div>
             <div><span class="footer-text">2026</span></div>
-        </footer>
+                </main>
+        
+        <!-- RIGHT SIDEBAR (Highlights & Social) -->
+        <aside class="nous-sidebar-right desktop-only">
+            <div class="sidebar-section">
+                <div class="sidebar-heading">// PROFILE & HIGHLIGHTS</div>
+                <div class="nous-profile-card">
+                    <div class="profile-card-bg"></div>
+                    <img src="images/asset3.png" alt="Statue Background" class="profile-card-statue">
+                    <div class="profile-card-content">
+                        <h4 style="margin: 0; font-size: 1rem; font-weight: 800; line-height: 1.2;">Full-Stack &<br>Mobile Engineer</h4>
+                        <div class="profile-specs" style="margin-top: 8px;">
+                            <span>Flutter</span> • <span>Node.js</span> • <span>Microservices</span>
+                        </div>
+                        <div class="profile-location" style="margin-top: 12px; font-size: 0.75rem;">📍 Tangerang / Remote</div>
+                    </div>
+                </div>
+                
+                <div class="hire-cta-card" style="margin-top: 12px;">
+                    <p class="hire-text" style="font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">Interested in collaborating?</p>
+                    <a href="mailto:fikbintang01@gmail.com" class="nous-hire-btn" style="display: block; text-align: center;">[ HIRE ME / CONTACT ↗ ]</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section" style="margin-top: 24px;">
+                <div class="sidebar-heading">// CONNECT & SOCIALS</div>
+                <div class="social-links-grid" style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="https://github.com/FikriBintangx" target="_blank" class="nous-social-card">
+                        <div class="social-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </div>
+                        <div class="social-info">
+                            <span class="social-platform" style="font-size: 0.8rem; font-weight: 700;">GitHub</span>
+                            <span class="social-handle" style="font-size: 0.65rem; opacity: 0.7;">@FikriBintangx</span>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/biru.css/" target="_blank" class="nous-social-card">
+                        <div class="social-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </div>
+                        <div class="social-info">
+                            <span class="social-platform" style="font-size: 0.8rem; font-weight: 700;">Instagram</span>
+                            <span class="social-handle" style="font-size: 0.65rem; opacity: 0.7;">@biru.css</span>
+                        </div>
+                    </a>
+                    <a href="mailto:fikbintang01@gmail.com" class="nous-social-card">
+                        <div class="social-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="social-info">
+                            <span class="social-platform" style="font-size: 0.8rem; font-weight: 700;">Email</span>
+                            <span class="social-handle" style="font-size: 0.65rem; opacity: 0.7;">fikbintang01@gmail.com</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer" style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <div class="system-stats" style="font-family: var(--font-mono); font-size: 0.65rem; opacity: 0.6;">
+                    <div style="display: flex; justify-content: space-between; padding-bottom: 4px;"><span>Build:</span> <b>2026.10 (Live)</b></div>
+                    <div style="display: flex; justify-content: space-between; padding-bottom: 4px;"><span>License:</span> <b>MIT</b></div>
+                    <div style="display: flex; justify-content: space-between;"><span>Latency:</span> <b>18ms (Edge)</b></div>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <!-- ReactBits-Inspired Pill Nav (Responsive Mobile Dock) -->
