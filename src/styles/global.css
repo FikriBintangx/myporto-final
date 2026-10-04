@@ -87,8 +87,8 @@ body {
 
 /* Container */
 .container {
-    max-width: 1600px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     padding: var(--spacing-md);
     position: relative;
     z-index: 1;
@@ -2626,14 +2626,13 @@ a {
     
     .nous-portal-layout {
         grid-template-columns: 240px 1fr 280px;
-        max-width: 1600px;
-        margin: 0 auto;
+        max-width: 100%;
+        margin: 0;
     }
     
     .nous-main-content {
         padding: 0 40px;
-        border-left: 1px solid var(--border-color);
-        border-right: 1px solid var(--border-color);
+        /* No outer border */
         min-height: 100vh;
     }
     
@@ -2978,4 +2977,103 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
 /* Invert statues for dark mode */
 .draggable-asset, .profile-card-statue {
     filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2);
+}
+
+/* ==========================================================
+   SIDEBAR HIDE & MINIMIZE CONTROLS (DESKTOP)
+========================================================== */
+.sidebar-collapse-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.sidebar-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.restore-sidebar-btn {
+    display: none;
+    position: fixed;
+    z-index: 900;
+    background: #090d20;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    cursor: pointer;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+}
+.restore-sidebar-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.restore-left {
+    top: 24px;
+    left: 24px;
+}
+.restore-right {
+    top: 24px;
+    right: 24px;
+}
+
+@media (min-width: 1024px) {
+    .nous-portal-layout {
+        transition: grid-template-columns 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Left Collapsed */
+    .nous-portal-layout.left-collapsed {
+        grid-template-columns: 0px 1fr 280px;
+    }
+    .nous-portal-layout.left-collapsed .nous-sidebar-left {
+        display: none;
+    }
+    .nous-portal-layout.left-collapsed #restore-left-sidebar {
+        display: inline-flex;
+    }
+
+    /* Right Collapsed */
+    .nous-portal-layout.right-collapsed {
+        grid-template-columns: 240px 1fr 0px;
+    }
+    .nous-portal-layout.right-collapsed .nous-sidebar-right {
+        display: none;
+    }
+    .nous-portal-layout.right-collapsed #restore-right-sidebar {
+        display: inline-flex;
+    }
+
+    /* Both Collapsed (Full-Width Focus Mode) */
+    .nous-portal-layout.left-collapsed.right-collapsed {
+        grid-template-columns: 0px 1fr 0px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .nous-portal-layout.left-collapsed {
+        grid-template-columns: 0px 1fr 300px;
+    }
+    .nous-portal-layout.right-collapsed {
+        grid-template-columns: 260px 1fr 0px;
+    }
+    .nous-portal-layout.left-collapsed.right-collapsed {
+        grid-template-columns: 0px 1fr 0px;
+    }
 }

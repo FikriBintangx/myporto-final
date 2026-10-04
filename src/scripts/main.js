@@ -1503,3 +1503,34 @@ draggables.forEach(draggable => {
 
 });
 
+
+    // ==========================================================
+    // SIDEBAR HIDE / MINIMIZE INTERACTIVITY
+    // ==========================================================
+    const portalLayout = document.querySelector('.nous-portal-layout');
+    const toggleLeftBtn = document.getElementById('toggle-left-sidebar');
+    const toggleRightBtn = document.getElementById('toggle-right-sidebar');
+    const restoreLeftBtn = document.getElementById('restore-left-sidebar');
+    const restoreRightBtn = document.getElementById('restore-right-sidebar');
+
+    if (portalLayout) {
+        // Toggle Left
+        if (toggleLeftBtn && restoreLeftBtn) {
+            toggleLeftBtn.addEventListener('click', () => {
+                portalLayout.classList.add('left-collapsed');
+            });
+            restoreLeftBtn.addEventListener('click', () => {
+                portalLayout.classList.remove('left-collapsed');
+            });
+        }
+
+        // Toggle Right
+        if (toggleRightBtn && restoreRightBtn) {
+            toggleRightBtn.addEventListener('click', () => {
+                portalLayout.classList.add('right-collapsed');
+            });
+            restoreRightBtn.addEventListener('click', () => {
+                portalLayout.classList.remove('right-collapsed');
+            });
+        }
+    }

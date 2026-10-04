@@ -50,14 +50,19 @@ const projectList = Object.values(projectsData);
         <div class="nous-portal-layout">
                 <!-- LEFT SIDEBAR (Navigation & Branding) -->
         <aside class="nous-sidebar-left desktop-only">
-            <div class="sidebar-brand" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-                <div style="width: 32px; height: 32px; border-radius: 4px; background: var(--text-primary); display: flex; align-items: center; justify-content: center; color: var(--bg-color);">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            <div class="sidebar-brand" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; border-radius: 4px; background: var(--text-primary); display: flex; align-items: center; justify-content: center; color: var(--bg-color);">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
+                        <h1 style="font-size: 1.1rem; font-weight: 800; font-family: var(--font-sans); letter-spacing: -0.02em; margin: 0;">PORTOFOLIO</h1>
+                        <div style="font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono);">FIKRI BINTANG P.</div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column;">
-                    <h1 style="font-size: 1.1rem; font-weight: 800; font-family: var(--font-sans); letter-spacing: -0.02em; margin: 0;">Nous Portal</h1>
-                    <div style="font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono);">FIKRI BINTANG P.</div>
-                </div>
+                <button id="toggle-left-sidebar" title="Hide/Minimize Sidebar" class="sidebar-collapse-btn">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
+                </button>
             </div>
             
             <a href="/" class="nous-cta-btn" style="display: flex; justify-content: center; align-items: center; gap: 8px; border-radius: 999px; padding: 12px;">
@@ -584,30 +589,55 @@ const projectList = Object.values(projectsData);
                     ↗</a></div>
             <div><span class="footer-text">2026</span></div>
         </footer>
-                </main>
+                
+        <!-- Floating Restore Sidebar Buttons (Shown when sidebars are minimized) -->
+        <button id="restore-left-sidebar" class="restore-sidebar-btn restore-left" title="Show Navigation Sidebar">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18l6-6-6-6"></path></svg>
+            <span>EXPLORE</span>
+        </button>
+        <button id="restore-right-sidebar" class="restore-sidebar-btn restore-right" title="Show Download / Profile Panel">
+            <span>DOWNLOAD</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+
+        </main>
         
                 <!-- RIGHT SIDEBAR (Highlights & Social) -->
         <aside class="nous-sidebar-right desktop-only">
+            <!-- HIGHLIGHT PROJECT CARD -->
             <div class="sidebar-section" style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); background: #050816; padding: 24px; min-height: 400px; display: flex; flex-direction: column;">
-                <img src="images/asset1.png" alt="Statue Background" style="position: absolute; right: -40px; bottom: 0; width: 180px; opacity: 0.15; filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2); pointer-events: none; mix-blend-mode: screen;">
+                <img src="images/asset3.png" alt="Statue Background" style="position: absolute; right: -40px; bottom: 0; width: 180px; opacity: 0.15; filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2); pointer-events: none; mix-blend-mode: screen;">
                 
-                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 24px; position: relative; z-index: 2;">-> // DOWNLOAD</div>
+                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 24px; position: relative; z-index: 2;">-> // FEATURED BUILD</div>
                 
-                <h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; line-height: 1.1; margin: 0 0 16px 0; position: relative; z-index: 2;">Install<br>Hermes</h2>
+                <h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; line-height: 1.1; margin: 0 0 16px 0; position: relative; z-index: 2;">MobilKu<br>Platform</h2>
                 
                 <p style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 32px; position: relative; z-index: 2;">
-                    An autonomous software engineer that lives on your server, remembers what it learns, and builds scalable web apps the longer it runs.
+                    Integrated web platform for buying and selling cars. Features an interactive catalog, bidding system, and comprehensive admin panels. Built with CodeIgniter & MySQL.
                 </p>
                 
                 <div style="margin-top: auto; position: relative; z-index: 2;">
-                    <a href="/CV.pdf" target="_blank" style="display: block; width: 100%; text-align: center; padding: 12px; background: rgba(255,255,255,0.1); color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 0.75rem; font-family: var(--font-sans); border-radius: 4px; transition: all 0.2s;">
-                        DOWNLOAD HERMES
+                    <a href="https://github.com/FikriBintangx" target="_blank" style="display: block; width: 100%; text-align: center; padding: 12px; background: rgba(255,255,255,0.1); color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 0.75rem; font-family: var(--font-sans); border-radius: 4px; transition: all 0.2s;">
+                        VIEW ON GITHUB ↗
                     </a>
                 </div>
             </div>
             
+            <!-- SOCIAL MEDIA BUTTONS -->
             <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-                <a href="mailto:fikbintang01@gmail.com" style="display: flex; align-items: center; justify-content: center; padding: 12px; background: var(--primary-color); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px;">PAY WITH STRIPE</a>
+                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 4px; margin-top: 8px;">// CONNECT</div>
+                <a href="https://github.com/FikriBintangx" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: var(--primary-color); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    GITHUB
+                </a>
+                <a href="https://instagram.com/biru.css" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px; transition: background 0.2s;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    INSTAGRAM
+                </a>
+                <a href="mailto:fikbintang01@gmail.com" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px; transition: background 0.2s;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    EMAIL ME
+                </a>
             </div>
         </aside>
     </div>
