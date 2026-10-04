@@ -3119,3 +3119,665 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
     background: #ffffff !important;
     color: #03051a !important;
 }
+
+
+/* ==========================================================================
+   DESIGNER AGENT POLISH (portal.nousresearch.com SPEC)
+   ========================================================================== */
+/* ==========================================================================
+   NOUS RESEARCH PORTAL DESIGN SYSTEM (portal.nousresearch.com)
+   Design Tokens & CSS Variables for Fikri Bintang's Portfolio
+   ========================================================================== */
+
+:root {
+  /* --- Canvas & Background Surfaces --- */
+  --bg-canvas: #020314;           /* Deep cosmic space void / Viewport root */
+  --bg-sidebar: #04061a;          /* Left & Right sticky navigation rails */
+  --bg-surface-1: #060a22;        /* Secondary panel background */
+  --bg-card: #090e2b;             /* Standard pricing / project card fill */
+  --bg-card-hover: #0d143d;       /* Card hover state */
+  --bg-card-active: #0015ff;      /* Solid electric blue active tier card */
+  --bg-input: #040619;            /* Terminal & quick-input widget background */
+  --bg-badge-bonus: #0015ff;      /* 10% bonus / highlight badge fill */
+  
+  /* --- Electric Blue & Accent System --- */
+  --accent-blue-primary: #0015ff; /* Nous electric cobalt blue */
+  --accent-blue-hover: #0038ff;   /* Lighter electric blue for interactive states */
+  --accent-blue-glow: rgba(0, 21, 255, 0.45); /* Box-shadow / ambient bloom */
+  --accent-cyan: #38bdf8;         /* Sub-accent for code tags, live status, pins */
+  --accent-cyan-dim: rgba(56, 189, 248, 0.15);
+  
+  /* --- Grid Blueprint & Borders --- */
+  --border-subtle: #17204f;       /* Standard panel & card perimeter (1px solid) */
+  --border-muted: #0e1538;        /* Deep internal dividers */
+  --border-focus: #2c3c8c;        /* Input focus & secondary button borders */
+  --border-active: #0015ff;       /* Active card & selection outline */
+  --border-badge: #ffffff;        /* High-contrast 1px badge perimeter */
+  --border-cyan: rgba(56, 189, 248, 0.4);
+  --border-dotted: #2a3770;       /* Dotted navigation alignment rules */
+
+  /* --- Typography & Text Hierarchy --- */
+  --text-primary: #ffffff;        /* Headlines, pricing numbers, high-contrast labels */
+  --text-secondary: #cad2ff;      /* Crisp body copy, tier feature bullets */
+  --text-muted: #56649e;          /* Metadata, line numbers, terminal timestamps */
+  --text-dim: #3a4675;            /* Inactive link delimiters */
+  --text-inverse: #020314;        /* Dark text on white CTA buttons */
+  --text-cyan: #38bdf8;           /* Highlighted keyword accents */
+
+  /* --- Font Stacks --- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier Prime', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display-serif: 'PPEditorialNew', 'Editorial New', 'Fraunces', serif;
+
+  /* --- Blueprint Sizing & Layout Geometry --- */
+  --radius-sharp: 0px;            /* Strict 0px brutalist sharp corners */
+  --radius-badge: 2px;            /* Micro radius for compact pill tags */
+  --header-height: 56px;
+  --sidebar-left-width: 260px;
+  --sidebar-right-width: 320px;
+  --max-content-width: 1560px;
+
+  /* --- Shadows & Glow Effects --- */
+  --glow-electric: 0 0 24px rgba(0, 21, 255, 0.5);
+  --glow-cyan: 0 0 16px rgba(56, 189, 248, 0.4);
+  --shadow-card: 0 12px 32px rgba(2, 3, 20, 0.6);
+}
+
+/* ==========================================================================
+   NOUS PORTAL GLOBAL RESET & BLUEPRINT GRID BASE
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle Blueprint Coordinate Grid Background */
+.nous-blueprint-grid {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(23, 32, 79, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 32, 79, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Halftone / Dither Noise Overlay */
+.nous-dither-noise {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   3-COLUMN NOUS PORTAL LAYOUT
+   ========================================================================== */
+
+.nous-portal-layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: var(--sidebar-left-width) minmax(0, 1fr) var(--sidebar-right-width);
+  max-width: var(--max-content-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
+
+/* Sticky Glassmorphism Header */
+.nous-header {
+  grid-column: 1 / -1;
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background: rgba(4, 6, 26, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nous-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nous-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Navigation Rails */
+.nous-rail-left {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.nous-rail-right {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  background-color: var(--bg-sidebar);
+  border-left: 1px solid var(--border-subtle);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.nous-main-feed {
+  padding: 2rem 2.5rem;
+  background-color: var(--bg-canvas);
+  overflow-y: auto;
+}
+
+/* Dotted Alignment Nav Links */
+.nous-nav-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.nous-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sharp);
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.nous-nav-link::after {
+  content: '';
+  flex: 1;
+  margin: 0 0.5rem;
+  border-bottom: 1px dotted var(--border-dotted);
+  opacity: 0.4;
+}
+
+.nous-nav-link:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nous-nav-link.active {
+  color: var(--text-primary);
+  background-color: var(--accent-blue-primary);
+}
+
+.nous-nav-link.active::after {
+  display: none;
+}
+
+/* ==========================================================================
+   TERMINAL SECTION HEADERS & CODE COMMENTS
+   ========================================================================== */
+
+.nous-terminal-header-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.nous-terminal-header-tag .slash {
+  color: var(--accent-cyan);
+}
+
+.nous-hero-statement {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 780px;
+}
+
+.nous-hero-statement strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   PRICING & PROJECT 4-TIER CARDS GRID
+   ========================================================================== */
+
+.nous-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.nous-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sharp);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nous-card:hover {
+  border-color: var(--border-focus);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Active Highlighted Tier (e.g. PLUS Plan) */
+.nous-card.active-electric {
+  background-color: var(--bg-card-active);
+  border-color: var(--text-primary);
+  box-shadow: var(--glow-electric);
+}
+
+.nous-card.active-electric .nous-card-bullet,
+.nous-card.active-electric .nous-card-desc,
+.nous-card.active-electric .nous-card-pricing-sub {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Card Header & Badges */
+.nous-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.nous-card-title {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.nous-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border-badge);
+  border-radius: var(--radius-sharp);
+  background: transparent;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.nous-badge-pill.bonus {
+  background-color: var(--bg-badge-bonus);
+  border-color: var(--text-primary);
+}
+
+/* Dithered Statue Visual Frame */
+.nous-card-artwork {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background-color: #04061a;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.nous-card-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(160%) brightness(90%);
+  mix-blend-mode: luminosity;
+  opacity: 0.85;
+}
+
+.nous-card-artwork::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(2, 3, 20, 0.6) 2px,
+    rgba(2, 3, 20, 0.6) 4px
+  );
+  pointer-events: none;
+}
+
+/* Price & Specs */
+.nous-card-pricing {
+  margin-bottom: 1.25rem;
+}
+
+.nous-card-price {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+}
+
+.nous-card-pricing-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* Feature List */
+.nous-card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.nous-card-bullet {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.nous-card-bullet::before {
+  content: '•';
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   HIGH-CONTRAST NOUS BUTTONS (CTAs)
+   ========================================================================== */
+
+.nous-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-primary);
+}
+
+/* Primary White Solid Button */
+.nous-btn-primary-white {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+  border-color: var(--text-primary);
+}
+
+.nous-btn-primary-white:hover {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+/* Solid Electric Blue CTA Button */
+.nous-btn-electric {
+  background-color: var(--accent-blue-primary);
+  color: var(--text-primary);
+  border-color: var(--accent-blue-primary);
+  box-shadow: 0 4px 16px rgba(0, 21, 255, 0.35);
+}
+
+.nous-btn-electric:hover {
+  background-color: var(--accent-blue-hover);
+  border-color: var(--accent-blue-hover);
+  box-shadow: var(--glow-electric);
+}
+
+/* Secondary Outline Button */
+.nous-btn-outline {
+  background: transparent;
+  border-color: var(--border-focus);
+  color: var(--text-primary);
+}
+
+.nous-btn-outline:hover {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   TOP-UP / QUICK-ACTION WIDGET
+   ========================================================================== */
+
+.nous-topup-panel {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sharp);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.nous-topup-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.nous-pill-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nous-pill-btn:hover, .nous-pill-btn.active {
+  border-color: var(--text-primary);
+  background: var(--accent-blue-primary);
+}
+
+.nous-topup-input-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.nous-topup-input {
+  flex: 1;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+}
+
+.nous-topup-input:focus {
+  border-color: var(--text-primary);
+}
+
+/* ==========================================================================
+   CLI TERMINAL & RETRO PROMPT COMPONENT
+   ========================================================================== */
+
+.nous-terminal-window {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sharp);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.nous-terminal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.4rem 0.75rem;
+}
+
+.nous-terminal-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nous-terminal-tab {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nous-terminal-tab:hover {
+  color: var(--text-primary);
+}
+
+.nous-terminal-tab.active {
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--bg-card);
+  margin-bottom: -1px;
+}
+
+.nous-terminal-console {
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  min-height: 220px;
+}
+
+.nous-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--accent-cyan);
+}
+
+.nous-prompt-symbol {
+  color: var(--accent-blue-primary);
+  text-shadow: var(--glow-electric);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+  .nous-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .nous-portal-layout {
+    grid-template-columns: 1fr;
+    border: none;
+  }
+  
+  .nous-rail-left, .nous-rail-right {
+    position: static;
+    height: auto;
+    border: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  
+  .nous-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nous-topup-input-group {
+    flex-direction: column;
+  }
+}
