@@ -3077,3 +3077,45 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
         grid-template-columns: 0px 1fr 0px;
     }
 }
+
+/* NOUS BRUTALIST REFINEMENTS */
+.nous-profile-card, .hire-cta-card, .nous-social-card, .nous-cta-btn {
+    border-radius: 0px !important;
+}
+.sidebar-section {
+    border-radius: 0px !important;
+}
+
+.nous-profile-card {
+    background-color: #0b0f2e !important;
+    border: 1px solid #1a224a !important;
+}
+
+.hire-cta-card {
+    background-color: transparent !important;
+    border: 1px dotted #1f2756 !important;
+}
+
+.nous-social-card {
+    background: transparent !important;
+    border: 1px solid #1a224a !important;
+}
+.nous-social-card:hover {
+    background: #0b0f2e !important;
+    border-color: #001eff !important;
+}
+
+.sidebar-nav .nav-link, .sidebar-nav .nous-nav-item {
+    border-radius: 0px !important;
+    border-bottom: 1px dotted #1f2756;
+}
+
+.nous-hire-btn {
+    background: #001eff !important;
+    color: #fff !important;
+    border-radius: 0px !important;
+}
+.nous-hire-btn:hover {
+    background: #ffffff !important;
+    color: #03051a !important;
+}
