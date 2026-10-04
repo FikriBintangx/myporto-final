@@ -1,3 +1,31 @@
+
+/* Background Image with Opacity */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -2;
+}
+
+/* Texture Overlay */
+.texture-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+    mix-blend-mode: screen;
+}
 @font-face {
     font-family: 'Editorial New';
     src: url('/fonts/PPEditorialNew-Ultrabold-BF644b21500840c.otf') format('opentype');
@@ -6,19 +34,19 @@
 }
 
 :root {
-    --bg-color: #f1f5f9;
-    /* Light gray-blue background */
-    --primary-rgb: 0, 82, 204;
-    /* More saturated, higher contrast cobalt blue */
-    --primary-color: rgb(var(--primary-rgb));
-    --text-primary: var(--primary-color);
-    --text-secondary: rgba(var(--primary-rgb), 0.7);
-    --border-color: rgba(var(--primary-rgb), 0.55);
-    --terminal-bg: rgba(var(--primary-rgb), 0.05);
+    /* NOUS RESEARCH PORTAL DARK THEME */
+    --bg-color: #03040B; /* Deep Space Navy / Black */
+    --primary-rgb: 0, 71, 255; /* Electric Blue */
+    --primary-color: #0047FF;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8B949E;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --border-blue: rgba(0, 71, 255, 0.4);
+    --terminal-bg: rgba(0, 71, 255, 0.05);
 
     --font-sans: 'Inter', sans-serif;
-    --font-mono: 'Courier Prime', monospace;
-    --font-serif: 'Editorial New', 'Fraunces', serif;
+    --font-mono: 'Courier Prime', 'JetBrains Mono', monospace;
+    --font-serif: 'Fraunces', serif;
 
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
@@ -55,19 +83,7 @@ body {
     min-height: 100vh;
 }
 
-/* Texture Overlay */
-.texture-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 100;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.04;
-    mix-blend-mode: multiply;
-}
+
 
 /* Container */
 .container {
@@ -2291,7 +2307,7 @@ a {
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.03em;
-    color: #555555;
+    color: #A1A1AA;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
@@ -2317,12 +2333,12 @@ a {
 }
 
 .mobile-pill-link:hover {
-    color: #111111;
+    color: #FFFFFF;
     background: rgba(0, 0, 0, 0.04);
 }
 
 .mobile-pill-link.active {
-    background: #111111;
+    background: #FFFFFF;
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -2663,7 +2679,7 @@ a {
 
 .nous-cta-btn {
     display: inline-block;
-    background: #111111;
+    background: #FFFFFF;
     color: #ffffff;
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -2690,7 +2706,7 @@ a {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 700;
-    color: #888888;
+    color: #71717A;
     letter-spacing: 0.05em;
     margin-bottom: 4px;
 }
@@ -2705,7 +2721,7 @@ a {
     gap: 10px;
     padding: 8px 12px;
     border-radius: 6px;
-    color: #555555;
+    color: #A1A1AA;
     text-decoration: none;
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -2713,11 +2729,11 @@ a {
     transition: all 0.2s ease;
 }
 .nous-nav-item:hover {
-    background: rgba(0,0,0,0.04);
-    color: #111111;
+    background: rgba(255,255,255,0.06);
+    color: #FFFFFF;
 }
 .nous-nav-item.active {
-    background: #111111;
+    background: #FFFFFF;
     color: #ffffff;
 }
 .nous-nav-bullet {
@@ -2762,7 +2778,7 @@ a {
 .system-note {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: #999;
+    color: #71717A;
 }
 
 /* RIGHT SIDEBAR SPECIFICS */
@@ -2771,7 +2787,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
-    background: rgba(248, 250, 252, 0.5);
+    background: rgba(10, 10, 15, 0.6);
 }
 .profile-card-bg {
     position: absolute;
@@ -2807,7 +2823,7 @@ a {
 .profile-specs {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: #666;
+    color: #A1A1AA;
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
@@ -2817,7 +2833,7 @@ a {
     font-size: 0.65rem;
     font-weight: 700;
     margin-top: 8px;
-    color: #333;
+    color: #E4E4E7;
 }
 
 .hire-cta-card {
@@ -2830,7 +2846,7 @@ a {
 .hire-text {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #444;
+    color: #D4D4D8;
     margin: 0 0 10px 0;
 }
 .nous-hire-btn {
@@ -2847,7 +2863,7 @@ a {
     transition: all 0.2s;
 }
 .nous-hire-btn:hover {
-    background: #111111;
+    background: #FFFFFF;
     transform: translateY(-2px);
 }
 
@@ -2866,11 +2882,11 @@ a {
     text-decoration: none;
     color: inherit;
     transition: all 0.2s;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
 }
 .nous-social-card:hover {
     background: #ffffff;
-    border-color: #bbbbbb;
+    border-color: #FFFFFF;
     transform: translateX(4px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
@@ -2880,9 +2896,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.04);
+    background: rgba(255,255,255,0.06);
     border-radius: 6px;
-    color: #333;
+    color: #E4E4E7;
 }
 .social-info {
     display: flex;
@@ -2896,7 +2912,7 @@ a {
 .social-handle {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: #666;
+    color: #A1A1AA;
 }
 
 .system-stats {
@@ -2915,7 +2931,7 @@ a {
 }
 .stat-val {
     font-weight: 700;
-    color: #333;
+    color: #E4E4E7;
 }
 
 /* MOBILE TOP HEADER */
@@ -2931,4 +2947,35 @@ a {
     .nous-main-content {
         padding: 0 16px 80px 16px; /* 80px bottom padding for the pill nav */
     }
+}
+
+.cta-button.primary {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+.cta-button.secondary {
+    background: transparent;
+    color: #fff;
+    border-color: var(--border-color);
+}
+.cta-button.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+.nous-cta-btn {
+    background: #FFFFFF;
+    color: #000000;
+}
+.nous-cta-btn:hover {
+    background: #E4E4E7;
+}
+
+/* White text for general layout */
+body { color: var(--text-primary); background: var(--bg-color); }
+h1, h2, h3, h4, h5, p, span, div { color: inherit; }
+
+/* Invert statues for dark mode */
+.draggable-asset, .profile-card-statue {
+    filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2);
 }
