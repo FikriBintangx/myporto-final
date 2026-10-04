@@ -3781,3 +3781,84 @@ body {
     flex-direction: column;
   }
 }
+
+/* ==========================================================
+   NAVIGATION LINKS & ICONS
+========================================================== */
+.nous-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-radius: 0px !important;
+    border: 1px solid transparent;
+}
+
+.nous-nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nous-nav-link.active {
+    background: var(--accent-blue-primary);
+    color: #ffffff;
+    border: 1px solid var(--accent-blue-primary);
+    box-shadow: var(--glow-electric);
+}
+
+.nous-nav-bullet {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    width: 16px;
+    display: inline-block;
+    text-align: center;
+}
+
+.nous-nav-link.active .nous-nav-bullet {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Fix CSS Pulse Dot for Available Status */
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: pulseGlow 2s infinite;
+}
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+/* Ensure no white boxes block the layout */
+.sidebar-section {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    min-height: auto !important;
+}
+
+/* EXCEPT for the Featured Build card */
+.nous-sidebar-right .sidebar-section:first-child {
+    background: var(--bg-surface-1) !important;
+    border: 1px solid var(--border-subtle) !important;
+    padding: 24px !important;
+    min-height: 400px !important;
+}
+
+.nous-social-card {
+    background: transparent;
+    color: var(--text-secondary);
+}
+.nous-social-card:hover {
+    background: var(--bg-surface-1) !important;
+    color: var(--text-primary);
+}

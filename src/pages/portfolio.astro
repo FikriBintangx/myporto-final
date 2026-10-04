@@ -50,58 +50,65 @@ const projectList = Object.values(projectsData);
         <div class="nous-portal-layout">
                 <!-- LEFT SIDEBAR (Navigation & Branding) -->
         <aside class="nous-sidebar-left desktop-only">
+            <!-- BRANDING -->
             <div class="sidebar-brand" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 32px; height: 32px; border-radius: 4px; background: var(--text-primary); display: flex; align-items: center; justify-content: center; color: var(--bg-color);">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    <div style="width: 32px; height: 32px; border-radius: 0px; background: var(--text-primary); display: flex; align-items: center; justify-content: center; color: var(--bg-canvas);">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                     </div>
                     <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
-                        <h1 style="font-size: 1.1rem; font-weight: 800; font-family: var(--font-sans); letter-spacing: -0.02em; margin: 0;">PORTOFOLIO</h1>
+                        <h1 style="font-size: 1.1rem; font-weight: 800; font-family: var(--font-sans); letter-spacing: -0.02em; margin: 0; color: var(--text-primary);">PORTOFOLIO</h1>
                         <div style="font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono);">FIKRI BINTANG P.</div>
                     </div>
                 </div>
                 <button id="toggle-left-sidebar" title="Hide/Minimize Sidebar" class="sidebar-collapse-btn">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
+                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
                 </button>
             </div>
             
-            <a href="/" class="nous-cta-btn" style="display: flex; justify-content: center; align-items: center; gap: 8px; border-radius: 999px; padding: 12px;">
-                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                CREATE NOUS ACCOUNT
+            <!-- MAIN CTA -->
+            <a href="/CV.pdf" target="_blank" class="nous-cta-btn" style="display: flex; justify-content: center; align-items: center; gap: 8px; border-radius: 0px; padding: 12px; margin-bottom: 24px; margin-top: 0; width: 100%;">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                DOWNLOAD FULL CV
             </a>
             
-            <div class="sidebar-section" style="margin-top: 16px;">
-                <div class="sidebar-heading" style="color: var(--text-secondary); letter-spacing: 0.1em;">EXPLORE</div>
+            <!-- MENU 1 -->
+            <div class="sidebar-section" style="margin-bottom: 24px;">
+                <div class="sidebar-heading" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 12px;">EXPLORE</div>
                 <nav class="sidebar-nav">
-                    <a href="#home" class="nav-link nous-nav-item active"><span class="nous-nav-bullet">⊞</span> <span class="nous-nav-label" data-translate="nav-home">OVERVIEW</span></a>
-                    <a href="#projects" class="nav-link nous-nav-item"><span class="nous-nav-bullet">⑂</span> <span class="nous-nav-label" data-translate="nav-projects">MODELS / PROJECTS</span></a>
-                    <a href="#skills" class="nav-link nous-nav-item"><span class="nous-nav-bullet">$</span> <span class="nous-nav-label" data-translate="nav-skills">PLANS / SKILLS</span></a>
+                    <a href="#home" class="nav-link nous-nav-link active"><span class="nous-nav-bullet">⊞</span> <span class="nous-nav-label" data-translate="nav-home">BERANDA</span></a>
+                    <a href="#about" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⑂</span> <span class="nous-nav-label" data-translate="nav-about">TENTANG SAYA</span></a>
+                    <a href="#projects" class="nav-link nous-nav-link"><span class="nous-nav-bullet">❖</span> <span class="nous-nav-label" data-translate="nav-projects">PROYEK & KARYA</span></a>
+                    <a href="#skills" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⚙</span> <span class="nous-nav-label" data-translate="nav-skills">KEAHLIAN TEKNIS</span></a>
+                    <a href="#location" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⎋</span> <span class="nous-nav-label" data-translate="location-header">LOKASI & GLOBE</span></a>
                 </nav>
             </div>
 
+            <!-- MENU 2 -->
             <div class="sidebar-section">
-                <div class="sidebar-heading" style="color: var(--text-secondary); letter-spacing: 0.1em;">RESOURCES</div>
+                <div class="sidebar-heading" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; margin-bottom: 12px;">RESOURCES</div>
                 <nav class="sidebar-nav">
-                    <a href="#about" class="nav-link nous-nav-item"><span class="nous-nav-bullet">⚙</span> <span class="nous-nav-label" data-translate="nav-about">HERMES CLOUD</span></a>
-                    <a href="#location" class="nav-link nous-nav-item"><span class="nous-nav-bullet">⎋</span> <span class="nous-nav-label" data-translate="location-header">HERMES AGENT</span></a>
-                    <a href="https://github.com/FikriBintangx" target="_blank" class="nous-nav-item"><span class="nous-nav-bullet">📖</span> <span class="nous-nav-label">API DOCS (GITHUB)</span></a>
-                    <a href="/CV.pdf" target="_blank" class="nous-nav-item"><span class="nous-nav-bullet">?</span> <span class="nous-nav-label">HELP / CV</span></a>
-                    <a href="mailto:fikbintang01@gmail.com" class="nous-nav-item"><span class="nous-nav-bullet">📄</span> <span class="nous-nav-label">TERMS / EMAIL</span></a>
-                    <a href="https://instagram.com/biru.css" target="_blank" class="nous-nav-item"><span class="nous-nav-bullet">♡</span> <span class="nous-nav-label">PRIVACY / INSTAGRAM</span></a>
+                    <a href="https://github.com/FikriBintangx" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">⟨⟩</span> <span class="nous-nav-label">GITHUB PROFILE</span></a>
+                    <a href="https://instagram.com/biru.css" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">◇</span> <span class="nous-nav-label">INSTAGRAM</span></a>
+                    <a href="mailto:fikbintang01@gmail.com" class="nous-nav-link"><span class="nous-nav-bullet">✉</span> <span class="nous-nav-label">EMAIL CONTACT</span></a>
+                    <a href="Porto Bintang.pdf" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">📄</span> <span class="nous-nav-label">PRINT PORTOFOLIO</span></a>
                 </nav>
             </div>
 
-            <div class="sidebar-footer">
-                <a href="#" style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600;">
-                    ↪ MEMBER SIGN IN
-                </a>
+            <div class="sidebar-footer" style="margin-top: auto; padding-top: 16px; border-top: 1px dotted var(--border-dotted);">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;">
+                    <span class="pulse-dot" style="background-color: var(--accent-cyan); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);"></span> AVAILABLE FOR HIRE
+                </div>
             </div>
         </aside>
 
         <!-- MAIN CENTER CONTENT -->
                 <main class="nous-main-content container">
             <!-- OVERVIEW LABEL -->
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); margin-top: 32px; margin-bottom: 12px; letter-spacing: 0.05em;">// OVERVIEW</div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; margin-bottom: 12px; letter-spacing: 0.1em;">// DEVELOPER WORKSPACE</div>
+            <div style="font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 40px; max-width: 800px; padding: 16px; border: 1px solid var(--border-subtle); background: var(--bg-surface-1);">
+                Selamat datang di portofolio interaktif Fikri Bintang. Dibuat dari nol menggunakan <span style="color: var(--text-primary); font-weight: 600;">Astro</span> dan <span style="color: var(--text-primary); font-weight: 600;">Node.js</span>. Mengeksplorasi pembuatan aplikasi web scalable, backend system yang tangguh, dan arsitektur mobile cross-platform. <a href="https://github.com/FikriBintangx/myporto-final" target="_blank" style="color: var(--accent-blue-primary); font-weight: 600; text-decoration: none;">[ Source Code ↗ ]</a>
+            </div>
             <div style="font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 40px; max-width: 800px;">
                 Use your developer portfolio. Connect an eligible client for supported project builds. No paid Fikri subscription is required. Web hosting and mobile app architectures are quoted separately. <a href="#projects" style="color: var(--primary-color); text-decoration: underline;">[Learn More]</a>
             </div>
@@ -608,7 +615,12 @@ const projectList = Object.values(projectsData);
             <div class="sidebar-section" style="position: relative; overflow: hidden; border-radius: 0px; border: 1px solid var(--border-color); background: #0b0f2e; padding: 24px; min-height: 400px; display: flex; flex-direction: column;">
                 <img src="images/asset3.png" alt="Statue Background" style="position: absolute; right: -40px; bottom: 0; width: 180px; opacity: 0.15; filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2); pointer-events: none; mix-blend-mode: screen;">
                 
-                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 24px; position: relative; z-index: 2;">-> // FEATURED BUILD</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; position: relative; z-index: 2;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em;">-> // FEATURED BUILD</div>
+                    <button id="toggle-right-sidebar" title="Hide/Minimize Panel" class="sidebar-collapse-btn">
+                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18l6-6-6-6"></path></svg>
+                    </button>
+                </div>
                 
                 <h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; line-height: 1.1; margin: 0 0 16px 0; position: relative; z-index: 2;">MobilKu<br>Platform</h2>
                 
