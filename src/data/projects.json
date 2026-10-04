@@ -150,5 +150,19 @@
       "/uploads/project/ourscontent/screenshots/ourscontent_4.png"
     ],
     "cover": "/uploads/project/ourscontent/cover.png"
+  },
+  "wahana-dashboard": {
+    "id": "wahana-dashboard",
+    "title": "Wahana Dashboard",
+    "tags": [
+      "Full Stack"
+    ],
+    "link": "#",
+    "descriptionEn": "<p>Wahana Dashboard project details.</p>",
+    "descriptionId": "<p>Detail proyek Wahana Dashboard.</p>",
+    "images": [
+      "/uploads/project/wahana-dashboard/cover.png"
+    ],
+    "cover": "/uploads/project/wahana-dashboard/cover.png"
   }
 }

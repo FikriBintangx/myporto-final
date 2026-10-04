@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-20T16:29:28.754Z",
-  "totalItems": 5,
+  "updatedAt": "2026-10-04T13:04:50.918Z",
+  "totalItems": 8,
   "projects": [
     {
       "id": "project-jurnal-ku",
@@ -66,9 +66,51 @@
       ],
       "anchorName": "East Australia",
       "rotation": "-4deg"
+    },
+    {
+      "id": "project-wahana-dashboard",
+      "slug": "wahana-dashboard",
+      "title": "Wahana Dashboard",
+      "type": "project",
+      "image": "/uploads/project/wahana-dashboard/cover.png",
+      "location": [
+        40.7128,
+        -74.006
+      ],
+      "anchorName": "New York",
+      "rotation": "2deg"
     }
   ],
-  "certificates": [],
+  "certificates": [
+    {
+      "id": "cert-sertifikat-backend-nodejs-jpg",
+      "slug": "sertifikat-backend-nodejs-jpg",
+      "title": "Sertifikat Backend NodeJS.Jpg",
+      "type": "certificate",
+      "filename": "Sertifikat-Backend-NodeJS.jpg",
+      "image": "/uploads/certificate/Sertifikat-Backend-NodeJS.jpg",
+      "location": [
+        52.52,
+        13.405
+      ],
+      "anchorName": "Berlin",
+      "rotation": "-5deg"
+    },
+    {
+      "id": "cert-sertifikat-dicoding-flutter-jpg",
+      "slug": "sertifikat-dicoding-flutter-jpg",
+      "title": "Sertifikat Dicoding Flutter.Jpg",
+      "type": "certificate",
+      "filename": "Sertifikat-Dicoding-Flutter.jpg",
+      "image": "/uploads/certificate/Sertifikat-Dicoding-Flutter.jpg",
+      "location": [
+        1.3521,
+        103.8198
+      ],
+      "anchorName": "Singapore",
+      "rotation": "-3deg"
+    }
+  ],
   "items": [
     {
       "id": "project-jurnal-ku",
@@ -134,6 +176,47 @@
       ],
       "anchorName": "East Australia",
       "rotation": "-4deg"
+    },
+    {
+      "id": "project-wahana-dashboard",
+      "slug": "wahana-dashboard",
+      "title": "Wahana Dashboard",
+      "type": "project",
+      "image": "/uploads/project/wahana-dashboard/cover.png",
+      "location": [
+        40.7128,
+        -74.006
+      ],
+      "anchorName": "New York",
+      "rotation": "2deg"
+    },
+    {
+      "id": "cert-sertifikat-backend-nodejs-jpg",
+      "slug": "sertifikat-backend-nodejs-jpg",
+      "title": "Sertifikat Backend NodeJS.Jpg",
+      "type": "certificate",
+      "filename": "Sertifikat-Backend-NodeJS.jpg",
+      "image": "/uploads/certificate/Sertifikat-Backend-NodeJS.jpg",
+      "location": [
+        52.52,
+        13.405
+      ],
+      "anchorName": "Berlin",
+      "rotation": "-5deg"
+    },
+    {
+      "id": "cert-sertifikat-dicoding-flutter-jpg",
+      "slug": "sertifikat-dicoding-flutter-jpg",
+      "title": "Sertifikat Dicoding Flutter.Jpg",
+      "type": "certificate",
+      "filename": "Sertifikat-Dicoding-Flutter.jpg",
+      "image": "/uploads/certificate/Sertifikat-Dicoding-Flutter.jpg",
+      "location": [
+        1.3521,
+        103.8198
+      ],
+      "anchorName": "Singapore",
+      "rotation": "-3deg"
     }
   ]
 }

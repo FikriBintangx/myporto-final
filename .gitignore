@@ -32,3 +32,4 @@ test.ts
 **/__pycache__/
 *.pyc
 *.pyo
+.env*
