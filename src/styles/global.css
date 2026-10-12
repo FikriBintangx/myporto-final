@@ -59,18 +59,48 @@
     padding: 0;
 }
 
+/* Deep-space starfield: layered radial-gradient dots, no image asset */
 .bg-image {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/images/bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    opacity: 0.35;
+    inset: 0;
     z-index: -1;
+    background-color: var(--bg-color);
+}
+.bg-image::before,
+.bg-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+}
+/* far stars - small, dim, slow twinkle */
+.bg-image::before {
+    background-image:
+        radial-gradient(1px 1px at 25px 35px, rgba(255,255,255,0.55), transparent 1.5px),
+        radial-gradient(1px 1px at 120px 90px, rgba(255,255,255,0.35), transparent 1.5px),
+        radial-gradient(1.5px 1.5px at 200px 40px, rgba(160,190,255,0.45), transparent 2px),
+        radial-gradient(1px 1px at 300px 140px, rgba(255,255,255,0.3), transparent 1.5px),
+        radial-gradient(1px 1px at 80px 200px, rgba(200,215,255,0.4), transparent 1.5px);
+    background-size: 360px 360px;
+    animation: star-twinkle 7s ease-in-out infinite;
+}
+/* near stars - slightly bigger, brighter */
+.bg-image::after {
+    background-image:
+        radial-gradient(1.5px 1.5px at 60px 160px, rgba(255,255,255,0.7), transparent 2px),
+        radial-gradient(1px 1px at 240px 60px, rgba(255,255,255,0.6), transparent 1.5px),
+        radial-gradient(2px 2px at 320px 260px, rgba(140,175,255,0.55), transparent 2.5px),
+        radial-gradient(1px 1px at 150px 300px, rgba(255,255,255,0.5), transparent 1.5px);
+    background-size: 480px 480px;
+    animation: star-twinkle 11s ease-in-out infinite reverse;
+    opacity: 0.8;
+}
+@keyframes star-twinkle {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bg-image::before, .bg-image::after { animation: none; }
 }
 
 body {
