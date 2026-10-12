@@ -1,11 +1,12 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
+import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://fikribintang.web.id',
   output: 'server',
-  adapter: vercel()
+  adapter: vercel(),
+  integrations: [react()]
 });
