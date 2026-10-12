@@ -39,7 +39,7 @@
     --primary-rgb: 0, 71, 255; /* Electric Blue */
     --primary-color: #0047FF;
     --text-primary: #FFFFFF;
-    --text-secondary: #8B949E;
+    --text-secondary: #C3CBD8; /* lifted from #8B949E for WCAG AA contrast on near-black bg */
     --border-color: rgba(255, 255, 255, 0.15);
     --border-blue: rgba(0, 71, 255, 0.4);
     --terminal-bg: rgba(0, 71, 255, 0.05);
@@ -2671,7 +2671,7 @@ a {
     font-family: var(--font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.05em;
-    color: #6B7280;
+    color: #AEB8C7;
     margin-top: 4px;
 }
 .sidebar-brand a { text-decoration: none; }
@@ -2705,7 +2705,7 @@ a {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 700;
-    color: #71717A;
+    color: #AEB8C7;
     letter-spacing: 0.05em;
     margin-bottom: 4px;
 }
@@ -2777,7 +2777,7 @@ a {
 .system-note {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: #71717A;
+    color: #AEB8C7;
 }
 
 /* RIGHT SIDEBAR SPECIFICS */
@@ -2920,7 +2920,7 @@ a {
     gap: 6px;
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: #888;
+    color: #B9C1CE;
 }
 .stat-row {
     display: flex;
