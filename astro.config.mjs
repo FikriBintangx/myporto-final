@@ -8,5 +8,10 @@ export default defineConfig({
   site: 'https://fikribintang.web.id',
   output: 'server',
   adapter: vercel(),
-  integrations: [react()]
+  integrations: [react()],
+  vite: {
+    ssr: {
+      noExternal: ['gsap']
+    }
+  }
 });
