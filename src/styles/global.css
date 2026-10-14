@@ -3847,15 +3847,36 @@ body {
 /* ==========================================================
    NAVIGATION LINKS & ICONS
 ========================================================== */
+.nous-sidebar-left .brand-text-wrap h1 {
+    font-size: 1.25rem !important;
+}
+
+.nous-sidebar-left .brand-text-wrap div {
+    font-size: 0.78rem !important;
+}
+
+.nous-sidebar-left .nous-cta-btn {
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    padding: 12px 16px !important;
+}
+
+.nous-sidebar-left .sidebar-heading {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+}
+
 .nous-nav-link {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
+    padding: 9px 12px;
     color: var(--text-secondary);
     text-decoration: none;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     font-weight: 500;
     transition: all 0.2s ease;
     border-radius: 0px !important;
@@ -3875,9 +3896,9 @@ body {
 }
 
 .nous-nav-bullet {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     opacity: 0.7;
-    width: 16px;
+    width: 18px;
     display: inline-block;
     text-align: center;
 }
@@ -3885,6 +3906,10 @@ body {
 .nous-nav-link.active .nous-nav-bullet {
     color: #ffffff;
     opacity: 1;
+}
+
+.nous-sidebar-left .sidebar-footer div {
+    font-size: 0.82rem !important;
 }
 
 /* Fix CSS Pulse Dot for Available Status */
