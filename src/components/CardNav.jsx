@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import gsapPkg from 'gsap';
+const gsap = gsapPkg.gsap || gsapPkg;
 import { GoArrowUpRight } from 'react-icons/go';
 import './CardNav.css';
 
