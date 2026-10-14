@@ -3081,10 +3081,10 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
     
     /* Left Collapsed */
     .nous-portal-layout.left-collapsed {
-        grid-template-columns: 0px 1fr 280px;
+        grid-template-columns: minmax(0, 1fr) 280px;
     }
     .nous-portal-layout.left-collapsed .nous-sidebar-left {
-        display: none;
+        display: none !important;
     }
     .nous-portal-layout.left-collapsed #restore-left-sidebar {
         display: inline-flex;
@@ -3092,10 +3092,10 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
 
     /* Right Collapsed */
     .nous-portal-layout.right-collapsed {
-        grid-template-columns: 240px 1fr 0px;
+        grid-template-columns: 240px minmax(0, 1fr);
     }
     .nous-portal-layout.right-collapsed .nous-sidebar-right {
-        display: none;
+        display: none !important;
     }
     .nous-portal-layout.right-collapsed #restore-right-sidebar {
         display: inline-flex;
@@ -3103,20 +3103,25 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
 
     /* Both Collapsed (Full-Width Focus Mode) */
     .nous-portal-layout.left-collapsed.right-collapsed {
-        grid-template-columns: 0px 1fr 0px;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
 @media (min-width: 1280px) {
     .nous-portal-layout.left-collapsed {
-        grid-template-columns: 0px 1fr 300px;
+        grid-template-columns: minmax(0, 1fr) var(--sidebar-right-width, 320px);
     }
     .nous-portal-layout.right-collapsed {
-        grid-template-columns: 260px 1fr 0px;
+        grid-template-columns: var(--sidebar-left-width, 260px) minmax(0, 1fr);
     }
     .nous-portal-layout.left-collapsed.right-collapsed {
-        grid-template-columns: 0px 1fr 0px;
+        grid-template-columns: minmax(0, 1fr);
     }
+}
+
+.nous-portal-layout.left-collapsed .nous-main-content,
+.nous-portal-layout.right-collapsed .nous-main-content {
+    padding-top: 36px;
 }
 
 /* NOUS BRUTALIST REFINEMENTS */
