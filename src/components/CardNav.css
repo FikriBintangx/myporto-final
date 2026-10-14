@@ -1,4 +1,5 @@
 .card-nav-container {
+  display: none;
   position: fixed;
   top: 1em;
   left: 50%;
@@ -7,6 +8,13 @@
   max-width: 800px;
   z-index: 999;
   box-sizing: border-box;
+}
+
+/* Header CardNav hanya muncul saat mobile view atau mode portrait */
+@media (max-width: 1023px), (orientation: portrait) {
+  .card-nav-container {
+    display: block;
+  }
 }
 
 .card-nav {

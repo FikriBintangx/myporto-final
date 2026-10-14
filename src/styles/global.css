@@ -2678,6 +2678,14 @@ a {
         gap: 32px;
         scrollbar-width: none;
     }
+    .nous-sidebar-left {
+        border-right: 1px solid var(--border-color);
+        background: rgba(10, 12, 20, 0.5);
+    }
+    .nous-sidebar-right {
+        border-left: 1px solid var(--border-color);
+        background: rgba(10, 12, 20, 0.5);
+    }
     .nous-sidebar-left::-webkit-scrollbar,
     .nous-sidebar-right::-webkit-scrollbar {
         display: none;
@@ -3208,7 +3216,7 @@ h1, h2, h3, h4, h5, p, span, div { color: inherit; }
   --header-height: 56px;
   --sidebar-left-width: 260px;
   --sidebar-right-width: 320px;
-  --max-content-width: 1560px;
+  --max-content-width: 100%;
 
   /* --- Shadows & Glow Effects --- */
   --glow-electric: 0 0 24px rgba(0, 21, 255, 0.5);
@@ -3274,11 +3282,12 @@ body {
   z-index: 2;
   display: grid;
   grid-template-columns: var(--sidebar-left-width) minmax(0, 1fr) var(--sidebar-right-width);
-  max-width: var(--max-content-width);
+  max-width: 100%;
+  width: 100%;
   min-height: 100vh;
-  margin: 0 auto;
-  border-left: 1px solid var(--border-subtle);
-  border-right: 1px solid var(--border-subtle);
+  margin: 0;
+  border-left: none;
+  border-right: none;
 }
 
 /* Sticky Glassmorphism Header */
