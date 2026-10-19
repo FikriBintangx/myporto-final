@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fikri Bintang Purnomo | Mobile &amp; Web UI/UX Engineer</title>
+<meta name="description" content="Portfolio 2026 Fikri Bintang Purnomo — Mobile & Web UI/UX Engineer, Fullstack Developer dari Indonesia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<!-- GSAP + ScrollTrigger + Lenis for ultra-smooth scrolling -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader">
+  <div class="loader-ambient" aria-hidden="true"></div>
+  <div class="loader-stage">
+    <div class="loader-center">
+      <div class="greeting-box">
+        <em class="greeting-text" id="greetingText">Halo</em>
+      </div>
+    </div>
+    <div class="loader-lang mono" id="loaderLang">INDONESIA</div>
+  </div>
+  <div class="loader-bottom">
+    <span class="mono">Fikri Bintang — Portfolio 2026</span>
+    <span class="mono loader-pct" id="loaderPct">0%</span>
+  </div>
+  <div class="loader-bar"><span id="loaderBarFill"></span></div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="nav">
+  <a href="#top" class="nav-logo">Fikri Bintang.</a>
+  <nav class="nav-menu">
+    <a href="#karya">Karya</a>
+    <a href="#proses">Proses</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-text-select-box">
+        <p class="mono label">Portfolio — 2026</p>
+        <h1 class="hero-title">
+          <span class="upright">Fikri</span><br>
+          <span class="accent-italic">Bintang.</span>
+        </h1>
+        <p class="mono hero-route"><span class="celestial-sparkle">✦</span> 6.1783° S, 106.6319° E · Tangerang, ID</p>
+        <p class="hero-desc">Mobile &amp; Web UI/UX Engineer yang merancang antarmuka presisi, arsitektur produk yang kokoh, dan pengalaman digital yang bersinar.</p>
+
+        <!-- Interactive Figma / Canvas Selection Frame -->
+        <div class="figma-select-frame" aria-hidden="true">
+          <span class="f-handle f-tl"></span>
+          <span class="f-handle f-tc"></span>
+          <span class="f-handle f-tr"></span>
+          <span class="f-handle f-mr"></span>
+          <span class="f-handle f-br"></span>
+          <span class="f-handle f-bc"></span>
+          <span class="f-handle f-bl"></span>
+          <span class="f-handle f-ml"></span>
+          <div class="figma-tag mono">
+            <span class="f-tag-icon">#</span>
+            <span>Hero / Headline</span>
+            <span class="f-tag-dim">Auto</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#karya" class="mono hero-cta">Eksplorasi Karya <span class="arrow">↓</span></a>
+        <a href="assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf" class="mono hero-btn-subtle">Unduh CV ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <!-- Celestial Astrolabe / Orbital Rings -->
+      <svg class="celestial-orbit" viewBox="0 0 540 540" fill="none">
+        <circle cx="270" cy="270" r="250" stroke="#0B2545" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="4 8"/>
+        <circle cx="270" cy="270" r="200" stroke="#2E6BC4" stroke-opacity="0.22" stroke-width="1.5"/>
+        <circle cx="270" cy="270" r="145" stroke="#A9C6E8" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="2 6"/>
+        <line x1="270" y1="10" x2="270" y2="530" stroke="#0B2545" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 4"/>
+        <line x1="10" y1="270" x2="530" y2="270" stroke="#0B2545" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="270" cy="70" r="3.5" fill="#2E6BC4"/>
+        <circle cx="470" cy="270" r="3.5" fill="#2E6BC4"/>
+        <circle cx="270" cy="470" r="3.5" fill="#2E6BC4"/>
+        <circle cx="70" cy="270" r="3.5" fill="#2E6BC4"/>
+        <text x="278" y="35" fill="#0B2545" opacity="0.4" font-family="Space Mono, monospace" font-size="9" letter-spacing="2">000° ZENITH</text>
+        <text x="440" y="285" fill="#0B2545" opacity="0.4" font-family="Space Mono, monospace" font-size="9" letter-spacing="2">090° E</text>
+      </svg>
+
+      <!-- Constellation Stars -->
+      <svg class="constellation-layer" viewBox="0 0 600 500" fill="none">
+        <line x1="80" y1="110" x2="160" y2="70" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="160" y1="70" x2="230" y2="120" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="430" y1="80" x2="500" y2="140" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="500" y1="140" x2="540" y2="90" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="80" cy="110" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="160" cy="70" r="4" fill="#0B2545" opacity="0.7"/>
+        <circle cx="230" cy="120" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="430" cy="80" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="500" cy="140" r="4.5" fill="#0B2545" opacity="0.8"/>
+        <circle cx="540" cy="90" r="3" fill="#2E6BC4" opacity="0.6"/>
+      </svg>
+
+      <!-- Floating 4-Point Editorial Sparkles -->
+      <div class="sparkle sparkle-top">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#2E6BC4"/>
+        </svg>
+      </div>
+      <div class="sparkle sparkle-right">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+        </svg>
+      </div>
+      <div class="sparkle sparkle-left">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#0B2545"/>
+        </svg>
+      </div>
+
+      <!-- Clean Photo Arch (No Pirate Hat!) -->
+      <div class="photo-wrap photo-celestial">
+        <img src="assets/foto-hero.png" alt="Fikri Bintang Purnomo">
+      </div>
+
+      <!-- Celestial Seal / Compass Badge -->
+      <div class="celestial-badge">
+        <div class="celestial-badge-inner">
+          <svg class="badge-star" viewBox="0 0 100 100" fill="none">
+            <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#0B2545"/>
+          </svg>
+          <span class="mono">about me on 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="badge-tilt"><span class="pulse-dot"></span><span class="mono">Terima Proyek</span></div>
+    </div>
+  </div>
+
+  <div class="hero-bottombar mono">
+    <span>Mobile UI/UX — Fullstack Dev</span>
+    <span class="scroll-hint">Scroll <span class="arrow">↓</span></span>
+    <span>Figma — Flutter — Next.js</span>
+  </div>
+
+  <div class="waves celestial-horizon" aria-hidden="true">
+    <!-- Layer 1: Atmospheric Upper Horizon with Stardust -->
+    <svg class="horizon-layer horizon-layer-1" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#A9C6E8" stop-opacity="0.85"/>
+          <stop offset="30%" stop-color="#C5DEFA" stop-opacity="0.95"/>
+          <stop offset="70%" stop-color="#B2D3F5" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#A9C6E8" stop-opacity="0.85"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,65 C260,20 520,85 780,40 C1020,5 1260,75 1440,48 L1440,130 L0,130 Z" fill="url(#grad-sky-1)"/>
+      <circle cx="95" cy="74" r="1.5" fill="#ffffff" opacity="0.85"/>
+      <circle cx="280" cy="62" r="2" fill="#ffffff" opacity="0.95"/>
+      <circle cx="480" cy="78" r="1.5" fill="#ffffff" opacity="0.8"/>
+      <circle cx="720" cy="52" r="2.2" fill="#ffffff" opacity="0.95"/>
+      <circle cx="960" cy="38" r="1.8" fill="#ffffff" opacity="0.9"/>
+      <circle cx="1180" cy="68" r="1.5" fill="#ffffff" opacity="0.85"/>
+      <circle cx="1380" cy="62" r="2" fill="#ffffff" opacity="0.9"/>
+    </svg>
+
+    <!-- Layer 2: Intermediate Orbital Ridge with Constellations -->
+    <svg class="horizon-layer horizon-layer-2" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#194B8A"/>
+          <stop offset="50%" stop-color="#2E6BC4"/>
+          <stop offset="100%" stop-color="#1A4A85"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,75 C220,35 480,95 720,52 C960,18 1200,80 1440,58 L1440,130 L0,130 Z" fill="url(#grad-sky-2)"/>
+      <g class="horizon-constellation">
+        <circle cx="180" cy="85" r="2.2" fill="#ffffff"/>
+        <circle cx="240" cy="72" r="2.8" fill="#E8F2FF"/>
+        <circle cx="310" cy="88" r="2" fill="#A9C6E8"/>
+        <line x1="180" y1="85" x2="240" y2="72" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="240" y1="72" x2="310" y2="88" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+
+        <circle cx="620" cy="82" r="2.2" fill="#ffffff"/>
+        <circle cx="690" cy="68" r="2.8" fill="#E8F2FF"/>
+        <circle cx="760" cy="80" r="2" fill="#A9C6E8"/>
+        <line x1="620" y1="82" x2="690" y2="68" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="690" y1="68" x2="760" y2="80" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+
+        <circle cx="1080" cy="62" r="2.2" fill="#ffffff"/>
+        <circle cx="1150" cy="75" r="2.8" fill="#E8F2FF"/>
+        <circle cx="1230" cy="66" r="2" fill="#A9C6E8"/>
+        <line x1="1080" y1="62" x2="1150" y2="75" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="1150" y1="75" x2="1230" y2="66" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+      </g>
+    </svg>
+
+    <!-- Layer 3: Deep Cosmos Horizon with 4-Point Sparkle Stars -->
+    <svg class="horizon-layer horizon-layer-3" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#071932"/>
+          <stop offset="50%" stop-color="#0B2545"/>
+          <stop offset="100%" stop-color="#051428"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,86 C280,48 540,105 800,62 C1060,28 1280,95 1440,72 L1440,130 L0,130 Z" fill="url(#grad-sky-3)"/>
+
+      <!-- 4-Point Sparkles (Bintang Berkilau) -->
+      <g class="h-sparkle" transform="translate(110, 92) scale(0.18)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+      <g class="h-sparkle" transform="translate(390, 84) scale(0.14)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+      </g>
+      <g class="h-sparkle" transform="translate(710, 72) scale(0.22)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+      <g class="h-sparkle" transform="translate(980, 65) scale(0.16)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+      </g>
+      <g class="h-sparkle" transform="translate(1260, 82) scale(0.18)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+
+      <!-- Deep Cosmos Stardust & Nodes -->
+      <circle cx="50" cy="102" r="2" fill="#A9C6E8"/>
+      <circle cx="210" cy="98" r="2.5" fill="#ffffff"/>
+      <circle cx="490" cy="92" r="2.2" fill="#ffffff"/>
+      <circle cx="580" cy="85" r="2.8" fill="#ffffff"/>
+      <circle cx="860" cy="78" r="2.4" fill="#ffffff"/>
+      <circle cx="1120" cy="88" r="2.6" fill="#ffffff"/>
+      <circle cx="1360" cy="95" r="2.2" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ KARYA PILIHAN ============ -->
+<section class="works" id="karya">
+  <div class="sunburst" aria-hidden="true"></div>
+  <div class="works-head">
+    <h2 class="works-title">
+      <span class="upright">Karya</span><br>
+      <span class="accent-italic-light">Pilihan</span>
+    </h2>
+    <div class="receipt">
+      <div class="receipt-header-row">
+        <span class="mono">INDEX #0026</span>
+        <span class="celestial-sparkle">✦</span>
+      </div>
+      <p class="receipt-title"><em>Observatorium</em></p>
+      <p class="mono receipt-order">Daftar Proyek &amp; Sistem · 2026</p>
+      <ul class="mono receipt-list">
+        <li><span>01&nbsp;&nbsp;JurnalKu (AI Web)</span><span>2026</span></li>
+        <li><span>02&nbsp;&nbsp;MariMatcha Shop</span><span>2026</span></li>
+        <li><span>03&nbsp;&nbsp;TiaraFinn (RT/RW)</span><span>2026</span></li>
+        <li><span>04&nbsp;&nbsp;SiAbsensi Desktop</span><span>2026</span></li>
+        <li><span>05&nbsp;&nbsp;OursContent System</span><span>2026</span></li>
+        <li><span>06&nbsp;&nbsp;Mobilku.id Auto</span><span>2026</span></li>
+      </ul>
+      <p class="mono receipt-total"><span>Total Sistem</span><span>6</span></p>
+    </div>
+  </div>
+
+  <!-- STACKING CARDS WRAPPER FOR GSAP SCROLLTRIGGER -->
+  <div class="cards-stack-wrapper" id="cardsStackWrapper">
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="jurnalku" data-index="0">
+        <div class="card-content">
+          <p class="mono card-no">No.01 / 06 — AI &amp; E-Learning — 2026</p>
+          <h3 class="card-title">JurnalKu <em>AI</em></h3>
+          <p class="card-desc">Platform riset akademik berbasis AI untuk menemukan, mengelola, dan menganalisis jurnal ilmiah secara cerdas dengan Next.js, Python, dan Supabase.</p>
+          <div class="card-tech mono">Next.js · React · Python · Supabase</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="jurnalku">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-jurnalku.png" alt="JurnalKu AI Platform">
+          </div>
+          <figcaption class="mono">JurnalKu · AI Research 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="marimatcha" data-index="1">
+        <div class="card-content">
+          <p class="mono card-no">No.02 / 06 — Ecommerce Web — 2026</p>
+          <h3 class="card-title">Mari<em>Matcha</em></h3>
+          <p class="card-desc">Platform e-commerce modern produk minuman matcha artisan dengan UI segar, keranjang belanja interaktif, serta manajemen pesanan terintegrasi.</p>
+          <div class="card-tech mono">Web Dev · UI/UX · MySQL · Laravel</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="marimatcha">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-marimatcha.png" alt="MariMatcha Ecommerce">
+          </div>
+          <figcaption class="mono">MariMatcha · Ecommerce 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="tiarafinn" data-index="2">
+        <div class="card-content">
+          <p class="mono card-no">No.03 / 06 — Mobile Application — 2026</p>
+          <h3 class="card-title">Tiara<em>Finn</em></h3>
+          <p class="card-desc">Aplikasi mobile cerdas pengelolaan iuran warga RT/RW berbasis Flutter &amp; Supabase untuk transparansi kas, tagihan digital, dan rekapitulasi real-time.</p>
+          <div class="card-tech mono">Flutter · Dart · Firebase · Supabase</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="tiarafinn">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-tiarafinn.png" alt="TiaraFinn Mobile App">
+          </div>
+          <figcaption class="mono">TiaraFinn · Mobile RT/RW 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="siabsensi" data-index="3">
+        <div class="card-content">
+          <p class="mono card-no">No.04 / 06 — Desktop System — 2026</p>
+          <h3 class="card-title">Si<em>Absensi</em></h3>
+          <p class="card-desc">Sistem absensi dan administrasi pegawai desktop yang mempermudah pencatatan kehadiran presisi, slip gaji, dan pelaporan otomatis perusahaan.</p>
+          <div class="card-tech mono">Java · PostgreSQL · Java Swing</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="siabsensi">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-siabsensi.png" alt="SiAbsensi Karyawan">
+          </div>
+          <figcaption class="mono">SiAbsensi · Desktop App 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="ourscontent" data-index="4">
+        <div class="card-content">
+          <p class="mono card-no">No.05 / 06 — Creator Platform — 2026</p>
+          <h3 class="card-title">Ours<em>Content</em></h3>
+          <p class="card-desc">Sistem manajemen konten digital marketing untuk scheduling kampanye, monitoring analitik performa reach, serta laporan otomatis tim kreatif.</p>
+          <div class="card-tech mono">Java · PostgreSQL · JasperReports</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="ourscontent">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-ourscontent.png" alt="OursContent Management">
+          </div>
+          <figcaption class="mono">OursContent · Analytics 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="mobilku" data-index="5">
+        <div class="card-content">
+          <p class="mono card-no">No.06 / 06 — Dealership System — 2026</p>
+          <h3 class="card-title">Mobilku<em>.id</em></h3>
+          <p class="card-desc">Sistem informasi jual beli mobil bekas terintegrasi untuk katalog kendaraan interaktif, administrasi transaksi jual-beli, dan CRM dealer.</p>
+          <div class="card-tech mono">Web Platform · PostgreSQL · UI/UX</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="mobilku">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="assets/p-mobilku.png" alt="Mobilku.id">
+          </div>
+          <figcaption class="mono">Mobilku.id · Auto Sales 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mobile UI/UX <i>✦</i></span>
+    <span class="it">Figma Design System <i>✦</i></span>
+    <span>Flutter App <i>✦</i></span>
+    <span class="it">Next.js &amp; React <i>✦</i></span>
+    <span>PostgreSQL &amp; MySQL <i>✦</i></span>
+    <span class="it">Interactive Prototyping <i>✦</i></span>
+    <span>Python &amp; Java <i>✦</i></span>
+    <span class="it">Design to Code <i>✦</i></span>
+    <span>Mobile UI/UX <i>✦</i></span>
+    <span class="it">Figma Design System <i>✦</i></span>
+    <span>Flutter App <i>✦</i></span>
+    <span class="it">Next.js &amp; React <i>✦</i></span>
+    <span>PostgreSQL &amp; MySQL <i>✦</i></span>
+    <span class="it">Interactive Prototyping <i>✦</i></span>
+    <span>Python &amp; Java <i>✦</i></span>
+    <span class="it">Design to Code <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ============ PROSES ============ -->
+<section class="process" id="proses">
+  <div class="process-header">
+    <p class="mono label light">Metodologi &amp; Alur Kerja</p>
+    <h2 class="process-title">Cara Saya Membangun Produk</h2>
+  </div>
+  <div class="process-cards">
+    <article class="p-card p-blue">
+      <p class="p-num">01</p>
+      <h3>Riset &amp; Empathize</h3>
+      <p>Menggali kebutuhan pengguna, menganalisa alur operasional, dan merumuskan arsitektur informasi sebelum mendesain.</p>
+    </article>
+    <article class="p-card p-ivory">
+      <p class="p-num">02</p>
+      <h3>Wireframe &amp; Prototyping</h3>
+      <p>Membangun rancangan wireframe cepat, eksplorasi antarmuka, dan prototype interaktif menggunakan Figma yang presisi.</p>
+    </article>
+    <article class="p-card p-blue">
+      <p class="p-num">03</p>
+      <h3>Design System &amp; Coding</h3>
+      <p>Menerjemahkan design system ke kode bersih (Clean Architecture) menggunakan Next.js, Flutter, atau Java.</p>
+    </article>
+    <article class="p-card p-ivory">
+      <p class="p-num">04</p>
+      <h3>Testing &amp; Delivery</h3>
+      <p>Pengujian fungsionalitas, integrasi API &amp; database, optimalisasi performa, serta serah terima sistem siap pakai.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TENTANG ============ -->
+<section class="about" id="tentang">
+  <p class="mono label">Tentang Saya</p>
+  <div class="about-grid">
+    <div>
+      <p class="about-text" id="aboutText">
+        Halo, saya Fikri Bintang Purnomo. Bagi saya, desain antarmuka dan baris kode bukan sekadar tampilan digital, melainkan jembatan yang menghubungkan kebutuhan manusia dengan solusi teknologi yang intuitif. Saya berfokus pada Mobile UI/UX, Web Development, dan rekayasa perangkat lunak modern.
+      </p>
+
+      <div class="about-journey">
+        <h4 class="mono about-subhead">Riwayat Pendidikan &amp; Magang</h4>
+        <ul class="journey-list">
+          <li>
+            <strong>PT Wahanaartha Ritelindo</strong>
+            <span class="mono">UI/UX Engineer &amp; Fullstack Dev (Intern) · 2026 - Sekarang</span>
+            <p>Mendevelop sistem internal, website, mobile apps, dan merancang design system.</p>
+          </li>
+          <li>
+            <strong>Global Institute of Technology &amp; Business</strong>
+            <span class="mono">Sistem Informasi / Teknik Informatika (IPK 3.34) · 2023 - 2028</span>
+            <p>Aktif dalam riset teknologi terapan, prototyping digital, dan organisasi kampus.</p>
+          </li>
+          <li>
+            <strong>SMK Bina Am Ma'mur</strong>
+            <span class="mono">Pendidikan Menengah Kejuruan · 2020 - 2023</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="about-imgs">
+      <figure class="sticker sticker-portrait">
+        <img src="assets/foto-mirror.jpg" alt="Fikri Bintang Selfie Mirror">
+        <figcaption class="mono">Fikri Bintang · Studio</figcaption>
+      </figure>
+      <figure class="sticker sticker-work">
+        <img src="assets/exp-wahanaartha.png" alt="Workspace Magang PT Wahanaartha Ritelindo">
+        <figcaption class="mono">Wahanaartha Ritelindo · 2026</figcaption>
+      </figure>
+      <p class="mono caption">Tangerang, Banten · Indonesia</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><p class="stat-num">3.34</p><p class="mono">Indeks Prestasi Kumulatif</p></div>
+    <div class="stat"><p class="stat-num">6+</p><p class="mono">Proyek Terverifikasi</p></div>
+    <div class="stat"><p class="stat-num">4+</p><p class="mono">Pengalaman Kerja &amp; Magang</p></div>
+  </div>
+</section>
+
+<!-- ============ KONTAK / TIKET ============ -->
+<section class="contact" id="kontak">
+  <p class="mono label">Tiket Kolaborasi</p>
+  <p class="contact-sub">Siap berkolaborasi untuk proyek baru.<br>Respon cepat dalam 1×24 jam.</p>
+  <p class="mono ticket-kicker">Tiket Masuk Kolaborasi · Tiket #0001</p>
+  <h2 class="contact-title">Punya proyek aplikasi atau web?<br><span class="hl">Mari kita wujudkan bersama.</span></h2>
+  <div class="chips mono">
+    <span>Mobile UI/UX</span>
+    <span>Figma Design System</span>
+    <span>Next.js Web</span>
+    <span>Flutter Mobile</span>
+    <span>Fullstack Integration</span>
+  </div>
+
+  <div class="ticket">
+    <div class="ticket-photo">
+      <img src="assets/foto-mask.jpg" alt="Fikri Bintang Purnomo">
+      <p class="mono">Fikri Bintang — Tangerang</p>
+    </div>
+    <div class="ticket-main">
+      <p class="mono ticket-row"><span>Kandidat</span><strong>Fikri Bintang P.</strong></p>
+      <p class="ticket-note">Terbuka untuk posisi Mobile &amp; Web UI/UX Engineer, Fullstack Dev, maupun proyek freelance aplikasi &amp; web modern.</p>
+      <div class="ticket-links mono">
+        <a href="mailto:fikribn123@gmail.com">✉ fikribn123@gmail.com</a>
+        <a href="https://wa.me/6281292870932" target="_blank" rel="noopener">☏ +62 812-9287-0932</a>
+        <a href="assets/porto-fikri-bintang.pdf" target="_blank" rel="noopener">📄 Portfolio PDF (Canva) ↗</a>
+      </div>
+      <p class="mono ticket-date"><span>19.10</span><span>2026</span></p>
+    </div>
+    <div class="ticket-stub">
+      <div class="barcode" aria-hidden="true"></div>
+      <p class="stub-name">FIKRI BINTANG</p>
+      <p class="mono">BOARDING PASS</p>
+      <p class="mono stub-date"><span>2026</span><span>EXP</span></p>
+      <p class="mono stub-code">#FIKRI2026UIUX</p>
+      <a class="btn-navy mono" href="https://wa.me/6281292870932" target="_blank" rel="noopener">WhatsApp Langsung →</a>
+    </div>
+  </div>
+  <p class="contact-mail">Atau kirim surel ke <a href="mailto:fikribn123@gmail.com">fikribn123@gmail.com</a></p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="zigzag" aria-hidden="true"></div>
+  <p class="mono label light">Terima kasih sudah berkunjung</p>
+  <p class="footer-desc">Mobile &amp; Web UI/UX Engineer serta Fullstack Developer dari Indonesia. Mendesain dan membangun produk digital yang rapi, elegan, berkinerja tinggi, dan berdampak nyata bagi pengguna.</p>
+  <div class="footer-cols">
+    <div>
+      <p class="mono flabel">Jejaring</p>
+      <ul class="mono flinks">
+        <li><a href="https://github.com/FikriBintangx" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="https://instagram.com/87nvlion" target="_blank" rel="noopener">Instagram (@87nvlion) ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="mono flabel">Kontak</p>
+      <a class="mono fmail" href="mailto:fikribn123@gmail.com">fikribn123@gmail.com</a>
+      <p class="mono fphone">+62 812-9287-0932</p>
+      <p class="mono faddr">Cikupa, Kab. Tangerang, Banten</p>
+    </div>
+    <div>
+      <p class="mono flabel">Berkas</p>
+      <ul class="mono flinks">
+        <li><a href="assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf">Unduh CV (PDF) ↓</a></li>
+        <li><a href="assets/porto-fikri-bintang.pdf" target="_blank" rel="noopener">Unduh Portofolio (PDF) ↗</a></li>
+      </ul>
+      <a href="#top" class="mono pill pill-light" id="toTop" style="margin-top: 1.5rem;">Ke Atas <span>↑</span></a>
+    </div>
+  </div>
+  <p class="footer-giant">Fikri Bintang</p>
+  <div class="footer-base mono">
+    <span>© 2026 Fikri Bintang Purnomo. All rights reserved.</span>
+    <span>Dibuat di Indonesia</span>
+  </div>
+</footer>
+
+<!-- ============ PROJECT DETAIL MODAL ============ -->
+<div class="project-modal" id="projectModal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup Detail">
+      <span>✕</span>
+      <span class="mono">TUTUP</span>
+    </button>
+    <div class="modal-scroll-body">
+      <div class="modal-header">
+        <div class="modal-meta mono">
+          <span class="modal-cat" id="modalCategory">Category</span>
+          <span class="modal-dot">·</span>
+          <span class="modal-year" id="modalYear">2026</span>
+          <span class="modal-dot">·</span>
+          <span class="modal-role" id="modalRole">Role</span>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        <p class="modal-tagline" id="modalTagline">Project Tagline</p>
+      </div>
+
+      <div class="modal-preview-wrapper">
+        <img class="modal-image" id="modalImage" src="assets/p-jurnalku.png" alt="Project Preview">
+      </div>
+
+      <div class="modal-content-grid">
+        <div class="modal-main-col">
+          <div class="modal-section">
+            <h4 class="mono modal-section-title">01 / Ringkasan Proyek</h4>
+            <p class="modal-text" id="modalOverview"></p>
+          </div>
+
+          <div class="modal-problem-solution">
+            <div class="modal-box modal-problem">
+              <h5 class="mono">Tantangan &amp; Kebutuhan</h5>
+              <p id="modalProblem"></p>
+            </div>
+            <div class="modal-box modal-solution">
+              <h5 class="mono">Solusi Rekayasa Digital</h5>
+              <p id="modalSolution"></p>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="mono modal-section-title">02 / Fitur Utama &amp; Arsitektur</h4>
+            <ul class="modal-feature-list" id="modalFeatures"></ul>
+          </div>
+        </div>
+
+        <div class="modal-side-col">
+          <div class="modal-side-card">
+            <h5 class="mono">Tech Stack &amp; Tools</h5>
+            <div class="modal-stack-pills mono" id="modalStack"></div>
+          </div>
+
+          <div class="modal-side-card modal-cta-card">
+            <h5 class="mono">Tertarik dengan Sistem Ini?</h5>
+            <p>Mari diskusikan implementasi produk digital serupa untuk bisnis atau proyek Anda.</p>
+            <a href="#kontak" class="btn-navy mono modal-cta-btn" id="modalContactBtn">Hubungi Fikri →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>

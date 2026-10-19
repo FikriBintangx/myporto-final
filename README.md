@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# Portfolio — Rafi Ahmad Alfarissi
 
-```sh
-npm create astro@latest -- --template minimal
+Rebuild dari https://rafiahmadalfarissi.vercel.app/ (source code asli hilang).
+Situs statis: HTML + CSS + JS murni, tanpa build step.
+
+## Isi folder
+
+- `index.html` — struktur semua section
+- `styles.css` — seluruh styling
+- `script.js` — loader, animasi, interaksi
+- `assets/` — 4 gambar halftone/duotone (diambil dari site asli)
+
+## Cara jalanin lokal
+
+```bash
+cd portfolio-rafi
+python3 -m http.server 8000
+# buka http://localhost:8000
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Atau langsung double-click `index.html` (font Google butuh internet).
 
-## 🚀 Project Structure
+## Deploy ke Vercel
 
-Inside of your Astro project, you'll see the following folders and files:
+1. Push folder ini ke repo GitHub baru
+2. Di Vercel: Add New Project → import repo → Deploy (tanpa setting tambahan)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Catatan
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Font (Playfair Display, Space Mono, Inter) dimuat dari Google Fonts — butuh internet saat dibuka.
+- Warna & teks disalin dari site asli; ilustrasi kapal/topi/awan digambar ulang sebagai SVG.
