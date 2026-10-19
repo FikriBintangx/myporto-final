@@ -1216,14 +1216,13 @@ section {
 .career-col-head {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-bottom: 1.1rem;
+  gap: 1.1rem;
+  padding-bottom: 1.2rem;
   border-bottom: 2px solid rgba(11, 37, 69, 0.15);
+  cursor: default;
 }
 
 .career-icon {
-  font-size: 1.8rem;
-  background: #ffffff;
   width: 52px;
   height: 52px;
   display: flex;
@@ -1233,6 +1232,68 @@ section {
   box-shadow: 0 4px 14px rgba(11, 37, 69, 0.08);
   border: 1px solid rgba(11, 37, 69, 0.12);
   flex-shrink: 0;
+  color: var(--navy);
+  background: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.career-col-head:hover .career-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(46, 107, 196, 0.18);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* Lucide Animated Graduation Cap */
+.cap-group {
+  transform-origin: 12px 12px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.tassel-path {
+  transform-origin: 22px 10px;
+  transition: transform 0.7s ease-in-out;
+}
+
+.career-col-head:hover .cap-group {
+  animation: capBounce 0.8s ease-in-out forwards;
+}
+
+.career-col-head:hover .tassel-path {
+  animation: tasselSwing 0.9s ease-in-out forwards;
+}
+
+@keyframes capBounce {
+  0% { transform: translateY(0) rotate(0deg); }
+  35% { transform: translateY(-3px) rotate(6deg); }
+  65% { transform: translateY(0) rotate(-2deg); }
+  82% { transform: translateY(-1px) rotate(0deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes tasselSwing {
+  0% { transform: rotate(0deg); }
+  35% { transform: rotate(18deg); }
+  65% { transform: rotate(-6deg); }
+  85% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Lucide Animated Briefcase */
+.case-group {
+  transform-origin: 12px 3px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.career-col-head:hover .case-group {
+  animation: caseSwing 0.7s ease-in-out forwards;
+}
+
+@keyframes caseSwing {
+  0% { transform: translateY(0) rotate(0deg); }
+  35% { transform: translateY(-1px) rotate(-6deg); }
+  70% { transform: translateY(0) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 .career-col-title {
