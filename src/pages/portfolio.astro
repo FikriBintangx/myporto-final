@@ -1,756 +1,639 @@
 ---
-import '../styles/global.css';
-import CardNav from '../components/CardNav.jsx';
-import showcaseData from '../data/showcase.json';
-import projectsData from '../data/projects.json';
-
-const projectList = Object.values(projectsData);
+// Fikri Bintang Purnomo — Celestial & Space Portfolio
 ---
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fikri Bintang Purnomo — Portfolio</title>
-    <meta name="description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
-    <meta name="author" content="Fikri Bintang Purnomo">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://fikribintang.web.id/portfolio">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fikri Bintang Purnomo | Mobile &amp; Web UI/UX Engineer</title>
+<meta name="description" content="Portfolio 2026 Fikri Bintang Purnomo — Mobile & Web UI/UX Engineer, Fullstack Developer dari Indonesia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/portfolio-assets/styles.css">
 
-    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Fikri Bintang Purnomo">
-    <meta property="og:url" content="https://fikribintang.web.id/portfolio">
-    <meta property="og:title" content="Fikri Bintang Purnomo — Portfolio">
-    <meta property="og:description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
-    <meta property="og:image" content="https://fikribintang.web.id/images/logo.jpg">
-
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://fikribintang.web.id/">
-    <meta name="twitter:title" content="Fikri Bintang Purnomo — Portfolio">
-    <meta name="twitter:description" content="Portfolio of Fikri Bintang Purnomo — Software Engineer specializing in mobile (Flutter) and web development.">
-    <meta name="twitter:image" content="https://fikribintang.web.id/images/logo.jpg">
-
-    <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-    <link rel="apple-touch-icon" href="/images/logo.jpg">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,900&family=Inter:wght@400;700;900&display=swap"
-        rel="stylesheet">
+<!-- GSAP + ScrollTrigger + Lenis for ultra-smooth scrolling -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
+<body>
 
-<body class="theme-dark">
-    <!-- Sticky CardNav Header (ReactBits CardNav) -->
-    <CardNav
-        client:load
-        logo="/images/logo.jpg"
-        logoAlt="Fikri Bintang Purnomo"
-        baseColor="rgba(8, 10, 18, 0.65)"
-        menuColor="#F0F4FC"
-        buttonBgColor="#F0F4FC"
-        buttonTextColor="#05060C"
-        ctaLabel="HUBUNGI SAYA"
-        ctaHref="#contact"
-        items={[
-            {
-                label: 'Tentang',
-                bgColor: '#10141F',
-                textColor: '#F0F4FC',
-                links: [
-                    { label: 'Tentang Saya', href: '#about', ariaLabel: 'Tentang Saya' },
-                    { label: 'Keahlian', href: '#skills', ariaLabel: 'Keahlian' },
-                    { label: 'Pengalaman', href: '#experience', ariaLabel: 'Pengalaman' }
-                ]
-            },
-            {
-                label: 'Proyek',
-                bgColor: '#161B28',
-                textColor: '#F0F4FC',
-                links: [
-                    { label: 'Proyek Unggulan', href: '#projects', ariaLabel: 'Proyek Unggulan' },
-                    { label: 'Studi Kasus', href: '#projects', ariaLabel: 'Studi Kasus' }
-                ]
-            },
-            {
-                label: 'Kontak',
-                bgColor: '#161B28',
-                textColor: '#F0F4FC',
-                links: [
-                    { label: 'Email', href: 'mailto:hello@fikribintang.web.id', ariaLabel: 'Email' },
-                    { label: 'LinkedIn', href: 'https://linkedin.com/in/fikribintang', ariaLabel: 'LinkedIn' },
-                    { label: 'GitHub', href: 'https://github.com/FikriBintangx', ariaLabel: 'GitHub' }
-                ]
-            }
-        ]}
-    />
-
-    <!-- Background Image with Opacity -->
-    <div class="bg-image"></div>
-
-    <!-- Texture Overlay -->
-    <div class="texture-overlay"></div>
-
-        <div class="nous-portal-layout">
-                <!-- LEFT SIDEBAR (Navigation & Branding) -->
-        <aside class="nous-sidebar-left desktop-only">
-            <!-- BRANDING -->
-            <div class="sidebar-brand" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 36px; height: 36px; border-radius: 0px; background: var(--text-primary); display: flex; align-items: center; justify-content: center; color: var(--bg-canvas);">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                    </div>
-                    <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
-                        <h1 style="font-size: 20px; font-weight: 800; font-family: var(--font-sans); letter-spacing: -0.02em; margin: 0; color: var(--text-primary);">PORTOFOLIO</h1>
-                        <div style="font-size: 12px; color: var(--text-secondary); font-family: var(--font-mono); margin-top: 2px;">FIKRI BINTANG P.</div>
-                    </div>
-                </div>
-                <button id="toggle-left-sidebar" title="Hide/Minimize Sidebar" class="sidebar-collapse-btn">
-                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
-                </button>
-            </div>
-            
-            <!-- MAIN CTA -->
-            <a href="/CV.pdf" target="_blank" class="nous-cta-btn" style="display: flex; justify-content: center; align-items: center; gap: 8px; border-radius: 0px; padding: 12px; margin-bottom: 24px; margin-top: 0; width: 100%; font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em;">
-                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                DOWNLOAD FULL CV
-            </a>
-            
-            <!-- MENU 1 -->
-            <div class="sidebar-section" style="margin-bottom: 24px;">
-                <div class="sidebar-heading" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 12px;">EXPLORE</div>
-                <nav class="sidebar-nav">
-                    <a href="#home" class="nav-link nous-nav-link active"><span class="nous-nav-bullet">⊞</span> <span class="nous-nav-label" data-translate="nav-home">BERANDA</span></a>
-                    <a href="#about" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⑂</span> <span class="nous-nav-label" data-translate="nav-about">TENTANG SAYA</span></a>
-                    <a href="#projects" class="nav-link nous-nav-link"><span class="nous-nav-bullet">❖</span> <span class="nous-nav-label" data-translate="nav-projects">PROYEK & KARYA</span></a>
-                    <a href="#skills" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⚙</span> <span class="nous-nav-label" data-translate="nav-skills">KEAHLIAN TEKNIS</span></a>
-                    <a href="#location" class="nav-link nous-nav-link"><span class="nous-nav-bullet">⎋</span> <span class="nous-nav-label" data-translate="location-header">LOKASI & GLOBE</span></a>
-                </nav>
-            </div>
-
-            <!-- MENU 2 -->
-            <div class="sidebar-section">
-                <div class="sidebar-heading" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 12px;">RESOURCES</div>
-                <nav class="sidebar-nav">
-                    <a href="https://github.com/FikriBintangx" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">⟨⟩</span> <span class="nous-nav-label">GITHUB PROFILE</span></a>
-                    <a href="https://instagram.com/biru.css" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">◇</span> <span class="nous-nav-label">INSTAGRAM</span></a>
-                    <a href="mailto:fikbintang01@gmail.com" class="nous-nav-link"><span class="nous-nav-bullet">✉</span> <span class="nous-nav-label">EMAIL CONTACT</span></a>
-                    <a href="Porto Bintang.pdf" target="_blank" class="nous-nav-link"><span class="nous-nav-bullet">📄</span> <span class="nous-nav-label">PRINT PORTOFOLIO</span></a>
-                </nav>
-            </div>
-
-            <div class="sidebar-footer" style="margin-top: auto; padding-top: 16px; border-top: 1px dotted var(--border-dotted);">
-                <div style="display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-family: var(--font-mono); font-size: 12.5px; font-weight: 700;">
-                    <span class="pulse-dot" style="background-color: var(--accent-cyan); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); width: 7px; height: 7px;"></span> AVAILABLE FOR HIRE
-                </div>
-            </div>
-        </aside>
-
-        <!-- MAIN CENTER CONTENT -->
-                <main class="nous-main-content container">
-            <!-- OVERVIEW LABEL -->
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; margin-bottom: 12px; letter-spacing: 0.1em;">// DEVELOPER WORKSPACE</div>
-            <!-- Mobile Header (Visible only on <1024px) -->
-            <header class="mobile-top-header mobile-only">
-                <div class="header-logo">
-                    <a href="#home">
-                        <h1 class="logo-font" style="font-size: 1.2rem; margin: 0; line-height: 1;">PORTOFOLIO</h1>
-                        <div class="brand-subtitle" style="font-size: 0.6rem; opacity: 0.7; letter-spacing: 0.1em;">// FIKRI BINTANG</div>
-                    </a>
-                </div>
-                <div class="mobile-top-actions">
-                    <a href="https://github.com/FikriBintangx" target="_blank" class="nav-link github-icon" title="GitHub" style="color: var(--text-primary);">
-                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                </div>
-            </header>
-
-        <!-- Hero Section -->
-        <section id="home" class="hero-section" style="position: relative;">
-            
-            <!-- Draggable Assets -->
-            <div class="draggable-wrapper layout-right" style="top: 10vh; right: 2vw;">
-                <div class="drag-hint">
-                    <div class="arrow">----------------&gt;</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-                <img src="images/statue.png" class="draggable-asset" alt="Draggable Statue">
-            </div>
-
-            <div class="draggable-wrapper layout-left" style="top: 15vh; left: 2vw;">
-                <img src="images/asset1.png" class="draggable-asset" alt="Phone Statue">
-                <div class="drag-hint">
-                    <div class="arrow">&lt;----------------</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-            </div>
-
-            <div class="draggable-wrapper layout-left" style="top: 75vh; left: 5vw;">
-                <img src="images/asset2.png" class="draggable-asset" alt="Pointing Statue">
-                <div class="drag-hint">
-                    <div class="arrow">&lt;----------------</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-            </div>
-
-            <div class="draggable-wrapper layout-right" style="top: 75vh; right: 5vw;">
-                <div class="drag-hint">
-                    <div class="arrow">----------------&gt;</div>
-                    <div class="text">drag &amp; drop</div>
-                </div>
-                <img src="images/asset3.png" class="draggable-asset" alt="Chess Piece">
-            </div>
-
-            <div class="hero-content">
-                <span class="badge" data-translate="hero-badge">FULL STACK & SOFTWARE DEVELOPER</span>
-                <h2 class="hero-title scramble">FIKRI BINTANG PURNOMO</h2>
-                <p class="hero-description" data-translate="hero-desc">
-                    Building scalable web systems, robust backend architectures, and modern digital applications.<br>
-                    Informatics Engineering student focused on software craftsmanship and interactive UI.
-                </p>
-                <div class="hero-ctas">
-                    <a href="#projects" class="cta-button primary" data-translate="btn-projects">[ View Projects ]</a>
-                    <a href="/CV.pdf" target="_blank" class="cta-button secondary" data-translate="btn-cv">[ Download CV ]</a>
-                    <a href="mailto:fikbintang01@gmail.com" class="cta-button secondary" data-translate="btn-contact">[ Let's Talk ]</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Terminal / About Section -->
-        <section id="about" class="grid-section reveal">
-            <div class="section-header col-border-right col-span-1">
-                <h3 data-translate="about-header">SEE IT IN ACTION</h3>
-            </div>
-            <div class="terminal-container col-span-3">
-                <div class="terminal-window">
-                    <div class="terminal-header">
-                        <div class="dots">
-                            <span class="dot dot-close" id="term-dot-close" title="Tutup / Minimize"></span>
-                            <span class="dot dot-min" id="term-dot-min" title="Minimize"></span>
-                            <span class="dot dot-max" id="term-dot-max" title="Fokus / Expand Terminal"></span>
-                        </div>
-                        <div class="terminal-tabs">
-                            <button class="terminal-tab active" data-mode="intro" data-translate="term-tab-intro">INTRO</button>
-                            <button class="terminal-tab" data-mode="qa" data-translate="term-tab-qa">Q&A CLI</button>
-                            <button class="terminal-tab" data-mode="activity" data-translate="term-tab-activity">ACTIVITY</button>
-                        </div>
-                        <div class="terminal-header-controls">
-                            <button class="terminal-expand-btn" id="term-expand-btn" title="Expand / Mode Fokus">
-                                <span class="expand-icon">⛶</span>
-                                <span class="expand-text">[ FOKUS ]</span>
-                            </button>
-                            <span class="terminal-title" data-translate="terminal-title">ABOUT ME</span>
-                        </div>
-                    </div>
-                    <div class="terminal-body" id="terminal-body-intro">
-                        <p class="terminal-system-text">> Executing profile fetch...</p>
-                        <br>
-                        <p class="typewriter-text" id="typewriter"></p>
-                    </div>
-                    <div class="terminal-body" id="terminal-body-qa" style="display: none;">
-                        <div class="terminal-history" id="terminal-history">
-                            <p class="terminal-system-text" data-translate="qa-welcome">Welcome to Fikri's Q&A CLI. Type your question or click a suggestion below! Type 'help' for commands.</p>
-                        </div>
-                        <div class="terminal-suggestions" id="terminal-suggestions">
-                            <!-- Dynamic suggestion tags will be rendered here -->
-                        </div>
-                        <div class="terminal-input-line">
-                            <span class="terminal-prompt">guest@fikribintang:~$</span>
-                            <input type="text" id="terminal-input" autocomplete="off" placeholder="Type a question or 'help'..." data-translate-placeholder="qa-input-placeholder">
-                        </div>
-                    </div>
-                    <!-- Activity / Heatmap Tab -->
-                    <div class="terminal-body" id="terminal-body-activity" style="display: none;">
-                        <p class="terminal-system-text" style="margin-bottom: 1rem;" data-translate="activity-desc">> Fetching GitHub contribution history...</p>
-                        <div class="heatmap-wrapper">
-                            <div class="heatmap-header">
-                                <div class="heatmap-header-left">
-                                    <span class="heatmap-title" data-translate="activity-title">CONTRIBUTIONS</span>
-                                    <div class="heatmap-stats">
-                                        <span class="stat-item"><span class="highlight" id="total-contributions-text">0</span> <span data-translate="activity-contribs">Contributions</span></span>
-                                    </div>
-                                </div>
-                                <div class="heatmap-actions">
-                                    <select id="heatmap-year-filter" style="background: var(--bg-color); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.2rem 0.5rem; font-family: var(--font-mono); font-size: 0.8rem; cursor: pointer; outline: none;">
-                                        <option value="">Last Year</option>
-                                        <option value="2026">2026</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2023">2023</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="heatmap-scroll">
-                                <div class="heatmap-grid" id="heatmap-grid">
-                                    <!-- Squares will be generated by JS -->
-                                </div>
-                            </div>
-                            <div class="heatmap-legend">
-                                <span data-translate="activity-less">Less</span>
-                                <div class="legend-squares">
-                                    <div class="heatmap-square" data-level="0"></div>
-                                    <div class="heatmap-square" data-level="1"></div>
-                                    <div class="heatmap-square" data-level="2"></div>
-                                    <div class="heatmap-square" data-level="3"></div>
-                                    <div class="heatmap-square" data-level="4"></div>
-                                </div>
-                                <span data-translate="activity-more">More</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="grid-section projects-section reveal" style="overflow: hidden;">
-            <div class="section-header col-border-right col-span-1">
-                <h3 data-translate="projects-header">PROJECTS</h3>
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" title="Previous Project">&lt;</button>
-                    <button class="slider-btn next-btn" title="Next Project">&gt;</button>
-                </div>
-            </div>
-            <div class="projects-slider-container col-span-3">
-                <div class="projects-track">
-                    {projectList.map((proj, idx) => (
-                        <div class="project-card" data-project={proj.id}>
-                            <div class="glitch-wrapper">
-                                <div class="scanlines"></div>
-                                <img
-                                    src={proj.cover}
-                                    alt={proj.title}
-                                    class="glitch-image"
-                                    loading="eager"
-                                    decoding="async"
-                                    onerror={`if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/uploads/project/${proj.id}.png';}`}
-                                />
-                            </div>
-                            <h4>{proj.title}</h4>
-                            <p class="project-card-desc" data-translate={`proj-${idx + 1}-desc`}>
-                                {proj.shortDescId || proj.shortDescEn || ''}
-                            </p>
-                            <div class="project-tags">
-                                {(proj.tags || []).map((tag: string) => (
-                                    <span class="project-tag">{tag}</span>
-                                ))}
-                            </div>
-                            <a href={proj.link || '#'} target="_blank" rel="noopener noreferrer" class="project-btn" data-translate="btn-view-project">LIHAT PROYEK ↗</a>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills & Experience Section (Separated Stack & Timeline) -->
-        <section id="skills" class="grid-section feature-section reveal">
-            <div class="section-title-full">
-                <h3 data-translate="skills-header">SKILLS & EXPERIENCE</h3>
-            </div>
-            
-            <div class="skills-editorial-container">
-                <!-- Part 1: Technical Stack (Chips & Badges) -->
-                <div class="skills-block">
-                    <div class="block-header">
-                        <span class="block-kicker" data-translate="skills-tech-title">TECHNICAL STACK</span>
-                    </div>
-                    <div class="tech-stack-grid">
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-frontend-title">FRONTEND & MOBILE</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Flutter</span>
-                                <span class="tech-chip">Dart</span>
-                                <span class="tech-chip">JavaScript (ES6+)</span>
-                                <span class="tech-chip">HTML5 & CSS3</span>
-                                <span class="tech-chip">Responsive UI</span>
-                                <span class="tech-chip">Bootstrap</span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-backend-title">BACKEND & APIS</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Java</span>
-                                <span class="tech-chip">PHP</span>
-                                <span class="tech-chip">Node.js</span>
-                                <span class="tech-chip">CodeIgniter 3</span>
-                                <span class="tech-chip">RESTful APIs</span>
-                                <span class="tech-chip">OOP Patterns</span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-db-title">DATABASES & CLOUD</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">MySQL</span>
-                                <span class="tech-chip">PostgreSQL</span>
-                                <span class="tech-chip">MariaDB</span>
-                                <span class="tech-chip">Supabase</span>
-                                <span class="tech-chip">Vercel</span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-cat-title">
-                                <span class="cat-dot"></span>
-                                <h4 data-translate="skill-tools-title">TOOLS & ARCHITECTURE</h4>
-                            </div>
-                            <div class="tech-chips-wrap">
-                                <span class="tech-chip">Git & GitHub</span>
-                                <span class="tech-chip">Figma</span>
-                                <span class="tech-chip">FlatLaf UI</span>
-                                <span class="tech-chip">Postman</span>
-                                <span class="tech-chip">MVC Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Part 2: Work Experience (Professional Timeline) -->
-                <div class="experience-block">
-                    <div class="block-header">
-                        <span class="block-kicker" data-translate="skills-exp-title">WORK EXPERIENCE</span>
-                    </div>
-                    <div class="experience-timeline">
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2025 — PRESENT</span>
-                                    <span class="timeline-org">INDEPENDENT & FREELANCE</span>
-                                </div>
-                                <h4 class="timeline-job">Full-Stack & Mobile Developer</h4>
-                                <p class="timeline-text">
-                                    Architecting and building responsive web apps and cross-platform Flutter applications. Focused on sleek interactive UI, microservices, and AI-assisted workflows.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2024 — 2025</span>
-                                    <span class="timeline-org">WAHANA HONDA</span>
-                                </div>
-                                <h4 class="timeline-job">Software Engineering Intern</h4>
-                                <p class="timeline-text">
-                                    Developed backoffice admin systems and RESTful API endpoints using Node.js & Express. Maintained internal microservices for motorcycle dealership operations.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2024 — 2025</span>
-                                    <span class="timeline-org">RESTAURANT OPERATIONS</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job3-role">Customer Service & Operations</h4>
-                                <p class="timeline-text" data-translate="skill-job3-desc">
-                                    Assisted in food preparation, customer service satisfaction, and maintained high cleanliness standards.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                                <span class="rail-line"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2024 — 2025</span>
-                                    <span class="timeline-org">PT. SURYA SHUENN YUEHH</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job2-role">Machine Operator</h4>
-                                <p class="timeline-text" data-translate="skill-job2-desc">
-                                    Operated manufacturing machinery, ensured strict product quality thresholds, and maintained workplace safety.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-entry">
-                            <div class="timeline-rail">
-                                <span class="rail-marker"></span>
-                            </div>
-                            <div class="timeline-body">
-                                <div class="timeline-badge-group">
-                                    <span class="timeline-year">2022 — 2024</span>
-                                    <span class="timeline-org">ID EXPRESS</span>
-                                </div>
-                                <h4 class="timeline-job" data-translate="skill-job1-role">Delivery Administration Staff</h4>
-                                <p class="timeline-text" data-translate="skill-job1-desc">
-                                    Managed shipment routing records, tracking information, and monitored daily delivery operations.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Location / 3D Globe Section -->
-        <section id="location" class="grid-section feature-section reveal">
-            <div class="location-header-bar">
-                <h3 data-translate="location-header">LOCATION</h3>
-                <div class="location-header-line"></div>
-            </div>
-            <div class="globe-section-wrapper">
-                <!-- Left Column (Desktop) / Top Section (Mobile) -->
-                <div class="globe-typography-side">
-                    <div class="globe-status-pill">
-                        <span class="pulse-dot"></span>
-                        <span class="globe-status-text" data-translate="globe-live-status">LIVE BASE - GMT+7 (WIB)</span>
-                    </div>
-
-                    <h2 class="globe-massive-title">
-                        BASED IN<br>
-                        <span class="globe-city-highlight">TANGERANG,</span><br>
-                        INDONESIA
-                    </h2>
-
-                    <p class="globe-side-desc" data-translate="globe-desc">
-                        ENGINEERING DIGITAL EXPERIENCES, MOBILE APPLICATIONS, AND RESILIENT CLOUD SYSTEMS LOCALLY FROM TANGERANG, AVAILABLE FOR HIGH-IMPACT TEAMS AND CLIENTS WORLDWIDE.
-                    </p>
-
-                    <div class="globe-action-indicator">
-                        <span class="globe-action-icon">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
-                                <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
-                                <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
-                                <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
-                            </svg>
-                        </span>
-                        <span class="globe-drag-action desktop-action">[ DRAG TO ROTATE &bull; CLICK ITEM TO EXPAND ]</span>
-                        <span class="globe-drag-action mobile-action">[ DRAG TO ROTATE ]</span>
-                    </div>
-                </div>
-
-                <!-- Right Column (Desktop) / Middle Section (Mobile): 3D Globe & Orbits -->
-                <div class="globe-canvas-side">
-                    <div class="globe-canvas-container" id="globe-container">
-                        <!-- Trajectory Elliptical Orbits SVG -->
-                        <svg class="globe-orbits-svg" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Ellipse Orbit 1: Tilted left-down -->
-                            <ellipse cx="300" cy="300" rx="270" ry="125" transform="rotate(-26 300 300)" stroke="rgba(0, 82, 204, 0.32)" stroke-width="1.2" stroke-dasharray="4 3" />
-                            <!-- Ellipse Orbit 2: Tilted right-up -->
-                            <ellipse cx="300" cy="300" rx="280" ry="115" transform="rotate(18 300 300)" stroke="rgba(0, 82, 204, 0.25)" stroke-width="1.2" />
-                            
-                            <!-- Trajectory Orbital Waypoint Circles -->
-                            <circle cx="58" cy="360" r="4.5" fill="#0052cc" />
-                            <circle cx="318" cy="186" r="4" fill="#0052cc" />
-                            <circle cx="188" cy="246" r="4.5" fill="#0052cc" />
-                            <circle cx="395" cy="240" r="4.5" fill="#16a34a" />
-                            <circle cx="470" cy="365" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
-                            <circle cx="536" cy="372" r="4" fill="#0052cc" />
-                            <circle cx="448" cy="445" r="4.5" fill="#475569" />
-                            <circle cx="298" cy="486" r="4" fill="#0052cc" />
-                            <circle cx="185" cy="425" r="4.5" fill="#0052cc" />
-                        </svg>
-
-                        <!-- Geographic Blueprint Monospace Tags -->
-                        <span class="orbit-geo-tag tag-indian-ocean">INDIAN<br>OCEAN</span>
-                        <span class="orbit-geo-tag tag-asia">ASIA</span>
-                        <span class="orbit-geo-tag tag-pacific-ocean">PACIFIC<br>OCEAN</span>
-
-                        <!-- Interactive 3D Cobe Globe Canvas -->
-                        <canvas id="cobe-globe" class="cobe-canvas"></canvas>
-
-                        <!-- Dedicated Live Tangerang Pin -->
-                        <div class="tangerang-live-badge" id="tangerang-pin">
-                            <span class="tangerang-pin-circle">
-                                <span class="tangerang-pin-dot"></span>
-                            </span>
-                            <span class="tangerang-pin-text">TANGERANG</span>
-                        </div>
-
-                        <!-- Dynamic Polaroid Cards -->
-                        {showcaseData.items.map((item) => (
-                            <div
-                                class={`showcase-polaroid ${item.type === 'certificate' ? 'cert-polaroid' : 'project-polaroid'}`}
-                                data-anchor={item.id}
-                                data-project-slug={item.type === 'project' ? item.slug : undefined}
-                                data-cert-image={item.type === 'certificate' ? item.image : undefined}
-                                data-cert-title={item.type === 'certificate' ? item.title : undefined}
-                                data-rotate={item.rotation}
-                                title={`Klik untuk lihat detail ${item.title}`}
-                            >
-                                <img src={item.image} alt={item.title} loading="eager" />
-                                <span class="showcase-polaroid-caption">{item.title}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <!-- 2x2 Technical Metadata Grid (Desktop below text, Mobile below globe) -->
-                <div class="globe-meta-grid">
-                    <div class="globe-meta-box">
-                        <span class="meta-label">COORDINATES</span>
-                        <span class="meta-value">6.1783° S, 106.6319° E</span>
-                    </div>
-                    <div class="globe-meta-box">
-                        <span class="meta-label">TIMEZONE</span>
-                        <span class="meta-value">UTC+07:00 (WIB)</span>
-                    </div>
-                    <div class="globe-meta-box">
-                        <span class="meta-label">STATUS</span>
-                        <span class="meta-value status-available">OPEN FOR ROLES</span>
-                    </div>
-                    <div class="globe-meta-box">
-                        <span class="meta-label">COLLABORATION</span>
-                        <span class="meta-value">REMOTE / HYBRID</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="grid-footer">
-            <div class="col-border-right"><span class="footer-text">FIKRI BINTANG PURNOMO PORTFOLIO</span></div>
-            <div class="col-border-right"><span class="footer-text v-text">v1.0.0</span></div>
-            <div class="col-border-right"><a href="CV.pdf" target="_blank" class="footer-link" data-translate="footer-cv">PRINT CV ↗</a></div>
-            <div class="col-border-right"><a href="Porto Bintang.pdf" class="footer-link" data-translate="footer-porto">PORTFOLIO
-                    ↗</a></div>
-            <div><span class="footer-text">2026</span></div>
-        </footer>
-                
-        <!-- Floating Restore Sidebar Buttons (Shown when sidebars are minimized) -->
-        <button id="restore-left-sidebar" class="restore-sidebar-btn restore-left" title="Show Navigation Sidebar">
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18l6-6-6-6"></path></svg>
-            <span>EXPLORE</span>
-        </button>
-        <button id="restore-right-sidebar" class="restore-sidebar-btn restore-right" title="Show Download / Profile Panel">
-            <span>DOWNLOAD</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M15 18l-6-6 6-6"></path></svg>
-        </button>
-
-        </main>
-        
-                <!-- RIGHT SIDEBAR (Highlights & Social) -->
-        <aside class="nous-sidebar-right desktop-only">
-            <!-- HIGHLIGHT PROJECT CARD -->
-            <div class="sidebar-section" style="position: relative; overflow: hidden; border-radius: 0px; border: 1px solid var(--border-color); background: #0b0f2e; padding: 24px; min-height: 400px; display: flex; flex-direction: column;">
-                <img src="images/asset3.png" alt="Statue Background" style="position: absolute; right: -40px; bottom: 0; width: 180px; opacity: 0.15; filter: invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.2); pointer-events: none; mix-blend-mode: screen;">
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; position: relative; z-index: 2;">
-                    <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em;">-> // FEATURED BUILD</div>
-                    <button id="toggle-right-sidebar" title="Hide/Minimize Panel" class="sidebar-collapse-btn">
-                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18l6-6-6-6"></path></svg>
-                    </button>
-                </div>
-                
-                <h2 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; line-height: 1.1; margin: 0 0 16px 0; position: relative; z-index: 2;">MobilKu<br>Platform</h2>
-                
-                <p style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 32px; position: relative; z-index: 2;">
-                    Integrated web platform for buying and selling cars. Features an interactive catalog, bidding system, and comprehensive admin panels. Built with CodeIgniter & MySQL.
-                </p>
-                
-                <div style="margin-top: auto; position: relative; z-index: 2;">
-                    <a href="https://github.com/FikriBintangx" target="_blank" style="display: block; width: 100%; text-align: center; padding: 12px; background: rgba(255,255,255,0.1); color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 0.75rem; font-family: var(--font-sans); border-radius: 4px; transition: all 0.2s;">
-                        VIEW ON GITHUB ↗
-                    </a>
-                </div>
-            </div>
-            
-            <!-- SOCIAL MEDIA BUTTONS -->
-            <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 4px; margin-top: 8px;">// CONNECT</div>
-                <a href="https://github.com/FikriBintangx" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: var(--primary-color); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    GITHUB
-                </a>
-                <a href="https://instagram.com/biru.css" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px; transition: background 0.2s;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    INSTAGRAM
-                </a>
-                <a href="mailto:fikbintang01@gmail.com" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 0.75rem; border-radius: 4px; transition: background 0.2s;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    EMAIL ME
-                </a>
-            </div>
-        </aside>
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader">
+  <div class="loader-ambient" aria-hidden="true"></div>
+  <div class="loader-stage">
+    <div class="loader-center">
+      <div class="greeting-box">
+        <em class="greeting-text" id="greetingText">Halo</em>
+      </div>
     </div>
+    <div class="loader-lang mono" id="loaderLang">INDONESIA</div>
+  </div>
+  <div class="loader-bottom">
+    <span class="mono">Fikri Bintang — Portfolio 2026</span>
+    <span class="mono loader-pct" id="loaderPct">0%</span>
+  </div>
+  <div class="loader-bar"><span id="loaderBarFill"></span></div>
+</div>
 
-    
+<!-- ============ NAVBAR ============ -->
+<header class="nav">
+  <a href="#top" class="nav-logo">Fikri Bintang.</a>
+  <nav class="nav-menu">
+    <a href="#karya">Karya</a>
+    <a href="#proses">Proses</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
 
-    <!-- Project Detail Modal -->
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-grid">
-                <div class="modal-left">
-                    <div id="modal-gallery" class="modal-gallery">
-                        <!-- Images will be inserted here dynamically -->
-                    </div>
-                </div>
-                <div class="modal-right">
-                    <h3 id="modal-title" class="scramble" style="font-size: 2rem; margin-bottom: 0.5rem; font-family: var(--font-mono);">PROJECT TITLE</h3>
-                    <div id="modal-tags" class="project-tags" style="margin-bottom: 1.5rem;">
-                        <!-- Tags will be inserted here dynamically -->
-                    </div>
-                    <div id="modal-description" class="modal-description">
-                        <!-- Description will be inserted here dynamically -->
-                    </div>
-                    <div class="modal-actions">
-                        <a id="modal-link" href="#" target="_blank" class="cta-button primary">[ VISIT PROJECT ]</a>
-                    </div>
-                </div>
-            </div>
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-text-select-box">
+        <p class="mono label">Portfolio — 2026</p>
+        <h1 class="hero-title">
+          <span class="upright">Fikri</span><br>
+          <span class="accent-italic">Bintang.</span>
+        </h1>
+        <p class="mono hero-route"><span class="celestial-sparkle">✦</span> 6.1783° S, 106.6319° E · Tangerang, ID</p>
+        <p class="hero-desc">Mobile &amp; Web UI/UX Engineer yang merancang antarmuka presisi, arsitektur produk yang kokoh, dan pengalaman digital yang bersinar.</p>
+
+        <!-- Interactive Figma / Canvas Selection Frame -->
+        <div class="figma-select-frame" aria-hidden="true">
+          <span class="f-handle f-tl"></span>
+          <span class="f-handle f-tc"></span>
+          <span class="f-handle f-tr"></span>
+          <span class="f-handle f-mr"></span>
+          <span class="f-handle f-br"></span>
+          <span class="f-handle f-bc"></span>
+          <span class="f-handle f-bl"></span>
+          <span class="f-handle f-ml"></span>
+          <div class="figma-tag mono">
+            <span class="f-tag-icon">#</span>
+            <span>Hero / Headline</span>
+            <span class="f-tag-dim">Auto</span>
+          </div>
         </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#karya" class="mono hero-cta">Eksplorasi Karya <span class="arrow">↓</span></a>
+        <a href="/assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf" class="mono hero-btn-subtle">Unduh CV ↗</a>
+      </div>
     </div>
 
-    <!-- PDF Viewer Modal -->
-    <div id="pdf-modal" class="modal">
-        <div class="modal-content pdf-modal-content">
-            <span class="modal-close pdf-modal-close">&times;</span>
-            <div class="pdf-modal-header">
-                <h3 id="pdf-modal-title" style="font-family: var(--font-mono); margin: 0; font-size: 1.5rem;" data-translate="pdf-viewer-title">PDF VIEWER</h3>
-                <a id="pdf-download-btn" href="#" download class="cta-button primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" data-translate="pdf-download">[ DOWNLOAD PDF ]</a>
-            </div>
-            <div class="pdf-frame-container">
-                <iframe id="pdf-iframe" src="" frameborder="0" style="width: 100%; height: 100%; border: 1px solid var(--border-color); background: white;"></iframe>
-            </div>
+    <div class="hero-art" aria-hidden="true">
+      <!-- Celestial Astrolabe / Orbital Rings -->
+      <svg class="celestial-orbit" viewBox="0 0 540 540" fill="none">
+        <circle cx="270" cy="270" r="250" stroke="#0B2545" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="4 8"/>
+        <circle cx="270" cy="270" r="200" stroke="#2E6BC4" stroke-opacity="0.22" stroke-width="1.5"/>
+        <circle cx="270" cy="270" r="145" stroke="#A9C6E8" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="2 6"/>
+        <line x1="270" y1="10" x2="270" y2="530" stroke="#0B2545" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 4"/>
+        <line x1="10" y1="270" x2="530" y2="270" stroke="#0B2545" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="270" cy="70" r="3.5" fill="#2E6BC4"/>
+        <circle cx="470" cy="270" r="3.5" fill="#2E6BC4"/>
+        <circle cx="270" cy="470" r="3.5" fill="#2E6BC4"/>
+        <circle cx="70" cy="270" r="3.5" fill="#2E6BC4"/>
+        <text x="278" y="35" fill="#0B2545" opacity="0.4" font-family="Space Mono, monospace" font-size="9" letter-spacing="2">000° ZENITH</text>
+        <text x="440" y="285" fill="#0B2545" opacity="0.4" font-family="Space Mono, monospace" font-size="9" letter-spacing="2">090° E</text>
+      </svg>
+
+      <!-- Constellation Stars -->
+      <svg class="constellation-layer" viewBox="0 0 600 500" fill="none">
+        <line x1="80" y1="110" x2="160" y2="70" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="160" y1="70" x2="230" y2="120" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="430" y1="80" x2="500" y2="140" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="500" y1="140" x2="540" y2="90" stroke="#2E6BC4" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="80" cy="110" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="160" cy="70" r="4" fill="#0B2545" opacity="0.7"/>
+        <circle cx="230" cy="120" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="430" cy="80" r="3" fill="#2E6BC4" opacity="0.6"/>
+        <circle cx="500" cy="140" r="4.5" fill="#0B2545" opacity="0.8"/>
+        <circle cx="540" cy="90" r="3" fill="#2E6BC4" opacity="0.6"/>
+      </svg>
+
+      <!-- Floating 4-Point Editorial Sparkles -->
+      <div class="sparkle sparkle-top">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#2E6BC4"/>
+        </svg>
+      </div>
+      <div class="sparkle sparkle-right">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+        </svg>
+      </div>
+      <div class="sparkle sparkle-left">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#0B2545"/>
+        </svg>
+      </div>
+
+      <!-- Clean Photo Arch (No Pirate Hat!) -->
+      <div class="photo-wrap photo-celestial">
+        <img src="/assets/foto-hero.png" alt="Fikri Bintang Purnomo">
+      </div>
+
+      <!-- Celestial Seal / Compass Badge -->
+      <div class="celestial-badge">
+        <div class="celestial-badge-inner">
+          <svg class="badge-star" viewBox="0 0 100 100" fill="none">
+            <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#0B2545"/>
+          </svg>
+          <span class="mono">about me on 2026</span>
         </div>
+      </div>
     </div>
 
-    <!-- Certificate Viewer Modal -->
-    <div id="cert-modal" class="modal">
-        <div class="modal-content cert-modal-content">
-            <span class="modal-close cert-modal-close">&times;</span>
-            <div style="text-align: center; padding: 1rem;">
-                <h3 id="cert-modal-title" style="font-family: var(--font-mono); margin-bottom: 1rem; font-size: 1.5rem; text-transform: uppercase;">CERTIFICATE</h3>
-                <div style="display: flex; justify-content: center; align-items: center; max-height: 75vh;">
-                    <img id="cert-modal-image" src="" alt="Certificate" style="max-width: 100%; max-height: 70vh; object-fit: contain; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.25);" />
-                </div>
-            </div>
+    <div class="hero-right">
+      <div class="badge-tilt"><span class="pulse-dot"></span><span class="mono">Terima Proyek</span></div>
+    </div>
+  </div>
+
+  <div class="hero-bottombar mono">
+    <span>Mobile UI/UX — Fullstack Dev</span>
+    <span class="scroll-hint">Scroll <span class="arrow">↓</span></span>
+    <span>Figma — Flutter — Next.js</span>
+  </div>
+
+  <div class="waves celestial-horizon" aria-hidden="true">
+    <!-- Layer 1: Atmospheric Upper Horizon with Stardust -->
+    <svg class="horizon-layer horizon-layer-1" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#A9C6E8" stop-opacity="0.85"/>
+          <stop offset="30%" stop-color="#C5DEFA" stop-opacity="0.95"/>
+          <stop offset="70%" stop-color="#B2D3F5" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#A9C6E8" stop-opacity="0.85"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,65 C260,20 520,85 780,40 C1020,5 1260,75 1440,48 L1440,130 L0,130 Z" fill="url(#grad-sky-1)"/>
+      <circle cx="95" cy="74" r="1.5" fill="#ffffff" opacity="0.85"/>
+      <circle cx="280" cy="62" r="2" fill="#ffffff" opacity="0.95"/>
+      <circle cx="480" cy="78" r="1.5" fill="#ffffff" opacity="0.8"/>
+      <circle cx="720" cy="52" r="2.2" fill="#ffffff" opacity="0.95"/>
+      <circle cx="960" cy="38" r="1.8" fill="#ffffff" opacity="0.9"/>
+      <circle cx="1180" cy="68" r="1.5" fill="#ffffff" opacity="0.85"/>
+      <circle cx="1380" cy="62" r="2" fill="#ffffff" opacity="0.9"/>
+    </svg>
+
+    <!-- Layer 2: Intermediate Orbital Ridge with Constellations -->
+    <svg class="horizon-layer horizon-layer-2" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#194B8A"/>
+          <stop offset="50%" stop-color="#2E6BC4"/>
+          <stop offset="100%" stop-color="#1A4A85"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,75 C220,35 480,95 720,52 C960,18 1200,80 1440,58 L1440,130 L0,130 Z" fill="url(#grad-sky-2)"/>
+      <g class="horizon-constellation">
+        <circle cx="180" cy="85" r="2.2" fill="#ffffff"/>
+        <circle cx="240" cy="72" r="2.8" fill="#E8F2FF"/>
+        <circle cx="310" cy="88" r="2" fill="#A9C6E8"/>
+        <line x1="180" y1="85" x2="240" y2="72" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="240" y1="72" x2="310" y2="88" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+
+        <circle cx="620" cy="82" r="2.2" fill="#ffffff"/>
+        <circle cx="690" cy="68" r="2.8" fill="#E8F2FF"/>
+        <circle cx="760" cy="80" r="2" fill="#A9C6E8"/>
+        <line x1="620" y1="82" x2="690" y2="68" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="690" y1="68" x2="760" y2="80" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+
+        <circle cx="1080" cy="62" r="2.2" fill="#ffffff"/>
+        <circle cx="1150" cy="75" r="2.8" fill="#E8F2FF"/>
+        <circle cx="1230" cy="66" r="2" fill="#A9C6E8"/>
+        <line x1="1080" y1="62" x2="1150" y2="75" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+        <line x1="1150" y1="75" x2="1230" y2="66" stroke="#ffffff" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+      </g>
+    </svg>
+
+    <!-- Layer 3: Deep Cosmos Horizon with 4-Point Sparkle Stars -->
+    <svg class="horizon-layer horizon-layer-3" viewBox="0 0 1440 130" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad-sky-3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#071932"/>
+          <stop offset="50%" stop-color="#0B2545"/>
+          <stop offset="100%" stop-color="#051428"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,86 C280,48 540,105 800,62 C1060,28 1280,95 1440,72 L1440,130 L0,130 Z" fill="url(#grad-sky-3)"/>
+
+      <!-- 4-Point Sparkles (Bintang Berkilau) -->
+      <g class="h-sparkle" transform="translate(110, 92) scale(0.18)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+      <g class="h-sparkle" transform="translate(390, 84) scale(0.14)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+      </g>
+      <g class="h-sparkle" transform="translate(710, 72) scale(0.22)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+      <g class="h-sparkle" transform="translate(980, 65) scale(0.16)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#A9C6E8"/>
+      </g>
+      <g class="h-sparkle" transform="translate(1260, 82) scale(0.18)">
+        <path d="M50 0 C50 32 68 50 100 50 C68 50 50 68 50 100 C50 68 32 50 0 50 C32 50 50 32 50 0 Z" fill="#ffffff"/>
+      </g>
+
+      <!-- Deep Cosmos Stardust & Nodes -->
+      <circle cx="50" cy="102" r="2" fill="#A9C6E8"/>
+      <circle cx="210" cy="98" r="2.5" fill="#ffffff"/>
+      <circle cx="490" cy="92" r="2.2" fill="#ffffff"/>
+      <circle cx="580" cy="85" r="2.8" fill="#ffffff"/>
+      <circle cx="860" cy="78" r="2.4" fill="#ffffff"/>
+      <circle cx="1120" cy="88" r="2.6" fill="#ffffff"/>
+      <circle cx="1360" cy="95" r="2.2" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ KARYA PILIHAN ============ -->
+<section class="works" id="karya">
+  <div class="sunburst" aria-hidden="true"></div>
+  <div class="works-head">
+    <h2 class="works-title">
+      <span class="upright">Karya</span><br>
+      <span class="accent-italic-light">Pilihan</span>
+    </h2>
+    <div class="receipt">
+      <div class="receipt-header-row">
+        <span class="mono">INDEX #0026</span>
+        <span class="celestial-sparkle">✦</span>
+      </div>
+      <p class="receipt-title"><em>Observatorium</em></p>
+      <p class="mono receipt-order">Daftar Proyek &amp; Sistem · 2026</p>
+      <ul class="mono receipt-list">
+        <li><span>01&nbsp;&nbsp;JurnalKu (AI Web)</span><span>2026</span></li>
+        <li><span>02&nbsp;&nbsp;MariMatcha Shop</span><span>2026</span></li>
+        <li><span>03&nbsp;&nbsp;TiaraFinn (RT/RW)</span><span>2026</span></li>
+        <li><span>04&nbsp;&nbsp;SiAbsensi Desktop</span><span>2026</span></li>
+        <li><span>05&nbsp;&nbsp;OursContent System</span><span>2026</span></li>
+        <li><span>06&nbsp;&nbsp;Mobilku.id Auto</span><span>2026</span></li>
+      </ul>
+      <p class="mono receipt-total"><span>Total Sistem</span><span>6</span></p>
+    </div>
+  </div>
+
+  <!-- STACKING CARDS WRAPPER FOR GSAP SCROLLTRIGGER -->
+  <div class="cards-stack-wrapper" id="cardsStackWrapper">
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="jurnalku" data-index="0">
+        <div class="card-content">
+          <p class="mono card-no">No.01 / 06 — AI &amp; E-Learning — 2026</p>
+          <h3 class="card-title">JurnalKu <em>AI</em></h3>
+          <p class="card-desc">Platform riset akademik berbasis AI untuk menemukan, mengelola, dan menganalisis jurnal ilmiah secara cerdas dengan Next.js, Python, dan Supabase.</p>
+          <div class="card-tech mono">Next.js · React · Python · Supabase</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="jurnalku">Lihat Detail <span>→</span></button>
         </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-jurnalku.png" alt="JurnalKu AI Platform">
+          </div>
+          <figcaption class="mono">JurnalKu · AI Research 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="marimatcha" data-index="1">
+        <div class="card-content">
+          <p class="mono card-no">No.02 / 06 — Ecommerce Web — 2026</p>
+          <h3 class="card-title">Mari<em>Matcha</em></h3>
+          <p class="card-desc">Platform e-commerce modern produk minuman matcha artisan dengan UI segar, keranjang belanja interaktif, serta manajemen pesanan terintegrasi.</p>
+          <div class="card-tech mono">Web Dev · UI/UX · MySQL · Laravel</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="marimatcha">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-marimatcha.png" alt="MariMatcha Ecommerce">
+          </div>
+          <figcaption class="mono">MariMatcha · Ecommerce 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="tiarafinn" data-index="2">
+        <div class="card-content">
+          <p class="mono card-no">No.03 / 06 — Mobile Application — 2026</p>
+          <h3 class="card-title">Tiara<em>Finn</em></h3>
+          <p class="card-desc">Aplikasi mobile cerdas pengelolaan iuran warga RT/RW berbasis Flutter &amp; Supabase untuk transparansi kas, tagihan digital, dan rekapitulasi real-time.</p>
+          <div class="card-tech mono">Flutter · Dart · Firebase · Supabase</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="tiarafinn">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-tiarafinn.png" alt="TiaraFinn Mobile App">
+          </div>
+          <figcaption class="mono">TiaraFinn · Mobile RT/RW 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="siabsensi" data-index="3">
+        <div class="card-content">
+          <p class="mono card-no">No.04 / 06 — Desktop System — 2026</p>
+          <h3 class="card-title">Si<em>Absensi</em></h3>
+          <p class="card-desc">Sistem absensi dan administrasi pegawai desktop yang mempermudah pencatatan kehadiran presisi, slip gaji, dan pelaporan otomatis perusahaan.</p>
+          <div class="card-tech mono">Java · PostgreSQL · Java Swing</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="siabsensi">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-siabsensi.png" alt="SiAbsensi Karyawan">
+          </div>
+          <figcaption class="mono">SiAbsensi · Desktop App 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-dark" data-project="ourscontent" data-index="4">
+        <div class="card-content">
+          <p class="mono card-no">No.05 / 06 — Creator Platform — 2026</p>
+          <h3 class="card-title">Ours<em>Content</em></h3>
+          <p class="card-desc">Sistem manajemen konten digital marketing untuk scheduling kampanye, monitoring analitik performa reach, serta laporan otomatis tim kreatif.</p>
+          <div class="card-tech mono">Java · PostgreSQL · JasperReports</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="ourscontent">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-ourscontent.png" alt="OursContent Management">
+          </div>
+          <figcaption class="mono">OursContent · Analytics 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+    <div class="card-sticky-wrapper">
+      <article class="card card-light" data-project="mobilku" data-index="5">
+        <div class="card-content">
+          <p class="mono card-no">No.06 / 06 — Dealership System — 2026</p>
+          <h3 class="card-title">Mobilku<em>.id</em></h3>
+          <p class="card-desc">Sistem informasi jual beli mobil bekas terintegrasi untuk katalog kendaraan interaktif, administrasi transaksi jual-beli, dan CRM dealer.</p>
+          <div class="card-tech mono">Web Platform · PostgreSQL · UI/UX</div>
+          <button type="button" class="mono pill btn-open-modal" data-project="mobilku">Lihat Detail <span>→</span></button>
+        </div>
+        <figure class="polaroid">
+          <div class="polaroid-img-wrap">
+            <img src="/assets/p-mobilku.png" alt="Mobilku.id">
+          </div>
+          <figcaption class="mono">Mobilku.id · Auto Sales 2026</figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mobile UI/UX <i>✦</i></span>
+    <span class="it">Figma Design System <i>✦</i></span>
+    <span>Flutter App <i>✦</i></span>
+    <span class="it">Next.js &amp; React <i>✦</i></span>
+    <span>PostgreSQL &amp; MySQL <i>✦</i></span>
+    <span class="it">Interactive Prototyping <i>✦</i></span>
+    <span>Python &amp; Java <i>✦</i></span>
+    <span class="it">Design to Code <i>✦</i></span>
+    <span>Mobile UI/UX <i>✦</i></span>
+    <span class="it">Figma Design System <i>✦</i></span>
+    <span>Flutter App <i>✦</i></span>
+    <span class="it">Next.js &amp; React <i>✦</i></span>
+    <span>PostgreSQL &amp; MySQL <i>✦</i></span>
+    <span class="it">Interactive Prototyping <i>✦</i></span>
+    <span>Python &amp; Java <i>✦</i></span>
+    <span class="it">Design to Code <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ============ PROSES ============ -->
+<section class="process" id="proses">
+  <div class="process-header">
+    <p class="mono label light">Metodologi &amp; Alur Kerja</p>
+    <h2 class="process-title">Cara Saya Membangun Produk</h2>
+  </div>
+  <div class="process-cards">
+    <article class="p-card p-blue">
+      <p class="p-num">01</p>
+      <h3>Riset &amp; Empathize</h3>
+      <p>Menggali kebutuhan pengguna, menganalisa alur operasional, dan merumuskan arsitektur informasi sebelum mendesain.</p>
+    </article>
+    <article class="p-card p-ivory">
+      <p class="p-num">02</p>
+      <h3>Wireframe &amp; Prototyping</h3>
+      <p>Membangun rancangan wireframe cepat, eksplorasi antarmuka, dan prototype interaktif menggunakan Figma yang presisi.</p>
+    </article>
+    <article class="p-card p-blue">
+      <p class="p-num">03</p>
+      <h3>Design System &amp; Coding</h3>
+      <p>Menerjemahkan design system ke kode bersih (Clean Architecture) menggunakan Next.js, Flutter, atau Java.</p>
+    </article>
+    <article class="p-card p-ivory">
+      <p class="p-num">04</p>
+      <h3>Testing &amp; Delivery</h3>
+      <p>Pengujian fungsionalitas, integrasi API &amp; database, optimalisasi performa, serta serah terima sistem siap pakai.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TENTANG ============ -->
+<section class="about" id="tentang">
+  <p class="mono label">Tentang Saya</p>
+  <div class="about-grid">
+    <div>
+      <p class="about-text" id="aboutText">
+        Halo, saya Fikri Bintang Purnomo. Bagi saya, desain antarmuka dan baris kode bukan sekadar tampilan digital, melainkan jembatan yang menghubungkan kebutuhan manusia dengan solusi teknologi yang intuitif. Saya berfokus pada Mobile UI/UX, Web Development, dan rekayasa perangkat lunak modern.
+      </p>
+
+      <div class="about-journey">
+        <h4 class="mono about-subhead">Riwayat Pendidikan &amp; Magang</h4>
+        <ul class="journey-list">
+          <li>
+            <strong>PT Wahanaartha Ritelindo</strong>
+            <span class="mono">UI/UX Engineer &amp; Fullstack Dev (Intern) · 2026 - Sekarang</span>
+            <p>Mendevelop sistem internal, website, mobile apps, dan merancang design system.</p>
+          </li>
+          <li>
+            <strong>Global Institute of Technology &amp; Business</strong>
+            <span class="mono">Sistem Informasi / Teknik Informatika (IPK 3.34) · 2023 - 2028</span>
+            <p>Aktif dalam riset teknologi terapan, prototyping digital, dan organisasi kampus.</p>
+          </li>
+          <li>
+            <strong>SMK Bina Am Ma'mur</strong>
+            <span class="mono">Pendidikan Menengah Kejuruan · 2020 - 2023</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/motion.js"></script>
-    <script src="../scripts/globe.js"></script>
+    <div class="about-imgs">
+      <figure class="sticker sticker-portrait">
+        <img src="/assets/foto-mirror.jpg" alt="Fikri Bintang Selfie Mirror">
+        <figcaption class="mono">Fikri Bintang · Studio</figcaption>
+      </figure>
+      <figure class="sticker sticker-work">
+        <img src="/assets/exp-wahanaartha.png" alt="Workspace Magang PT Wahanaartha Ritelindo">
+        <figcaption class="mono">Wahanaartha Ritelindo · 2026</figcaption>
+      </figure>
+      <p class="mono caption">Tangerang, Banten · Indonesia</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><p class="stat-num">3.34</p><p class="mono">Indeks Prestasi Kumulatif</p></div>
+    <div class="stat"><p class="stat-num">6+</p><p class="mono">Proyek Terverifikasi</p></div>
+    <div class="stat"><p class="stat-num">4+</p><p class="mono">Pengalaman Kerja &amp; Magang</p></div>
+  </div>
+</section>
+
+<!-- ============ KONTAK / TIKET ============ -->
+<section class="contact" id="kontak">
+  <p class="mono label">Tiket Kolaborasi</p>
+  <p class="contact-sub">Siap berkolaborasi untuk proyek baru.<br>Respon cepat dalam 1×24 jam.</p>
+  <p class="mono ticket-kicker">Tiket Masuk Kolaborasi · Tiket #0001</p>
+  <h2 class="contact-title">Punya proyek aplikasi atau web?<br><span class="hl">Mari kita wujudkan bersama.</span></h2>
+  <div class="chips mono">
+    <span>Mobile UI/UX</span>
+    <span>Figma Design System</span>
+    <span>Next.js Web</span>
+    <span>Flutter Mobile</span>
+    <span>Fullstack Integration</span>
+  </div>
+
+  <div class="ticket">
+    <div class="ticket-photo">
+      <img src="/assets/foto-mask.jpg" alt="Fikri Bintang Purnomo">
+      <p class="mono">Fikri Bintang — Tangerang</p>
+    </div>
+    <div class="ticket-main">
+      <p class="mono ticket-row"><span>Kandidat</span><strong>Fikri Bintang P.</strong></p>
+      <p class="ticket-note">Terbuka untuk posisi Mobile &amp; Web UI/UX Engineer, Fullstack Dev, maupun proyek freelance aplikasi &amp; web modern.</p>
+      <div class="ticket-links mono">
+        <a href="mailto:fikribn123@gmail.com">✉ fikribn123@gmail.com</a>
+        <a href="https://wa.me/6281292870932" target="_blank" rel="noopener">☏ +62 812-9287-0932</a>
+        <a href="/assets/porto-fikri-bintang.pdf" target="_blank" rel="noopener">📄 Portfolio PDF (Canva) ↗</a>
+      </div>
+      <p class="mono ticket-date"><span>19.10</span><span>2026</span></p>
+    </div>
+    <div class="ticket-stub">
+      <div class="barcode" aria-hidden="true"></div>
+      <p class="stub-name">FIKRI BINTANG</p>
+      <p class="mono">BOARDING PASS</p>
+      <p class="mono stub-date"><span>2026</span><span>EXP</span></p>
+      <p class="mono stub-code">#FIKRI2026UIUX</p>
+      <a class="btn-navy mono" href="https://wa.me/6281292870932" target="_blank" rel="noopener">WhatsApp Langsung →</a>
+    </div>
+  </div>
+  <p class="contact-mail">Atau kirim surel ke <a href="mailto:fikribn123@gmail.com">fikribn123@gmail.com</a></p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="zigzag" aria-hidden="true"></div>
+  <p class="mono label light">Terima kasih sudah berkunjung</p>
+  <p class="footer-desc">Mobile &amp; Web UI/UX Engineer serta Fullstack Developer dari Indonesia. Mendesain dan membangun produk digital yang rapi, elegan, berkinerja tinggi, dan berdampak nyata bagi pengguna.</p>
+  <div class="footer-cols">
+    <div>
+      <p class="mono flabel">Jejaring</p>
+      <ul class="mono flinks">
+        <li><a href="https://github.com/FikriBintangx" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="https://instagram.com/87nvlion" target="_blank" rel="noopener">Instagram (@87nvlion) ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="mono flabel">Kontak</p>
+      <a class="mono fmail" href="mailto:fikribn123@gmail.com">fikribn123@gmail.com</a>
+      <p class="mono fphone">+62 812-9287-0932</p>
+      <p class="mono faddr">Cikupa, Kab. Tangerang, Banten</p>
+    </div>
+    <div>
+      <p class="mono flabel">Berkas</p>
+      <ul class="mono flinks">
+        <li><a href="/assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf">Unduh CV (PDF) ↓</a></li>
+        <li><a href="/assets/porto-fikri-bintang.pdf" target="_blank" rel="noopener">Unduh Portofolio (PDF) ↗</a></li>
+      </ul>
+      <a href="#top" class="mono pill pill-light" id="toTop" style="margin-top: 1.5rem;">Ke Atas <span>↑</span></a>
+    </div>
+  </div>
+  <p class="footer-giant">Fikri Bintang</p>
+  <div class="footer-base mono">
+    <span>© 2026 Fikri Bintang Purnomo. All rights reserved.</span>
+    <span>Dibuat di Indonesia</span>
+  </div>
+</footer>
+
+<!-- ============ PROJECT DETAIL MODAL ============ -->
+<div class="project-modal" id="projectModal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup Detail">
+      <span>✕</span>
+      <span class="mono">TUTUP</span>
+    </button>
+    <div class="modal-scroll-body">
+      <div class="modal-header">
+        <div class="modal-meta mono">
+          <span class="modal-cat" id="modalCategory">Category</span>
+          <span class="modal-dot">·</span>
+          <span class="modal-year" id="modalYear">2026</span>
+          <span class="modal-dot">·</span>
+          <span class="modal-role" id="modalRole">Role</span>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        <p class="modal-tagline" id="modalTagline">Project Tagline</p>
+      </div>
+
+      <div class="modal-preview-wrapper">
+        <img class="modal-image" id="modalImage" src="/assets/p-jurnalku.png" alt="Project Preview">
+      </div>
+
+      <div class="modal-content-grid">
+        <div class="modal-main-col">
+          <div class="modal-section">
+            <h4 class="mono modal-section-title">01 / Ringkasan Proyek</h4>
+            <p class="modal-text" id="modalOverview"></p>
+          </div>
+
+          <div class="modal-problem-solution">
+            <div class="modal-box modal-problem">
+              <h5 class="mono">Tantangan &amp; Kebutuhan</h5>
+              <p id="modalProblem"></p>
+            </div>
+            <div class="modal-box modal-solution">
+              <h5 class="mono">Solusi Rekayasa Digital</h5>
+              <p id="modalSolution"></p>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="mono modal-section-title">02 / Fitur Utama &amp; Arsitektur</h4>
+            <ul class="modal-feature-list" id="modalFeatures"></ul>
+          </div>
+        </div>
+
+        <div class="modal-side-col">
+          <div class="modal-side-card">
+            <h5 class="mono">Tech Stack &amp; Tools</h5>
+            <div class="modal-stack-pills mono" id="modalStack"></div>
+          </div>
+
+          <div class="modal-side-card modal-cta-card">
+            <h5 class="mono">Tertarik dengan Sistem Ini?</h5>
+            <p>Mari diskusikan implementasi produk digital serupa untuk bisnis atau proyek Anda.</p>
+            <a href="#kontak" class="btn-navy mono modal-cta-btn" id="modalContactBtn">Hubungi Fikri →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<script is:inline src="/portfolio-assets/script.js"></script>
 </body>
-
 </html>
