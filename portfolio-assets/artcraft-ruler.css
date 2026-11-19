@@ -1,0 +1,212 @@
+/* ==========================================================================
+   ARTCRAFT KINETIC NAVIGATION RULER · CLAUDE ARCHITECTURE
+   High-performance GPU composited transforms, Zero Layout Thrashing
+   ========================================================================== */
+
+:root {
+  --ruler-rail-w: 68px;
+  --ruler-cw: 16px;
+  --ruler-line: rgba(11, 37, 69, 0.12);
+  --ruler-dim: #8E8D88;
+  --ruler-fg: #0B2545;
+  --ruler-accent: #2E6BC4;
+}
+
+/* 1. Hide native browser scrollbar completely on desktop */
+@media (min-width: 1025px) {
+  html {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+/* Fixed Ruler Track (Right Edge) - Transparent Glass Blur + Shadow Blur */
+.artcraft-ruler {
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: var(--ruler-rail-w) !important;
+  z-index: 900 !important;
+  background: transparent !important;
+  backdrop-filter: blur(18px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+  border-left: 1px solid var(--ruler-line) !important;
+  box-shadow: -6px 0 28px rgba(11, 37, 69, 0.06) !important;
+  user-select: none !important;
+  touch-action: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Dark Mode Adaptation - Transparent Glass Blur + Shadow Blur */
+.artcraft-ruler.ruler-dark {
+  background: transparent !important;
+  border-left-color: rgba(169, 198, 232, 0.16) !important;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Canvas for Engineering Ticks */
+#rulerScaleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Scrub Thumb / Needle */
+.ruler-thumb {
+  position: absolute;
+  left: 0;
+  width: var(--ruler-rail-w);
+  height: 22px;
+  cursor: grab;
+  will-change: transform;
+  background: transparent;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 910;
+  box-sizing: border-box;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb {
+  background: transparent;
+}
+
+.ruler-thumb:active {
+  cursor: grabbing;
+}
+
+.ruler-thumb-line {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: calc(100% - 12px);
+  height: 1.5px;
+  background: var(--ruler-accent);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb-line {
+  background: #38bdf8;
+}
+
+.ruler-thumb-pct {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ruler-accent);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb-pct {
+  color: #38bdf8;
+}
+
+/* Flat Kinetic Text Stage (Zero Layout Reads) */
+#kineticRulerStage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 950;
+}
+
+.k-ch {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--ruler-cw);
+  height: var(--ruler-cw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ruler-fg);
+  transform-origin: 50% 50%;
+  will-change: transform;
+  white-space: pre;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.k-ch:hover {
+  color: var(--ruler-accent) !important;
+}
+
+.k-ch.k-dim {
+  color: var(--ruler-dim);
+}
+
+.k-ch.k-active {
+  color: var(--ruler-fg);
+}
+
+/* Dynamic Dark Background Adaptive Contrast (Per-Char / Per-Region) */
+.k-ch.k-on-dark {
+  color: #FFFFFF !important;
+}
+
+.k-ch.k-on-dark.k-dim {
+  color: #94a3b8 !important;
+}
+
+.k-ch.k-on-dark:not(.k-active) {
+  opacity: 0.70 !important;
+}
+
+.k-ch.k-on-dark.k-active {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+}
+
+.k-ch.k-on-dark:hover {
+  color: #38bdf8 !important;
+  opacity: 1 !important;
+}
+
+.artcraft-ruler.ruler-dark ~ #kineticRulerStage .k-ch {
+  color: #94a3b8;
+}
+
+.artcraft-ruler.ruler-dark ~ #kineticRulerStage .k-ch:hover {
+  color: #38bdf8 !important;
+}
+
+.artcraft-ruler.ruler-dark ~ #kineticRulerStage .k-ch.k-dim {
+  color: #64748b;
+}
+
+.artcraft-ruler.ruler-dark ~ #kineticRulerStage .k-ch.k-active {
+  color: #FFFFFF;
+}
+
+/* Hide on Mobile & Tablets */
+@media (max-width: 1024px), (orientation: portrait) {
+  .artcraft-ruler,
+  #kineticRulerStage {
+    display: none !important;
+  }
+}

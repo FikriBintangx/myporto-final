@@ -1,0 +1,383 @@
+/* ==========================================================================
+   MOBILE RADIAL / ARC NAVIGATION RULER · CLAUDE ARCHITECTURE
+   High-performance GPU composited transforms, Zero Layout Thrashing
+   Active on Viewport <= 1024px or (orientation: portrait)
+   ========================================================================== */
+
+/* 1. Visibility Switches */
+@media (min-width: 1025px) and (orientation: landscape) {
+  #mobileRadialRuler {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px), (orientation: portrait) {
+  /* Hide desktop vertical ruler rail on mobile/tablet */
+  .artcraft-ruler,
+  #kineticRulerStage {
+    display: none !important;
+  }
+
+  /* Show mobile radial dial */
+  #mobileRadialRuler {
+    display: flex !important;
+  }
+}
+
+/* 2. Container Fixed at Bottom Center */
+.mobile-radial-ruler {
+  position: fixed !important;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: none !important;
+  pointer-events: none; /* children enable pointer-events */
+}
+
+/* 3. Arched Radial HUD (Expands Above Dock) */
+.mrr-arc-hud {
+  position: relative;
+  width: 240px;
+  height: 110px;
+  margin-bottom: -18px;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(12px) scale(0.94);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mrr-arc-hud.active,
+.mrr-arc-hud.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.mrr-arc-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mrr-arc-track {
+  fill: none;
+  stroke: rgba(11, 37, 69, 0.12);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.mrr-on-dark .mrr-arc-track {
+  stroke: rgba(255, 255, 255, 0.14);
+}
+
+.mrr-arc-active {
+  fill: none;
+  stroke: #2E6BC4;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 314.16;
+  stroke-dashoffset: 314.16;
+  transition: stroke-dashoffset 0.08s linear;
+}
+
+.mrr-on-dark .mrr-arc-active {
+  stroke: #38bdf8;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.7));
+}
+
+.mrr-arc-tick {
+  fill: #8E8D88;
+  transition: fill 0.2s ease, r 0.2s ease;
+  cursor: pointer;
+}
+
+.mrr-arc-tick.active {
+  fill: #2E6BC4;
+  r: 4.5;
+}
+
+.mrr-on-dark .mrr-arc-tick {
+  fill: #64748b;
+}
+
+.mrr-on-dark .mrr-arc-tick.active {
+  fill: #38bdf8;
+  filter: drop-shadow(0 0 6px #38bdf8);
+}
+
+.mrr-arc-bead {
+  fill: #2E6BC4;
+  stroke: #FFFFFF;
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 6px rgba(11, 37, 69, 0.35));
+  transition: cx 0.08s linear, cy 0.08s linear;
+  cursor: grab;
+}
+
+.mrr-on-dark .mrr-arc-bead {
+  fill: #38bdf8;
+  stroke: #061527;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+}
+
+.mrr-arc-label {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0B2545;
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 37, 69, 0.1);
+  box-shadow: 0 4px 12px rgba(11, 37, 69, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.mrr-on-dark .mrr-arc-label {
+  color: #FFFFFF;
+  background: rgba(6, 21, 39, 0.88);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+/* 4. Floating Curved Pill Dock */
+.mrr-dock {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 6px 4px 4px;
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(11, 37, 69, 0.12);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px -4px rgba(11, 37, 69, 0.18),
+              0 2px 8px rgba(11, 37, 69, 0.06);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: auto;
+  max-width: calc(100vw - 20px);
+}
+
+.mrr-dock.mrr-on-dark {
+  background: rgba(6, 21, 39, 0.88);
+  border-color: rgba(56, 189, 248, 0.25);
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6),
+              0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+/* 5. Circular Dial Scrubber (Centerpiece) */
+.mrr-dial {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 35%, rgba(46, 107, 196, 0.12), transparent 70%);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mrr-dial:active {
+  cursor: grabbing;
+  transform: scale(0.96);
+}
+
+.mrr-dial-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.mrr-dial-track {
+  fill: none;
+  stroke: rgba(11, 37, 69, 0.10);
+  stroke-width: 3.5;
+}
+
+.mrr-on-dark .mrr-dial-track {
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+.mrr-dial-progress {
+  fill: none;
+  stroke: #2E6BC4;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 125.66; /* 2 * PI * 20 */
+  stroke-dashoffset: 125.66;
+  transition: stroke-dashoffset 0.08s linear;
+}
+
+.mrr-on-dark .mrr-dial-progress {
+  stroke: #38bdf8;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.7));
+}
+
+.mrr-dial-needle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.08s linear;
+}
+
+.mrr-dial-needle::after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2E6BC4;
+  box-shadow: 0 0 6px rgba(46, 107, 196, 0.7);
+}
+
+.mrr-on-dark .mrr-dial-needle::after {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.mrr-dial-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.mrr-dial-pct {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #0B2545;
+  letter-spacing: -0.02em;
+}
+
+.mrr-on-dark .mrr-dial-pct {
+  color: #FFFFFF;
+}
+
+.mrr-dial-sec {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 7px;
+  font-weight: 700;
+  color: #2E6BC4;
+  letter-spacing: 0.05em;
+  margin-top: 1.5px;
+  text-transform: uppercase;
+}
+
+.mrr-on-dark .mrr-dial-sec {
+  color: #38bdf8;
+}
+
+/* 6. Section Nodes Track */
+.mrr-track {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 2px;
+}
+
+.mrr-track::-webkit-scrollbar {
+  display: none;
+}
+
+.mrr-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.mrr-node:active {
+  transform: scale(0.94);
+}
+
+.mrr-node-num {
+  font-size: 7px;
+  font-weight: 700;
+  color: #8E8D88;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.mrr-node-label {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #0B2545;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.mrr-on-dark .mrr-node-num {
+  color: #64748b;
+}
+
+.mrr-on-dark .mrr-node-label {
+  color: #94a3b8;
+}
+
+.mrr-node.active {
+  background: #0B2545;
+}
+
+.mrr-node.active .mrr-node-num {
+  color: #a5b4fc;
+}
+
+.mrr-node.active .mrr-node-label {
+  color: #FFFFFF;
+}
+
+.mrr-on-dark .mrr-node.active {
+  background: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+}
+
+.mrr-on-dark .mrr-node.active .mrr-node-num {
+  color: #061527;
+  font-weight: 800;
+}
+
+.mrr-on-dark .mrr-node.active .mrr-node-label {
+  color: #061527;
+  font-weight: 800;
+}

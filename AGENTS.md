@@ -31,3 +31,21 @@ For UI, copy, people, mobile layout, or code comments work, read `antislop.md` (
 - Code comments: `skills/antislop-code/SKILL.md`
 Before starting, ask the user when antislop applies: during the work, or after it is done.
 <!-- antislop:end -->
+
+
+═══════════════════════════════════════════════════════════════════════════════
+[STRICT OPERATOR RULE - ZERO RESTORE / ZERO ROLLBACK]
+═══════════════════════════════════════════════════════════════════════════════
+- DILARANG KERAS melakukan git restore, git checkout commit lama, git reset, atau me-revert file ke commit sebelumnya!
+- Sering terjadi bug karena AI mengambil commit lama / menimpa pekerjaan aktif dengan state lama.
+- ATURAN MUTLAK: Selalu work-forward langsung dari file kerjaan aktif terkini (working tree). Jangan pernah mengembalikan atau me-reset progress Biru.
+
+
+
+═══════════════════════════════════════════════════════════════════════════════
+[STRICT OPERATOR RULE - ZERO RESTORE / ZERO ROLLBACK]
+═══════════════════════════════════════════════════════════════════════════════
+- DILARANG KERAS melakukan git restore, git checkout commit lama, git reset, atau me-revert file ke commit sebelumnya!
+- Sering terjadi bug karena AI mengambil commit lama / menimpa pekerjaan aktif dengan state lama.
+- ATURAN MUTLAK: Selalu work-forward langsung dari file kerjaan aktif terkini (working tree). Jangan pernah mengembalikan atau me-reset progress Biru.
+

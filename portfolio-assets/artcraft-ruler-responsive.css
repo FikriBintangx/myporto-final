@@ -1,0 +1,264 @@
+/* ==========================================================================
+   ARTCRAFT KINETIC NAVIGATION RULER · FULLY RESPONSIVE RIGHT-RAIL ENGINE
+   Zero Floating Bars · 100% Right-Edge Native · Desktop to Mobile Portrait
+   Adaptive Per-Pixel Contrast (Black on White, White on Dark)
+   ========================================================================== */
+
+:root {
+  --ruler-rail-w: 68px;
+  --ruler-cw: 16px;
+  --ruler-line: rgba(11, 37, 69, 0.14);
+  --ruler-dim: #475569;
+  --ruler-fg: #0B2545;
+  --ruler-accent: #2E6BC4;
+}
+
+/* Responsive Rail Width Variables */
+@media (max-width: 1024px) {
+  :root {
+    --ruler-rail-w: 44px;
+    --ruler-cw: 13px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --ruler-rail-w: 32px;
+    --ruler-cw: 11px;
+  }
+}
+
+/* Hide native scrollbar on desktop */
+@media (min-width: 1025px) {
+  html {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+/* Fixed Ruler Track (Right Edge) */
+.artcraft-ruler {
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: var(--ruler-rail-w) !important;
+  z-index: 900 !important;
+  background: transparent !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  border-left: 1px solid var(--ruler-line) !important;
+  box-shadow: -4px 0 24px rgba(11, 37, 69, 0.08) !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, width 0.25s ease !important;
+}
+
+/* Dark Mode Track Adaptation */
+.artcraft-ruler.ruler-dark {
+  border-left-color: rgba(169, 198, 232, 0.20) !important;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Canvas for Engineering Ticks */
+#rulerScaleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Scrub Thumb */
+.ruler-thumb {
+  position: absolute;
+  left: 0;
+  width: var(--ruler-rail-w);
+  height: 24px;
+  cursor: grab;
+  will-change: transform;
+  background: transparent;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 910;
+  box-sizing: border-box;
+}
+
+.ruler-thumb:active {
+  cursor: grabbing;
+}
+
+/* Needle Line */
+.ruler-thumb-line {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: calc(100% - 6px);
+  height: 2px;
+  background: #0B2545;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb-line {
+  background: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+/* Circular Bead on Thumb */
+.ruler-thumb::before {
+  content: '';
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0B2545;
+  box-shadow: 0 0 6px rgba(11, 37, 69, 0.5);
+  pointer-events: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb::before {
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.ruler-thumb:active::before {
+  transform: translateY(-50%) scale(1.4);
+}
+
+/* Live Percentage Badge */
+.ruler-thumb-pct {
+  position: absolute;
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  color: #0B2545;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  padding: 2.5px 6px;
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: 1.5px solid #0B2545;
+  box-shadow: 0 2px 10px rgba(11, 37, 69, 0.18);
+  transition: all 0.2s ease;
+}
+
+.artcraft-ruler.ruler-dark .ruler-thumb-pct {
+  color: #38bdf8;
+  background: rgba(6, 21, 39, 0.92);
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 600px) {
+  .ruler-thumb-pct {
+    font-size: 8.5px;
+    padding: 1.5px 4px;
+    right: calc(100% + 4px);
+  }
+}
+
+/* Flat Kinetic Text Stage */
+#kineticRulerStage {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 950 !important;
+  display: block !important;
+}
+
+/* BASE: LIGHT/WHITE BACKGROUND -> PURE SOLID BLACK/NAVY TEXT (#0B2545) */
+.k-ch {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--ruler-cw);
+  height: var(--ruler-cw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #0B2545 !important;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  white-space: pre;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.12s ease, opacity 0.12s ease;
+  text-shadow: 0 0 1px rgba(11, 37, 69, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .k-ch {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .k-ch {
+    font-size: 9.5px;
+  }
+}
+
+/* Dim & Active states on LIGHT background */
+.k-ch.k-dim {
+  color: #334155 !important;
+  opacity: 0.85;
+}
+
+.k-ch.k-active {
+  color: #000000 !important;
+  font-weight: 900;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.k-ch:hover {
+  color: #2E6BC4 !important;
+}
+
+/* DARK BACKGROUND -> PURE SOLID WHITE TEXT (#FFFFFF) WITH GLOW */
+.k-ch.k-on-dark {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.k-ch.k-on-dark.k-dim {
+  color: #94a3b8 !important;
+  opacity: 0.80;
+}
+
+.k-ch.k-on-dark.k-active {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  font-weight: 900;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
+}
+
+.k-ch.k-on-dark:hover {
+  color: #38bdf8 !important;
+}

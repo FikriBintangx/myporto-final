@@ -19,7 +19,7 @@
  *    GOOGLE_APPS_SCRIPT_URL = <URL_DEPLOYMENT_ANDA>
  */
 
-const SPREADSHEET_ID = "1POl1a7TytH3tBr3ihWZHZwCK6-AEeYilR_TmyNQYsK4";
+const SPREADSHEET_ID = "1bgi7v7oavbBIp07tQGZ7ToQMnb0DublscUP512yU9S0";
 const SHEET_NAME = "Visitors";
 
 const HEADERS = [

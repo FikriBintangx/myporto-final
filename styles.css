@@ -1928,3 +1928,12 @@ button.pill {
     gap: 0.6rem;
   }
 }
+/* Ensure no name in header logo */
+.nav-logo-text { display: none !important; }
+
+
+/* MANDATORY DARK CONTRAST RULE: All text over dark/navy/black background is pure white */
+.dark-section, .works-title .upright, .works-title .accent-italic-light,
+.works-title, .k-on-dark {
+  color: #FFFFFF !important;
+}

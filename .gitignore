@@ -33,3 +33,4 @@ test.ts
 *.pyc
 *.pyo
 .env*
+playground/
