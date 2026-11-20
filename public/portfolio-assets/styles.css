@@ -3918,8 +3918,10 @@ html.lenis, html.lenis body {
 .artcraft-ruler {
   position: fixed !important;
   right: 0 !important;
-  top: 48px !important;
+  top: 0 !important;
   bottom: 0 !important;
+  height: 100vh !important;
+  height: 100svh !important;
   width: 46px !important;
   z-index: 950 !important;
   background: rgba(250, 249, 246, 0.9) !important;

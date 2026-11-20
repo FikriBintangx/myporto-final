@@ -387,9 +387,11 @@
       const thumbY = p * (rH - 24);
       thumb.style.transform = `translate3d(0, ${thumbY.toFixed(1)}px, 0)`;
 
-      // Percentage Text
-      const pctStr = Math.round(p * 100).toString().padStart(3, '0') + '%';
-      thumbPct.textContent = pctStr;
+      // Percentage Text (if element exists)
+      if (thumbPct) {
+        const pctStr = Math.round(p * 100).toString().padStart(3, '0') + '%';
+        thumbPct.textContent = pctStr;
+      }
 
       // 2. Track & Scrubber Dark Zone Adaptivity via direct point sampling
       const isDark = isPixelDark(VW - 20, thumbY + 12);

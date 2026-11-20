@@ -21,17 +21,27 @@
   pointer-events: auto !important;
 }
 
-/* RULER STARTS BELOW HEADER SO IT NEVER OVERLAPS HEADER PHYSICALLY */
+/* RULER FULL-HEIGHT FROM TOP OF SCREEN */
 .artcraft-ruler,
 #artcraftRuler {
   position: fixed !important;
   right: 0 !important;
-  top: 56px !important;
+  top: 0 !important;
   bottom: 0 !important;
-  height: calc(100vh - 56px) !important;
+  height: 100vh !important;
+  height: 100svh !important;
   width: var(--ruler-rail-w, 44px) !important;
   z-index: 999999 !important;
   pointer-events: auto !important;
+}
+
+/* HIDE PERCENTAGE COMPLETELY */
+.ruler-thumb-pct,
+#rulerThumbPct {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 /* FOOTER FULL-BLEED (FULL WIDTH EDGE TO EDGE) UNDER RULER */
 .footer {
