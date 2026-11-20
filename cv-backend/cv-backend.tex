@@ -1,0 +1,100 @@
+%-------------------------------------------------------------
+% Fikri Bintang Purnomo - Backend Developer Resume (1 page, ATS-friendly)
+% Single column, no tables/graphics, real text layer (\pdfgentounicode).
+% Compile: pdflatex cv-backend.tex   (or upload to Overleaf)
+%-------------------------------------------------------------
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage[margin=0.55in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+\pagestyle{empty}
+
+\titleformat{\section}{\vspace{-6pt}\scshape\large\bfseries}{}{0em}{}[\titlerule\vspace{-4pt}]
+
+\newcommand{\project}[2]{%
+  \item[]\begin{tabularx}{\linewidth}{X r}
+    \textbf{#1} & \small\emph{#2}\\
+  \end{tabularx}\vspace{-6pt}}
+\newlist{bullets}{itemize}{1}
+\setlist[bullets]{label=\textbullet, leftmargin=1.2em, itemsep=1pt, topsep=2pt}
+\setlist[itemize]{leftmargin=0em, itemsep=0pt, topsep=0pt}
+
+\begin{document}
+
+%----------HEADER----------
+\begin{center}
+  {\Huge\bfseries Fikri Bintang Purnomo}\\[3pt]
+  Backend Developer \textbar{} Go $\cdot$ Python $\cdot$ PostgreSQL $\cdot$ Redis\\[2pt]
+  \small
+  \href{https://github.com/FikriBintangx}{github.com/FikriBintangx} $|$
+  \href{https://fikribintang.web.id}{fikribintang.web.id} $|$
+  [EMAIL] $|$ [PHONE] $|$ [CITY], Indonesia
+\end{center}
+
+%----------SUMMARY----------
+\section{Summary}
+Backend developer focused on high-throughput APIs, PostgreSQL performance, and concurrent services in Go and Node.js. Built a gRPC vs REST benchmark engine that cut P99 latency by 71.6\% at 10,000+ req/sec, a pgvector semantic-search pipeline with async indexing workers, and a Redis-backed auth gateway. Prefers measuring before optimizing.
+
+%----------SKILLS----------
+\section{Technical Skills}
+\small
+\begin{itemize}
+  \item[] \textbf{Languages:} Go, Python (FastAPI, Flask), TypeScript / Node.js, SQL
+  \item[] \textbf{Backend \& Messaging:} REST, gRPC + Protocol Buffers, RabbitMQ, Kafka, event-driven architecture, worker queues
+  \item[] \textbf{Databases \& Caching:} PostgreSQL (indexing, EXPLAIN ANALYZE tuning, connection pooling, pgvector), Redis (caching, sliding-window rate limiting, pub/sub), MongoDB, Supabase
+  \item[] \textbf{Infrastructure:} Docker, Linux, Nginx, GitHub Actions CI/CD, Cloudflare Workers, Vercel, Zero Trust access
+  \item[] \textbf{Testing \& Observability:} load testing (k6 / wrk), P50/P95/P99 latency profiling, structured logging
+\end{itemize}
+\normalsize
+
+%----------PROJECTS----------
+\section{Projects}
+\begin{itemize}
+
+\project{SmartOps Dual-Engine --- gRPC vs REST Benchmark}{Go, Node.js, gRPC, Protobuf, Docker}
+\begin{bullets}
+  \item Cut P99 latency by 71.6\% under 10,000+ req/sec concurrent load by moving the hot path from JSON/REST to gRPC with Protocol Buffers and persistent connection reuse.
+  \item Built a reproducible benchmark harness that runs both engines against identical payloads and reports P50/P95/P99 and throughput per run.
+  \item Containerized both services with Docker so results are comparable across machines.
+\end{bullets}
+
+\project{JurnalKu AI \& NotesBrain --- Semantic Search Backend}{Python, FastAPI, PostgreSQL + pgvector}
+\begin{bullets}
+  \item Kept API response times flat while indexing thousands of papers and documents by moving embedding and indexing into asynchronous worker queues off the HTTP request path.
+  \item Implemented vector similarity search with pgvector in PostgreSQL, so semantic and relational queries share one database instead of a separate vector store.
+  \item Added idempotent job handling so failed indexing jobs retry without creating duplicate records.
+\end{bullets}
+
+\project{Gatekeeper --- Auth \& Reverse-Proxy Gateway}{Go / Node.js, Redis, Nginx}
+\begin{bullets}
+  \item Blocked abusive traffic per client without penalizing normal users by implementing Redis sliding-window rate limiting in a reverse-proxy middleware.
+  \item Closed timing side channels in credential checks by using constant-time comparison for tokens and secrets.
+  \item Built a token rotation pipeline (short-lived access + rotating refresh tokens) with revocation of reused refresh tokens.
+\end{bullets}
+
+\project{Wahana Mobile API \& Admin Backoffice}{Node.js, Express, SQL, REST}
+\begin{bullets}
+  \item Reduced query overhead by 40\% by removing redundant JOINs and adding targeted indexes on the relational schema behind the admin backoffice.
+  \item Standardized secure REST endpoints (input validation, consistent error format, auth middleware) shared by the mobile app and admin dashboard.
+\end{bullets}
+
+\end{itemize}
+
+%----------EDUCATION----------
+\section{Education}
+\begin{itemize}
+  \project{[UNIVERSITY] --- [DEGREE], [MAJOR]}{[YEAR -- YEAR]}
+\end{itemize}
+
+\end{document}

@@ -3922,12 +3922,13 @@ html.lenis, html.lenis body {
   bottom: 0 !important;
   height: 100vh !important;
   height: 100svh !important;
-  width: 46px !important;
-  z-index: 950 !important;
-  background: rgba(250, 249, 246, 0.9) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  width: var(--ruler-rail-w, 68px) !important;
+  z-index: 999990 !important;
+  background: transparent !important;
+  backdrop-filter: blur(18px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
   border-left: 1px solid rgba(11, 37, 69, 0.12) !important;
+  box-shadow: -6px 0 28px rgba(11, 37, 69, 0.06) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;

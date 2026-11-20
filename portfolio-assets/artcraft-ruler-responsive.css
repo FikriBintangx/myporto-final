@@ -49,7 +49,8 @@
   top: 0 !important;
   bottom: 0 !important;
   width: var(--ruler-rail-w) !important;
-  z-index: 900 !important;
+  z-index: 999990 !important;
+  pointer-events: auto !important;
   background: transparent !important;
   backdrop-filter: blur(16px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
@@ -159,18 +160,31 @@
   }
 }
 
-/* Flat Kinetic Text Stage */
+/* ==========================================================================
+   STACKING ORDER (absolute, no exceptions)
+     #site-nav / .nav ........ 10000000
+     #kineticRulerStage ......   999995  (labels)
+     #artcraftRuler ..........   999990  (track, ticks, thumb)
+     page content ............   1 - 100
+   ========================================================================== */
+.artcraft-ruler.is-scrubbing,
+.artcraft-ruler.is-scrubbing .ruler-thumb {
+  cursor: grabbing !important;
+}
+
+/* Stage is a click-through layer; individual characters opt back in from JS
+   only while visible. */
 #kineticRulerStage {
   position: fixed !important;
   inset: 0 !important;
   pointer-events: none !important;
-  z-index: 950 !important;
+  z-index: 999995 !important;
   display: block !important;
+  contain: layout style;
 }
 
-/* BASE: LIGHT/WHITE BACKGROUND -> PURE SOLID BLACK/NAVY TEXT (#0B2545) */
 .k-ch {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   width: var(--ruler-cw);
@@ -183,62 +197,34 @@
   font-weight: 800;
   letter-spacing: 0.02em;
   line-height: 1;
-  color: #0B2545 !important;
+  color: #0B2545;
+  opacity: 0;
   transform-origin: 50% 50%;
-  will-change: transform;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   white-space: pre;
-  pointer-events: auto;
+  pointer-events: none;
   cursor: pointer;
-  transition: color 0.12s ease, opacity 0.12s ease;
-  text-shadow: 0 0 1px rgba(11, 37, 69, 0.3);
+  user-select: none;
+  -webkit-user-select: none;
+  /* Only color eases; transform/opacity are written per frame and must not lag. */
+  transition: color 0.15s ease, text-shadow 0.15s ease;
 }
 
-@media (max-width: 1024px) {
-  .k-ch {
-    font-size: 11px;
-  }
-}
+@media (max-width: 1024px) { .k-ch { font-size: 11px; } }
+@media (max-width: 600px)  { .k-ch { font-size: 9.5px; } }
 
-@media (max-width: 600px) {
-  .k-ch {
-    font-size: 9.5px;
-  }
-}
+/* Light backdrop -> navy */
+.k-ch.k-dim    { color: #334155; }
+.k-ch.k-active { color: #0B2545; font-weight: 900; }
+.k-ch:hover    { color: #2E6BC4; }
 
-/* Dim & Active states on LIGHT background */
-.k-ch.k-dim {
-  color: #334155 !important;
-  opacity: 0.85;
-}
+/* Dark backdrop -> white */
+.k-ch.k-on-dark          { color: #FFFFFF; text-shadow: 0 0 10px rgba(56, 189, 248, 0.35); }
+.k-ch.k-on-dark.k-dim    { color: #94a3b8; }
+.k-ch.k-on-dark.k-active { color: #FFFFFF; text-shadow: 0 0 14px rgba(56, 189, 248, 0.6); }
+.k-ch.k-on-dark:hover    { color: #38bdf8; }
 
-.k-ch.k-active {
-  color: #000000 !important;
-  font-weight: 900;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-}
-
-.k-ch:hover {
-  color: #2E6BC4 !important;
-}
-
-/* DARK BACKGROUND -> PURE SOLID WHITE TEXT (#FFFFFF) WITH GLOW */
-.k-ch.k-on-dark {
-  color: #FFFFFF !important;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-}
-
-.k-ch.k-on-dark.k-dim {
-  color: #94a3b8 !important;
-  opacity: 0.80;
-}
-
-.k-ch.k-on-dark.k-active {
-  color: #FFFFFF !important;
-  opacity: 1 !important;
-  font-weight: 900;
-  text-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
-}
-
-.k-ch.k-on-dark:hover {
-  color: #38bdf8 !important;
+@media (prefers-reduced-motion: reduce) {
+  .k-ch { transition: none; }
 }

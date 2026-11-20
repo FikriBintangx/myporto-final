@@ -1,26 +1,69 @@
-// ============ INITIALIZE LENIS SMOOTH SCROLL ============
-let lenis = null;
+// ============ LENIS SMOOTH SCROLL + GSAP TICKER SYNC ============
+// One clock drives everything: gsap.ticker -> lenis.raf -> ScrollTrigger.update.
+// `let` at script top level does not create a window property, so the instance
+// is exposed explicitly; the ruler and swarm scripts read window.lenis.
+const SCROLL_EASE = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)); // expo-out
+const NAV_OFFSET = () => {
+  const nav = document.getElementById('site-nav');
+  return nav ? -(nav.offsetHeight + 12) : -72;
+};
 
-if (typeof Lenis !== 'undefined') {
+let lenis = null;
+const prefersReducedMotion =
+  window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
   lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    lerp: 0.11,              // per-frame catch-up; frame-rate independent in Lenis 1.1
+    smoothWheel: true,
+    syncTouch: false,        // native momentum on touch: no rubber-band lag
+    wheelMultiplier: 1,
+    touchMultiplier: 1,
     orientation: 'vertical',
     gestureOrientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 1,
-    touchMultiplier: 2,
+    autoRaf: false,
   });
+  window.lenis = lenis;
 
-  // Sync with GSAP ScrollTrigger
-  if (typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+  if (typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+    }
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+  } else {
+    const loop = (t) => { lenis.raf(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
   }
+
+  // Layout shifts (loader exit, images, swarm rebuild) change scroll height.
+  if ('ResizeObserver' in window) {
+    let pending = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(pending);
+      pending = requestAnimationFrame(() => {
+        lenis.resize();
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+      });
+    }).observe(document.body);
+  }
+
+  window.dispatchEvent(new CustomEvent('lenis:ready', { detail: lenis }));
 }
+
+// Shared smooth-scroll helper for anchors, ruler labels and other scripts.
+window.smoothScrollTo = function (target, opts) {
+  const o = Object.assign({ offset: NAV_OFFSET(), duration: 1.1, immediate: false }, opts || {});
+  if (lenis) {
+    lenis.scrollTo(target, { offset: o.offset, duration: o.duration, easing: SCROLL_EASE, immediate: o.immediate, force: true });
+    return;
+  }
+  const y = typeof target === 'number'
+    ? target
+    : target.getBoundingClientRect().top + window.scrollY + o.offset;
+  window.scrollTo({ top: Math.max(0, y), behavior: o.immediate ? 'auto' : 'smooth' });
+};
 
 // ============ APPLE HELLO LOADER ============
 (function () {
@@ -386,23 +429,20 @@ if (typeof Lenis !== 'undefined') {
 })();
 
 // ============ SMOOTH ANCHOR NAVIGATION (WITH LENIS COMPATIBILITY) ============
-document.querySelectorAll('a[href^="#"]').forEach((a) => {
-  a.addEventListener('click', function (ev) {
-    const id = this.getAttribute('href');
-    if (!id || id.length < 2) return;
-    const target = document.querySelector(id);
-    if (!target) return;
+// Delegated so links added later (modal CTA, i18n re-render) work too.
+document.addEventListener('click', (ev) => {
+  if (ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+  const a = ev.target.closest && ev.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute('href');
+  if (!id || id.length < 2) return;
+  let target = null;
+  try { target = document.querySelector(id); } catch (_) { return; }
+  if (!target) return;
 
-    ev.preventDefault();
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -60, duration: 1.2 });
-    } else {
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 60,
-        behavior: 'smooth',
-      });
-    }
-  });
+  ev.preventDefault();
+  window.smoothScrollTo(target);
+  if (history.replaceState) history.replaceState(null, '', id);
 });
 
 // Marquee pause on hover

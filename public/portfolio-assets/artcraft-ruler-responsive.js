@@ -1,14 +1,26 @@
 /* ==========================================================================
-   ARTCRAFT KINETIC NAVIGATION RULER · FULLY RESPONSIVE PRODUCTION ENGINE
-   Pure Function of scrollY · GPU Composited · Zero Layout Thrashing
-   Rock-Solid Horizon, Section & Card Geometric Contrast Engine
+   ARTCRAFT KINETIC NAVIGATION RULER
+   Labels ride the right rail as a pure function of scroll position.
+
+   Modeled on getartcraft.com. Per section, one state at a time:
+     queue  -> horizontal word, right-aligned in a fixed row at the bottom-right
+     enter  -> each character turns a corner (right, then up) onto the rail,
+               rotating 0deg -> -90deg; the last letter leads
+     dwell  -> word stands vertical on the rail and climbs with section progress
+     exit   -> each character turns a corner (up, then left) into a fixed row
+               at the top-right, rotating -90deg -> 0deg; the last letter leads
+     piled  -> horizontal word resting in its top-right row
+   Rows are fixed per section, so words never reflow while others move.
+
+   Frame budget: all DOM geometry is read in measure() (resize, load, layout
+   change). The per-frame path is arithmetic plus transform/opacity writes,
+   driven by the same gsap.ticker that drives Lenis.
    ========================================================================== */
 
 (function () {
   "use strict";
 
-  // Navigation definition mapped to portfolio sections
-  const NAV = (window.ARTCRAFT_NAV && Array.isArray(window.ARTCRAFT_NAV) && window.ARTCRAFT_NAV.length > 0)
+  const NAV = (Array.isArray(window.ARTCRAFT_NAV) && window.ARTCRAFT_NAV.length > 0)
     ? window.ARTCRAFT_NAV
     : [
         { id: 'hero',      label: 'OVERVIEW' },
@@ -19,441 +31,385 @@
         { id: 'kontak',    label: 'KONTAK' }
       ];
 
-  const ROW_GAP = 8;
-  const STAGGER_WINDOW = 0.58;
-  const BOW_STRENGTH = 0.32;
+  // Fraction of the viewport over which a label enters / exits.
+  const TRANSITION_VH = 0.35;
+  const ROW_GAP = 7;
+  // Share of the transition each character spends moving (rest is stagger).
+  const STAGGER_WINDOW = 0.55;
+  const LIGHT_SECTION_SELECTOR = '#tentang, #kontak';
+  const WHITE_CARD_SELECTOR = '.card, .receipt, .about-card, .ticket';
 
-  let RAIL_W = 68;
-  let CW = 16;
-  let VW = window.innerWidth;
-  let VH = window.innerHeight;
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  const lerp = (a, b, t) => a + (b - a) * t;
+    const easeInOutCubic = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-  let RAIL_X, RIGHT_X, QUEUE_TOP_Y, PILE_TOP_Y, RAIL_ENTRY_Y, RAIL_EXIT_Y;
+  // ---- Layout (recomputed on resize) ----
+  const L = {
+    VW: 0, VH: 0,
+    RAIL_W: 68,
+    CW: 16,
+    RAIL_X: 0,       // center of the rail track
+    TOP: 80,         // first top-right pile row (below the navbar)
+    BOTTOM: 0,       // last bottom-right queue row
+    ROW: 22,         // row pitch of queue / pile words
+    ROW_END_X: 0,    // right edge of queue / pile words (just left of the rail)
+    COUNT: 1,
+    maxScroll: 1
+  };
 
   function recalcLayout() {
-    VW = window.innerWidth;
-    VH = window.innerHeight;
+    L.VW = window.innerWidth;
+    L.VH = window.innerHeight;
+    L.RAIL_W = L.VW <= 600 ? 32 : (L.VW <= 1024 ? 44 : 68);
 
-    // Responsive rail width and char cell width
-    if (VW <= 600) {
-      RAIL_W = 32;
-      CW = 11;
-    } else if (VW <= 1024) {
-      RAIL_W = 44;
-      CW = 13;
-    } else {
-      RAIL_W = 68;
-      CW = 16;
-    }
+    const fsize = L.VW <= 600 ? 9.5 : (L.VW <= 1024 ? 11 : 13.5);
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = `800 ${fsize}px 'Space Mono', ui-monospace, monospace`;
+    L.CW = Math.max(L.VW <= 600 ? 10 : 13, Math.ceil(ctx.measureText('M').width) + 2);
 
-    document.documentElement.style.setProperty('--ruler-rail-w', RAIL_W + 'px');
-    document.documentElement.style.setProperty('--ruler-cw', CW + 'px');
+    L.RAIL_X = L.VW - L.RAIL_W / 2;
 
-    RAIL_X       = VW - (RAIL_W * 0.48);
-    RIGHT_X      = VW - RAIL_W - (VW <= 600 ? 6 : 14);
-    QUEUE_TOP_Y  = VH - (VW <= 600 ? 120 : 160);
-    PILE_TOP_Y   = (VW <= 600 ? 50 : 75);
-    RAIL_ENTRY_Y = VH * 0.80;
-    RAIL_EXIT_Y  = VH * 0.20;
+    const nav = document.getElementById('site-nav');
+    const navBottom = nav ? clamp(nav.getBoundingClientRect().bottom, 0, 140) : 64;
+    L.ROW = L.CW + ROW_GAP;
+    L.TOP = navBottom + 12 + L.ROW / 2;
+    L.BOTTOM = L.VH - (L.VW <= 600 ? 20 : 28);
+    L.ROW_END_X = L.VW - L.RAIL_W - (L.VW <= 600 ? 6 : 10);
+
+    const root = document.documentElement.style;
+    root.setProperty('--ruler-rail-w', L.RAIL_W + 'px');
+    root.setProperty('--ruler-cw', L.CW + 'px');
   }
 
-  function measureCW() {
-    const c = document.createElement('canvas').getContext('2d');
-    const fsize = VW <= 600 ? "9.5px" : (VW <= 1024 ? "11px" : "13.5px");
-    c.font = `800 ${fsize} 'Space Mono', ui-monospace, monospace`;
-    const measured = Math.ceil(c.measureText('M').width) + 2;
-    CW = Math.max(VW <= 600 ? 10 : 14, measured);
-    document.documentElement.style.setProperty('--ruler-cw', CW + 'px');
+  function currentScroll() {
+    const l = window.lenis;
+    return l && typeof l.scroll === 'number' ? l.scroll : (window.scrollY || document.documentElement.scrollTop || 0);
   }
 
-  // ---- Mathematical Primitives ----
-  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
-  const lerp  = (a, b, t) => a + (b - a) * t;
-  const easeInOutCubic = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
-  function quadBezier(p0, pc, p1, t) {
-    const u = 1 - t;
-    return {
-      x: u * u * p0.x + 2 * u * t * pc.x + t * t * p1.x,
-      y: u * u * p0.y + 2 * u * t * pc.y + t * t * p1.y
-    };
+  function computeMaxScroll() {
+    const l = window.lenis;
+    if (l && typeof l.limit === 'number' && l.limit > 0) return l.limit;
+    return Math.max(1, document.documentElement.scrollHeight - L.VH);
   }
 
-  function bowControl(p0, p1) {
-    const dx = p1.x - p0.x;
-    const dy = p1.y - p0.y;
-    const len = Math.hypot(dx, dy) || 1;
-    const px = dy / len;
-    const py = -dx / len;
-    const bow = len * BOW_STRENGTH;
-    return {
-      x: (p0.x + p1.x) / 2 + px * bow,
-      y: (p0.y + p1.y) / 2 + py * bow
-    };
+  // ---- Contrast map: document-space zones, rebuilt in measure() ----
+  const Z = { light: [], heroLight: null, heroDark: null, cards: [] };
+
+  function docRect(el, sy) {
+    const r = el.getBoundingClientRect();
+    return { top: r.top + sy, bottom: r.bottom + sy, left: r.left, right: r.right, h: r.height };
   }
 
-  function queuePos(slot, i, N) {
-    return {
-      x: RIGHT_X - (N - 1 - i) * CW,
-      y: QUEUE_TOP_Y + slot * (CW + ROW_GAP)
-    };
-  }
-  function railPos(i, railY) {
-    return {
-      x: RAIL_X,
-      y: railY - i * CW
-    };
-  }
+  function buildContrastMap(sy) {
+    Z.light = [...document.querySelectorAll(LIGHT_SECTION_SELECTOR)].map(el => docRect(el, sy));
+    Z.cards = [...document.querySelectorAll(WHITE_CARD_SELECTOR)]
+      .map(el => docRect(el, sy))
+      .filter(r => r.h > 0);
 
-  function pilePos(slot, i, N) {
-    return {
-      x: RIGHT_X - (N - 1 - i) * CW,
-      y: PILE_TOP_Y + slot * (CW + ROW_GAP)
-    };
-  }
-  function isPixelDark(screenX, screenY) {
-    const probeY = clamp(screenY, 2, window.innerHeight - 2);
-    const probeX = Math.max(10, Math.min(screenX, window.innerWidth - 30));
-
-    // 1. TENTANG & KONTAK SECTIONS ARE 100% LIGHT IVORY -> SOLID BLACK/NAVY TEXT!
-    const lightSections = document.querySelectorAll('#tentang, #kontak');
-    for (let i = 0; i < lightSections.length; i++) {
-      const r = lightSections[i].getBoundingClientRect();
-      if (probeY >= r.top && probeY <= r.bottom) {
-        return false; // IN TENTANG / KONTAK -> SOLID BLACK/NAVY TEXT (#0B2545)
-      }
-    }
-
-    // 2. HERO SECTION
     const hero = document.getElementById('hero');
-    const horizon = document.querySelector('.waves.celestial-horizon, .horizon-layer-1');
+    Z.heroLight = Z.heroDark = null;
     if (hero) {
-      const hr = hero.getBoundingClientRect();
-      const waveTop = horizon ? horizon.getBoundingClientRect().top : hr.bottom - 120;
-      // 2a. Upper hero (above waves) -> LIGHT IVORY/GRID -> SOLID BLACK/NAVY TEXT!
-      if (probeY >= hr.top && probeY < waveTop + 15) {
-        return false;
-      }
-      // 2b. Hero celestial waves -> DEEP BLUE WAVES -> SOLID WHITE TEXT (#FFFFFF)
-      if (probeY >= waveTop + 15 && probeY <= hr.bottom + 15) {
-        return true;
-      }
+      const hr = docRect(hero, sy);
+      const horizon = document.querySelector('.waves.celestial-horizon, .horizon-layer-1');
+      const waveTop = horizon ? docRect(horizon, sy).top : hr.bottom - 120;
+      Z.heroLight = { top: hr.top, bottom: waveTop + 15 };
+      Z.heroDark = { top: waveTop + 15, bottom: hr.bottom + 15 };
     }
-
-    // 3. WHITE CARDS / RECEIPTS / TICKETS IN KARYA -> SOLID BLACK/NAVY TEXT!
-    const whiteCards = document.querySelectorAll('.card, .receipt, .about-card, .ticket');
-    for (let i = 0; i < whiteCards.length; i++) {
-      const cr = whiteCards[i].getBoundingClientRect();
-      if (cr.height > 0 && probeY >= cr.top + 10 && probeY <= cr.bottom - 10 && probeX >= cr.left && probeX <= cr.right) {
-        return false; // ON WHITE CARD -> SOLID BLACK/NAVY TEXT (#0B2545)
-      }
-    }
-
-    // 4. EVERYWHERE ELSE IS DARK BLUE / BLACK COSMOS -> SOLID WHITE TEXT (#FFFFFF) WITH GLOW!
-    // (Works starfield & headings, Publikasi, Proses, Footer)
-    return true; // ON DARK COSMOS -> SOLID WHITE TEXT (#FFFFFF)
   }
 
-  // ---- Section Item Model ----
-  class Item {
-    constructor(def, idx, stageEl) {
+  // Pure lookup: true when the backdrop at (screenX, screenY) is dark.
+  function isDarkAt(screenX, screenY, sy) {
+    const y = clamp(screenY, 2, L.VH - 2) + sy;
+    const x = clamp(screenX, 10, L.VW - 30);
+
+    for (let i = 0; i < Z.light.length; i++) {
+      const r = Z.light[i];
+      if (y >= r.top && y <= r.bottom) return false;
+    }
+    if (Z.heroLight && y >= Z.heroLight.top && y < Z.heroLight.bottom) return false;
+    if (Z.heroDark && y >= Z.heroDark.top && y <= Z.heroDark.bottom) return true;
+    for (let i = 0; i < Z.cards.length; i++) {
+      const r = Z.cards[i];
+      if (y >= r.top + 10 && y <= r.bottom - 10 && x >= r.left && x <= r.right) return false;
+    }
+    return true;
+  }
+
+  // ---- Navigation ----
+  function glideTo(target, opts) {
+    if (typeof window.smoothScrollTo === 'function') {
+      window.smoothScrollTo(target, opts);
+      return;
+    }
+    const y = typeof target === 'number'
+      ? target
+      : target.getBoundingClientRect().top + window.scrollY - 72;
+    if (window.lenis) window.lenis.scrollTo(y, Object.assign({ force: true }, opts));
+    else window.scrollTo({ top: y, behavior: opts && opts.immediate ? 'auto' : 'smooth' });
+  }
+
+  // ---- One label (section) ----
+  class Label {
+    constructor(def, idx, stage) {
       this.idx = idx;
       this.id = def.id;
       this.label = def.label;
       this.N = def.label.length;
       this.el = document.getElementById(def.id);
-      this.sectionTop = 0;
-      this.sectionH = 0;
+      this.top = 0;
+      this.bottom = 0;
+      this.state = 'queue';
+      this.t = 0;
 
-      this.chars = [...def.label].map((ch, i) => {
+      this.chars = [...def.label].map(ch => {
         const span = document.createElement('span');
         span.className = 'k-ch' + (ch === ' ' ? ' k-dim' : '');
         span.textContent = ch;
-        span.setAttribute('data-target', def.id);
+        span.dataset.target = def.id;
         span.title = `Lompat ke ${def.label}`;
-        span.addEventListener('click', (e) => {
+        span.addEventListener('pointerdown', e => e.stopPropagation());
+        span.addEventListener('click', e => {
           e.stopPropagation();
-          this.jumpTo();
+          if (this.el) glideTo(this.el);
         });
-        stageEl.appendChild(span);
-        return span;
+        stage.appendChild(span);
+        return { span, tf: '', op: '', dark: null, active: null, hit: null };
       });
-
-      this.state = 'queue';
-      this.morph = 0;
-      this.dwellT = 0;
-      this.queueSlot = 0;
-      this.pileSlot = 0;
     }
 
-    measure() {
+    measure(sy) {
       if (!this.el) return;
       const r = this.el.getBoundingClientRect();
-      this.sectionTop = r.top + (window.scrollY || window.pageYOffset);
-      this.sectionH = Math.max(r.height, 400);
+      this.top = r.top + sy;
+      this.bottom = this.top + Math.max(r.height, 1);
     }
 
-    jumpTo() {
-      const top = Math.max(0, this.sectionTop - 30);
-      if (window.lenis) {
-        window.lenis.scrollTo(top, { duration: 1.2 });
-      } else {
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-    }
-
+    // Reference line is the viewport center: a section is "active" while the
+    // center line lies inside it.
     classify(sy) {
-      const enterLead = VH * 0.82;
-      const exitTrail = VH * 0.50;
-      const enterStart = this.sectionTop - enterLead;
-      const enterEnd   = this.sectionTop;
-      const exitStart  = this.sectionTop + this.sectionH;
-      const exitEnd    = exitStart + exitTrail;
+      const ref = sy + L.VH * 0.5;
+      const span = L.VH * TRANSITION_VH;
+      if (!this.el || ref < this.top - span) { this.state = 'queue'; this.t = 0; }
+      else if (ref < this.top) { this.state = 'enter'; this.t = (ref - (this.top - span)) / span; }
+      else if (ref < this.bottom) { this.state = 'dwell'; this.t = (ref - this.top) / Math.max(1, this.bottom - this.top); }
+      else if (ref < this.bottom + span) { this.state = 'exit'; this.t = (ref - this.bottom) / span; }
+      else { this.state = 'piled'; this.t = 1; }
+    }
 
-      if (sy < enterStart) {
-        this.state = 'queue';
-        this.morph = 0;
-      } else if (sy < enterEnd) {
-        this.state = 'enter';
-        this.morph = (sy - enterStart) / (enterEnd - enterStart);
-      } else if (sy < exitStart) {
-        this.state = 'dwell';
-        this.dwellT = (sy - enterEnd) / Math.max(1, (exitStart - enterEnd));
-      } else if (sy < exitEnd) {
-        this.state = 'exit';
-        this.morph = (sy - exitStart) / (exitEnd - exitStart);
-      } else {
-        this.state = 'piled';
-        this.morph = 1;
-      }
+    // Fixed rows: section k always queues / piles in the same row.
+    queueRowY() { return L.BOTTOM - (L.COUNT - 1 - this.idx) * L.ROW; }
+    pileRowY() { return L.TOP + this.idx * L.ROW; }
+    rowCharX(i) { return L.ROW_END_X - (this.N - 1 - i + 0.5) * L.CW; }
+
+    // Rail span shared by every section: just above the queue block, down from
+    // just below the pile block. Values are the center of character 0.
+    railStartY() { return L.BOTTOM - (L.COUNT - 1) * L.ROW - L.ROW; }
+    railEndY() {
+      const pileBottom = L.TOP + (L.COUNT - 1) * L.ROW + L.ROW;
+      return Math.min(this.railStartY(), pileBottom + (this.N - 0.5) * L.CW);
     }
 
     render(sy) {
       const N = this.N;
-      const isDwelling = (this.state === 'dwell');
+      const CW = L.CW;
+      const RX = L.RAIL_X;
+      const startY = this.railStartY();
+      const endY = this.railEndY();
+      const qy = this.queueRowY();
+      const py = this.pileRowY();
+      const active = this.state === 'dwell';
 
-      this.chars.forEach((span, i) => {
-        let x, y, rot = 0;
-        const stagDelay = (N <= 1 ? 0 : (i / (N - 1))) * (1 - STAGGER_WINDOW);
-        const t = clamp((this.morph - stagDelay) / STAGGER_WINDOW, 0, 1);
-        const e = easeInOutCubic(t);
+      for (let i = 0; i < N; i++) {
+        const c = this.chars[i];
+        // The last letter (i = N-1) leads on the way in and on the way out.
+        const lead = N <= 1 ? 0 : (N - 1 - i) / (N - 1);
+        const k = clamp((this.t - lead * (1 - STAGGER_WINDOW)) / STAGGER_WINDOW, 0, 1);
+        const e = easeInOutCubic(k);
 
-        if (this.state === 'queue') {
-          ({ x, y } = queuePos(this.queueSlot, i, N));
-          rot = 0;
-          span.classList.remove('k-active');
-          span.style.opacity = '';
-          span.style.pointerEvents = 'auto';
-        } else if (this.state === 'enter') {
-          const p0 = queuePos(this.queueSlot, i, N);
-          const p1 = railPos(i, RAIL_ENTRY_Y);
-          const c  = bowControl(p0, p1);
-          ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = lerp(0, -90, e);
-          span.classList.remove('k-active');
-          span.style.opacity = '';
-          span.style.pointerEvents = 'auto';
-        } else if (this.state === 'dwell') {
-          const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
-          ({ x, y } = railPos(i, railY));
-          rot = -90;
-          span.classList.add('k-active');
-          span.style.opacity = '1';
-          span.style.pointerEvents = 'auto';
-        } else if (this.state === 'exit') {
-          const p0 = railPos(i, RAIL_EXIT_Y);
-          const p1 = pilePos(this.pileSlot, i, N);
-          const c  = bowControl(p0, p1);
-          ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = lerp(-90, 0, e);
-          span.classList.remove('k-active');
-          span.style.opacity = '';
-          span.style.pointerEvents = 'auto';
-        } else { // piled
-          ({ x, y } = pilePos(this.pileSlot, i, N));
-          rot = 0;
-          span.classList.remove('k-active');
-          span.style.opacity = '';
-          span.style.pointerEvents = 'auto';
+        let cx, cy, rot;
+        switch (this.state) {
+          case 'queue':
+            cx = this.rowCharX(i); cy = qy; rot = 0;
+            break;
+          case 'enter': {
+            // Corner turn: control point sits at (rail x, queue row y), so the
+            // path leaves the row heading right and arrives on the rail heading up.
+            const x0 = this.rowCharX(i), y0 = qy;
+            const x1 = RX, y1 = startY - i * CW;
+            const u = 1 - e;
+            cx = u * u * x0 + 2 * u * e * x1 + e * e * x1;
+            cy = u * u * y0 + 2 * u * e * y0 + e * e * y1;
+            rot = lerp(0, -90, e);
+            break;
+          }
+          case 'dwell':
+            cx = RX; cy = lerp(startY, endY, this.t) - i * CW; rot = -90;
+            break;
+          case 'exit': {
+            // Corner turn: control point at (rail x, pile row y): up, then left.
+            const x0 = RX, y0 = endY - i * CW;
+            const x1 = this.rowCharX(i), y1 = py;
+            const u = 1 - e;
+            cx = u * u * x0 + 2 * u * e * x0 + e * e * x1;
+            cy = u * u * y0 + 2 * u * e * y1 + e * e * y1;
+            rot = lerp(-90, 0, e);
+            break;
+          }
+          default: // piled
+            cx = this.rowCharX(i); cy = py; rot = 0;
         }
 
-        // Apply dynamic contrast per character based on underlying element
-        const inDark = isPixelDark(x, y);
-        span.classList.toggle('k-on-dark', inDark);
+        // Spans are CW x CW boxes positioned by their top-left corner.
+        const tf = `translate3d(${(cx - CW / 2).toFixed(1)}px,${(cy - CW / 2).toFixed(1)}px,0) rotate(${rot.toFixed(1)}deg)`;
+        if (tf !== c.tf) { c.span.style.transform = tf; c.tf = tf; }
 
-        // Hardware composited transform
-        span.style.transform = `translate3d(${(x - CW / 2).toFixed(1)}px, ${(y - CW / 2).toFixed(1)}px, 0) rotate(${rot.toFixed(1)}deg)`;
-      });
+        if (c.op !== '1') { c.span.style.opacity = '1'; c.op = '1'; }
+        if (c.hit !== true) { c.span.style.pointerEvents = 'auto'; c.hit = true; }
+        if (active !== c.active) { c.span.classList.toggle('k-active', active); c.active = active; }
+
+        const dark = isDarkAt(cx, cy, sy);
+        if (dark !== c.dark) { c.span.classList.toggle('k-on-dark', dark); c.dark = dark; }
+      }
     }
   }
 
-  // ---- Retina Canvas Engineering Ticks with Per-Tick Contrast ----
-  function drawRulerTicks(rulerCanvas) {
-    if (!rulerCanvas) return;
+  // ---- Canvas ticks with per-tick contrast ----
+  function drawTicks(canvas, sy) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = RAIL_W;
-    const h = VH;
+    const w = L.RAIL_W;
+    const h = L.VH;
+    const W = Math.round(w * dpr);
+    const H = Math.round(h * dpr);
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
 
-    if (rulerCanvas.width !== Math.round(w * dpr) || rulerCanvas.height !== Math.round(h * dpr)) {
-      rulerCanvas.width = Math.round(w * dpr);
-      rulerCanvas.height = Math.round(h * dpr);
-    }
-
-    const ctx = rulerCanvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    const totalLines = 100;
-    const step = h / totalLines;
-    const isMobile = (w <= 36);
+    const total = 100;
+    const step = h / total;
+    const compact = w <= 36;
+    ctx.font = compact ? "800 7.5px 'Space Mono', monospace" : "800 8.5px 'Space Mono', monospace";
 
-    for (let i = 0; i <= totalLines; i++) {
+    for (let i = 0; i <= total; i++) {
       const y = i * step;
-      const isMajor = (i % 10 === 0);
-      const isMid = (i % 5 === 0 && !isMajor);
-      const len = isMajor ? (isMobile ? 12 : 18) : (isMid ? (isMobile ? 7 : 11) : (isMobile ? 4 : 6));
-      const stroke = isMajor ? 1.5 : (isMid ? 1.0 : 0.6);
-      const alpha = isMajor ? 0.80 : (isMid ? 0.45 : 0.22);
+      const major = i % 10 === 0;
+      const mid = !major && i % 5 === 0;
+      const len = major ? (compact ? 12 : 18) : mid ? (compact ? 7 : 11) : (compact ? 4 : 6);
+      const alpha = major ? 0.8 : mid ? 0.45 : 0.22;
+      const dark = isDarkAt(L.VW - 10, y, sy);
 
-      // Check darkness for THIS exact tick Y coordinate!
-      const tickIsDark = isPixelDark(w - 10, y);
-
-      ctx.strokeStyle = tickIsDark
-        ? `rgba(255, 255, 255, ${alpha})`
-        : `rgba(11, 37, 69, ${alpha})`;
-      ctx.lineWidth = stroke;
+      ctx.strokeStyle = dark ? `rgba(255,255,255,${alpha})` : `rgba(11,37,69,${alpha})`;
+      ctx.lineWidth = major ? 1.5 : mid ? 1 : 0.6;
       ctx.beginPath();
       ctx.moveTo(w - len - 2, y);
       ctx.lineTo(w - 2, y);
       ctx.stroke();
 
-      if (isMajor && i > 0 && i < 100) {
-        ctx.fillStyle = tickIsDark
-          ? "rgba(255, 255, 255, 0.95)"
-          : "rgba(11, 37, 69, 0.90)";
-        ctx.font = isMobile ? "800 7.5px 'Space Mono', monospace" : "800 8.5px 'Space Mono', monospace";
-        const xOffset = isMobile ? 3 : 5;
-        ctx.fillText(String(i).padStart(2, '0'), xOffset, y + 3);
+      if (major && i > 0 && i < total) {
+        ctx.fillStyle = dark ? 'rgba(255,255,255,0.95)' : 'rgba(11,37,69,0.9)';
+        ctx.fillText(String(i).padStart(2, '0'), compact ? 3 : 5, y + 3);
       }
     }
   }
 
-  // ---- Main Initialization ----
+  // ---- Engine ----
   function initEngine() {
     const ruler = document.getElementById('artcraftRuler');
     const thumb = document.getElementById('rulerThumb');
-    const thumbPct = document.getElementById('rulerThumbPct');
     const stage = document.getElementById('kineticRulerStage');
     const canvas = document.getElementById('rulerScaleCanvas');
-
     if (!ruler || !thumb || !stage || !canvas) return;
 
-    recalcLayout();
-    measureCW();
-    drawRulerTicks(canvas);
-
-    // Populate Items
     stage.innerHTML = '';
-    const items = NAV.map((d, i) => new Item(d, i, stage));
-    items.forEach(it => it.measure());
+    L.COUNT = NAV.length;
+    const labels = NAV.map((d, i) => new Label(d, i, stage));
 
-    // Main Render Loop
-    function update() {
-      const sy = window.pageYOffset || document.documentElement.scrollTop;
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - VH);
-      const p = clamp(sy / maxScroll, 0, 1);
+    let lastSy = NaN;
+    let dirty = true;
 
-      // 1. Move Thumb (Scrubber)
-      const rH = ruler.clientHeight || VH;
-      const thumbY = p * (rH - 24);
-      thumb.style.transform = `translate3d(0, ${thumbY.toFixed(1)}px, 0)`;
-
-      // Percentage Text (if element exists)
-      if (thumbPct) {
-        const pctStr = Math.round(p * 100).toString().padStart(3, '0') + '%';
-        thumbPct.textContent = pctStr;
-      }
-
-      // 2. Track & Scrubber Dark Zone Adaptivity via direct point sampling
-      const isDark = isPixelDark(VW - 20, thumbY + 12);
-      ruler.classList.toggle('ruler-dark', isDark);
-
-      // Redraw ticks with per-tick contrast
-      drawRulerTicks(canvas);
-
-      // 3. Classify all items against current scroll
-      items.forEach(it => it.classify(sy));
-
-      let qCount = 0;
-      let pCount = 0;
-      items.forEach(it => {
-        if (it.state === 'queue' || it.state === 'enter') it.queueSlot = qCount++;
-        if (it.state === 'piled' || it.state === 'exit')  it.pileSlot  = pCount++;
-      });
-
-      // 4. Render all characters via GPU translate3d + rotate + dynamic contrast
-      items.forEach(it => it.render(sy));
+    function measure() {
+      recalcLayout();
+      const sy = currentScroll();
+      L.maxScroll = computeMaxScroll();
+      labels.forEach(l => l.measure(sy));
+      buildContrastMap(sy);
+      dirty = true;
     }
 
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(() => {
-          update();
-          ticking = false;
-        });
+    function frame() {
+      const sy = currentScroll();
+      if (!dirty && sy === lastSy) return;
+      dirty = false;
+      lastSy = sy;
+
+      const p = clamp(sy / L.maxScroll, 0, 1);
+      const travel = Math.max(0, (ruler.clientHeight || L.VH) - 24);
+      const thumbY = p * travel;
+      thumb.style.transform = `translate3d(0,${thumbY.toFixed(1)}px,0)`;
+      ruler.classList.toggle('ruler-dark', isDarkAt(L.VW - 20, thumbY + 12, sy));
+
+      drawTicks(canvas, sy);
+
+      for (let i = 0; i < labels.length; i++) {
+        labels[i].classify(sy);
+        labels[i].render(sy);
       }
     }
 
-    // Ruler Drag-to-Scrub
+    // Drive from the same clock as Lenis so labels never lag a frame behind.
+    if (window.gsap && window.gsap.ticker) {
+      window.gsap.ticker.add(frame);
+    } else {
+      const loop = () => { frame(); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+    }
+
+    // ---- Drag-to-scrub ----
+    // Press glides to the point; dragging tracks the pointer 1:1.
     let dragging = false;
-    function scrubFromClientY(clientY) {
+    function scrollForClientY(clientY) {
       const r = ruler.getBoundingClientRect();
-      const p = clamp((clientY - r.top - 12) / (r.height - 24), 0, 1);
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - VH);
-      const targetY = p * maxScroll;
-      if (window.lenis) {
-        window.lenis.scrollTo(targetY, { immediate: true });
-      } else {
-        window.scrollTo(0, targetY);
-      }
+      const p = clamp((clientY - r.top - 12) / Math.max(1, r.height - 24), 0, 1);
+      return p * computeMaxScroll();
+    }
+    function scrubTo(y, immediate) {
+      if (window.lenis) window.lenis.scrollTo(y, { immediate, force: true, duration: immediate ? 0 : 0.6, lock: false });
+      else window.scrollTo({ top: y, behavior: immediate ? 'auto' : 'smooth' });
     }
 
     ruler.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
       dragging = true;
       ruler.setPointerCapture(e.pointerId);
-      scrubFromClientY(e.clientY);
+      ruler.classList.add('is-scrubbing');
+      e.preventDefault();
+      scrubTo(scrollForClientY(e.clientY), false);
     });
-
     ruler.addEventListener('pointermove', e => {
-      if (dragging) scrubFromClientY(e.clientY);
+      if (dragging) scrubTo(scrollForClientY(e.clientY), true);
     });
+    const endDrag = () => { dragging = false; ruler.classList.remove('is-scrubbing'); };
+    ruler.addEventListener('pointerup', endDrag);
+    ruler.addEventListener('pointercancel', endDrag);
+    ruler.addEventListener('lostpointercapture', endDrag);
 
-    ruler.addEventListener('pointerup', () => { dragging = false; });
-    ruler.addEventListener('pointercancel', () => { dragging = false; });
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', () => {
-      recalcLayout();
-      measureCW();
-      items.forEach(it => it.measure());
-      update();
-    });
-
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        measureCW();
-        update();
-      });
+    // ---- Re-measure whenever layout can change ----
+    let measurePending = 0;
+    const scheduleMeasure = () => {
+      cancelAnimationFrame(measurePending);
+      measurePending = requestAnimationFrame(measure);
+    };
+    window.addEventListener('resize', scheduleMeasure);
+    window.addEventListener('load', scheduleMeasure);
+    if ('ResizeObserver' in window) new ResizeObserver(scheduleMeasure).observe(document.body);
+    if (window.ScrollTrigger && window.ScrollTrigger.addEventListener) {
+      window.ScrollTrigger.addEventListener('refresh', scheduleMeasure);
     }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleMeasure);
 
-    // Connect to GSAP ticker if available
-    if (window.gsap && window.gsap.ticker) {
-      window.gsap.ticker.add(update);
-    }
-
-    update();
+    measure();
+    frame();
   }
 
   if (document.readyState === 'loading') {
