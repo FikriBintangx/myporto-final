@@ -94,8 +94,8 @@
 
   function queuePos(slot, i, N) {
     return {
-      x: RAIL_X,
-      y: RAIL_ENTRY_Y + 40 + (N - 1 - i) * CW
+      x: RIGHT_X - (N - 1 - i) * CW,
+      y: QUEUE_TOP_Y + slot * (CW + ROW_GAP)
     };
   }
   function railPos(i, railY) {
@@ -107,8 +107,8 @@
 
   function pilePos(slot, i, N) {
     return {
-      x: RAIL_X,
-      y: RAIL_EXIT_Y - 40 - (N - 1 - i) * CW
+      x: RIGHT_X - (N - 1 - i) * CW,
+      y: PILE_TOP_Y + slot * (CW + ROW_GAP)
     };
   }
   function isPixelDark(screenX, screenY) {
@@ -240,60 +240,41 @@
 
         if (this.state === 'queue') {
           ({ x, y } = queuePos(this.queueSlot, i, N));
-          rot = -90;
+          rot = 0;
           span.classList.remove('k-active');
-          span.style.opacity = '0';
-          span.style.pointerEvents = 'none';
+          span.style.opacity = '';
+          span.style.pointerEvents = 'auto';
         } else if (this.state === 'enter') {
           const p0 = queuePos(this.queueSlot, i, N);
           const p1 = railPos(i, RAIL_ENTRY_Y);
           const c  = bowControl(p0, p1);
           ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = -90;
-          span.classList.remove('k-active');
-          span.style.opacity = String(Math.min(1, e * 1.5));
-          span.style.pointerEvents = 'none';
-        } else if (this.state === 'dwell') {
-          const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
-          ({ x, y } = railPos(i, railY));
-          rot = -90;
-          span.classList.add('k-active');
-          span.style.opacity = '1';
-          span.style.pointerEvents = 'none';
-        } else if (this.state === 'exit') {
-          const p0 = railPos(i, RAIL_EXIT_Y);
-          const p1 = pilePos(this.pileSlot, i, N);
-          const c  = bowControl(p0, p1);
-          ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = -90;
-          span.classList.remove('k-active');
-          span.style.opacity = String(Math.max(0, 1 - e * 1.5));
-          span.style.pointerEvents = 'none';
-        } else if (this.state === 'piled') {
-          ({ x, y } = pilePos(this.pileSlot, i, N));
-          rot = -90;
-          span.classList.remove('k-active');
-          span.style.opacity = '0';
-          span.style.pointerEvents = 'none';
-        } else if (this.state === 'dwell') {
-          const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
-          ({ x, y } = railPos(i, railY));
-          rot = -90;
-          span.classList.add('k-active');
-          span.style.opacity = '1';
-        } else if (this.state === 'exit') {
-          const p0 = railPos(i, RAIL_EXIT_Y);
-          const p1 = pilePos(this.pileSlot, i, N);
-          const c  = bowControl(p0, p1);
-          ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = -90 * (1 - e);
+          rot = lerp(0, -90, e);
           span.classList.remove('k-active');
           span.style.opacity = '';
-        } else if (this.state === 'piled') {
+          span.style.pointerEvents = 'auto';
+        } else if (this.state === 'dwell') {
+          const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
+          ({ x, y } = railPos(i, railY));
+          rot = -90;
+          span.classList.add('k-active');
+          span.style.opacity = '1';
+          span.style.pointerEvents = 'auto';
+        } else if (this.state === 'exit') {
+          const p0 = railPos(i, RAIL_EXIT_Y);
+          const p1 = pilePos(this.pileSlot, i, N);
+          const c  = bowControl(p0, p1);
+          ({ x, y } = quadBezier(p0, c, p1, e));
+          rot = lerp(-90, 0, e);
+          span.classList.remove('k-active');
+          span.style.opacity = '';
+          span.style.pointerEvents = 'auto';
+        } else { // piled
           ({ x, y } = pilePos(this.pileSlot, i, N));
           rot = 0;
           span.classList.remove('k-active');
           span.style.opacity = '';
+          span.style.pointerEvents = 'auto';
         }
 
         // Apply dynamic contrast per character based on underlying element
@@ -301,7 +282,7 @@
         span.classList.toggle('k-on-dark', inDark);
 
         // Hardware composited transform
-        span.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(1)}deg)`;
+        span.style.transform = `translate3d(${(x - CW / 2).toFixed(1)}px, ${(y - CW / 2).toFixed(1)}px, 0) rotate(${rot.toFixed(1)}deg)`;
       });
     }
   }

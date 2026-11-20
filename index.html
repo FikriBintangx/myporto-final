@@ -531,7 +531,7 @@
 
 
 
-  <link rel="stylesheet" href="portfolio-assets/footer-crowd.css?v=20261120_nav_top_layer" />
+  <link rel="stylesheet" href="./portfolio-assets/footer-crowd.css?v=20261120_top_fix_v2" />
 </head><body><!-- ============ LOADER ============ --><div class="loader" id="loader"><div class="loader-ambient" aria-hidden="true"></div><div class="loader-stage"><div class="loader-center"><div class="greeting-box"><em class="greeting-text" id="greetingText">Halo</em></div></div><div class="loader-lang mono" id="loaderLang">INDONESIA</div></div><div class="loader-bottom"><span class="mono">Fikri Bintang — Portfolio 2026</span> · <span class="mono loader-pct" id="loaderPct">0%</span></div><div class="loader-bar"><span id="loaderBarFill"></span></div></div><!-- ============ NAVBAR ============ --><header class="nav" id="site-nav"><div class="nav-left"><a href="/" class="nav-logo"><span class="nav-logo-mark">FB</span><span class="nav-logo-text">Fikri Bintang.</span><span class="nav-logo-badge">PORTFOLIO</span></a></div><nav class="nav-menu">
       <a href="#karya" class="nav-link"><span class="nav-link-box" data-i18n="nav_karya">Karya</span></a>
       <a href="/jurnal" class="nav-link nav-link-jurnal"><span class="nav-link-box" data-i18n="nav_jurnal">Jurnal & Riset ✦</span></a>
@@ -1438,7 +1438,7 @@ window.addEventListener('load', function() {
 
 
 <script src="./portfolio-assets/journey-roadmap.js"></script>
-<script src="./portfolio-assets/artcraft-ruler-responsive.js"></script>
+<script src="./portfolio-assets/artcraft-ruler-responsive.js?v=20261120_menu_restore"></script>
 <script src="./portfolio-assets/swarm-rebuild.js"></script>
 
 <script id="dual-dossier-folder-script">
@@ -1643,11 +1643,10 @@ window.addEventListener('load', function() {
 
 
 <script>
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
-  }, 300);
-});
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
 </script>
 
 </body></html>
