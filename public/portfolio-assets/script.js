@@ -302,31 +302,59 @@ window.smoothScrollTo = function (target, opts) {
   const cardWrappers = gsap.utils.toArray('.card-sticky-wrapper');
   const totalCards = cardWrappers.length;
 
-  cardWrappers.forEach((wrapper, i) => {
-    const card = wrapper.querySelector('.card');
-    if (!card) return;
+  // Deck model: a card's depth = how many later cards have slid over it
+  // (fractional while one is arriving). Depth drives lift, scale and a navy
+  // dim overlay; at depth >= 2 the card fades out, so at most two edges peek
+  // above the front card. No CSS filter: blur/brightness on big sticky layers
+  // repaints every frame and misrenders in Safari.
+  const cards = cardWrappers.map((w) => w.querySelector('.card'));
+  const arrive = new Array(totalCards).fill(0);
+  const PEEK = 18;       // px each buried card shows above the one in front
+  const SHRINK = 0.04;   // scale lost per depth level
+  const setters = cards.map((card) => card && {
+    y: gsap.quickSetter(card, 'y', 'px'),
+    scale: gsap.quickSetter(card, 'scale'),
+    opacity: gsap.quickSetter(card, 'opacity'),
+    dim: (v) => card.style.setProperty('--card-dim', v.toFixed(3)),
+  });
 
-    // Accordion tab top offset
-    const offsetTop = 20 * i;
-    card.style.top = offsetTop + "px";
-
-    // As next cards scroll on top, scale down and dim this card
-    if (i < totalCards - 1) {
-      const nextWrapper = cardWrappers[i + 1];
-
-      gsap.to(card, {
-        scale: 0.94,
-        opacity: 0.4,
-        filter: 'blur(3px) brightness(0.6)',
-        ease: 'power1.inOut',
-        scrollTrigger: {
-          trigger: nextWrapper,
-          start: 'top 60%',
-          end: 'top top',
-          scrub: 0.4,
-        },
-      });
+  function renderDeck() {
+    let depthAbove = 0;
+    for (let i = totalCards - 1; i >= 0; i--) {
+      const s = setters[i];
+      if (s) {
+        const d = Math.min(depthAbove, 3);
+        s.y(-d * PEEK);
+        s.scale(1 - d * SHRINK);
+        s.opacity(d <= 2 ? 1 : Math.max(0, 3 - d));
+        s.dim(Math.min(d * 0.22, 0.55));
+      }
+      depthAbove += arrive[i];
     }
+  }
+
+  const deckMM = gsap.matchMedia();
+  deckMM.add('(min-width: 961px) and (orientation: landscape)', () => {
+    cards.forEach((card) => card && card.style.removeProperty('top'));
+    cardWrappers.forEach((wrapper, i) => {
+      if (i === 0) return;
+      ScrollTrigger.create({
+        trigger: wrapper,
+        start: 'top bottom',
+        end: 'top top',
+        onUpdate: (self) => { arrive[i] = self.progress; renderDeck(); },
+        onRefresh: (self) => { arrive[i] = self.progress; renderDeck(); },
+      });
+    });
+    renderDeck();
+    return () => {
+      arrive.fill(0);
+      cards.forEach((card) => {
+        if (!card) return;
+        gsap.set(card, { clearProps: 'transform,opacity' });
+        card.style.removeProperty('--card-dim');
+      });
+    };
   });
 
   // 4. Process Cards Stagger Entrance

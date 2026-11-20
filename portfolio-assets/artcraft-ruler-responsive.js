@@ -263,8 +263,18 @@
         const tf = `translate3d(${(cx - CW / 2).toFixed(1)}px,${(cy - CW / 2).toFixed(1)}px,0) rotate(${rot.toFixed(1)}deg)`;
         if (tf !== c.tf) { c.span.style.transform = tf; c.tf = tf; }
 
-        if (c.op !== '1') { c.span.style.opacity = '1'; c.op = '1'; }
-        if (c.hit !== true) { c.span.style.pointerEvents = 'auto'; c.hit = true; }
+        // Phones: only the rail label shows; queue/pile rows would sit on
+        // top of content in a 375px viewport. They fade along the corner turn.
+        let op = 1;
+        if (L.VW <= 600) {
+          if (this.state === 'queue' || this.state === 'piled') op = 0;
+          else if (this.state === 'enter') op = e;
+          else if (this.state === 'exit') op = 1 - e;
+        }
+        const ops = op >= 0.999 ? '1' : op.toFixed(3);
+        if (ops !== c.op) { c.span.style.opacity = ops; c.op = ops; }
+        const hit = op > 0.35;
+        if (hit !== c.hit) { c.span.style.pointerEvents = hit ? 'auto' : 'none'; c.hit = hit; }
         if (active !== c.active) { c.span.classList.toggle('k-active', active); c.active = active; }
 
         const dark = isDarkAt(cx, cy, sy);

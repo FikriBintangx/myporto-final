@@ -302,3 +302,99 @@
     padding-bottom: 24px !important;
   }
 }
+
+/* ==========================================================================
+   FOOTER POLISH — clears the right ruler rail, tighter hierarchy
+   ========================================================================== */
+.footer > .mono.label,
+.footer > .footer-desc,
+.footer > .footer-cols {
+  padding-right: calc(clamp(24px, 5vw, 64px) + var(--ruler-rail-w, 68px)) !important;
+}
+
+.footer .label {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem) !important;
+  margin-bottom: 1.1rem !important;
+  color: #A9C6E8 !important;
+  letter-spacing: 0.16em !important;
+}
+
+.footer > .footer-desc {
+  font-family: var(--serif, 'Playfair Display', Georgia, serif) !important;
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem) !important;
+  line-height: 1.4 !important;
+  color: #FFFFFF !important;
+  max-width: none !important;
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem) !important;
+}
+
+.footer > .footer-desc { text-wrap: balance; }
+
+.footer > .footer-cols {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.75rem, 4vw, 3rem) !important;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  border-top: 1px solid rgba(169, 198, 232, 0.18);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem) !important;
+}
+
+.footer .flabel {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.16em !important;
+  color: #A9C6E8 !important;
+  opacity: 0.85;
+  margin-bottom: 1rem !important;
+}
+
+.footer .flinks { gap: 0.7rem !important; }
+
+.footer .flinks a,
+.footer .fmail {
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.25s ease, color 0.2s ease;
+  padding-bottom: 2px;
+  width: fit-content;
+}
+.footer .flinks a:hover,
+.footer .fmail:hover {
+  color: #A9C6E8 !important;
+  background-size: 100% 1px;
+}
+.footer .fmail { word-break: break-all; }
+
+.footer-finale {
+  padding-right: calc(clamp(20px, 4vw, 48px) + var(--ruler-rail-w, 68px)) !important;
+}
+
+.footer-scene-bottom {
+  /* leave room for floating docks at the bottom of the viewport */
+  padding-bottom: clamp(56px, 9vh, 88px) !important;
+}
+
+@media (max-width: 900px) {
+  .footer > .footer-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer > .mono.label,
+  .footer > .footer-desc,
+  .footer > .footer-cols {
+    padding-left: 20px !important;
+    padding-right: calc(16px + var(--ruler-rail-w, 32px)) !important;
+  }
+  .footer > .footer-cols {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-finale {
+    padding-left: 16px !important;
+    padding-right: calc(12px + var(--ruler-rail-w, 32px)) !important;
+  }
+  .footer-finale-heading {
+    flex-wrap: wrap !important;
+  }
+}
