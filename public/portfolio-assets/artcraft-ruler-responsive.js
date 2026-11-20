@@ -94,11 +94,10 @@
 
   function queuePos(slot, i, N) {
     return {
-      x: RIGHT_X - (N - 1 - i) * CW,
-      y: QUEUE_TOP_Y + slot * (CW + ROW_GAP)
+      x: RAIL_X,
+      y: RAIL_ENTRY_Y + 40 + (N - 1 - i) * CW
     };
   }
-
   function railPos(i, railY) {
     return {
       x: RAIL_X,
@@ -108,14 +107,10 @@
 
   function pilePos(slot, i, N) {
     return {
-      x: RIGHT_X - (N - 1 - i) * CW,
-      y: PILE_TOP_Y + slot * (CW + ROW_GAP)
+      x: RAIL_X,
+      y: RAIL_EXIT_Y - 40 - (N - 1 - i) * CW
     };
   }
-
-  // ---- DETERMINISTIC HYBRID CONTRAST ENGINE ----
-  // Returns TRUE if background at screen coordinate (screenX, screenY) is DARK (needs WHITE text).
-  // Returns FALSE if background is WHITE / IVORY (needs SOLID BLACK/NAVY text).
   function isPixelDark(screenX, screenY) {
     const probeY = clamp(screenY, 2, window.innerHeight - 2);
     const probeX = Math.max(10, Math.min(screenX, window.innerWidth - 30));
@@ -245,17 +240,41 @@
 
         if (this.state === 'queue') {
           ({ x, y } = queuePos(this.queueSlot, i, N));
-          rot = 0;
+          rot = -90;
           span.classList.remove('k-active');
-          span.style.opacity = '';
+          span.style.opacity = '0';
+          span.style.pointerEvents = 'none';
         } else if (this.state === 'enter') {
           const p0 = queuePos(this.queueSlot, i, N);
           const p1 = railPos(i, RAIL_ENTRY_Y);
           const c  = bowControl(p0, p1);
           ({ x, y } = quadBezier(p0, c, p1, e));
-          rot = -90 * e;
+          rot = -90;
           span.classList.remove('k-active');
-          span.style.opacity = '';
+          span.style.opacity = String(Math.min(1, e * 1.5));
+          span.style.pointerEvents = 'none';
+        } else if (this.state === 'dwell') {
+          const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
+          ({ x, y } = railPos(i, railY));
+          rot = -90;
+          span.classList.add('k-active');
+          span.style.opacity = '1';
+          span.style.pointerEvents = 'none';
+        } else if (this.state === 'exit') {
+          const p0 = railPos(i, RAIL_EXIT_Y);
+          const p1 = pilePos(this.pileSlot, i, N);
+          const c  = bowControl(p0, p1);
+          ({ x, y } = quadBezier(p0, c, p1, e));
+          rot = -90;
+          span.classList.remove('k-active');
+          span.style.opacity = String(Math.max(0, 1 - e * 1.5));
+          span.style.pointerEvents = 'none';
+        } else if (this.state === 'piled') {
+          ({ x, y } = pilePos(this.pileSlot, i, N));
+          rot = -90;
+          span.classList.remove('k-active');
+          span.style.opacity = '0';
+          span.style.pointerEvents = 'none';
         } else if (this.state === 'dwell') {
           const railY = lerp(RAIL_ENTRY_Y, RAIL_EXIT_Y, this.dwellT);
           ({ x, y } = railPos(i, railY));

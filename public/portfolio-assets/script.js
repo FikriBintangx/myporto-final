@@ -57,10 +57,11 @@ if (typeof Lenis !== 'undefined') {
 
     if (typeof gsap !== 'undefined' && greetingEl) {
       gsap.to(greetingEl, {
-        y: -24,
+        y: -18,
         opacity: 0,
-        filter: 'blur(10px)',
-        duration: 0.24,
+        scale: 0.97,
+        filter: 'blur(8px)',
+        duration: 0.20,
         ease: 'power2.in',
         onComplete: () => {
           greetingEl.textContent = item.text;
@@ -68,8 +69,8 @@ if (typeof Lenis !== 'undefined') {
 
           gsap.fromTo(
             greetingEl,
-            { y: 24, opacity: 0, filter: 'blur(10px)' },
-            { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.36, ease: 'power3.out' }
+            { y: 18, opacity: 0, scale: 0.97, filter: 'blur(8px)' },
+            { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.36, ease: 'power3.out' }
           );
         },
       });
@@ -108,9 +109,11 @@ if (typeof Lenis !== 'undefined') {
       setTimeout(() => {
         if (typeof gsap !== 'undefined' && greetingEl) {
           gsap.to(greetingEl, {
-            scale: 1.08,
-            duration: 0.35,
-            ease: 'back.out(2)',
+            scale: 1.05,
+            opacity: 0,
+            filter: 'blur(12px)',
+            duration: 0.45,
+            ease: 'power2.inOut',
           });
         }
 
@@ -119,8 +122,8 @@ if (typeof Lenis !== 'undefined') {
           document.body.style.overflow = '';
           setTimeout(() => {
             loader.remove();
-          }, 950);
-        }, 400);
+          }, 900);
+        }, 220);
       }, 300);
     } else {
       if (pctEl) pctEl.textContent = progress + '%';

@@ -1,0 +1,632 @@
+[
+  {
+    "id": 0,
+    "label": "young man messy short hair oversize T-shirt over-ear headphones calm",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 1,
+    "label": "young woman high ponytail tee texting busy with PHONE HELD LOW while HEAD UPRIGHT",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 2,
+    "label": "teenage boy round glasses backpack shy smile",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 3,
+    "label": "college woman curly bob denim jacket excited",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 4,
+    "label": "young man undercut open casual shirt tough serious",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 5,
+    "label": "young woman shoulder-length hair tanktop happy holding iced coffee",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 6,
+    "label": "young man hoodie amused holding phone at stomach",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 7,
+    "label": "young woman braid checked overshirt thoughtful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 8,
+    "label": "young man short curls sleeveless athletic top confident",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 9,
+    "label": "young woman pixie haircut glasses headphones focused",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 10,
+    "label": "teenage boy wavy hair striped tee surprised",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 11,
+    "label": "college woman long ponytail plain shirt busy calling phone at ear head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 12,
+    "label": "young man cap graphic-free tee backpack cheerful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 13,
+    "label": "young woman messy bun loose tee sad",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 14,
+    "label": "young man long hair hairband polo shirt relaxed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 15,
+    "label": "woman30 round glasses formal shirt phone at ear busy head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 16,
+    "label": "man35 trimmed beard untucked office shirt tired",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 17,
+    "label": "woman27 ponytail blazer plain top confident",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 18,
+    "label": "man40 receding hair polo serious with phone low",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 19,
+    "label": "woman38 curly hair kurta with minimal dupatta calm",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 20,
+    "label": "man26 curly hair casual jacket overhead headphones happy",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 21,
+    "label": "woman45 bob haircut office blouse worried",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 22,
+    "label": "man32 broad build stubble work shirt excited",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 23,
+    "label": "woman29 rectangular glasses tee backpack focused",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 24,
+    "label": "man48 salt-and-pepper hair collared shirt composed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 25,
+    "label": "woman34 long braid denim shirt smiling coffee",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 26,
+    "label": "man28 shirt rolled sleeves calling phone ear hurried head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 27,
+    "label": "woman42 short wavy hair cardigan sad",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 28,
+    "label": "man37 wavy hair turtleneck tough",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 29,
+    "label": "woman31 shoulder-length hair printed-pattern-free top pleased",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 30,
+    "label": "woman22 cropped hair tanktop cheerful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 31,
+    "label": "woman36 long braid saree plain border composed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 32,
+    "label": "woman26 messy bun denim jacket over tee excited",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 33,
+    "label": "woman48 tied hair blouse with saree pallu calm",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 34,
+    "label": "woman20 high ponytail tee oversized headphones absorbed but OPEN EYES",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 35,
+    "label": "woman32 long wavy hair casual shirt busy phone at ear head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 36,
+    "label": "woman55 low bun salwar kameez dupatta kindly smile",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 37,
+    "label": "woman29 curly bob round glasses sleeveless top assertive",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 38,
+    "label": "woman41 short hair loose overshirt tired",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 39,
+    "label": "woman24 straight hair simple hijab with modern tunic peaceful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 40,
+    "label": "woman19 curly hair hoodie backpack nervous",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 41,
+    "label": "woman45 bun cotton kurta unhappy",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 42,
+    "label": "woman27 braid streetwear jacket phone low concentrated",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 43,
+    "label": "woman38 shoulder hair polo laughing with head level eyes open",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 44,
+    "label": "woman52 clipped short gray-streak hair cardigan thoughtful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 45,
+    "label": "man21 messy fringe oversize tee overhead headphones delighted",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 46,
+    "label": "man44 moustache plain cotton kurta thoughtful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 47,
+    "label": "man30 close-cropped hair striped shirt phone ear head upright busy",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 48,
+    "label": "man55 salt pepper moustache simple collared shirt glasses calm",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 49,
+    "label": "man24 curly hair tanktop athletic tough",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 50,
+    "label": "man38 beard casual overshirt relaxed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 51,
+    "label": "man47 side-part hair kurta with Nehru vest serious",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 52,
+    "label": "man20 wavy hair hoodie backpack excited",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 53,
+    "label": "man33 bald head clean face polo cheerful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 54,
+    "label": "man51 thick moustache plain traditional cotton shirt draped angavastram shoulder serene",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 55,
+    "label": "man28 long tied hair denim jacket doubtful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 56,
+    "label": "man42 glasses thinning hair tee concerned phone low",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 57,
+    "label": "man26 side fade open shirt tee smiling",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 58,
+    "label": "man36 short curls worker shirt tired",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 59,
+    "label": "man58 beard knit vest collared shirt pleasantly surprised",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 60,
+    "label": "girl7 two ponytails tee holding teddy bear delighted",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 61,
+    "label": "boy8 short curls shirt holding toy car excited",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 62,
+    "label": "girl10 bob glasses dungaree straps over tee shy smile holding storybook",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 63,
+    "label": "boy6 messy hair hoodie holding small toy robot amazed",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 64,
+    "label": "girl9 braid simple cotton pavadai blouse holding doll cheerful",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 65,
+    "label": "boy12 fringe sports tee football hugged proud",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 66,
+    "label": "girl8 curly hair tanktop holding bubble wand curious",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 67,
+    "label": "boy10 neat hair simple kurta holding spinning top toy calm",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 68,
+    "label": "girl11 high ponytail school backpack happy holding sketchbook",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 69,
+    "label": "boy7 rounded haircut striped tee holding toy bus sad",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 70,
+    "label": "girl12 short hair sweatshirt headphones focused",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 71,
+    "label": "boy9 short hair polo holding paper airplane excited",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 72,
+    "label": "girl6 two braids tee hugging stuffed rabbit sleepy",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 73,
+    "label": "boy13 tousled hair casual shirt backpack thoughtful toy cube held low",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 74,
+    "label": "girl10 wavy shoulder hair hoodie holding small plush dog content",
+    "ageGroup": "child",
+    "scale": 0.7
+  },
+  {
+    "id": 75,
+    "label": "grandfather72 balding gray hair moustache polo eyeglasses holding walking cane upright calm",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 76,
+    "label": "grandmother68 gray bun simple saree border warmly smiling with cane handle visible",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 77,
+    "label": "elderly man80 thin white hair button shirt cardigan holding walking stick serious",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 78,
+    "label": "grandmother75 gray braid saree pallu content",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 79,
+    "label": "grandfather65 silver beard modern zipped jacket amused phone ear head upright",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 80,
+    "label": "grandmother70 short silver bob rectangular glasses cardigan thoughtful",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 81,
+    "label": "grandfather78 white moustache cotton kurta angavastram walking cane kindly smile",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 82,
+    "label": "grandmother62 salt-pepper ponytail casual collared shirt happy",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 83,
+    "label": "grandfather69 gray sidepart checked shirt tired with shopping tote shoulder",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 84,
+    "label": "grandmother82 sparse gray bun saree eyeglasses walking stick peaceful",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 85,
+    "label": "grandfather63 close gray curls T-shirt overhead headphones cheerful",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 86,
+    "label": "grandmother66 low gray bun salwar dupatta worried",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 87,
+    "label": "grandfather74 white beard small turban plain shirt calm",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 88,
+    "label": "grandmother77 wavy gray short hair modern knit cardigan sad",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 89,
+    "label": "grandfather71 bald head white sidehair shirt sweater vest surprised with walking cane",
+    "ageGroup": "older",
+    "scale": 0.95
+  },
+  {
+    "id": 90,
+    "label": "young woman23 curly ponytail tanktop confident backpack",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 91,
+    "label": "man29 delivery worker plain unbranded collared shirt phone ear busy head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 92,
+    "label": "woman46 long braid saree pallu calm holding shopping bag strap",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 93,
+    "label": "teenage boy15 messy hair tee carrying skateboard upright excited",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 94,
+    "label": "woman33 bob glasses oversize shirt tired holding paperback",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 95,
+    "label": "man52 moustache shirt pocket serious with spectacles",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 96,
+    "label": "woman21 hijab simple modern jacket smiling phone low",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 97,
+    "label": "man25 dreadlock-like curls hoodie headphones relaxed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 98,
+    "label": "woman39 ponytail kurta dupatta hurried phone ear head upright",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 99,
+    "label": "man60 gray beard tee overshirt amused",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 100,
+    "label": "woman28 pixie tanktop surprised coffee",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 101,
+    "label": "man18 thick fringe denim jacket happy backpack",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 102,
+    "label": "woman50 gray-streak bun blouse cardigan thoughtful",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 103,
+    "label": "man36 medium hair plain tanktop tough arms crossed",
+    "ageGroup": "adult",
+    "scale": 1
+  },
+  {
+    "id": 104,
+    "label": "woman19 two braids tee backpack excited book held low",
+    "ageGroup": "adult",
+    "scale": 1
+  }
+]

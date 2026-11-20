@@ -537,30 +537,49 @@
     // 2. Cards in projects section
     const cardWrappers = Array.from(document.querySelectorAll(".card-sticky-wrapper"));
 
+    // 2.5 Academic & 3D Tactile Manilla Folders
+    const academicItems = [
+      get("#publikasi .research-callout-card", "CARD", "research.callout"),
+      get("#academicShelf h3", "TEXT", "academic.title"),
+      get("#academicShelf .mono", "BADGE", "academic.verified"),
+      ...getAll(".tactile-folder", "FOLDER", "manilla.folder")
+    ].filter(Boolean);
+
     // 3. Process items
     const processItems = [
       get(".process-header .process-title", "TEXT", "h2.proses"),
       ...getAll(".process-cards > div, .process-step", "STEP", "process.card")
     ].filter(Boolean);
 
-    // 4. About items
+    // 4. Experience Roadmap & About items
+    const experienceItems = [
+      get(".experience-title", "TEXT", "h2.experience"),
+      get("#journeyRoadSvg", "SVG", "journey.roadmap"),
+      ...getAll(".journey-stop", "STOP", "career.stop")
+    ].filter(Boolean);
+
     const aboutItems = [
+      ...experienceItems,
       get(".about-imgs img", "PHOTO", "about.photo"),
       get(".about-text h2, .about-text h3", "TEXT", "about.title"),
       ...getAll(".about-text p", "TEXT", "about.desc"),
       ...getAll(".career-card, .matrix-row, .dossier-card", "ROW", "career.matrix")
     ].filter(Boolean);
 
-    // 5. Contact & POLISHED FOOTER items
+    // 5. Contact items
     const contactItems = [
       get(".contact-title", "TEXT", "h2.kontak"),
       get(".ticket, .stub-ticket", "TICKET", "boarding.pass"),
       get(".contact .btn-navy", "BUTTON", "btn.whatsapp")
     ].filter(Boolean);
 
-    // Dedicated Polished Footer sequence
+    // 6. Dedicated Polished Footer & Walking Crowd sequence
     const footerItems = [
       get(".footer .zigzag", "SVG", "footer.zigzag"),
+      get(".footer-crowd-title", "TEXT", "footer.see-you-around"),
+      get(".footer-crowd-name", "TEXT", "footer.name.fikri"),
+      get(".footer-standing-wrap img", "PHOTO", "fikri.character"),
+      get(".footer-crowd-strip canvas", "CANVAS", "walking.crowd"),
       get(".footer p.mono.label.light", "TEXT", "footer.thankyou"),
       get(".footer-desc", "TEXT", "footer.desc"),
       ...getAll(".footer-cols > div", "COL", "footer.col"),
@@ -568,7 +587,7 @@
       get(".footer-base", "LEGAL", "footer.legal")
     ].filter(Boolean);
 
-    let totalItems = heroItems.length + 2 + (cardWrappers.length * 4) + processItems.length + aboutItems.length + contactItems.length + footerItems.length;
+    let totalItems = heroItems.length + 2 + (cardWrappers.length * 4) + academicItems.length + processItems.length + aboutItems.length + contactItems.length + footerItems.length;
     let completedCount = 0;
 
     dockCount.textContent = `0%`;
@@ -579,6 +598,7 @@
     const allGhostTargets = [
       ...heroItems.map(it => it.el),
       ...cardWrappers.map(w => w.querySelector(".card")).filter(Boolean),
+      ...academicItems.map(it => it.el),
       ...processItems.map(it => it.el),
       ...aboutItems.map(it => it.el),
       ...contactItems.map(it => it.el),
@@ -749,6 +769,24 @@
     }
 
     // ==========================================
+    // SCENE 2.5: AKADEMIK & 3D MANILLA FOLDERS (#publikasi)
+    // ==========================================
+    const pubSection = document.getElementById("publikasi");
+    if (pubSection && academicItems.length > 0) {
+      dockText.textContent = "AKADEMIK & FOLDER 3D";
+      const pubTop = pubSection.getBoundingClientRect().top + window.scrollY - 40;
+      await smoothScrollTo(pubTop, 0.85);
+
+      for (let i = 0; i < academicItems.length; i += 2) {
+        if (cancelToken) return exitRebuild(false);
+        const p1 = rebuildSingleElement(academicItems[i], i);
+        const p2 = (i + 1 < academicItems.length) ? rebuildSingleElement(academicItems[i + 1], i + 1) : Promise.resolve();
+        await Promise.all([p1, p2]);
+      }
+      await new Promise(r => setTimeout(r, 450));
+    }
+
+    // ==========================================
     // SCENE 3: PROSES (#proses)
     // ==========================================
     const processSection = document.getElementById("proses");
@@ -771,7 +809,7 @@
     // ==========================================
     const aboutSection = document.getElementById("tentang");
     if (aboutSection) {
-      dockText.textContent = "TENTANG & MATRIX";
+      dockText.textContent = "EXPERIENCE ROADMAP";
       const aTop = aboutSection.getBoundingClientRect().top + window.scrollY - 40;
       await smoothScrollTo(aTop, 0.85);
 
@@ -807,7 +845,7 @@
     // ==========================================
     const footerSection = document.querySelector(".footer");
     if (footerSection) {
-      dockText.textContent = "FOOTER POLISH";
+      dockText.textContent = "FOOTER & CROWD FINALE";
       const fTop = footerSection.getBoundingClientRect().top + window.scrollY - 40;
       await smoothScrollTo(fTop, 0.85);
 

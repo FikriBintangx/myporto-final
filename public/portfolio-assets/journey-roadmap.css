@@ -1,0 +1,913 @@
+/* ==========================================================================
+   EXPERIENCE ROADMAP · GSAP KINETIC WAVE TIMELINE
+   Inspired by Aswin Panengal (aswinpanengal.me) · Precision Editorial Architecture
+   Undulating Sinusoidal Wave on Desktop · Vertical Flow on Mobile
+   ========================================================================== */
+
+:root {
+  --exp-ink: #0B2545;
+  --exp-ink-soft: #475569;
+  --exp-ink-muted: #64748b;
+  --exp-canvas: #FAF8F2;
+  --exp-line: rgba(11, 37, 69, 0.16);
+  --exp-accent: #2E6BC4;
+}
+
+.experience-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.experience-wrap {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1.2rem, 3.5vw, 3rem);
+  box-sizing: border-box;
+}
+
+/* Heading Row */
+.experience-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--exp-line);
+  padding-bottom: 1.5rem;
+}
+
+.experience-heading .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--exp-accent);
+  margin-bottom: 0.4rem;
+}
+
+.experience-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(38px, 4.5vw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--exp-ink);
+  margin: 0;
+}
+
+.experience-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.55;
+  color: var(--exp-ink-muted);
+  text-align: right;
+  margin: 0;
+}
+
+/* Roadmap Grid */
+.journey-roadmap {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 32px);
+  padding-top: 10px;
+  margin-top: 1rem;
+}
+
+/* Continuous SVG Road */
+.journey-road {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.journey-road path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.journey-road-base {
+  stroke: var(--exp-line);
+  stroke-width: 2px;
+  stroke-dasharray: 4 8;
+}
+
+.journey-road-ink {
+  stroke: var(--exp-ink);
+  stroke-width: 2.2px;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1px;
+  will-change: stroke-dashoffset;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* CSS fallback animation when in view */
+.journey-roadmap[data-drawn="true"] .journey-road-ink {
+  stroke-dashoffset: 0;
+}
+
+/* Stops (Milestones) */
+.journey-stop {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Staggered Vertical Alternations on Desktop (Undulating Sinusoidal Wave) */
+.journey-stop:nth-child(2) { /* Stop 1: Wahanaartha (Current) */
+  padding-top: 0px;
+}
+
+.journey-stop:nth-child(3) { /* Stop 2: McDonald's (Trough) */
+  padding-top: 92px;
+}
+
+.journey-stop:nth-child(4) { /* Stop 3: Global Institute (Peak) */
+  padding-top: 18px;
+}
+
+.journey-stop:nth-child(5) { /* Stop 4: Surya Shuenn Yuehh (Trough) */
+  padding-top: 92px;
+}
+
+.journey-stop:nth-child(6) { /* Stop 5: ID Express (Peak) */
+  padding-top: 18px;
+}
+
+/* Circular Node Marker */
+.journey-stop-marker {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--exp-ink);
+  background: var(--exp-canvas);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 28px;
+  box-shadow: 0 4px 14px rgba(11, 37, 69, 0.08);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+}
+
+.journey-stop-marker > span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--exp-ink);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* Current Role Marker Variant */
+.journey-now .journey-stop-marker {
+  background: var(--exp-ink);
+  border-color: var(--exp-ink);
+  box-shadow: 0 0 0 6px rgba(11, 37, 69, 0.12), 0 8px 24px rgba(11, 37, 69, 0.2);
+}
+
+.journey-now .journey-stop-marker > span {
+  background: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.journey-stop:hover .journey-stop-marker {
+  transform: scale(1.15);
+  border-color: var(--exp-accent);
+}
+
+.journey-stop:hover .journey-stop-marker > span {
+  background: var(--exp-accent);
+}
+
+.journey-now:hover .journey-stop-marker > span {
+  background: #FFFFFF;
+}
+
+/* Stop Card Content */
+.journey-stop-content {
+  position: relative;
+  background: transparent;
+  padding: 0 4px;
+}
+
+/* Date & Pill Row */
+.journey-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--exp-ink-soft);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 26px;
+  margin: 0 0 14px;
+  letter-spacing: 0.02em;
+}
+
+.journey-current {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: var(--exp-ink);
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.2);
+}
+
+.journey-pill-subtle {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: rgba(11, 37, 69, 0.08);
+  color: var(--exp-ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Titles & Description */
+.journey-role {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(20px, 1.7vw, 25px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--exp-ink);
+  margin: 0 0 10px;
+}
+
+.journey-place {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--exp-ink);
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+
+.journey-place > span {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--exp-ink-muted);
+  margin-top: 4px;
+}
+
+.journey-description {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 13.5px;
+  color: var(--exp-ink-soft);
+  line-height: 1.62;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT · ADAPTIVE VERTICAL SNAKE ON MOBILE / TABLET
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .journey-roadmap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 2rem;
+    padding-top: 0;
+  }
+
+  .journey-stop {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 20px;
+    padding-top: 0 !important;
+  }
+
+  .journey-stop-marker {
+    margin: 0;
+  }
+
+  .journey-stop-content {
+    padding-top: 2px;
+  }
+
+  .experience-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .experience-sub {
+    text-align: left;
+  }
+
+  .journey-role {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .experience-section {
+    padding: 3rem 0;
+  }
+
+  .journey-roadmap {
+    gap: 32px;
+  }
+
+  .journey-stop {
+    gap: 16px;
+  }
+
+  .journey-role {
+    font-size: 19px;
+  }
+
+  .journey-description {
+    font-size: 13px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   TACTILE MANILLA FOLDER SLEEVES (aswinpanengal.me aesthetic)
+   3D Folders with Peeking Paper Sheets & Interactive Hover Opening
+   ═══════════════════════════════════════════════════════════════════ */
+
+.academic-shelf-section {
+  max-width: 1400px;
+  margin: 0 auto 6rem;
+  padding: 0 clamp(20px, 4vw, 48px);
+  position: relative;
+  z-index: 20;
+}
+
+.project-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding-top: 32px;
+}
+
+@media (max-width: 1200px) {
+  .project-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+@media (max-width: 680px) {
+  .project-folder-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.project-folder {
+  text-align: left;
+  width: 100%;
+  color: #0B2545;
+  background: transparent;
+  border: 0;
+  border-radius: 16px;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-folder:focus-visible {
+  outline: 2px solid #2E6BC4;
+  outline-offset: 8px;
+}
+
+.folder-scene {
+  perspective: 900px;
+  height: 270px;
+  display: block;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* FOLDER BACK BODY */
+.folder-back {
+  background: #E8E6DF;
+  border: 1px solid rgba(11, 37, 69, 0.14);
+  border-radius: 14px;
+  position: absolute;
+  inset: 62px 8px 16px;
+  box-shadow: 0 4px 12px rgba(11, 37, 69, 0.05);
+}
+
+/* FOLDER TAB ON TOP LEFT */
+.folder-back:before {
+  content: "";
+  background: #E8E6DF;
+  border: 1px solid rgba(11, 37, 69, 0.14);
+  border-bottom: 0;
+  border-radius: 10px 14px 0 0;
+  width: 44%;
+  height: 28px;
+  position: absolute;
+  top: -24px;
+  left: -1px;
+}
+
+/* PEEKING PAPER SHEETS */
+.folder-paper {
+  border: 1px solid rgba(11, 37, 69, 0.12);
+  background: #FFFFFF;
+  transform-origin: 50% 100%;
+  height: 168px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  position: absolute;
+  top: 52px;
+  left: 10%;
+  right: 10%;
+  box-shadow: 0 10px 24px -12px rgba(11, 37, 69, 0.25);
+  box-sizing: border-box;
+}
+
+.folder-paper-back {
+  transform: translate(-10px, -4px) rotate(-8deg);
+  background: #FAF9F6;
+}
+
+.folder-paper-preview {
+  padding: 8px;
+  overflow: hidden;
+  transform: translate(8px, -2px) rotate(6deg);
+  background: #FFFFFF;
+}
+
+.folder-paper-preview .preview-card-inner {
+  background: #0B2545;
+  color: #FFFFFF;
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.preview-card-inner.light-card {
+  background: #F1F4F8;
+  color: #0B2545;
+  border: 1px solid rgba(11, 37, 69, 0.10);
+}
+
+.preview-card-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.preview-card-stat {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.folder-paper-front {
+  transform: translateY(16px) rotate(-2deg);
+  background: #FFFFFF;
+}
+
+.folder-paper-lines {
+  border-block: 1px solid rgba(11, 37, 69, 0.12);
+  height: 32px;
+  position: relative;
+  margin-top: auto;
+}
+
+.folder-paper-lines:after {
+  content: "";
+  background: rgba(11, 37, 69, 0.10);
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 28%;
+}
+
+/* FOLDER FRONT FLAP */
+.folder-front {
+  border: 1px solid rgba(11, 37, 69, 0.16);
+  background: rgba(244, 243, 239, 0.85);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 22px;
+  display: flex;
+  position: absolute;
+  inset: 105px 0 8px;
+  transform-origin: 50% 100%;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.45s;
+  box-shadow: 0 16px 30px -18px rgba(11, 37, 69, 0.3);
+  box-sizing: border-box;
+}
+
+.folder-front:before {
+  content: "";
+  border: 1px solid rgba(11, 37, 69, 0.16);
+  border-bottom: 0;
+  background: rgba(244, 243, 239, 0.95);
+  border-radius: 10px 14px 0 0;
+  width: 48%;
+  height: 22px;
+  position: absolute;
+  top: -18px;
+  left: -1px;
+}
+
+.folder-front-tab-icon {
+  position: absolute;
+  top: -14px;
+  left: 12px;
+  font-size: 11px;
+  color: rgba(11, 37, 69, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Space Mono', monospace;
+}
+
+.folder-front-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0B2545;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 78%;
+}
+
+.folder-open-icon {
+  background: #0B2545;
+  width: 36px;
+  height: 36px;
+  color: #FFFFFF;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.folder-caption {
+  color: rgba(11, 37, 69, 0.7);
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 14px 4px 6px;
+  font-size: 12.5px;
+  display: flex;
+  font-family: 'Space Mono', monospace;
+}
+
+.folder-caption-action {
+  color: #0B2545;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  display: inline-flex;
+  transition: color 0.2s ease;
+}
+
+/* HOVER / EXPANDED 3D OPENING PHYSICS */
+.project-folder:hover .folder-paper-back,
+.project-folder:focus-visible .folder-paper-back {
+  transform: translate(-22px, -36px) rotate(-14deg);
+}
+
+.project-folder:hover .folder-paper-preview,
+.project-folder:focus-visible .folder-paper-preview {
+  transform: translate(20px, -46px) rotate(10deg);
+}
+
+.project-folder:hover .folder-paper-front,
+.project-folder:focus-visible .folder-paper-front {
+  transform: translateY(-12px) rotate(-3deg);
+}
+
+.project-folder:hover .folder-front,
+.project-folder:focus-visible .folder-front {
+  transform: rotateX(-26deg);
+  background: rgba(244, 243, 239, 0.70);
+}
+
+.project-folder:hover .folder-open-icon {
+  background: #2E6BC4;
+  transform: scale(1.08) translate(1px, -1px);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   TACTILE 3D MANILLA FOLDER SLEEVES (aswinpanengal.me aesthetic)
+   Dedicated to #academicShelf
+   ═══════════════════════════════════════════════════════════════════ */
+
+.tactile-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  padding: 24px 0 16px;
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .tactile-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tactile-folder-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.tactile-folder {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tactile-folder:hover {
+  transform: translateY(-4px);
+}
+
+.tactile-folder-scene {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  perspective: 900px;
+}
+
+/* 1. BACK JACKET (Manilla Folder Body) */
+.tactile-folder-back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 24px;
+  background: #E8E6E0;
+  border: 1px solid rgba(11, 37, 69, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(11, 37, 69, 0.05);
+}
+
+/* Tab protruding on top left */
+.tactile-folder-back::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -1px;
+  width: 44%;
+  height: 22px;
+  background: #E8E6E0;
+  border: 1px solid rgba(11, 37, 69, 0.12);
+  border-bottom: none;
+  border-radius: 10px 14px 0 0;
+}
+
+/* Document icon on tab */
+.tactile-folder-tab-badge {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(11, 37, 69, 0.65);
+}
+
+/* 2. PEEKING PAPER SHEETS INSIDE */
+.tactile-paper {
+  position: absolute;
+  border-radius: 10px;
+  border: 1px solid rgba(11, 37, 69, 0.10);
+  box-shadow: 0 4px 12px rgba(11, 37, 69, 0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Paper 1: Back tilt sheet */
+.tactile-paper-back {
+  inset: 12px 14px 26px 14px;
+  background: #18191B;
+  color: #FFFFFF;
+  z-index: 2;
+  transform: rotate(-3deg) translateY(0);
+  transform-origin: bottom center;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tactile-paper-back.light-theme {
+  background: #FFFFFF;
+  color: #0B2545;
+}
+
+/* Paper 2: Center preview sheet */
+.tactile-paper-mid {
+  inset: 8px 18px 22px 18px;
+  background: #FFFFFF;
+  color: #0B2545;
+  z-index: 3;
+  transform: rotate(2deg) translateY(0);
+  transform-origin: bottom center;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tactile-paper-mid.dark-theme {
+  background: #0B2545;
+  color: #FFFFFF;
+}
+
+/* Paper lines pattern simulation */
+.tactile-paper-header {
+  font-family: "Space Mono", monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.tactile-paper-metric {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.tactile-paper-sub {
+  font-size: 8px;
+  opacity: 0.7;
+}
+
+/* 3. FRONT JACKET FLAP (Manilla with Notch & Button) */
+.tactile-folder-front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  background: #F1EFEA;
+  border: 1px solid rgba(11, 37, 69, 0.14);
+  border-radius: 14px;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16px 18px;
+  box-shadow: 0 12px 24px -10px rgba(11, 37, 69, 0.18);
+  transform-origin: 50% 100%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* Front tab/notch on top left */
+.tactile-folder-front::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: -1px;
+  width: 48%;
+  height: 18px;
+  background: #F1EFEA;
+  border: 1px solid rgba(11, 37, 69, 0.14);
+  border-bottom: none;
+  border-radius: 9px 12px 0 0;
+}
+
+.tactile-folder-title {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.22;
+  color: #0B2545;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 74%;
+}
+
+.tactile-folder-btn {
+  width: 34px;
+  height: 34px;
+  background: #0B2545;
+  color: #FFFFFF;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.tactile-folder-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* 4. HOVER 3D PHYSICS */
+.tactile-folder:hover .tactile-paper-back {
+  transform: rotate(-5deg) translateY(-22px);
+  box-shadow: 0 12px 24px rgba(11, 37, 69, 0.12);
+}
+
+.tactile-folder:hover .tactile-paper-mid {
+  transform: rotate(3deg) translateY(-28px);
+  box-shadow: 0 14px 28px rgba(11, 37, 69, 0.14);
+}
+
+.tactile-folder:hover .tactile-folder-front {
+  transform: rotateX(-22deg);
+  background: #F7F5F0;
+}
+
+.tactile-folder:hover .tactile-folder-btn {
+  transform: scale(1.08);
+  background: #2E6BC4;
+}
+
+/* 5. METADATA CAPTION BELOW */
+.tactile-folder-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 4px;
+}
+
+.tactile-folder-meta-sub {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  color: rgba(11, 37, 69, 0.7);
+}
+
+.tactile-folder-meta-action {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0B2545;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: color 0.2s ease;
+}
+
+.tactile-folder:hover .tactile-folder-meta-action {
+  color: #2E6BC4;
+}
