@@ -1,0 +1,635 @@
+---
+// Stealth Admin Control Center — Theme & Portfolio Configuration
+// Protected by server-side timing-safe key verification (/api/admin/theme)
+---
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Restricted System — fikribintang.web.id</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script is:inline src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <style is:global>
+    :root {
+      --bg: #09090b;
+      --panel: #111114;
+      --card: #141418;
+      --card-hover: #1a1a20;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --dim: #71717a;
+      --accent: #1f2bff;
+      --accent-soft: rgba(31, 43, 255, 0.14);
+      --ok: #10b981;
+      --ok-soft: rgba(16, 185, 129, 0.12);
+      --err: #ef4444;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+    /* Camouflage Restricted Auth Gate */
+    .gate-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(31, 43, 255, 0.08), transparent 45%),
+        var(--bg);
+    }
+    .gate-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--panel);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+    .gate-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--mono); font-size: 10.5px; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .gate-badge i { width: 6px; height: 6px; border-radius: 50%; background: var(--err); display: inline-block; }
+    .gate-title { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .gate-sub { font-size: 12.5px; color: var(--dim); margin-bottom: 22px; }
+    .gate-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 11px 13px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.15s ease;
+    }
+    .gate-input:focus { border-color: var(--accent); }
+    .gate-btn {
+      width: 100%;
+      background: var(--text);
+      color: #09090b;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+    .gate-btn:hover { opacity: 0.92; }
+    .gate-btn:active { transform: scale(0.985); }
+    .gate-err {
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--err);
+      min-height: 16px;
+    }
+
+    /* Dashboard Shell */
+    .dash { display: none; min-height: 100vh; }
+    .dash.ready { display: block; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(9, 9, 11, 0.86); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1320px; margin: 0 auto; padding: 0 24px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .tb-brand { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; }
+    .tb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px rgba(16, 185, 129, 0.7); }
+    .tb-domain { color: var(--dim); font-family: var(--mono); font-size: 11.5px; font-weight: 400; }
+    .tb-actions { display: flex; align-items: center; gap: 10px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 7px; font-size: 12.5px; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border-strong); background: var(--card); color: var(--text);
+      transition: transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn:hover { border-color: rgba(255,255,255,0.3); background: var(--card-hover); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #ffffff; font-weight: 600; }
+    .btn-primary:hover { background: #3340ff; border-color: #3340ff; }
+    .btn-danger:hover { border-color: var(--err); color: var(--err); }
+
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 28px 24px 64px; }
+
+    .status-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 26px;
+    }
+    .stat-box {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px;
+    }
+    .stat-label { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+    .stat-val { font-size: 15px; font-weight: 600; color: var(--text); }
+    .stat-val.ok { color: var(--ok); }
+
+    .grid-main { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 22px; align-items: start; }
+
+    .panel {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+      margin-bottom: 20px;
+    }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .panel-title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+    .panel-sub { font-family: var(--mono); font-size: 11px; color: var(--dim); }
+
+    /* Theme Cards */
+    .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .theme-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+    }
+    .theme-card:hover { border-color: var(--border-strong); background: var(--card-hover); }
+    .theme-card.selected {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, rgba(31, 43, 255, 0.12), var(--card));
+      box-shadow: 0 0 0 1px rgba(31, 43, 255, 0.45);
+    }
+    .swatch-bar {
+      height: 54px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);
+      display: flex; overflow: hidden; position: relative;
+    }
+    .swatch-bar span { flex: 1; }
+    .swatch-active-pill {
+      position: absolute; top: 6px; right: 6px;
+      background: var(--ok); color: #04130c;
+      font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+      padding: 2px 7px; border-radius: 999px; display: none;
+    }
+    .theme-card.selected .swatch-active-pill { display: inline-block; }
+    .tc-name { font-size: 14px; font-weight: 600; }
+    .tc-desc { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
+    .tc-foot { display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--dim); padding-top: 8px; border-top: 1px solid var(--border); }
+    .tc-preview-link { color: #8c9bff; text-decoration: none; }
+    .tc-preview-link:hover { text-decoration: underline; }
+
+    /* Controls */
+    .ctrl-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .ctrl-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .ctrl-info strong { display: block; font-size: 13px; font-weight: 500; }
+    .ctrl-info span { font-size: 11.5px; color: var(--dim); }
+
+    .seg-group { display: inline-flex; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 7px; padding: 2px; gap: 2px; }
+    .seg-btn {
+      background: transparent; border: none; color: var(--muted);
+      padding: 5px 11px; border-radius: 5px; font-family: var(--mono); font-size: 11px; cursor: pointer;
+    }
+    .seg-btn.active { background: var(--accent); color: #ffffff; font-weight: 600; }
+
+    /* Toggle Switch */
+    .switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: #27272a; border-radius: 999px; cursor: pointer;
+      transition: background 0.18s ease;
+    }
+    .slider::before {
+      content: ''; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px;
+      border-radius: 50%; background: #ffffff; transition: transform 0.18s ease;
+    }
+    .switch input:checked + .slider { background: var(--ok); }
+    .switch input:checked + .slider::before { transform: translateX(18px); }
+
+    /* Live Preview Frame */
+    .preview-shell {
+      background: #050507; border: 1px solid var(--border-strong); border-radius: 10px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .preview-bar-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 14px; background: var(--card); border-bottom: 1px solid var(--border);
+    }
+    .vp-btns { display: flex; gap: 5px; }
+    .vp-btn {
+      background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+      padding: 4px 9px; border-radius: 5px; font-family: var(--mono); font-size: 10.5px; cursor: pointer;
+    }
+    .vp-btn.active { border-color: var(--accent); color: #ffffff; background: var(--accent-soft); }
+    .iframe-stage {
+      background: #000; display: flex; justify-content: center; height: 540px; overflow: hidden;
+    }
+    .iframe-stage iframe {
+      width: 100%; height: 100%; border: none; background: #fff;
+      transition: width 0.25s ease;
+    }
+
+    .json-box {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 14px; font-family: var(--mono); font-size: 11.5px; line-height: 1.65;
+      color: #a1a1aa; overflow-x: auto; white-space: pre;
+    }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 100;
+      background: var(--panel); border: 1px solid var(--ok); color: var(--text);
+      padding: 11px 16px; border-radius: 8px; font-family: var(--mono); font-size: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6); opacity: 0; pointer-events: none;
+      transform: translateY(12px); transition: all 0.2s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .grid-main, .status-strip { grid-template-columns: 1fr; }
+      .theme-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- RESTRICTED ACCESS GATE -->
+  <section class="gate-wrap" id="authGate">
+    <form class="gate-card" id="authForm" autocomplete="off">
+      <div class="gate-badge"><i></i> Restricted System</div>
+      <h1 class="gate-title">Theme Control Access</h1>
+      <p class="gate-sub">fikribintang.web.id · Authorized operator only.</p>
+      <input
+        type="password"
+        id="accessKeyInput"
+        class="gate-input"
+        placeholder="••••••••••••"
+        autocomplete="current-password"
+        required
+      />
+      <button type="submit" class="gate-btn" id="btnVerify">Authenticate</button>
+      <div class="gate-err" id="authErr" role="alert"></div>
+    </form>
+  </section>
+
+  <!-- ADMIN THEME DASHBOARD -->
+  <div class="dash" id="adminDash">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="tb-brand">
+          <span class="tb-dot"></span>
+          <span>Theme Control Center</span>
+          <span class="tb-domain">fikribintang.web.id</span>
+        </div>
+        <div class="tb-actions">
+          <a href="/portfolio" target="_blank" class="btn">Buka /portfolio ↗</a>
+          <button type="button" class="btn btn-primary" id="btnSaveConfig">Save Active Theme</button>
+          <button type="button" class="btn btn-danger" id="btnSignOut">Lock</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- Live Status Strip -->
+      <section class="status-strip">
+        <div class="stat-box">
+          <div class="stat-label">Active Theme</div>
+          <div class="stat-val mono" id="statTheme">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Color Mode</div>
+          <div class="stat-val mono" id="statMode">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Default Language</div>
+          <div class="stat-val mono" id="statLang">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Last Updated</div>
+          <div class="stat-val mono ok" id="statUpdated">—</div>
+        </div>
+      </section>
+
+      <div class="grid-main">
+        <!-- LEFT: Theme Selector & Controls -->
+        <div>
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2 class="panel-title">Portfolio Theme Presets</h2>
+                <span class="panel-sub">Klik kartu atau switch untuk ganti tema aktif</span>
+              </div>
+              <div class="seg-group" id="quickThemeSwitch">
+                <button type="button" class="seg-btn" data-quick-theme="celestial-blue">Celestial Blue</button>
+                <button type="button" class="seg-btn" data-quick-theme="midnight-portal">Backend Portal</button>
+              </div>
+            </div>
+            <div class="theme-grid" id="themeGrid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Display &amp; Feature Controls</h2>
+              <span class="panel-sub">Runtime flags</span>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>Color Mode</strong>
+                <span>Default appearance for themes supporting light/dark</span>
+              </div>
+              <div class="seg-group" id="modeGroup">
+                <button type="button" class="seg-btn" data-mode="dark">Dark</button>
+                <button type="button" class="seg-btn" data-mode="light">Light</button>
+                <button type="button" class="seg-btn" data-mode="system">System</button>
+              </div>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>Default Language</strong>
+                <span>Initial bilingual locale (ID / EN)</span>
+              </div>
+              <div class="seg-group" id="langGroup">
+                <button type="button" class="seg-btn" data-lang="id">ID</button>
+                <button type="button" class="seg-btn" data-lang="en">EN</button>
+              </div>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>3D GitHub Skyline</strong>
+                <span>Interactive 3D contribution graph &amp; repos telemetry</span>
+              </div>
+              <label class="switch"><input type="checkbox" id="flag3d" /><span class="slider"></span></label>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>Bayer Dither / ASCII Art</strong>
+                <span>ASCII portrait, radar skill morph &amp; project art</span>
+              </div>
+              <label class="switch"><input type="checkbox" id="flagAscii" /><span class="slider"></span></label>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>Hero Video Background</strong>
+                <span>Ambient looping background video on hero section</span>
+              </div>
+              <label class="switch"><input type="checkbox" id="flagVideo" /><span class="slider"></span></label>
+            </div>
+
+            <div class="ctrl-row">
+              <div class="ctrl-info">
+                <strong>Kinetic Ruler Sidebar</strong>
+                <span>Lenis-driven continuous navigation ruler</span>
+              </div>
+              <label class="switch"><input type="checkbox" id="flagRuler" /><span class="slider"></span></label>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT: Live Preview Stage & Config JSON -->
+        <div>
+          <section class="panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Live Theme Preview</h2>
+              <a href="/portfolio" target="_blank" class="btn mono" id="btnOpenPreview" style="padding:5px 10px; font-size:11px;">Open Tab ↗</a>
+            </div>
+            <div class="preview-shell">
+              <div class="preview-bar-top">
+                <span class="mono" style="font-size:11px; color:var(--dim);" id="previewUrlLabel">/portfolio</span>
+                <div class="vp-btns">
+                  <button type="button" class="vp-btn active" data-vp="100%">Desktop</button>
+                  <button type="button" class="vp-btn" data-vp="820px">Tablet</button>
+                  <button type="button" class="vp-btn" data-vp="390px">Mobile</button>
+                </div>
+              </div>
+              <div class="iframe-stage">
+                <iframe id="livePreviewFrame" src="/portfolio" title="Live Theme Preview"></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Active Configuration JSON</h2>
+              <span class="panel-sub">src/data/site-theme.json</span>
+            </div>
+            <pre class="json-box" id="jsonPreview">{}</pre>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toastEl">Saved.</div>
+
+  <script is:inline>
+    const THEMES = [
+      {
+        id: 'celestial-blue',
+        name: 'Celestial Blue (Current)',
+        desc: 'Tema aktif fikribintang.web.id saat ini — navy & sky-blue editorial dengan starfield & stacking cards.',
+        previewUrl: '/portfolio?theme=celestial-blue',
+        swatches: ['#071932', '#0b2545', '#2e6bc4', '#f7f4ee']
+      },
+      {
+        id: 'midnight-portal',
+        name: 'Backend Portal (ASCII)',
+        desc: '3-zone backend shell, Kinetic Ruler sidebar, hero video, 3D GitHub skyline, radar skill morph & Light/Dark.',
+        previewUrl: '/portfolio?theme=midnight-portal',
+        swatches: ['#040424', '#1f2bff', '#8c9bff', '#f4f6fb']
+      }
+    ];
+
+    let sessionKey = sessionStorage.getItem('fb_admin_key') || '';
+    let state = {
+      activeTheme: 'celestial-blue',
+      colorMode: 'dark',
+      defaultLang: 'id',
+      enable3DGithub: true,
+      enableAsciiArt: true,
+      enableHeroVideo: true,
+      enableRulerSidebar: true,
+      updatedAt: ''
+    };
+
+    const authGate = document.getElementById('authGate');
+    const adminDash = document.getElementById('adminDash');
+    const authForm = document.getElementById('authForm');
+    const keyInput = document.getElementById('accessKeyInput');
+    const authErr = document.getElementById('authErr');
+    const toastEl = document.getElementById('toastEl');
+
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 2600);
+    }
+
+    function renderThemeCards() {
+      const grid = document.getElementById('themeGrid');
+      grid.innerHTML = THEMES.map(t => {
+        const isActive = state.activeTheme === t.id;
+        return `
+          <article class="theme-card ${isActive ? 'selected' : ''}" data-theme-id="${t.id}">
+            <div class="swatch-bar">
+              ${t.swatches.map(c => `<span style="background:${c}"></span>`).join('')}
+              <span class="swatch-active-pill">ACTIVE</span>
+            </div>
+            <div class="tc-name">${t.name}</div>
+            <p class="tc-desc">${t.desc}</p>
+            <div class="tc-foot">
+              <button type="button" class="btn ${isActive ? 'btn-primary' : ''}" style="padding:5px 11px; font-size:11px;">
+                ${isActive ? '✓ Tema Aktif' : 'Pilih Tema'}
+              </button>
+              <a class="tc-preview-link" href="${t.previewUrl}" target="_blank" onclick="event.stopPropagation()">Preview ↗</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.theme-card').forEach(card => {
+        card.addEventListener('click', () => {
+          state.activeTheme = card.dataset.themeId;
+          syncUI();
+          anime({ targets: card, scale: [0.98, 1], duration: 240, easing: 'easeOutExpo' });
+        });
+      });
+
+      document.querySelectorAll('#quickThemeSwitch .seg-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.quickTheme === state.activeTheme);
+      });
+    }
+
+    function syncUI() {
+      renderThemeCards();
+      document.getElementById('statTheme').textContent = state.activeTheme;
+      document.getElementById('statMode').textContent = state.colorMode.toUpperCase();
+      document.getElementById('statLang').textContent = state.defaultLang.toUpperCase();
+      document.getElementById('statUpdated').textContent = state.updatedAt
+        ? new Date(state.updatedAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        : 'READY';
+
+      document.querySelectorAll('#modeGroup .seg-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === state.colorMode));
+      document.querySelectorAll('#langGroup .seg-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === state.defaultLang));
+
+      document.getElementById('flag3d').checked = !!state.enable3DGithub;
+      document.getElementById('flagAscii').checked = !!state.enableAsciiArt;
+      document.getElementById('flagVideo').checked = !!state.enableHeroVideo;
+      document.getElementById('flagRuler').checked = !!state.enableRulerSidebar;
+
+      const themeMeta = THEMES.find(t => t.id === state.activeTheme) || THEMES[0];
+      const frame = document.getElementById('livePreviewFrame');
+      if (frame.dataset.loaded !== themeMeta.previewUrl) {
+        frame.src = themeMeta.previewUrl;
+        frame.dataset.loaded = themeMeta.previewUrl;
+      }
+      document.getElementById('previewUrlLabel').textContent = themeMeta.previewUrl;
+      document.getElementById('btnOpenPreview').href = themeMeta.previewUrl;
+      document.getElementById('jsonPreview').textContent = JSON.stringify(state, null, 2);
+    }
+
+    async function verifyAndEnter(key) {
+      authErr.textContent = '';
+      try {
+        const res = await fetch('/api/admin/theme', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': key },
+          body: JSON.stringify({ action: 'verify' })
+        });
+        if (!res.ok) {
+          sessionStorage.removeItem('fb_admin_key');
+          authErr.textContent = '401 Unauthorized';
+          return false;
+        }
+        const data = await res.json();
+        sessionKey = key;
+        sessionStorage.setItem('fb_admin_key', key);
+        if (data.config) state = { ...state, ...data.config };
+        authGate.style.display = 'none';
+        adminDash.classList.add('ready');
+        syncUI();
+        anime({ targets: '.stat-box, .panel', opacity: [0, 1], translateY: [14, 0], delay: anime.stagger(45), duration: 480, easing: 'easeOutExpo' });
+        return true;
+      } catch {
+        authErr.textContent = 'Connection error';
+        return false;
+      }
+    }
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const k = keyInput.value.trim();
+      if (!k) return;
+      await verifyAndEnter(k);
+      keyInput.value = '';
+    });
+
+    document.querySelectorAll('#quickThemeSwitch .seg-btn').forEach(b => b.addEventListener('click', () => {
+      state.activeTheme = b.dataset.quickTheme;
+      syncUI();
+    }));
+    document.querySelectorAll('#modeGroup .seg-btn').forEach(b => b.addEventListener('click', () => { state.colorMode = b.dataset.mode; syncUI(); }));
+    document.querySelectorAll('#langGroup .seg-btn').forEach(b => b.addEventListener('click', () => { state.defaultLang = b.dataset.lang; syncUI(); }));
+
+    ['flag3d', 'flagAscii', 'flagVideo', 'flagRuler'].forEach(id => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        if (id === 'flag3d') state.enable3DGithub = e.target.checked;
+        if (id === 'flagAscii') state.enableAsciiArt = e.target.checked;
+        if (id === 'flagVideo') state.enableHeroVideo = e.target.checked;
+        if (id === 'flagRuler') state.enableRulerSidebar = e.target.checked;
+        syncUI();
+      });
+    });
+
+    document.querySelectorAll('.vp-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.vp-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('livePreviewFrame').style.width = btn.dataset.vp;
+      });
+    });
+
+    document.getElementById('btnSaveConfig').addEventListener('click', async () => {
+      const res = await fetch('/api/admin/theme', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': sessionKey },
+        body: JSON.stringify({ action: 'update', config: state })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.config) state = { ...state, ...data.config };
+        syncUI();
+        showToast(`Theme saved: ${state.activeTheme} (${state.colorMode})`);
+      } else {
+        showToast('Auth expired — please re-authenticate');
+      }
+    });
+
+    document.getElementById('btnSignOut').addEventListener('click', () => {
+      sessionStorage.removeItem('fb_admin_key');
+      sessionKey = '';
+      adminDash.classList.remove('ready');
+      authGate.style.display = 'flex';
+    });
+
+    if (sessionKey) {
+      verifyAndEnter(sessionKey);
+    }
+  </script>
+</body>
+</html>

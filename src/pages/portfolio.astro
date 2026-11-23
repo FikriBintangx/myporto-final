@@ -1,5 +1,14 @@
 ---
-// Fikri Bintang Purnomo — Celestial & Space Portfolio 2026
+// Fikri Bintang Purnomo — Portfolio Dynamic Theme Router
+import { readThemeConfig } from '../lib/theme-store';
+
+const queryTheme = Astro.url.searchParams.get('theme');
+const siteCfg = await readThemeConfig(Astro.request.headers.get('cookie'));
+const resolvedTheme = queryTheme || siteCfg.activeTheme;
+
+if (resolvedTheme === 'midnight-portal') {
+  return Astro.rewrite('/portfolio-backend');
+}
 ---
 <!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Fikri Bintang Purnomo — Backend Developer | Official Portfolio</title>
   <link rel="canonical" href="https://fikribintang.web.id/">
