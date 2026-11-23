@@ -544,6 +544,21 @@ if (resolvedTheme === 'midnight-portal') {
 
 
   <link rel="stylesheet" href="/portfolio-assets/footer-crowd.css?v=20261120_footer_v3" />
+  <style is:global id="celestial-responsive-guard">
+    html, body { max-width: 100%; overflow-x: clip; }
+    @media (max-width: 900px) {
+      .research-callout-card { grid-template-columns: 1fr !important; gap: 1.5rem !important; padding: 1.5rem !important; }
+      .research-stat-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+      .hero-bottombar { flex-wrap: wrap !important; gap: 0.5rem 1rem !important; justify-content: center !important; text-align: center !important; }
+      .about-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .tactile-folder-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 520px) {
+      .research-stat-grid { grid-template-columns: 1fr !important; }
+      .nav-right { gap: 0.35rem !important; }
+      .nav-cta-btn { padding: 0.45rem 0.75rem !important; font-size: 0.72rem !important; }
+    }
+  </style>
 </head><body><!-- ============ LOADER ============ --><div class="loader" id="loader"><div class="loader-ambient" aria-hidden="true"></div><div class="loader-stage"><div class="loader-center"><div class="greeting-box"><em class="greeting-text" id="greetingText">Halo</em></div></div><div class="loader-lang mono" id="loaderLang">INDONESIA</div></div><div class="loader-bottom"><span class="mono">Fikri Bintang — Portfolio 2026</span> · <span class="mono loader-pct" id="loaderPct">0%</span></div><div class="loader-bar"><span id="loaderBarFill"></span></div></div><!-- ============ NAVBAR ============ --><header class="nav" id="site-nav"><div class="nav-left"><a href="/" class="nav-logo"><span class="nav-logo-mark">FB</span><span class="nav-logo-text">Fikri Bintang.</span><span class="nav-logo-badge">PORTFOLIO</span></a></div><nav class="nav-menu">
       <a href="#karya" class="nav-link"><span class="nav-link-box" data-i18n="nav_karya">Karya</span></a>
       <a href="/jurnal" class="nav-link nav-link-jurnal"><span class="nav-link-box" data-i18n="nav_jurnal">Jurnal & Riset ✦</span></a>
