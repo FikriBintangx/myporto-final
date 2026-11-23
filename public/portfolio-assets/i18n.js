@@ -13,7 +13,7 @@ const translations = {
 
     // Hero
     hero_badge: "Portfolio — 2026",
-    hero_desc: "Mobile & Web UI/UX Engineer serta Peneliti Cyber Security yang merancang antarmuka presisi, arsitektur produk yang kokoh, dan pengalaman digital yang bersinar.",
+    hero_desc: "Backend Developer yang membangun arsitektur API berkinerja tinggi, sistem database presisi, dan layanan server yang tangguh di bawah beban tinggi.",
     hero_explore: "Eksplorasi Karya",
     hero_cv: "Unduh CV ↗",
     hero_jurnal_cta: "Buka Jurnal Ilmiah ↗",
@@ -34,20 +34,20 @@ const translations = {
 
     // Process
     process_badge: "02 / METODOLOGI",
-    process_title: "Proses Rekayasa Digital",
-    process_step1_title: "Eksplorasi & Discovery",
-    process_step1_desc: "Membedah kebutuhan pengguna, pemetaan arsitektur informasi, riset kompetitor, dan formulasi spesifikasi teknis.",
-    process_step2_title: "Desain Sistem & Prototyping",
-    process_step2_desc: "Menyusun wireframe presisi, atomic design system di Figma, interaksi mikro, dan validasi kegunaan antarmuka.",
-    process_step3_title: "Pengembangan Kode & Optimasi",
-    process_step3_desc: "Implementasi antarmuka bersih, arsitektur data efisien, keamanan lapis ganda, dan performa mulus 60 FPS.",
+    process_title: "Proses Rekayasa Backend",
+    process_step1_title: "Analisis & Arsitektur",
+    process_step1_desc: "Membedah kebutuhan bisnis, merancang kontrak API (REST/gRPC), pemodelan relasi database, dan spesifikasi skalabilitas sistem.",
+    process_step2_title: "Schema & Data Modeling",
+    process_step2_desc: "Menyusun skema PostgreSQL terindeks, strategi caching Redis, antrean worker asinkron, dan jaminan integritas data.",
+    process_step3_title: "Implementasi & Security",
+    process_step3_desc: "Menulis layanan backend bersih di Go, Python, atau Node.js dengan autentikasi ketat, validasi input, dan rate limiting.",
 
     // About
     about_badge: "03 / PROFIL",
     about_title: "Tentang Fikri Bintang",
-    about_lead: "Membangun jembatan harmonis antara estetika visual humanis, rekayasa kode mutakhir, dan ketahanan sistem digital.",
-    about_p1: "Saya adalah Software & UI/UX Engineer berbasis di Tangerang, Indonesia. Memiliki spesialisasi dalam merancang arsitektur web modern, aplikasi mobile responsif, serta riset keamanan siber perbankan.",
-    about_p2: "Dengan pengalaman membangun platform berskala nyata mulai dari e-commerce matcha, aplikasi pemantauan keuangan, sistem manajemen operasional RT/RW, hingga publikasi ilmiah keamanan siber.",
+    about_lead: "Membangun arsitektur backend berthroughput tinggi, optimasi database, dan ketahanan sistem digital skala produksi.",
+    about_p1: "Saya adalah Backend Developer berbasis di Tangerang, Indonesia. Memiliki spesialisasi dalam membangun API berkinerja tinggi (Go, Python, Node.js), optimasi PostgreSQL & Redis, serta riset keamanan siber perbankan.",
+    about_p2: "Berpengalaman membangun layanan backend berskala nyata mulai dari benchmark gRPC/REST 10k+ req/s, pipeline semantic search pgvector, gateway autentikasi Redis, hingga REST API korporat dan publikasi ilmiah.",
 
     // Dynamic Stats
     stat_ipk_label: "Indeks Prestasi Kumulatif",
@@ -63,7 +63,7 @@ const translations = {
 
     // Footer
     footer_thanks: "Terima kasih sudah berkunjung",
-    footer_desc: "Mobile & Web UI/UX Engineer serta Fullstack Developer dari Indonesia. Mendesain dan membangun produk digital yang rapi, elegan, berkinerja tinggi, dan berdampak nyata bagi pengguna.",
+    footer_desc: "Backend Developer & Systems Engineer dari Indonesia. Membangun layanan API, arsitektur database, dan sistem backend yang cepat, aman, serta tangguh untuk skala produksi.",
     footer_networks: "Jejaring",
     footer_contact: "Kontak",
     footer_files: "Berkas",
@@ -106,7 +106,7 @@ const translations = {
 
     // Hero
     hero_badge: "Portfolio — 2026",
-    hero_desc: "Mobile & Web UI/UX Engineer and Cybersecurity Researcher crafting pixel-perfect interfaces, resilient product architectures, and stellar digital experiences.",
+    hero_desc: "Backend Developer building high-throughput APIs, precision database architectures, and resilient server systems that stay fast under load.",
     hero_explore: "Explore Works",
     hero_cv: "Download CV ↗",
     hero_jurnal_cta: "View Research Papers ↗",
@@ -127,20 +127,20 @@ const translations = {
 
     // Process
     process_badge: "02 / METHODOLOGY",
-    process_title: "Digital Engineering Process",
-    process_step1_title: "Exploration & Discovery",
-    process_step1_desc: "Deconstructing user requirements, information architecture mapping, competitive benchmarks, and technical specification drafting.",
-    process_step2_title: "Design System & Prototyping",
-    process_step2_desc: "Drafting high-fidelity wireframes, atomic Figma design tokens, micro-interactions, and rigorous usability stress-testing.",
-    process_step3_title: "Code Craft & Performance",
-    process_step3_desc: "Implementing clean component hierarchies, robust data models, defense-in-depth security, and buttery 60 FPS transitions.",
+    process_title: "Backend Engineering Process",
+    process_step1_title: "Analysis & Architecture",
+    process_step1_desc: "Deconstructing business requirements, designing REST/gRPC API contracts, relational schema modeling, and scalability specifications.",
+    process_step2_title: "Schema & Data Modeling",
+    process_step2_desc: "Structuring indexed PostgreSQL schemas, Redis caching strategies, async worker queues, and strict data integrity guarantees.",
+    process_step3_title: "Implementation & Security",
+    process_step3_desc: "Writing clean backend services in Go, Python, or Node.js with hardened authentication, input validation, and sliding-window rate limiting.",
 
     // About
     about_badge: "03 / PROFILE",
     about_title: "About Fikri Bintang",
-    about_lead: "Bridging humanistic visual aesthetics, bleeding-edge engineering, and mission-critical digital resilience.",
-    about_p1: "I am a Software & UI/UX Engineer based in Tangerang, Indonesia. Specializing in modern web architectures, responsive mobile platforms, and banking cybersecurity research.",
-    about_p2: "With hands-on experience building production-grade digital products ranging from artisan matcha e-commerce and personal finance platforms to neighborhood management suites and sovereign cybersecurity publications.",
+    about_lead: "Engineering high-throughput backend architectures, PostgreSQL performance, and mission-critical system resilience.",
+    about_p1: "I am a Backend Developer based in Tangerang, Indonesia. Specializing in high-performance APIs (Go, Python, Node.js), PostgreSQL & Redis optimization, and banking cybersecurity research.",
+    about_p2: "Experienced in building production-grade backend systems ranging from 10k+ req/s gRPC vs REST benchmarks and pgvector semantic search pipelines to Redis auth gateways and enterprise APIs.",
 
     // Dynamic Stats
     stat_ipk_label: "Cumulative GPA",
@@ -156,7 +156,7 @@ const translations = {
 
     // Footer
     footer_thanks: "Thank you for visiting",
-    footer_desc: "Mobile & Web UI/UX Engineer and Fullstack Developer from Indonesia. Designing and engineering clean, high-performance, and impactful digital solutions.",
+    footer_desc: "Backend Developer & Systems Engineer from Indonesia. Building fast, secure, and production-grade APIs, database architectures, and distributed services.",
     footer_networks: "Networks",
     footer_contact: "Contact",
     footer_files: "Documents",
