@@ -1427,9 +1427,11 @@ const siteCfgJson = JSON.stringify(siteCfg);
 
     /* Full Royal-Cobalt Editorial Footer (Dark Royal Cobalt + Light Ice-Cobalt Adaptive) */
     .monolith-footer {
-      position: relative;
+      position: relative !important;
+      top: auto !important;
       margin-top: 0;
-      min-height: 100vh;
+      margin-bottom: 0;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -1438,6 +1440,11 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-left: 0 !important;
       padding-right: 0 !important;
       border-top: 1px solid rgba(130, 160, 255, 0.38) !important;
+    }
+    @media (max-width: 960px) {
+      .monolith-footer {
+        min-height: calc(100dvh - 52px);
+      }
     }
     html.light .monolith-footer {
       background: linear-gradient(180deg, #eef2ff 0%, #e6ecfb 48%, #dde6fa 100%);
@@ -3770,6 +3777,10 @@ const siteCfgJson = JSON.stringify(siteCfg);
           const pages = Array.from(document.querySelectorAll('.curtain-page'));
           pages.forEach((page, idx) => {
             page.style.transform = '';
+            if (page.id === 'monolithFooter') {
+              page.style.top = '';
+              return;
+            }
             const h = page.offsetHeight;
             // Short sections pin at top; tall sections pin when their bottom reaches viewport bottom
             const pinTop = h > availH ? Math.round(vh - h) : (idx === 0 ? topOffset + (isMob ? 0 : 16) : topOffset);
