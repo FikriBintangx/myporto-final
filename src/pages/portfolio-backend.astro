@@ -141,11 +141,25 @@ const siteCfgJson = JSON.stringify(siteCfg);
     html.light .avatar-modal-card { background: #ffffff; box-shadow: 0 24px 60px rgba(7, 9, 43, 0.18); }
 
     .theme-btn {
-      background: #020218; border: 1px solid var(--line-strong); color: var(--text-muted);
-      width: 24px; height: 24px; border-radius: 3px; cursor: pointer;
-      display: grid; place-items: center; font-size: 12px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.14s ease;
     }
-    .theme-btn:hover { color: var(--white); border-color: var(--white); }
+    .theme-btn:hover {
+      color: var(--white);
+      border-color: rgba(56, 189, 248, 0.55);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .theme-btn:active { transform: scale(0.94); }
+    .theme-btn svg, .sb-min-btn svg { width: 14px; height: 14px; display: block; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
@@ -195,17 +209,52 @@ const siteCfgJson = JSON.stringify(siteCfg);
       overflow: hidden;
     }
     .sb-min-btn {
-      background: #020218; border: 1px solid var(--line-strong); color: var(--text-muted);
-      width: 24px; height: 24px; border-radius: 3px; cursor: pointer;
-      display: grid; place-items: center; font-family: var(--mono); font-size: 11px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      flex-shrink: 0;
+      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.14s ease;
     }
-    .sb-min-btn:hover { color: var(--white); border-color: var(--white); }
+    .sb-min-btn:hover {
+      color: var(--white);
+      border-color: rgba(56, 189, 248, 0.55);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .sb-min-btn:active { transform: scale(0.94); }
+    .sb-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid var(--line);
+    }
+    html.light .sb-controls-bar {
+      background: rgba(15, 23, 84, 0.035);
+      border-color: var(--line-strong);
+    }
+    .sb-controls-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
     .sb-min-bar {
       display: none; align-items: center; justify-content: space-between;
       padding-bottom: 10px; border-bottom: 1px dotted var(--line);
       font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em;
     }
     .shell.sb-min .sb-brand-row,
+    .shell.sb-min .sb-controls-bar,
     .shell.sb-min .sb-cta,
     .shell.sb-min .sb-group-tag,
     .shell.sb-min .sb-ext-item,
@@ -267,15 +316,36 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .sb-brand-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .sb-brand { display: flex; align-items: center; gap: 12px; }
     .lang-toggle {
-      display: inline-flex; align-items: center; padding: 2px;
-      background: #020218; border: 1px solid var(--line-strong); border-radius: 3px;
-      font-family: var(--mono); font-size: 10px; flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px;
+      gap: 2px;
+      background: rgba(2, 2, 24, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      flex-shrink: 0;
     }
     .lang-btn {
-      background: transparent; border: none; color: var(--text-dim);
-      padding: 3px 7px; border-radius: 2px; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: 600;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      padding: 4px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
     }
-    .lang-btn.active { background: var(--cobalt); color: var(--white); }
+    .lang-btn:hover { color: var(--white); }
+    .lang-btn.active {
+      background: var(--cobalt);
+      color: var(--on-cobalt);
+      box-shadow: 0 2px 8px rgba(31, 43, 255, 0.42);
+    }
     .mob-lang-wrap { display: none; justify-content: flex-end; margin-bottom: 12px; }
     .sb-avatar {
       width: 52px; height: 52px; border-radius: 4px; background: #020218;
@@ -1105,6 +1175,46 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-top: 4px;
     }
 
+    /* Sticky Hero + Foreground Curtain Overlap Layer (Nous-style Layer Scrub) */
+    @media (min-width: 961px) {
+      .hero-sticky-stage {
+        position: sticky;
+        top: 20px;
+        z-index: 1;
+        will-change: transform, opacity, filter;
+        transform-origin: center top;
+      }
+    }
+    .curtain-layer {
+      position: relative;
+      z-index: 10;
+      background: var(--bg);
+      margin: 24px calc(clamp(16px, 4.5vw, 68px) * -1) 0;
+      padding: 18px clamp(16px, 4.5vw, 68px) 0;
+      border-top: 1px solid rgba(160, 174, 255, 0.24);
+      border-radius: 26px 26px 0 0;
+      box-shadow: 0 -28px 72px rgba(2, 2, 20, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    html.light .curtain-layer {
+      border-top-color: rgba(15, 23, 84, 0.16);
+      box-shadow: 0 -22px 54px rgba(7, 9, 43, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    .curtain-seam {
+      width: 44px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(160, 174, 255, 0.26);
+      margin: 0 auto 10px;
+    }
+    html.light .curtain-seam { background: rgba(15, 23, 84, 0.18); }
+    @media (max-width: 960px) {
+      .curtain-layer {
+        margin: 16px -16px 0;
+        padding: 14px 16px 0;
+        border-radius: 20px 20px 0 0;
+      }
+    }
+
     /* Monumental Cinematic Footer & Scroll-Scrubbed Perspective Stage */
     .scroll-perspective-wrap {
       perspective: 1200px;
@@ -1366,20 +1476,26 @@ const siteCfgJson = JSON.stringify(siteCfg);
       <div class="sb-top" id="sbTop">
         <div class="sb-min-bar">
           <span>NAV // RULER</span>
-          <button type="button" class="sb-min-btn" id="btnSbExpand" title="Expand Sidebar">»</button>
+          <button type="button" class="sb-min-btn" id="btnSbExpand" title="Expand Sidebar" aria-label="Expand Sidebar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+          </button>
         </div>
         <div class="sb-brand-row">
           <div class="sb-brand">
             <div class="sb-avatar" id="sbAvatarBtn" role="button" tabindex="0" title="Click to enlarge portrait"><canvas id="sbAvatarAscii" data-img="/assets/foto-hero.png" aria-label="Fikri Bintang ASCII Portrait"></canvas></div>
             <a href="#overview" class="sb-name">Fikri<br />Bintang</a>
           </div>
-          <div style="display:flex; align-items:center; gap:4px;">
-            <div class="lang-toggle" role="group" aria-label="Language Switcher">
-              <button type="button" class="lang-btn active" data-set-lang="id">ID</button>
-              <button type="button" class="lang-btn" data-set-lang="en">EN</button>
-            </div>
-            <button type="button" class="theme-btn" data-toggle-theme title="Toggle Light / Dark Mode">☀</button>
-            <button type="button" class="sb-min-btn" id="btnSbMin" title="Minimize Sidebar">«</button>
+        </div>
+        <div class="sb-controls-bar" aria-label="Workspace Controls">
+          <div class="lang-toggle" role="group" aria-label="Language Switcher">
+            <button type="button" class="lang-btn active" data-set-lang="id">ID</button>
+            <button type="button" class="lang-btn" data-set-lang="en">EN</button>
+          </div>
+          <div class="sb-controls-actions">
+            <button type="button" class="theme-btn" data-toggle-theme title="Toggle Light / Dark Mode" aria-label="Toggle Theme"></button>
+            <button type="button" class="sb-min-btn" id="btnSbMin" title="Minimize Sidebar" aria-label="Minimize Sidebar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg>
+            </button>
           </div>
         </div>
 
@@ -1434,7 +1550,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </div>
       <div class="breadcrumb" id="overview">// RINGKASAN</div>
 
-      <section class="hero">
+      <section class="hero hero-sticky-stage" id="heroStage">
         <div class="hero-video-wrap" aria-hidden="true">
           <video class="hero-video-bg" src="/assets/hero-bg.mp4" autoplay loop muted playsinline></video>
           <div class="hero-video-scrim"></div>
@@ -1456,8 +1572,12 @@ const siteCfgJson = JSON.stringify(siteCfg);
         </div>
       </section>
 
+      <!-- FOREGROUND CURTAIN LAYER (Overlaps Sticky Hero on Scroll) -->
+      <div class="curtain-layer" id="curtainLayer">
+        <div class="curtain-seam" aria-hidden="true"></div>
+
       <!-- GITHUB 3D TELEMETRY (Cleanly below Hero Video) -->
-      <section class="section" id="github" style="padding-top: 38px; padding-bottom: 44px;">
+      <section class="section" id="github" style="padding-top: 18px; padding-bottom: 44px;">
         <div class="gh-panel" data-anime-item id="ghPanel" style="margin-top: 0;">
           <div class="gh-top mono">
             <div class="gh-tabs">
@@ -1639,6 +1759,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
           </div>
         </div>
       </footer>
+      </div><!-- /.curtain-layer -->
     </main>
 
     <!-- RIGHT RAIL — Precision Telemetry & Skill Radar Dock -->
@@ -3024,13 +3145,16 @@ const siteCfgJson = JSON.stringify(siteCfg);
     });
 
     // Light / Dark Mode Switcher (Persisted in localStorage + Instant Canvas Redraw)
+    const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
+    const ICON_MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+
     function applyTheme(mode) {
       const isLight = mode === 'light';
       document.documentElement.classList.toggle('light', isLight);
       document.documentElement.classList.toggle('dark', !isLight);
       localStorage.setItem('p2_theme', isLight ? 'light' : 'dark');
       document.querySelectorAll('[data-toggle-theme]').forEach(btn => {
-        btn.textContent = isLight ? '☾' : '☀';
+        btn.innerHTML = isLight ? ICON_MOON : ICON_SUN;
         btn.title = isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode';
       });
       if (window.__asciiReady) {
@@ -3082,6 +3206,24 @@ const siteCfgJson = JSON.stringify(siteCfg);
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
+        // Sticky Hero Depth Recede as Foreground Curtain Layer overlaps it
+        const heroStage = document.getElementById('heroStage');
+        const curtainLayer = document.getElementById('curtainLayer');
+        if (heroStage && curtainLayer && window.innerWidth > 960) {
+          gsap.fromTo(heroStage,
+            { scale: 1, y: 0, opacity: 1, filter: 'blur(0px)' },
+            {
+              scale: 0.93, y: -28, opacity: 0.22, filter: 'blur(2.5px)', ease: 'none',
+              scrollTrigger: {
+                trigger: curtainLayer,
+                start: 'top 95%',
+                end: 'top 14%',
+                scrub: 0.6
+              }
+            }
+          );
+        }
+
         // 3D Perspective Stage Scrub on major showcase panels
         document.querySelectorAll('.gh-panel, .paper-card').forEach(panel => {
           gsap.fromTo(panel,
