@@ -660,151 +660,106 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .svc-stack { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; border-top: 1px dotted var(--line); }
     .chip { font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); border: 1px solid var(--line); padding: 2px 7px; border-radius: 2px; }
 
-    /* Experience List — Organic Curved S-Wave SVG Roadmap & Architectural Cards */
+    /* Experience List — Minimalist Grey ASCII Constellation Timeline (Zero Card Tips) */
     .exp-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       position: relative;
-      padding-left: 64px;
+      padding-left: 52px;
     }
-    .exp-curve-svg {
+    .exp-const-svg {
       position: absolute;
       left: 0;
       top: 0;
-      width: 56px;
+      width: 44px;
       height: 100%;
       pointer-events: none;
       overflow: visible;
       z-index: 1;
     }
-    .exp-curve-base {
+    .exp-const-base {
       fill: none;
-      stroke: rgba(160, 168, 255, 0.2);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-dasharray: 4 6;
+      stroke: rgba(148, 163, 184, 0.24);
+      stroke-width: 1.2;
+      stroke-dasharray: 2 4;
     }
-    .exp-curve-ink {
+    .exp-const-ink {
       fill: none;
-      stroke: url(#expCurveGrad);
-      stroke-width: 2.8;
-      stroke-linecap: round;
-      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.55));
+      stroke: #94a3b8;
+      stroke-width: 1.5;
+      stroke-dasharray: 3 3;
+      filter: drop-shadow(0 0 4px rgba(148, 163, 184, 0.35));
     }
-    .exp-curve-node {
-      fill: var(--bg);
-      stroke: rgba(160, 168, 255, 0.45);
-      stroke-width: 2.2;
-      transition: fill 0.25s ease, stroke 0.25s ease, r 0.25s ease;
+    .exp-const-star {
+      font-family: var(--mono);
+      font-size: 13px;
+      fill: rgba(148, 163, 184, 0.42);
+      text-anchor: middle;
+      dominant-baseline: central;
+      transition: fill 0.22s ease;
     }
-    .exp-curve-node.is-lit {
-      fill: #38bdf8;
-      stroke: #ffffff;
-      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+    .exp-const-star.is-lit {
+      fill: #cbd5e1;
+      filter: drop-shadow(0 0 6px rgba(203, 213, 225, 0.55));
     }
-    .exp-curve-halo {
-      fill: rgba(56, 189, 248, 0.22);
-      opacity: 0;
-      transition: opacity 0.25s ease;
+    .exp-const-dust {
+      font-family: var(--mono);
+      font-size: 9px;
+      fill: rgba(148, 163, 184, 0.28);
+      text-anchor: middle;
+      dominant-baseline: central;
     }
-    .exp-curve-halo.is-lit { opacity: 1; }
-    html.light .exp-curve-base { stroke: rgba(15, 23, 84, 0.18); }
-    html.light .exp-curve-node { fill: #ffffff; stroke: rgba(15, 23, 84, 0.35); }
-    html.light .exp-curve-node.is-lit { fill: var(--cobalt); stroke: #ffffff; }
+    html.light .exp-const-base { stroke: rgba(100, 116, 139, 0.26); }
+    html.light .exp-const-ink { stroke: #64748b; filter: none; }
+    html.light .exp-const-star { fill: rgba(100, 116, 139, 0.45); }
+    html.light .exp-const-star.is-lit { fill: #334155; filter: none; }
 
     .exp-row {
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 152px 1fr;
-      gap: 20px;
-      padding: 20px 22px;
-      background: linear-gradient(180deg, rgba(11, 13, 46, 0.72) 0%, rgba(7, 9, 34, 0.85) 100%);
-      border: 1px solid rgba(160, 168, 255, 0.14);
-      border-radius: 14px;
-      opacity: 0;
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+      grid-template-columns: 144px 1fr;
+      gap: 18px;
+      padding: 18px 20px;
+      background: rgba(9, 11, 38, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 10px;
+      transition: border-color 0.2s ease, background 0.2s ease;
     }
+    .exp-row.is-lit,
     .exp-row.is-now {
-      border-color: rgba(56, 189, 248, 0.36);
-      box-shadow: inset 3px 0 0 #38bdf8, 0 12px 30px rgba(0, 0, 0, 0.28);
-    }
-    .exp-row.is-lit {
-      border-color: rgba(160, 168, 255, 0.28);
+      border-color: rgba(148, 163, 184, 0.26);
     }
     .exp-row:hover {
-      transform: translateY(-2px);
-      border-color: rgba(56, 189, 248, 0.5);
-      background: linear-gradient(180deg, rgba(15, 19, 64, 0.88) 0%, rgba(9, 12, 44, 0.94) 100%);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+      border-color: rgba(148, 163, 184, 0.42);
+      background: rgba(14, 17, 52, 0.72);
     }
     html.light .exp-row {
       background: #ffffff;
-      border-color: var(--line-strong);
-      box-shadow: 0 4px 16px rgba(7, 9, 43, 0.04);
-    }
-    html.light .exp-row.is-now {
-      border-color: rgba(31, 43, 255, 0.42);
-      box-shadow: inset 3px 0 0 var(--cobalt), 0 10px 26px rgba(31, 43, 255, 0.08);
+      border-color: rgba(15, 23, 84, 0.12);
     }
     html.light .exp-row:hover {
       background: #f8faff;
-      border-color: var(--cobalt);
+      border-color: rgba(15, 23, 84, 0.28);
     }
     .exp-meta-col {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
+      gap: 4px;
     }
-    .exp-date { font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.03em; }
-    .exp-now {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(56, 229, 157, 0.12);
-      border: 1px solid rgba(56, 229, 157, 0.32);
-      color: #38e59d;
+    .exp-date { font-size: 11px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.03em; }
+    .exp-status-txt {
       font-family: var(--mono);
       font-size: 9.5px;
-      font-weight: 600;
+      color: #94a3b8;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 999px;
     }
-    .exp-now::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #38e59d;
-      box-shadow: 0 0 6px #38e59d;
-    }
-    html.light .exp-now { background: rgba(21, 128, 61, 0.1); border-color: rgba(21, 128, 61, 0.28); color: #15803d; }
-    html.light .exp-now::before { background: #15803d; box-shadow: none; }
-    .exp-tag-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 2.5px 8px;
-      border-radius: 6px;
-      background: rgba(160, 168, 255, 0.08);
-      border: 1px solid rgba(160, 168, 255, 0.18);
-      font-family: var(--mono);
-      font-size: 9.5px;
-      font-weight: 600;
-      color: #93c5fd;
-      letter-spacing: 0.06em;
-    }
-    html.light .exp-tag-pill {
-      background: rgba(31, 43, 255, 0.07);
-      border-color: rgba(31, 43, 255, 0.18);
-      color: var(--cobalt);
-    }
-    .exp-role { font-family: var(--cond); font-size: 24px; font-weight: 600; color: var(--white); line-height: 1.12; margin-bottom: 4px; }
-    .exp-org { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
-    .exp-desc { font-size: 13.5px; font-weight: 300; color: var(--text-dim); line-height: 1.62; }
+    .exp-role { font-family: var(--cond); font-size: 23px; font-weight: 500; color: var(--white); line-height: 1.12; margin-bottom: 3px; }
+    .exp-org { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-bottom: 6px; }
+    .exp-desc { font-size: 13.5px; font-weight: 300; color: var(--text-dim); line-height: 1.6; }
 
     /* Research Papers + Book ASCII Art */
     .paper-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -1339,15 +1294,24 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-top: 4px;
     }
 
-    /* Per-Page Stacked Curtain Layer Overlap Scroll (All Viewports: Desktop, Tablet & Mobile) */
+    /* Sticky Hero + Safe Layered Curtain Sheets (Zero Blank-Screen Sticky Bug) */
     .curtain-page {
-      position: sticky;
-      top: 0;
+      position: relative;
       --curtain-dim: 0;
-      will-change: transform;
       transform-origin: center top;
     }
-    .curtain-page::after {
+    #heroStage.curtain-page {
+      position: sticky;
+      top: 16px;
+      z-index: 1;
+      will-change: transform;
+    }
+    @media (max-width: 960px) {
+      #heroStage.curtain-page {
+        top: 52px;
+      }
+    }
+    #heroStage.curtain-page::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -1357,7 +1321,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       border-radius: inherit;
       z-index: 40;
     }
-    html.light .curtain-page::after {
+    html.light #heroStage.curtain-page::after {
       background: rgba(7, 9, 43, 0.22);
     }
     .curtain-sheet {
@@ -1424,12 +1388,12 @@ const siteCfgJson = JSON.stringify(siteCfg);
     }
     .monolith-upper {
       position: relative;
-      padding: clamp(56px, 9vw, 112px) clamp(20px, 4vw, 48px) clamp(44px, 7vw, 84px);
+      padding: clamp(52px, 7vw, 88px) clamp(20px, 4vw, 48px) clamp(40px, 5.5vw, 64px);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      min-height: clamp(220px, 28vw, 340px);
+      gap: 36px;
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 60%), #080a1c;
     }
     .monolith-watermark {
       position: absolute;
@@ -1448,68 +1412,123 @@ const siteCfgJson = JSON.stringify(siteCfg);
       line-height: 0.85;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      color: rgba(160, 174, 255, 0.06);
+      color: rgba(160, 174, 255, 0.055);
       white-space: nowrap;
       will-change: transform;
     }
-    .monolith-meta-row {
+    .monolith-cta-band {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(160, 174, 255, 0.14);
+    }
+    .monolith-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #38e59d;
+      margin-bottom: 10px;
+    }
+    .monolith-headline {
+      font-family: var(--cond);
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      font-weight: 500;
+      line-height: 1.02;
+      color: #f4f5ff;
+      max-width: 520px;
+    }
+    .monolith-cta-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .monolith-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: #1f2bff;
+      color: #ffffff;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.18s ease, transform 0.15s ease;
+    }
+    .monolith-btn-primary:hover { background: #3541ff; transform: translateY(-1px); }
+    .monolith-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(160, 174, 255, 0.24);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e2e8ff;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .monolith-btn-ghost:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
+    .monolith-grid {
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 20px;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 28px;
     }
-    .monolith-meta-left,
-    .monolith-meta-right {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .monolith-col-title {
       font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(214, 220, 255, 0.72);
-    }
-    .monolith-meta-right { text-align: right; align-items: flex-end; }
-    .monolith-meta-sub { color: rgba(148, 163, 214, 0.56); font-size: 10px; }
-    .monolith-badges {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .monolith-badge {
-      width: 44px;
-      height: 54px;
-      border-radius: 6px;
-      border: 1px solid rgba(160, 174, 255, 0.24);
-      background: rgba(12, 16, 44, 0.65);
-      backdrop-filter: blur(8px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      color: #e2e8ff;
-      font-family: var(--mono);
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 214, 0.65);
+      margin-bottom: 12px;
     }
-    .monolith-badge:hover {
-      transform: translateY(-3px);
-      border-color: #38bdf8;
-      background: rgba(31, 43, 255, 0.22);
-      color: #ffffff;
+    .monolith-col-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(214, 220, 255, 0.72);
+      max-width: 310px;
     }
+    .monolith-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: rgba(214, 220, 255, 0.8);
+    }
+    .monolith-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.16s ease, transform 0.16s ease;
+    }
+    .monolith-links a:hover { color: #38bdf8; transform: translateX(3px); }
     .monolith-horizon {
       position: relative;
-      height: clamp(160px, 24vw, 280px);
+      height: clamp(160px, 22vw, 250px);
       overflow: hidden;
-      background: linear-gradient(180deg, #0d1657 0%, #16249a 55%, #1f2bff 100%);
-      border-top: 1px solid rgba(129, 140, 248, 0.28);
+      background: linear-gradient(180deg, #0b1140 0%, #14228a 55%, #1d2be0 100%);
+      border-top: 1px solid rgba(129, 140, 248, 0.25);
     }
     .monolith-horizon-img {
       position: absolute;
@@ -1517,18 +1536,20 @@ const siteCfgJson = JSON.stringify(siteCfg);
       width: 100%;
       height: 136%;
       object-fit: cover;
-      object-position: center 22%;
-      filter: grayscale(100%) contrast(1.25) brightness(0.75) blur(3.5px);
+      object-position: center 24%;
+      filter: grayscale(100%) contrast(1.22) brightness(0.72) blur(2.5px);
       mix-blend-mode: luminosity;
-      opacity: 0.52;
+      opacity: 0.48;
       will-change: transform;
     }
     .monolith-horizon-wash {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 45%, rgba(56, 189, 248, 0.18), transparent 60%),
-        linear-gradient(180deg, rgba(10, 12, 30, 0.62) 0%, rgba(20, 31, 148, 0.45) 45%, rgba(31, 43, 255, 0.72) 100%);
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.16), transparent 62%),
+        linear-gradient(180deg, rgba(8, 10, 28, 0.72) 0%, rgba(16, 26, 118, 0.48) 50%, rgba(10, 14, 58, 0.86) 100%);
+      background-size: 6px 6px, 100% 100%, 100% 100%;
       pointer-events: none;
     }
     .monolith-horizon-caption {
@@ -1540,29 +1561,30 @@ const siteCfgJson = JSON.stringify(siteCfg);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(226, 232, 255, 0.78);
+      color: rgba(226, 232, 255, 0.82);
     }
     .monolith-top-btn {
-      padding: 5px 11px;
+      padding: 6px 13px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.26);
-      background: rgba(4, 4, 36, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(4, 4, 36, 0.48);
       backdrop-filter: blur(8px);
       color: #ffffff;
       cursor: pointer;
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.08em;
-      transition: background 0.18s ease, border-color 0.18s ease;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
     }
-    .monolith-top-btn:hover { background: rgba(255, 255, 255, 0.14); border-color: #ffffff; }
+    .monolith-top-btn:hover { background: rgba(255, 255, 255, 0.16); border-color: #ffffff; transform: translateY(-1px); }
     @media (max-width: 760px) {
-      .monolith-meta-row { grid-template-columns: 1fr; text-align: center; gap: 18px; }
-      .monolith-meta-left, .monolith-meta-right { align-items: center; text-align: center; }
+      .monolith-grid { grid-template-columns: 1fr; gap: 22px; }
     }
 
     /* Local Preview Switcher */
@@ -1651,9 +1673,9 @@ const siteCfgJson = JSON.stringify(siteCfg);
       .dither-strip { grid-template-columns: repeat(2, 1fr); padding: 16px; }
       .num-list, .svc-grid, .paper-grid { grid-template-columns: 1fr; gap: 18px; }
       .num-item.stagger-rev { margin-top: 0; }
-      .exp-list { padding-left: 38px; gap: 12px; }
-      .exp-curve-svg { width: 34px; }
-      .exp-row { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
+      .exp-list { padding-left: 36px; gap: 10px; }
+      .exp-const-svg { width: 32px; }
+      .exp-row { grid-template-columns: 1fr; gap: 8px; padding: 16px; }
       .gh-stage { height: 235px; }
       .gh-view-list { height: 260px; }
       .gh-ascii-langs { font-size: clamp(8px, 2.15vw, 11px); }
@@ -1941,42 +1963,56 @@ const siteCfgJson = JSON.stringify(siteCfg);
         </div>
       </section>
 
-      <!-- MONUMENTAL CINEMATIC FOOTER (Scroll-Scrubbed Parallax Watermark & Cobalt Horizon) -->
+      <!-- MONUMENTAL CINEMATIC FOOTER -->
       <footer class="monolith-footer curtain-page curtain-sheet curtain-z7" id="monolithFooter">
         <div class="monolith-upper">
           <div class="monolith-watermark" aria-hidden="true">
             <span id="monolithWatermarkText">BINTANG</span>
           </div>
-          <div class="monolith-meta-row">
-            <div class="monolith-meta-left">
-              <span>BACKEND SYSTEMS ENGINEER</span>
-              <span class="monolith-meta-sub">© 2026 FIKRI BINTANG PURNOMO</span>
+
+          <div class="monolith-cta-band">
+            <div>
+              <div class="monolith-avail"><span class="rail-pulse-dot"></span>Available for Backend Engineering &amp; Architecture</div>
+              <h2 class="monolith-headline">Membangun sistem backend yang cepat, aman, dan deterministik.</h2>
             </div>
-            <div class="monolith-badges">
-              <a class="monolith-badge" href="https://github.com/FikriBintangx" target="_blank" rel="noopener" title="GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                <span>GH</span>
-              </a>
-              <a class="monolith-badge" href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener" title="LinkedIn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                <span>IN</span>
-              </a>
-              <a class="monolith-badge" href="/assets/cv-fikri-bintang.pdf" target="_blank" rel="noopener" title="Download CV PDF">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                <span>CV</span>
-              </a>
+            <div class="monolith-cta-btns">
+              <a class="monolith-btn-primary" href="mailto:fikbintang01@gmail.com">Email Me →</a>
+              <a class="monolith-btn-ghost" href="/assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf">Download CV ↓</a>
             </div>
-            <div class="monolith-meta-right">
-              <span>TANGERANG, INDONESIA</span>
-              <span class="monolith-meta-sub">GO · PYTHON · POSTGRESQL · REDIS</span>
+          </div>
+
+          <div class="monolith-grid">
+            <div>
+              <div class="monolith-col-title">Identity &amp; Core Stack</div>
+              <p class="monolith-col-desc">Fikri Bintang Purnomo — Backend Developer berbasis di Tangerang, Indonesia. Fokus pada Go, Python (FastAPI), Node.js, PostgreSQL/pgvector, Redis, dan gRPC.</p>
+            </div>
+            <div>
+              <div class="monolith-col-title">Navigation</div>
+              <ul class="monolith-links">
+                <li><a href="#overview">→ Ringkasan</a></li>
+                <li><a href="#architecture">→ Arsitektur</a></li>
+                <li><a href="#systems">→ Sistem (11)</a></li>
+                <li><a href="#experience">→ Pengalaman</a></li>
+                <li><a href="#research">→ Riset &amp; Jurnal</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="monolith-col-title">Direct Channels</div>
+              <ul class="monolith-links">
+                <li><a href="https://github.com/FikriBintangx" target="_blank" rel="noopener">↗ GitHub (@FikriBintangx)</a></li>
+                <li><a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener">↗ LinkedIn</a></li>
+                <li><a href="https://wa.me/6281292870932" target="_blank" rel="noopener">↗ WhatsApp (+62 812-9287-0932)</a></li>
+                <li><a href="mailto:fikbintang01@gmail.com">✉ fikbintang01@gmail.com</a></li>
+              </ul>
             </div>
           </div>
         </div>
+
         <div class="monolith-horizon">
           <img class="monolith-horizon-img" id="monolithHorizonImg" src="/assets/foto-hero.png" alt="" aria-hidden="true" loading="lazy" />
           <div class="monolith-horizon-wash"></div>
           <div class="monolith-horizon-caption">
-            <span>FIKRIBINTANG.WEB.ID // PRODUCTION</span>
+            <span>© 2026 FIKRI BINTANG PURNOMO · TANGERANG, ID</span>
             <button type="button" class="monolith-top-btn" id="btnMonolithTop">BACK TO TOP ↑</button>
           </div>
         </div>
@@ -2314,6 +2350,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
     // 3. ANIME.JS Per-Component Bi-Directional Binding (PER-ITEM!)
     let itemTriggers = [];
     function bindAnimeItem(el) {
+      el.style.opacity = '1';
       const counter = el.querySelector('.c-num');
       const runCounter = () => {
         if (!counter) return;
@@ -2322,25 +2359,17 @@ const siteCfgJson = JSON.stringify(siteCfg);
       };
       const st = ScrollTrigger.create({
         trigger: el,
-        start: 'top 86%',
-        end: 'bottom 14%',
+        start: 'top 94%',
+        end: 'bottom 6%',
         onEnter: () => {
           anime.remove(el);
-          anime({ targets: el, opacity: [0, 1], translateY: [32, 0], scale: [0.95, 1], duration: 540, easing: 'easeOutExpo' });
+          anime({ targets: el, opacity: [0.35, 1], translateY: [22, 0], scale: [0.97, 1], duration: 480, easing: 'easeOutExpo' });
           runCounter();
-        },
-        onLeaveBack: () => {
-          anime.remove(el);
-          anime({ targets: el, opacity: 0, translateY: 32, scale: 0.95, duration: 360, easing: 'easeInCubic' });
         },
         onEnterBack: () => {
           anime.remove(el);
-          anime({ targets: el, opacity: [0, 1], translateY: [-32, 0], scale: [0.95, 1], duration: 540, easing: 'easeOutExpo' });
+          anime({ targets: el, opacity: [0.45, 1], translateY: [-18, 0], scale: [0.98, 1], duration: 440, easing: 'easeOutExpo' });
           runCounter();
-        },
-        onLeave: () => {
-          anime.remove(el);
-          anime({ targets: el, opacity: 0, translateY: -32, scale: 0.95, duration: 340, easing: 'easeInCubic' });
         }
       });
       itemTriggers.push(st);
@@ -3250,25 +3279,17 @@ const siteCfgJson = JSON.stringify(siteCfg);
       });
       if (expTrackST) { expTrackST.kill(); expTrackST = null; }
 
-      const expTags = ['BACKEND · LIVE', 'GPA 3.34 · S-1', 'F&B OPS', 'MANUFACTURING', 'LOGISTICS'];
       expEl.innerHTML = `
-        <svg class="exp-curve-svg" id="expCurveSvg" aria-hidden="true">
-          <defs>
-            <linearGradient id="expCurveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8" />
-              <stop offset="55%" stop-color="#4f46e5" />
-              <stop offset="100%" stop-color="#1f2bff" />
-            </linearGradient>
-          </defs>
-          <path class="exp-curve-base" id="expCurveBase" d="" />
-          <path class="exp-curve-ink" id="expCurveInk" d="" />
-          <g id="expCurveNodes"></g>
+        <svg class="exp-const-svg" id="expConstSvg" aria-hidden="true">
+          <polyline class="exp-const-base" id="expConstBase" points="" />
+          <polyline class="exp-const-ink" id="expConstInk" points="" />
+          <g id="expConstStars"></g>
         </svg>
       ` + experiences.map((e, i) => `
         <article class="exp-row ${e.now ? 'is-now' : ''}" data-anime-item>
           <div class="exp-meta-col mono">
             <div class="exp-date">${t.exp[i].date}</div>
-            ${e.now ? `<span class="exp-now">${t.current_role}</span>` : `<span class="exp-tag-pill">${expTags[i] || 'MILESTONE'}</span>`}
+            ${e.now ? `<span class="exp-status-txt">// ${t.current_role}</span>` : ''}
           </div>
           <div>
             <h3 class="exp-role" data-final-role="${t.exp[i].role.replace(/"/g, '&quot;')}">${t.exp[i].role}</h3>
@@ -3293,68 +3314,66 @@ const siteCfgJson = JSON.stringify(siteCfg);
         });
       });
 
-      // Build Organic Curved S-Wave SVG Path connecting each experience card
-      const curveSvg = document.getElementById('expCurveSvg');
-      const basePath = document.getElementById('expCurveBase');
-      const inkPath = document.getElementById('expCurveInk');
-      const nodesGroup = document.getElementById('expCurveNodes');
+      // Build Subtle Grey ASCII Constellation Polyline (gentle ±7px star offsets, never overly slanted)
+      const constSvg = document.getElementById('expConstSvg');
+      const basePoly = document.getElementById('expConstBase');
+      const inkPoly = document.getElementById('expConstInk');
+      const starsGroup = document.getElementById('expConstStars');
       let pathLen = 1;
-      let nodeCircles = [];
-      let nodeHalos = [];
+      let starEls = [];
 
-      function buildExpCurve() {
-        if (!curveSvg || !basePath || !inkPath || !nodesGroup || !rows.length) return;
+      function buildExpConstellation() {
+        if (!constSvg || !basePoly || !inkPoly || !starsGroup || !rows.length) return;
         const isMob = window.innerWidth <= 960;
-        const w = isMob ? 34 : 56;
-        const xLeft = isMob ? 9 : 14;
-        const xRight = isMob ? 25 : 42;
+        const w = isMob ? 34 : 44;
+        const cx = w * 0.5;
+        const offsets = [0, 6, -5, 7, -4];
         const totalH = Math.max(200, expEl.offsetHeight);
-        curveSvg.setAttribute('viewBox', `0 0 ${w} ${totalH}`);
-        curveSvg.style.height = totalH + 'px';
+        constSvg.setAttribute('viewBox', `0 0 ${w} ${totalH}`);
+        constSvg.style.height = totalH + 'px';
 
         const pts = rows.map((r, i) => ({
-          x: i % 2 === 0 ? xLeft : xRight,
-          y: r.offsetTop + Math.min(34, r.offsetHeight * 0.35)
+          x: Math.round(cx + (offsets[i % offsets.length] * (isMob ? 0.65 : 1))),
+          y: Math.round(r.offsetTop + Math.min(28, r.offsetHeight * 0.34))
         }));
 
-        let d = `M ${pts[0].x} ${pts[0].y}`;
-        for (let i = 0; i < pts.length - 1; i++) {
-          const p0 = pts[i], p1 = pts[i + 1];
-          const midY = (p0.y + p1.y) * 0.5;
-          d += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
-        }
+        const ptStr = pts.map(p => `${p.x},${p.y}`).join(' ');
+        basePoly.setAttribute('points', ptStr);
+        inkPoly.setAttribute('points', ptStr);
+        pathLen = Math.max(1, inkPoly.getTotalLength());
+        inkPoly.style.strokeDasharray = `${pathLen}`;
+        inkPoly.style.strokeDashoffset = `${pathLen}`;
 
-        basePath.setAttribute('d', d);
-        inkPath.setAttribute('d', d);
-        pathLen = Math.max(1, inkPath.getTotalLength());
-        inkPath.style.strokeDasharray = `${pathLen}`;
-        inkPath.style.strokeDashoffset = `${pathLen}`;
-
-        nodesGroup.innerHTML = pts.map((p, i) => `
-          <circle class="exp-curve-halo ${i === 0 ? 'is-lit' : ''}" cx="${p.x}" cy="${p.y}" r="${isMob ? 8 : 11}" />
-          <circle class="exp-curve-node ${i === 0 ? 'is-lit' : ''}" cx="${p.x}" cy="${p.y}" r="${isMob ? 4 : 5.2}" />
-        `).join('');
-        nodeCircles = Array.from(nodesGroup.querySelectorAll('.exp-curve-node'));
-        nodeHalos = Array.from(nodesGroup.querySelectorAll('.exp-curve-halo'));
+        const glyphs = ['✦', '✧', '+', '✧', '·'];
+        let starsMarkup = '';
+        pts.forEach((p, i) => {
+          starsMarkup += `<text class="exp-const-star ${i === 0 ? 'is-lit' : ''}" x="${p.x}" y="${p.y}">${glyphs[i % glyphs.length]}</text>`;
+          if (i < pts.length - 1) {
+            const mx = (p.x + pts[i + 1].x) * 0.5 + (i % 2 === 0 ? -9 : 9);
+            const my = (p.y + pts[i + 1].y) * 0.5;
+            starsMarkup += `<text class="exp-const-dust" x="${mx}" y="${my}">·</text>`;
+          }
+        });
+        starsGroup.innerHTML = starsMarkup;
+        starEls = Array.from(starsGroup.querySelectorAll('.exp-const-star'));
       }
 
-      requestAnimationFrame(buildExpCurve);
-      window.addEventListener('resize', buildExpCurve, { passive: true });
+      requestAnimationFrame(buildExpConstellation);
+      window.addEventListener('resize', buildExpConstellation, { passive: true });
 
       expTrackST = ScrollTrigger.create({
         trigger: expEl,
-        start: 'top 76%',
+        start: 'top 78%',
         end: 'bottom 45%',
-        scrub: 0.35,
+        scrub: 0.3,
         onUpdate: (self) => {
           const pct = Math.max(0, Math.min(1, self.progress));
-          if (inkPath) inkPath.style.strokeDashoffset = `${(pathLen * (1 - pct)).toFixed(1)}`;
+          if (inkPoly) inkPoly.style.strokeDashoffset = `${(pathLen * (1 - pct)).toFixed(1)}`;
           rows.forEach((r, idx) => {
             const threshold = rows.length > 1 ? idx / (rows.length - 1) : 0;
             const lit = idx === 0 || pct >= threshold - 0.04;
             r.classList.toggle('is-lit', lit);
-            if (nodeCircles[idx]) nodeCircles[idx].classList.toggle('is-lit', lit);
-            if (nodeHalos[idx]) nodeHalos[idx].classList.toggle('is-lit', lit);
+            if (starEls[idx]) starEls[idx].classList.toggle('is-lit', lit);
           });
         }
       });
@@ -3555,47 +3574,56 @@ const siteCfgJson = JSON.stringify(siteCfg);
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
-        // Per-Page Stacked Curtain Layer Overlap Scroll (All Sections — GPU-Safe Veil, Never Stuck Blank)
+        // Sticky Hero Depth Recede + Smooth Curtain Sheet Entrance (100% Bug-Free, Never Blank)
         let curtainSTs = [];
         window.refreshCurtainStack = function initCurtainStack() {
           curtainSTs.forEach(st => st.kill());
           curtainSTs = [];
-          const pages = Array.from(document.querySelectorAll('.curtain-page'));
-          pages.forEach(p => {
-            gsap.set(p, { clearProps: 'transform,opacity,filter' });
-            p.style.setProperty('--curtain-dim', '0');
-          });
-          const isMob = window.innerWidth <= 960;
-          const topBar = isMob ? document.querySelector('.mob-topbar') : null;
-          const topOffset = isMob ? (topBar ? Math.round(topBar.offsetHeight) : 52) : 0;
-          const vh = window.innerHeight;
-          pages.forEach((page, idx) => {
-            // Sticky bottom-pin for tall sections so full content scrolls before next sheet overlaps
-            const h = page.offsetHeight;
-            const availH = vh - topOffset;
-            const pinTop = h > availH ? Math.round(vh - h) : (idx === 0 ? topOffset + (isMob ? 0 : 16) : topOffset);
-            page.style.top = pinTop + 'px';
+          const heroStage = document.getElementById('heroStage');
+          const firstSheet = document.getElementById('github');
+          const sheets = Array.from(document.querySelectorAll('.curtain-sheet'));
 
-            const nextPage = pages[idx + 1];
-            if (!nextPage) return;
+          if (heroStage) {
+            gsap.set(heroStage, { clearProps: 'transform,opacity,filter' });
+            heroStage.style.setProperty('--curtain-dim', '0');
+          }
+          if (heroStage && firstSheet) {
+            const isMob = window.innerWidth <= 960;
             const st = ScrollTrigger.create({
-              trigger: nextPage,
-              start: 'top 88%',
-              end: 'top 10%',
+              trigger: firstSheet,
+              start: 'top 90%',
+              end: 'top 12%',
               scrub: true,
               invalidateOnRefresh: true,
               onUpdate: (self) => {
                 const p = self.progress;
-                const sc = 1 - p * (isMob ? 0.03 : 0.04);
-                page.style.transform = p > 0.001 ? `scale(${sc.toFixed(4)})` : '';
-                page.style.setProperty('--curtain-dim', (p * (isMob ? 0.52 : 0.65)).toFixed(3));
+                const sc = 1 - p * (isMob ? 0.03 : 0.045);
+                heroStage.style.transform = p > 0.001 ? `scale(${sc.toFixed(4)})` : '';
+                heroStage.style.setProperty('--curtain-dim', (p * (isMob ? 0.55 : 0.68)).toFixed(3));
               },
               onLeaveBack: () => {
-                page.style.transform = '';
-                page.style.setProperty('--curtain-dim', '0');
+                heroStage.style.transform = '';
+                heroStage.style.setProperty('--curtain-dim', '0');
               }
             });
             curtainSTs.push(st);
+          }
+
+          sheets.forEach((sheet) => {
+            const tween = gsap.fromTo(sheet,
+              { y: 28, scale: 0.985 },
+              {
+                y: 0, scale: 1, ease: 'none',
+                scrollTrigger: {
+                  trigger: sheet,
+                  start: 'top 96%',
+                  end: 'top 64%',
+                  scrub: true,
+                  invalidateOnRefresh: true
+                }
+              }
+            );
+            if (tween.scrollTrigger) curtainSTs.push(tween.scrollTrigger);
           });
           ScrollTrigger.refresh();
         };
