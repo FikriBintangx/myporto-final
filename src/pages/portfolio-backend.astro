@@ -1367,10 +1367,10 @@ const siteCfgJson = JSON.stringify(siteCfg);
       }
     }
 
-    /* Full Royal-Cobalt Editorial Footer (Dithered Hover-Wobble Portrait + 5-Column Directory) */
+    /* Full Royal-Cobalt Editorial Footer (Dark Royal Cobalt + Light Ice-Cobalt Adaptive) */
     .monolith-footer {
       position: relative;
-      margin-top: 28px;
+      margin-top: 0;
       overflow: hidden;
       background: linear-gradient(180deg, #09139e 0%, #050b7c 42%, #030663 100%);
       color: #ffffff;
@@ -1379,39 +1379,61 @@ const siteCfgJson = JSON.stringify(siteCfg);
       border-top: 1px solid rgba(130, 160, 255, 0.38) !important;
     }
     html.light .monolith-footer {
-      background: linear-gradient(180deg, #09139e 0%, #050b7c 42%, #030663 100%);
-      color: #ffffff;
+      background: linear-gradient(180deg, #eef2ff 0%, #e6ecfb 48%, #dde6fa 100%);
+      color: #07092b;
+      border-top-color: rgba(15, 23, 84, 0.16) !important;
     }
+    html.light .monolith-horizon { background: #d6e0fb; }
+    html.light .monolith-horizon-img {
+      mix-blend-mode: multiply;
+      opacity: 0.42;
+      filter: url(#monolithWaveFilter) grayscale(100%) contrast(1.25) brightness(1.06);
+    }
+    html.light .monolith-horizon-wash {
+      background:
+        radial-gradient(rgba(31, 43, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(226, 234, 255, 0.35) 0%, rgba(214, 224, 251, 0.25) 55%, rgba(238, 242, 255, 0.92) 100%);
+      background-size: 4px 4px, 100% 100%;
+    }
+    html.light .monolith-watermark span { color: rgba(31, 43, 255, 0.12); }
+    html.light .monolith-body { border-top-color: rgba(15, 23, 84, 0.16); }
+    html.light .monolith-emblem {
+      border-color: #07092b;
+      background: #ffffff;
+      color: #07092b;
+    }
+    html.light .monolith-brand-sub,
+    html.light .monolith-col-kicker { color: #525982; }
+    html.light .monolith-col-head { color: #07092b; }
+    html.light .monolith-links { color: #363d66; }
+    html.light .monolith-links a:hover { color: #1f2bff; }
+    html.light .monolith-bottom-bar {
+      border-top-color: rgba(15, 23, 84, 0.14);
+      color: #525982;
+    }
+    html.light .monolith-socials a { color: #07092b; }
+    html.light .monolith-socials a:hover { color: #1f2bff; }
+    html.light .monolith-top-btn { color: #07092b; }
+    html.light .monolith-top-btn:hover { color: #1f2bff; }
     .monolith-horizon {
       position: relative;
       height: clamp(210px, 28vw, 340px);
       overflow: hidden;
       background: #0b19c4;
-      cursor: crosshair;
+      cursor: pointer;
     }
     .monolith-horizon-img {
       position: absolute;
-      inset: -14% -4%;
-      width: 108%;
+      inset: -14% 0;
+      width: 100%;
       height: 128%;
       object-fit: cover;
       object-position: center 22%;
-      filter: grayscale(100%) contrast(1.45) brightness(0.92);
+      filter: url(#monolithWaveFilter) grayscale(100%) contrast(1.45) brightness(0.92);
       mix-blend-mode: screen;
-      opacity: 0.62;
+      opacity: 0.65;
       will-change: transform;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
-    }
-    .monolith-horizon:hover .monolith-horizon-img {
-      animation: horizonWobble 2.8s ease-in-out infinite;
-      filter: grayscale(100%) contrast(1.6) brightness(1.04);
-    }
-    @keyframes horizonWobble {
-      0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.03); }
-      25%  { transform: translate3d(-7px, -4px, 0) rotate(-0.8deg) scale(1.05); }
-      50%  { transform: translate3d(6px, 3px, 0) rotate(0.7deg) scale(1.04); }
-      75%  { transform: translate3d(-4px, 4px, 0) rotate(-0.5deg) scale(1.05); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.03); }
+      transition: filter 0.3s ease;
     }
     .monolith-horizon-wash {
       position: absolute;
@@ -1426,21 +1448,21 @@ const siteCfgJson = JSON.stringify(siteCfg);
       position: absolute;
       left: 0;
       right: 0;
-      top: clamp(148px, 21vw, 255px);
+      bottom: -0.22em;
       z-index: 2;
       display: flex;
       justify-content: center;
       pointer-events: none;
       user-select: none;
-      overflow: hidden;
+      overflow: visible;
     }
     .monolith-watermark span {
       font-family: var(--sans);
       font-weight: 500;
-      font-size: clamp(68px, 12.8vw, 178px);
-      line-height: 0.9;
+      font-size: clamp(54px, 9.8vw, 142px);
+      line-height: 0.88;
       letter-spacing: -0.04em;
-      color: rgba(165, 188, 255, 0.16);
+      color: rgba(165, 188, 255, 0.18);
       white-space: nowrap;
       will-change: transform;
     }
@@ -1527,18 +1549,20 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .monolith-links a:hover { color: #7dd3fc; transform: translateX(3px); }
 
     .monolith-bottom-bar {
-      display: grid;
-      grid-template-columns: 1.55fr repeat(4, 1fr);
+      display: flex;
       align-items: center;
-      gap: 14px 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 24px;
       padding-top: 18px;
       border-top: 1px solid rgba(145, 175, 255, 0.22);
       font-family: var(--mono);
       font-size: 9.5px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(196, 210, 255, 0.74);
+      color: rgba(196, 210, 255, 0.78);
     }
+    .monolith-bottom-bar > span { white-space: nowrap; }
     .monolith-socials {
       display: flex;
       align-items: center;
@@ -1551,7 +1575,6 @@ const siteCfgJson = JSON.stringify(siteCfg);
     }
     .monolith-socials a:hover { color: #7dd3fc; transform: translateY(-2px); }
     .monolith-top-btn {
-      justify-self: end;
       background: transparent;
       border: none;
       color: #ffffff;
@@ -1562,13 +1585,13 @@ const siteCfgJson = JSON.stringify(siteCfg);
       text-transform: uppercase;
       text-decoration: underline;
       text-underline-offset: 4px;
+      white-space: nowrap;
     }
     .monolith-top-btn:hover { color: #7dd3fc; }
     @media (max-width: 960px) {
       .monolith-dir-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
       .monolith-brand-stamp { grid-column: 1 / -1; }
-      .monolith-bottom-bar { grid-template-columns: 1fr 1fr; }
-      .monolith-top-btn { justify-self: start; }
+      .monolith-bottom-bar { gap: 12px 16px; }
     }
 
     /* Local Preview Switcher */
@@ -1651,7 +1674,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       .mob-topbar { display: flex; }
       .mob-nav-strip { display: flex; }
       .mob-lang-wrap { display: none !important; }
-      .main { padding: 18px 16px 88px; max-width: 100%; }
+      .main { padding: 18px 16px 0; max-width: 100%; }
       .hero { margin: -8px -16px 0; padding: 22px 16px 40px; }
       .breadcrumb { margin-bottom: 24px; }
       .dither-strip { grid-template-columns: repeat(2, 1fr); padding: 16px; }
@@ -1949,13 +1972,21 @@ const siteCfgJson = JSON.stringify(siteCfg);
 
       <!-- FULL ROYAL-COBALT EDITORIAL FOOTER (100% Fikri Bintang Identity) -->
       <footer class="monolith-footer curtain-page curtain-sheet curtain-z7" id="monolithFooter">
+        <svg width="0" height="0" style="position:absolute; pointer-events:none;" aria-hidden="true">
+          <defs>
+            <filter id="monolithWaveFilter" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence id="waveTurb" type="fractalNoise" baseFrequency="0.012 0.032" numOctaves="2" seed="3" result="noise" />
+              <feDisplacementMap id="waveDisp" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </defs>
+        </svg>
+
         <div class="monolith-horizon" id="monolithHorizon">
           <img class="monolith-horizon-img" id="monolithHorizonImg" src="/assets/foto-hero.png" alt="Fikri Bintang Purnomo" loading="lazy" />
           <div class="monolith-horizon-wash"></div>
-        </div>
-
-        <div class="monolith-watermark" aria-hidden="true">
-          <span id="monolithWatermarkText">Fikri Bintang</span>
+          <div class="monolith-watermark" aria-hidden="true">
+            <span id="monolithWatermarkText">Fikri Bintang</span>
+          </div>
         </div>
 
         <div class="monolith-body">
@@ -3614,20 +3645,40 @@ const siteCfgJson = JSON.stringify(siteCfg);
       });
     }
 
-    // Interactive Hover Sway / Wobble on Footer Portrait Banner
+    // Liquid Wavy Ripple Shader on Footer Portrait Hover (Photo stays still, surface ripples smoothly)
     const monolithHorizon = document.getElementById('monolithHorizon');
-    const monolithHorizonImg = document.getElementById('monolithHorizonImg');
-    if (monolithHorizon && monolithHorizonImg) {
-      monolithHorizon.addEventListener('pointermove', (e) => {
-        const r = monolithHorizon.getBoundingClientRect();
-        const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-        const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        monolithHorizonImg.style.animation = 'none';
-        monolithHorizonImg.style.transform = `translate3d(${(nx * -12).toFixed(1)}px, ${(ny * -8).toFixed(1)}px, 0) rotate(${(nx * 1.1).toFixed(2)}deg) scale(1.05)`;
+    const waveTurb = document.getElementById('waveTurb');
+    const waveDisp = document.getElementById('waveDisp');
+    if (monolithHorizon && waveTurb && waveDisp) {
+      let waveHovered = false;
+      let waveScale = 0;
+      let waveTime = 0;
+      let waveRaf = 0;
+
+      function tickWave() {
+        const target = waveHovered ? 18 : 0;
+        waveScale += (target - waveScale) * 0.09;
+        waveTime += 0.045;
+        const fx = (0.011 + Math.sin(waveTime * 0.9) * 0.0035).toFixed(4);
+        const fy = (0.028 + Math.cos(waveTime * 1.15) * 0.007).toFixed(4);
+        waveTurb.setAttribute('baseFrequency', `${fx} ${fy}`);
+        waveDisp.setAttribute('scale', waveScale.toFixed(2));
+
+        if (waveHovered || waveScale > 0.12) {
+          waveRaf = requestAnimationFrame(tickWave);
+        } else {
+          waveDisp.setAttribute('scale', '0');
+          waveRaf = 0;
+        }
+      }
+
+      monolithHorizon.addEventListener('pointerenter', () => {
+        waveHovered = true;
+        if (!waveRaf) waveRaf = requestAnimationFrame(tickWave);
       });
       monolithHorizon.addEventListener('pointerleave', () => {
-        monolithHorizonImg.style.animation = '';
-        monolithHorizonImg.style.transform = '';
+        waveHovered = false;
+        if (!waveRaf) waveRaf = requestAnimationFrame(tickWave);
       });
     }
 
