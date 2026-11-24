@@ -1368,6 +1368,9 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .monolith-footer {
       position: relative;
       margin-top: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       background: linear-gradient(180deg, #09139e 0%, #050b7c 42%, #030663 100%);
       color: #ffffff;
@@ -1414,21 +1417,22 @@ const siteCfgJson = JSON.stringify(siteCfg);
     html.light .monolith-top-btn:hover { color: #1f2bff; }
     .monolith-horizon {
       position: relative;
-      height: clamp(210px, 28vw, 340px);
+      flex: 1 1 auto;
+      min-height: clamp(300px, 48vh, 540px);
       overflow: hidden;
       background: #0b19c4;
       cursor: pointer;
     }
     .monolith-horizon-img {
       position: absolute;
-      inset: -10% 0 -18% 0;
+      inset: 0;
       width: 100%;
-      height: 128%;
+      height: 100%;
       object-fit: cover;
-      object-position: center 14%;
+      object-position: center 22%;
       filter: url(#monolithWaveFilter) grayscale(100%) contrast(1.45) brightness(0.92);
       mix-blend-mode: screen;
-      opacity: 0.65;
+      opacity: 0.68;
       will-change: transform;
       transition: filter 0.3s ease;
     }
