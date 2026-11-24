@@ -13,7 +13,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
   <title>Fikri Bintang Purnomo — Backend Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Mandatory Tri-Engine Motion Stack: Lenis + GSAP + ScrollTrigger + Anime.js -->
   <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -1294,17 +1294,11 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-top: 4px;
     }
 
-    /* Sticky Hero & Sticky GitHub 3D Stage + Safe Layered Curtain Sheets */
+    /* Per-Page Sticky Curtain Stack with Seamless Feathered Mist (Zero Box-Line, Zero Blank Bug) */
     .curtain-page {
-      position: relative;
-      --curtain-dim: 0;
-      transform-origin: center top;
-    }
-    #heroStage.curtain-page,
-    #github.curtain-page {
       position: sticky;
       top: 0;
-      will-change: transform;
+      --curtain-dim: 0;
     }
     #heroStage.curtain-page { top: 16px; z-index: 1; }
     #github.curtain-page { top: 0; z-index: 2; }
@@ -1314,52 +1308,43 @@ const siteCfgJson = JSON.stringify(siteCfg);
         top: 52px;
       }
     }
-    #heroStage.curtain-page::after,
-    #github.curtain-page::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(2, 3, 20, 0.74);
-      opacity: var(--curtain-dim, 0);
-      pointer-events: none;
-      border-radius: inherit;
-      z-index: 40;
-    }
-    html.light #heroStage.curtain-page::after,
-    html.light #github.curtain-page::after {
-      background: rgba(7, 9, 43, 0.28);
-    }
     .curtain-sheet {
-      position: relative;
+      position: sticky;
       background: var(--bg);
       margin-left: calc(clamp(16px, 4.5vw, 68px) * -1);
       margin-right: calc(clamp(16px, 4.5vw, 68px) * -1);
       padding-left: clamp(16px, 4.5vw, 68px);
       padding-right: clamp(16px, 4.5vw, 68px);
-      border-top: 1px solid rgba(160, 174, 255, 0.18);
+      border-top: none !important;
       border-radius: 0 !important;
-      box-shadow: 0 -48px 98px 4px rgba(0, 0, 12, 0.96), 0 -18px 42px rgba(0, 0, 18, 0.88), 0 -4px 14px rgba(0, 0, 20, 0.72);
+      box-shadow: none !important;
     }
     .curtain-sheet::before {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      top: -68px;
-      height: 68px;
+      top: -115px;
+      height: 115px;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(2, 2, 20, 0) 0%, rgba(2, 2, 20, 0.62) 60%, rgba(4, 4, 36, 0.96) 100%);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      mask-image: linear-gradient(180deg, transparent 0%, black 100%);
-      -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 100%);
-    }
-    html.light .curtain-sheet {
-      border-top-color: rgba(15, 23, 84, 0.14);
-      box-shadow: 0 -42px 86px 2px rgba(7, 9, 43, 0.24), 0 -16px 36px rgba(7, 9, 43, 0.16), 0 -3px 10px rgba(7, 9, 43, 0.11);
+      background: linear-gradient(
+        180deg,
+        rgba(4, 4, 36, 0) 0%,
+        rgba(4, 4, 36, 0.22) 28%,
+        rgba(4, 4, 36, 0.58) 58%,
+        rgba(4, 4, 36, 0.88) 82%,
+        var(--bg) 100%
+      );
     }
     html.light .curtain-sheet::before {
-      background: linear-gradient(180deg, rgba(226, 232, 248, 0) 0%, rgba(212, 220, 240, 0.58) 58%, rgba(244, 246, 251, 0.96) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(244, 246, 251, 0) 0%,
+        rgba(244, 246, 251, 0.25) 28%,
+        rgba(244, 246, 251, 0.62) 58%,
+        rgba(244, 246, 251, 0.9) 82%,
+        var(--bg) 100%
+      );
     }
     .monolith-footer.curtain-sheet::before { display: none; }
     .curtain-z1 { z-index: 1; }
@@ -1436,11 +1421,11 @@ const siteCfgJson = JSON.stringify(siteCfg);
     }
     .monolith-horizon-img {
       position: absolute;
-      inset: -14% 0;
+      inset: -24% 0 -4% 0;
       width: 100%;
       height: 128%;
       object-fit: cover;
-      object-position: center 22%;
+      object-position: center 38%;
       filter: url(#monolithWaveFilter) grayscale(100%) contrast(1.45) brightness(0.92);
       mix-blend-mode: screen;
       opacity: 0.65;
@@ -1460,7 +1445,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -0.22em;
+      bottom: 8px;
       z-index: 2;
       display: flex;
       justify-content: center;
@@ -1469,12 +1454,12 @@ const siteCfgJson = JSON.stringify(siteCfg);
       overflow: visible;
     }
     .monolith-watermark span {
-      font-family: var(--sans);
-      font-weight: 500;
-      font-size: clamp(54px, 9.8vw, 142px);
-      line-height: 0.88;
+      font-family: 'Plus Jakarta Sans', var(--sans);
+      font-weight: 700;
+      font-size: clamp(54px, 9.6vw, 138px);
+      line-height: 0.92;
       letter-spacing: -0.04em;
-      color: rgba(165, 188, 255, 0.18);
+      color: rgba(165, 188, 255, 0.22);
       white-space: nowrap;
       will-change: transform;
     }
@@ -3697,59 +3682,24 @@ const siteCfgJson = JSON.stringify(siteCfg);
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
-        // Sticky Hero Depth Recede + Smooth Curtain Sheet Entrance (100% Bug-Free, Never Blank)
+        // All Sections Sticky Bottom-Pin Overlap (Pure CSS Sticky + Feathered Mist, Zero Transform/Opacity Blank Bug)
         let curtainSTs = [];
         window.refreshCurtainStack = function initCurtainStack() {
           curtainSTs.forEach(st => st.kill());
           curtainSTs = [];
-          const heroStage = document.getElementById('heroStage');
-          const githubStage = document.getElementById('github');
-          const archStage = document.getElementById('architecture');
-          const sheets = Array.from(document.querySelectorAll('.curtain-sheet')).filter(el => el !== githubStage);
+          const isMob = window.innerWidth <= 960;
+          const topBar = isMob ? document.querySelector('.mob-topbar') : null;
+          const topOffset = isMob ? (topBar ? Math.round(topBar.offsetHeight) : 52) : 0;
+          const vh = window.innerHeight;
+          const availH = vh - topOffset;
 
-          const bindStickyEat = (targetEl, eaterEl) => {
-            if (!targetEl || !eaterEl) return;
-            gsap.set(targetEl, { clearProps: 'transform,opacity,filter' });
-            targetEl.style.setProperty('--curtain-dim', '0');
-            const isMob = window.innerWidth <= 960;
-            const st = ScrollTrigger.create({
-              trigger: eaterEl,
-              start: 'top 92%',
-              end: 'top 10%',
-              scrub: true,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => {
-                const p = self.progress;
-                const sc = 1 - p * (isMob ? 0.03 : 0.045);
-                targetEl.style.transform = p > 0.001 ? `scale(${sc.toFixed(4)})` : '';
-                targetEl.style.setProperty('--curtain-dim', (p * (isMob ? 0.58 : 0.72)).toFixed(3));
-              },
-              onLeaveBack: () => {
-                targetEl.style.transform = '';
-                targetEl.style.setProperty('--curtain-dim', '0');
-              }
-            });
-            curtainSTs.push(st);
-          };
-
-          bindStickyEat(heroStage, githubStage);
-          bindStickyEat(githubStage, archStage);
-
-          sheets.forEach((sheet) => {
-            const tween = gsap.fromTo(sheet,
-              { y: 28, scale: 0.985 },
-              {
-                y: 0, scale: 1, ease: 'none',
-                scrollTrigger: {
-                  trigger: sheet,
-                  start: 'top 96%',
-                  end: 'top 64%',
-                  scrub: true,
-                  invalidateOnRefresh: true
-                }
-              }
-            );
-            if (tween.scrollTrigger) curtainSTs.push(tween.scrollTrigger);
+          const pages = Array.from(document.querySelectorAll('.curtain-page'));
+          pages.forEach((page, idx) => {
+            page.style.transform = '';
+            const h = page.offsetHeight;
+            // Short sections pin at top; tall sections pin when their bottom reaches viewport bottom
+            const pinTop = h > availH ? Math.round(vh - h) : (idx === 0 ? topOffset + (isMob ? 0 : 16) : topOffset);
+            page.style.top = pinTop + 'px';
           });
           ScrollTrigger.refresh();
         };
