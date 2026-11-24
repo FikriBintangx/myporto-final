@@ -522,15 +522,32 @@ const siteCfgJson = JSON.stringify(siteCfg);
       background: #020218;
       margin-bottom: 4px;
     }
+    .svc-preview.has-raw { cursor: pointer; }
     .svc-preview canvas {
       position: relative; z-index: 2; width: 100%; height: 100%; display: block;
-      image-rendering: pixelated; transition: opacity 0.28s ease;
+      image-rendering: pixelated; transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .svc-preview img.raw-peek {
       position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
       object-fit: cover; display: block;
+      transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .svc-card:hover .svc-preview.has-raw canvas { opacity: 0.08; }
+    @media (hover: hover) {
+      .svc-card:hover .svc-preview.has-raw canvas { opacity: 0; }
+      .svc-card:hover .svc-preview.has-raw img.raw-peek { transform: scale(1.03); }
+      .svc-card:hover .svc-preview.has-raw .svc-preview-badge {
+        background: var(--cobalt);
+        border-color: var(--cobalt);
+        color: #ffffff;
+      }
+    }
+    .svc-card.is-raw .svc-preview.has-raw canvas { opacity: 0; }
+    .svc-card.is-raw .svc-preview.has-raw img.raw-peek { transform: scale(1.03); }
+    .svc-card.is-raw .svc-preview.has-raw .svc-preview-badge {
+      background: var(--cobalt);
+      border-color: var(--cobalt);
+      color: #ffffff;
+    }
     .svc-preview-badge {
       position: absolute; top: 7px; right: 7px; z-index: 3;
       background: rgba(3, 3, 28, 0.85); border: 1px solid var(--line-strong);
@@ -2501,9 +2518,10 @@ const siteCfgJson = JSON.stringify(siteCfg);
         .filter(s => filter === 'ALL' || s.cat === filter)
         .map(s => `
           <article class="svc-card" data-anime-item>
-            <div class="svc-preview">
+            <div class="svc-preview ${s.img ? 'has-raw' : ''}">
+              ${s.img ? `<img class="raw-peek" src="${s.img}" alt="${s.name}" loading="lazy" />` : ''}
               <canvas data-proj-canvas data-img="${s.img || ''}" data-scene="${s.scene}" data-title="${s.name}"></canvas>
-              <span class="svc-preview-badge">ASCII · MATRIX</span>
+              <span class="svc-preview-badge">${s.img ? 'ASCII · TAP/HOVER' : 'ASCII · MATRIX'}</span>
             </div>
             <div class="svc-top mono"><span>SVC-${s.id} · ${s.cat}</span><span class="svc-proto">${s.proto}</span></div>
             <h3 class="svc-name">${s.name}</h3>
@@ -2511,7 +2529,27 @@ const siteCfgJson = JSON.stringify(siteCfg);
             <div class="svc-stack">${s.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div>
           </article>
         `).join('');
-      svcGrid.querySelectorAll('.svc-card').forEach(bindAnimeItem);
+      svcGrid.querySelectorAll('.svc-card').forEach(card => {
+        bindAnimeItem(card);
+        const preview = card.querySelector('.svc-preview.has-raw');
+        const badge = card.querySelector('.svc-preview-badge');
+        if (preview) {
+          card.addEventListener('click', () => {
+            const raw = card.classList.toggle('is-raw');
+            if (badge) badge.textContent = raw ? 'ORIGINAL · RAW' : 'ASCII · TAP/HOVER';
+          });
+          card.addEventListener('pointerenter', () => {
+            if (window.matchMedia('(hover: hover)').matches && badge && !card.classList.contains('is-raw')) {
+              badge.textContent = 'ORIGINAL · RAW';
+            }
+          });
+          card.addEventListener('pointerleave', () => {
+            if (window.matchMedia('(hover: hover)').matches && badge && !card.classList.contains('is-raw')) {
+              badge.textContent = 'ASCII · TAP/HOVER';
+            }
+          });
+        }
+      });
       if (window.__asciiReady) initProjectAsciiCanvases();
       ScrollTrigger.refresh();
       requestAnimationFrame(measureNavPositions);
