@@ -1339,13 +1339,27 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-top: 4px;
     }
 
-    /* Per-Page Stacked Curtain Layer Overlap Scroll */
+    /* Per-Page Stacked Curtain Layer Overlap Scroll (GPU-Safe, Zero Filter Bug) */
     @media (min-width: 961px) {
       .curtain-page {
         position: sticky;
         top: 0;
-        will-change: transform, opacity, filter;
+        --curtain-dim: 0;
+        will-change: transform;
         transform-origin: center top;
+      }
+      .curtain-page::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(2, 3, 20, 0.72);
+        opacity: var(--curtain-dim, 0);
+        pointer-events: none;
+        border-radius: inherit;
+        z-index: 40;
+      }
+      html.light .curtain-page::after {
+        background: rgba(7, 9, 43, 0.22);
       }
     }
     .curtain-sheet {
@@ -3320,7 +3334,8 @@ const siteCfgJson = JSON.stringify(siteCfg);
         measureNavPositions();
         updateRulerVisuals(latestScrollY, true);
         resizeCanvas();
-        ScrollTrigger.refresh();
+        if (typeof window.refreshCurtainStack === 'function') window.refreshCurtainStack();
+        else ScrollTrigger.refresh();
       }, 300);
     }
 
@@ -3474,6 +3489,9 @@ const siteCfgJson = JSON.stringify(siteCfg);
       b.classList.add('active');
       currentFilter = b.dataset.cat;
       renderSvcs(currentFilter);
+      if (typeof window.refreshCurtainStack === 'function') {
+        requestAnimationFrame(() => window.refreshCurtainStack());
+      }
     }));
 
     // Scroll-Scrubbed Perspective Stage & Monumental Footer Parallax (Bi-Directional GSAP Scrub)
@@ -3488,64 +3506,75 @@ const siteCfgJson = JSON.stringify(siteCfg);
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
-        // Per-Page Stacked Curtain Layer Overlap Scroll (All Sections)
+        // Per-Page Stacked Curtain Layer Overlap Scroll (All Sections — GPU-Safe Veil, Never Stuck Blank)
         let curtainSTs = [];
-        function initCurtainStack() {
+        window.refreshCurtainStack = function initCurtainStack() {
           curtainSTs.forEach(st => st.kill());
           curtainSTs = [];
           const pages = Array.from(document.querySelectorAll('.curtain-page'));
+          pages.forEach(p => {
+            gsap.set(p, { clearProps: 'transform,opacity,filter' });
+            p.style.setProperty('--curtain-dim', '0');
+          });
           if (window.innerWidth <= 960) {
-            pages.forEach(p => {
-              p.style.top = '';
-              gsap.set(p, { clearProps: 'transform,opacity,filter' });
-            });
+            pages.forEach(p => { p.style.top = ''; });
             return;
           }
           const vh = window.innerHeight;
           pages.forEach((page, idx) => {
-            // Sticky bottom-pin for tall sections (e.g. #systems) so full content scrolls before next sheet overlaps
+            // Sticky bottom-pin for tall sections so full content scrolls before next sheet overlaps
             const h = page.offsetHeight;
-            const pinTop = h > vh ? Math.round(vh - h) : (idx === 0 ? 20 : 0);
+            const pinTop = h > vh ? Math.round(vh - h) : (idx === 0 ? 16 : 0);
             page.style.top = pinTop + 'px';
 
             const nextPage = pages[idx + 1];
             if (!nextPage) return;
-            const tween = gsap.fromTo(page,
-              { scale: 1, y: 0, opacity: 1, filter: 'blur(0px)' },
-              {
-                scale: 0.945, y: -20, opacity: 0.28, filter: 'blur(2px)', ease: 'none',
-                scrollTrigger: {
-                  trigger: nextPage,
-                  start: 'top 95%',
-                  end: 'top 15%',
-                  scrub: 0.55,
-                  invalidateOnRefresh: true
-                }
+            const st = ScrollTrigger.create({
+              trigger: nextPage,
+              start: 'top 88%',
+              end: 'top 10%',
+              scrub: true,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const p = self.progress;
+                const sc = 1 - p * 0.04;
+                page.style.transform = p > 0.001 ? `scale(${sc.toFixed(4)})` : '';
+                page.style.setProperty('--curtain-dim', (p * 0.65).toFixed(3));
+              },
+              onLeaveBack: () => {
+                page.style.transform = '';
+                page.style.setProperty('--curtain-dim', '0');
               }
-            );
-            if (tween.scrollTrigger) curtainSTs.push(tween.scrollTrigger);
+            });
+            curtainSTs.push(st);
           });
-        }
+          ScrollTrigger.refresh();
+        };
 
-        window.addEventListener('load', () => setTimeout(initCurtainStack, 180));
+        window.addEventListener('load', () => setTimeout(() => window.refreshCurtainStack(), 180));
         let curtainResizeTimer = 0;
-        window.addEventListener('resize', () => {
+        const scheduleCurtainRefresh = () => {
           clearTimeout(curtainResizeTimer);
-          curtainResizeTimer = setTimeout(initCurtainStack, 160);
-        });
-        setTimeout(initCurtainStack, 280);
+          curtainResizeTimer = setTimeout(() => window.refreshCurtainStack(), 140);
+        };
+        window.addEventListener('resize', scheduleCurtainRefresh);
+        const mainEl = document.querySelector('main.main');
+        if ('ResizeObserver' in window && mainEl) {
+          new ResizeObserver(scheduleCurtainRefresh).observe(mainEl);
+        }
+        setTimeout(() => window.refreshCurtainStack(), 260);
 
-        // 3D Perspective Stage Scrub on major showcase panels
+        // Clean GPU Stage Scrub on showcase panels (No 3D perspective/filter conflict inside sticky)
         document.querySelectorAll('.gh-panel, .paper-card').forEach(panel => {
           gsap.fromTo(panel,
-            { y: 38, scale: 0.94, rotateX: 8, opacity: 0.72, transformPerspective: 1100, transformOrigin: 'center top' },
+            { y: 26, scale: 0.97 },
             {
-              y: 0, scale: 1, rotateX: 0, opacity: 1, ease: 'none',
+              y: 0, scale: 1, ease: 'none',
               scrollTrigger: {
                 trigger: panel,
                 start: 'top 95%',
-                end: 'top 52%',
-                scrub: 0.65
+                end: 'top 60%',
+                scrub: true
               }
             }
           );
