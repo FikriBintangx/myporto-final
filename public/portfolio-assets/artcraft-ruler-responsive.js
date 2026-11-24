@@ -36,7 +36,7 @@
   const ROW_GAP = 7;
   // Share of the transition each character spends moving (rest is stagger).
   const STAGGER_WINDOW = 0.55;
-  const LIGHT_SECTION_SELECTOR = '#tentang, #kontak';
+  const LIGHT_SECTION_SELECTOR = '#publikasi, #tentang, #kontak';
   const WHITE_CARD_SELECTOR = '.card, .receipt, .about-card, .ticket';
 
   const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
@@ -231,6 +231,7 @@
     }
 
     render(sy) {
+      const isPhone = L.VW <= 600;
       const N = this.N;
       const CW = L.CW;
       const RX = L.RAIL_X;
@@ -240,6 +241,19 @@
       const py = this.pileRowY();
       const active = this.state === 'dwell';
 
+      // On mobile phones, distribute all section menus cleanly along the right rail
+      // so every menu item is always visible, readable, and tappable without overlapping content.
+      let phoneBaseY = 0;
+      let phoneStep = CW;
+      if (isPhone) {
+        const usableTop = L.TRACK_TOP + 18;
+        const usableBot = L.VH - 18;
+        const slotH = Math.max(48, (usableBot - usableTop) / Math.max(1, L.COUNT));
+        const slotCenter = usableTop + (this.idx + 0.5) * slotH;
+        phoneStep = Math.min(CW, Math.max(6.5, (slotH - 12) / Math.max(1, N)));
+        phoneBaseY = slotCenter + ((N - 1) * phoneStep) / 2;
+      }
+
       for (let i = 0; i < N; i++) {
         const c = this.chars[i];
         // The last letter (i = N-1) leads on the way in and on the way out.
@@ -248,49 +262,51 @@
         const e = easeInOutCubic(k);
 
         let cx, cy, rot;
-        switch (this.state) {
-          case 'queue':
-            cx = this.rowCharX(i); cy = qy; rot = 0;
-            break;
-          case 'enter': {
-            // Corner turn: control point sits at (rail x, queue row y), so the
-            // path leaves the row heading right and arrives on the rail heading up.
-            const x0 = this.rowCharX(i), y0 = qy;
-            const x1 = RX, y1 = startY - i * CW;
-            const u = 1 - e;
-            cx = u * u * x0 + 2 * u * e * x1 + e * e * x1;
-            cy = u * u * y0 + 2 * u * e * y0 + e * e * y1;
-            rot = lerp(0, -90, e);
-            break;
+        if (isPhone) {
+          cx = RX;
+          cy = phoneBaseY - i * phoneStep;
+          rot = -90;
+        } else {
+          switch (this.state) {
+            case 'queue':
+              cx = this.rowCharX(i); cy = qy; rot = 0;
+              break;
+            case 'enter': {
+              // Corner turn: control point sits at (rail x, queue row y), so the
+              // path leaves the row heading right and arrives on the rail heading up.
+              const x0 = this.rowCharX(i), y0 = qy;
+              const x1 = RX, y1 = startY - i * CW;
+              const u = 1 - e;
+              cx = u * u * x0 + 2 * u * e * x1 + e * e * x1;
+              cy = u * u * y0 + 2 * u * e * y0 + e * e * y1;
+              rot = lerp(0, -90, e);
+              break;
+            }
+            case 'dwell':
+              cx = RX; cy = lerp(startY, endY, this.t) - i * CW; rot = -90;
+              break;
+            case 'exit': {
+              // Corner turn: control point at (rail x, pile row y): up, then left.
+              const x0 = RX, y0 = endY - i * CW;
+              const x1 = this.rowCharX(i), y1 = py;
+              const u = 1 - e;
+              cx = u * u * x0 + 2 * u * e * x0 + e * e * x1;
+              cy = u * u * y0 + 2 * u * e * y1 + e * e * y1;
+              rot = lerp(-90, 0, e);
+              break;
+            }
+            default: // piled
+              cx = this.rowCharX(i); cy = py; rot = 0;
           }
-          case 'dwell':
-            cx = RX; cy = lerp(startY, endY, this.t) - i * CW; rot = -90;
-            break;
-          case 'exit': {
-            // Corner turn: control point at (rail x, pile row y): up, then left.
-            const x0 = RX, y0 = endY - i * CW;
-            const x1 = this.rowCharX(i), y1 = py;
-            const u = 1 - e;
-            cx = u * u * x0 + 2 * u * e * x0 + e * e * x1;
-            cy = u * u * y0 + 2 * u * e * y1 + e * e * y1;
-            rot = lerp(-90, 0, e);
-            break;
-          }
-          default: // piled
-            cx = this.rowCharX(i); cy = py; rot = 0;
         }
 
         // Spans are CW x CW boxes positioned by their top-left corner.
         const tf = `translate3d(${(cx - CW / 2).toFixed(1)}px,${(cy - CW / 2).toFixed(1)}px,0) rotate(${rot.toFixed(1)}deg)`;
         if (tf !== c.tf) { c.span.style.transform = tf; c.tf = tf; }
 
-        // Phones: only the rail label shows; queue/pile rows would sit on
-        // top of content in a 375px viewport. They fade along the corner turn.
         let op = 1;
-        if (L.VW <= 600) {
-          if (this.state === 'queue' || this.state === 'piled') op = 0;
-          else if (this.state === 'enter') op = e;
-          else if (this.state === 'exit') op = 1 - e;
+        if (isPhone) {
+          op = active ? 1 : (this.state === 'enter' || this.state === 'exit' ? 0.8 : 0.56);
         }
         const ops = op >= 0.999 ? '1' : op.toFixed(3);
         if (ops !== c.op) { c.span.style.opacity = ops; c.op = ops; }

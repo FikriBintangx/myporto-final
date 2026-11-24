@@ -233,7 +233,9 @@
   }
 }
 @media (max-width: 600px) {
-  .k-ch { font-size: 8.5px; letter-spacing: 0.01em; }
+  .k-ch { font-size: 8px; letter-spacing: 0.01em; }
+  .k-ch.k-active { color: #2E6BC4; font-weight: 900; }
+  .k-ch.k-on-dark.k-active { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.7); }
   .ruler-thumb-line { left: 4px; width: calc(100% - 4px); }
   .ruler-thumb::before { right: 2px; width: 5px; height: 5px; }
 }
