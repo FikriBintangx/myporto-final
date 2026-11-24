@@ -177,7 +177,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       display: grid;
       grid-template-columns: 268px 1fr 56px;
       min-height: 100vh;
-      transition: grid-template-columns 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: grid-template-columns 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .shell.sb-min { grid-template-columns: 168px 1fr 56px; }
     .shell.rail-open { grid-template-columns: 268px 1fr 340px; }
@@ -660,80 +660,151 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .svc-stack { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; border-top: 1px dotted var(--line); }
     .chip { font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); border: 1px solid var(--line); padding: 2px 7px; border-radius: 2px; }
 
-    /* Experience List — Far-Left Pixel-Centered Dotted ASCII Timeline Slider */
-    .exp-list { display: flex; flex-direction: column; position: relative; padding-left: 36px; }
-    .exp-track-rail {
-      position: absolute;
-      left: 10px;
-      top: 28px;
-      bottom: 28px;
-      width: 6px;
-      background-image: radial-gradient(circle, rgba(140, 155, 255, 0.28) 1.4px, transparent 1.7px);
-      background-size: 6px 10px;
-      background-repeat: repeat-y;
-      background-position: center top;
-      pointer-events: none;
-      z-index: 1;
+    /* Experience List — Organic Curved S-Wave SVG Roadmap & Architectural Cards */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      padding-left: 64px;
     }
-    .exp-track-fill {
+    .exp-curve-svg {
       position: absolute;
       left: 0;
       top: 0;
-      width: 6px;
-      height: 0%;
-      background-image: radial-gradient(circle, #ffffff 1.6px, rgba(31, 43, 255, 0.85) 2.2px, transparent 2.6px);
-      background-size: 6px 10px;
-      background-repeat: repeat-y;
-      background-position: center top;
-      filter: drop-shadow(0 0 6px rgba(140, 155, 255, 0.85));
-      will-change: height;
+      width: 56px;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
     }
-    .exp-track-pulse {
-      position: absolute;
-      left: 3px;
-      top: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 0 10px #ffffff, 0 0 18px #1f2bff;
-      transform: translate(-50%, -50%);
-      will-change: top;
+    .exp-curve-base {
+      fill: none;
+      stroke: rgba(160, 168, 255, 0.2);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 4 6;
     }
+    .exp-curve-ink {
+      fill: none;
+      stroke: url(#expCurveGrad);
+      stroke-width: 2.8;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.55));
+    }
+    .exp-curve-node {
+      fill: var(--bg);
+      stroke: rgba(160, 168, 255, 0.45);
+      stroke-width: 2.2;
+      transition: fill 0.25s ease, stroke 0.25s ease, r 0.25s ease;
+    }
+    .exp-curve-node.is-lit {
+      fill: #38bdf8;
+      stroke: #ffffff;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+    }
+    .exp-curve-halo {
+      fill: rgba(56, 189, 248, 0.22);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .exp-curve-halo.is-lit { opacity: 1; }
+    html.light .exp-curve-base { stroke: rgba(15, 23, 84, 0.18); }
+    html.light .exp-curve-node { fill: #ffffff; stroke: rgba(15, 23, 84, 0.35); }
+    html.light .exp-curve-node.is-lit { fill: var(--cobalt); stroke: #ffffff; }
+
     .exp-row {
       position: relative;
       z-index: 2;
-      display: grid; grid-template-columns: 155px 1fr; gap: 20px;
-      padding: 22px 14px; border-bottom: 1px dotted var(--line); opacity: 0;
-      border-radius: 3px; transition: background 0.18s ease;
+      display: grid;
+      grid-template-columns: 152px 1fr;
+      gap: 20px;
+      padding: 20px 22px;
+      background: linear-gradient(180deg, rgba(11, 13, 46, 0.72) 0%, rgba(7, 9, 34, 0.85) 100%);
+      border: 1px solid rgba(160, 168, 255, 0.14);
+      border-radius: 14px;
+      opacity: 0;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
     }
-    .exp-row::before {
+    .exp-row.is-now {
+      border-color: rgba(56, 189, 248, 0.36);
+      box-shadow: inset 3px 0 0 #38bdf8, 0 12px 30px rgba(0, 0, 0, 0.28);
+    }
+    .exp-row.is-lit {
+      border-color: rgba(160, 168, 255, 0.28);
+    }
+    .exp-row:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.5);
+      background: linear-gradient(180deg, rgba(15, 19, 64, 0.88) 0%, rgba(9, 12, 44, 0.94) 100%);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+    }
+    html.light .exp-row {
+      background: #ffffff;
+      border-color: var(--line-strong);
+      box-shadow: 0 4px 16px rgba(7, 9, 43, 0.04);
+    }
+    html.light .exp-row.is-now {
+      border-color: rgba(31, 43, 255, 0.42);
+      box-shadow: inset 3px 0 0 var(--cobalt), 0 10px 26px rgba(31, 43, 255, 0.08);
+    }
+    html.light .exp-row:hover {
+      background: #f8faff;
+      border-color: var(--cobalt);
+    }
+    .exp-meta-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .exp-date { font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.03em; }
+    .exp-now {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(56, 229, 157, 0.12);
+      border: 1px solid rgba(56, 229, 157, 0.32);
+      color: #38e59d;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .exp-now::before {
       content: '';
-      position: absolute;
-      left: -23px;
-      top: 26px;
-      width: 12px;
-      height: 12px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--text-dim);
-      transform: translateX(-50%);
-      box-shadow: 0 0 0 3px var(--bg);
-      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      background: #38e59d;
+      box-shadow: 0 0 6px #38e59d;
     }
-    .exp-row.is-lit::before, .exp-row.is-now::before {
-      border-color: var(--white);
-      background: var(--cobalt);
-      box-shadow: 0 0 0 3px var(--bg), 0 0 12px rgba(31, 43, 255, 0.9);
+    html.light .exp-now { background: rgba(21, 128, 61, 0.1); border-color: rgba(21, 128, 61, 0.28); color: #15803d; }
+    html.light .exp-now::before { background: #15803d; box-shadow: none; }
+    .exp-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2.5px 8px;
+      border-radius: 6px;
+      background: rgba(160, 168, 255, 0.08);
+      border: 1px solid rgba(160, 168, 255, 0.18);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #93c5fd;
+      letter-spacing: 0.06em;
     }
-    .exp-row:hover { background: rgba(31, 43, 255, 0.08); }
-    .exp-row:last-child { border-bottom: none; }
-    .exp-date { font-size: 11.5px; color: var(--text-dim); }
-    .exp-now { display: inline-block; margin-top: 6px; background: var(--cobalt); color: var(--white); font-family: var(--cond); font-size: 11px; letter-spacing: 0.08em; padding: 1px 7px; border-radius: 2px; }
-    .exp-ascii-meter { margin-top: 8px; font-family: var(--mono); font-size: 10px; color: #6d7cff; letter-spacing: 0.04em; opacity: 0.85; }
-    .exp-role { font-family: var(--cond); font-size: 24px; font-weight: 500; color: var(--white); line-height: 1.1; margin-bottom: 3px; }
-    .exp-org { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
-    .exp-desc { font-size: 13.5px; font-weight: 300; color: var(--text-dim); }
+    html.light .exp-tag-pill {
+      background: rgba(31, 43, 255, 0.07);
+      border-color: rgba(31, 43, 255, 0.18);
+      color: var(--cobalt);
+    }
+    .exp-role { font-family: var(--cond); font-size: 24px; font-weight: 600; color: var(--white); line-height: 1.12; margin-bottom: 4px; }
+    .exp-org { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
+    .exp-desc { font-size: 13.5px; font-weight: 300; color: var(--text-dim); line-height: 1.62; }
 
     /* Research Papers + Book ASCII Art */
     .paper-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -763,7 +834,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .paper-card p { font-size: 13.5px; font-weight: 300; color: var(--text-muted); flex: 1; }
     .paper-cta { font-family: var(--cond); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #8c9bff; }
 
-    /* RIGHT RAIL — Precision Telemetry & Skill Radar Dock */
+    /* RIGHT RAIL — Engraving Artwork & Precision Telemetry Dock */
     .right-rail {
       position: sticky;
       top: 0;
@@ -771,7 +842,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       border-left: 1px solid var(--line);
       background:
         radial-gradient(circle at 50% 18%, rgba(56, 189, 248, 0.08), transparent 52%),
-        radial-gradient(circle at 50% 85%, rgba(31, 43, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 50% 85%, rgba(31, 43, 255, 0.14), transparent 55%),
         var(--bg-sidebar);
       display: flex;
       flex-direction: column;
@@ -781,12 +852,105 @@ const siteCfgJson = JSON.stringify(siteCfg);
       overflow-y: auto;
       overflow-x: hidden;
       scrollbar-width: none;
+      transition: padding 0.38s cubic-bezier(0.22, 1, 0.36, 1), width 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
     }
     .right-rail::-webkit-scrollbar { display: none; }
     .shell.rail-open .right-rail {
       align-items: stretch;
       padding: 14px 14px 16px;
       gap: 12px;
+    }
+
+    /* Full-height Atmospheric Engraving Artwork Layer inside Right Rail */
+    .rail-art-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .rail-art-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      opacity: 0.42;
+      filter: contrast(1.14) saturate(0.85);
+      mix-blend-mode: screen;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+      transform: scale(1.06);
+    }
+    .rail-art-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--bg-sidebar) 0%, rgba(3, 3, 28, 0.12) 18%, rgba(3, 3, 28, 0.12) 78%, var(--bg-sidebar) 100%);
+    }
+    html.light .rail-art-bg img {
+      mix-blend-mode: multiply;
+      opacity: 0.22;
+      filter: invert(1) contrast(1.1);
+    }
+    html.light .rail-art-bg::after {
+      background: linear-gradient(180deg, var(--bg-sidebar) 0%, rgba(235, 239, 248, 0.2) 18%, rgba(235, 239, 248, 0.2) 78%, var(--bg-sidebar) 100%);
+    }
+    .shell.rail-open .rail-art-bg img {
+      opacity: 0.18;
+      transform: scale(1.0);
+      filter: contrast(1.1) blur(1px);
+    }
+    .rail-panel-head,
+    .rail-expanded-box,
+    .rail-text {
+      position: relative;
+      z-index: 2;
+    }
+    .rail-toggle-ico {
+      display: inline-flex;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .shell.rail-open .rail-toggle-ico {
+      transform: rotate(180deg);
+    }
+    .rail-art-banner {
+      position: relative;
+      height: 118px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(160, 168, 255, 0.2);
+      background: #04051c;
+      flex-shrink: 0;
+    }
+    .rail-art-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 36%;
+      filter: contrast(1.12);
+      opacity: 0.92;
+      display: block;
+    }
+    .rail-art-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(4, 4, 36, 0.08) 0%, rgba(4, 4, 36, 0.72) 100%);
+      pointer-events: none;
+    }
+    .rail-art-banner-cap {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 8px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(235, 240, 255, 0.86);
     }
 
     /* Header bar inside Right Rail */
@@ -1175,42 +1339,54 @@ const siteCfgJson = JSON.stringify(siteCfg);
       padding-top: 4px;
     }
 
-    /* Sticky Hero + Foreground Curtain Overlap Layer (Nous-style Layer Scrub) */
+    /* Per-Page Stacked Curtain Layer Overlap Scroll */
     @media (min-width: 961px) {
-      .hero-sticky-stage {
+      .curtain-page {
         position: sticky;
-        top: 20px;
-        z-index: 1;
+        top: 0;
         will-change: transform, opacity, filter;
         transform-origin: center top;
       }
     }
-    .curtain-layer {
+    .curtain-sheet {
       position: relative;
-      z-index: 10;
       background: var(--bg);
-      margin: 24px calc(clamp(16px, 4.5vw, 68px) * -1) 0;
-      padding: 18px clamp(16px, 4.5vw, 68px) 0;
-      border-top: 1px solid rgba(160, 174, 255, 0.24);
+      margin-left: calc(clamp(16px, 4.5vw, 68px) * -1);
+      margin-right: calc(clamp(16px, 4.5vw, 68px) * -1);
+      padding-left: clamp(16px, 4.5vw, 68px);
+      padding-right: clamp(16px, 4.5vw, 68px);
+      border-top: 1px solid rgba(160, 174, 255, 0.22);
       border-radius: 26px 26px 0 0;
-      box-shadow: 0 -28px 72px rgba(2, 2, 20, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      box-shadow: 0 -24px 64px rgba(2, 2, 20, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    html.light .curtain-layer {
-      border-top-color: rgba(15, 23, 84, 0.16);
-      box-shadow: 0 -22px 54px rgba(7, 9, 43, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    html.light .curtain-sheet {
+      border-top-color: rgba(15, 23, 84, 0.15);
+      box-shadow: 0 -18px 48px rgba(7, 9, 43, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.92);
     }
-    .curtain-seam {
-      width: 44px;
-      height: 4px;
+    .curtain-sheet::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3.5px;
       border-radius: 999px;
-      background: rgba(160, 174, 255, 0.26);
-      margin: 0 auto 10px;
+      background: rgba(160, 174, 255, 0.24);
+      margin: 12px auto 0;
     }
-    html.light .curtain-seam { background: rgba(15, 23, 84, 0.18); }
+    html.light .curtain-sheet::before { background: rgba(15, 23, 84, 0.16); }
+    .monolith-footer.curtain-sheet::before { display: none; }
+    .curtain-z1 { z-index: 1; }
+    .curtain-z2 { z-index: 2; }
+    .curtain-z3 { z-index: 3; }
+    .curtain-z4 { z-index: 4; }
+    .curtain-z5 { z-index: 5; }
+    .curtain-z6 { z-index: 6; }
+    .curtain-z7 { z-index: 7; }
     @media (max-width: 960px) {
-      .curtain-layer {
-        margin: 16px -16px 0;
-        padding: 14px 16px 0;
+      .curtain-sheet {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
         border-radius: 20px 20px 0 0;
       }
     }
@@ -1428,10 +1604,9 @@ const siteCfgJson = JSON.stringify(siteCfg);
       .dither-strip { grid-template-columns: repeat(2, 1fr); padding: 16px; }
       .num-list, .svc-grid, .paper-grid { grid-template-columns: 1fr; gap: 18px; }
       .num-item.stagger-rev { margin-top: 0; }
-      .exp-list { padding-left: 26px; }
-      .exp-track-rail { left: 6px; }
-      .exp-row { grid-template-columns: 1fr; gap: 8px; padding: 16px 10px; }
-      .exp-row::before { left: -17px; top: 20px; }
+      .exp-list { padding-left: 38px; gap: 12px; }
+      .exp-curve-svg { width: 34px; }
+      .exp-row { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
       .gh-stage { height: 235px; }
       .gh-view-list { height: 260px; }
       .gh-ascii-langs { font-size: clamp(8px, 2.15vw, 11px); }
@@ -1550,7 +1725,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </div>
       <div class="breadcrumb" id="overview">// RINGKASAN</div>
 
-      <section class="hero hero-sticky-stage" id="heroStage">
+      <section class="hero curtain-page curtain-z1" id="heroStage">
         <div class="hero-video-wrap" aria-hidden="true">
           <video class="hero-video-bg" src="/assets/hero-bg.mp4" autoplay loop muted playsinline></video>
           <div class="hero-video-scrim"></div>
@@ -1572,12 +1747,8 @@ const siteCfgJson = JSON.stringify(siteCfg);
         </div>
       </section>
 
-      <!-- FOREGROUND CURTAIN LAYER (Overlaps Sticky Hero on Scroll) -->
-      <div class="curtain-layer" id="curtainLayer">
-        <div class="curtain-seam" aria-hidden="true"></div>
-
-      <!-- GITHUB 3D TELEMETRY (Cleanly below Hero Video) -->
-      <section class="section" id="github" style="padding-top: 18px; padding-bottom: 44px;">
+      <!-- GITHUB 3D TELEMETRY (Curtain Sheet 02) -->
+      <section class="section curtain-page curtain-sheet curtain-z2" id="github" style="padding-top: 18px; padding-bottom: 44px;">
         <div class="gh-panel" data-anime-item id="ghPanel" style="margin-top: 0;">
           <div class="gh-top mono">
             <div class="gh-tabs">
@@ -1609,7 +1780,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </section>
 
       <!-- ARCHITECTURE -->
-      <section class="section" id="architecture">
+      <section class="section curtain-page curtain-sheet curtain-z3" id="architecture">
         <h2 class="sec-title gsap-scroll-words" data-i18n-words="sec_arch">Cara Saya Merancang Sistem Backend</h2>
         <div class="num-list">
           <article class="num-item" data-anime-item>
@@ -1663,7 +1834,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </section>
 
       <!-- SYSTEMS -->
-      <section class="section" id="systems">
+      <section class="section curtain-page curtain-sheet curtain-z4" id="systems">
         <div class="sec-head-row">
           <h2 class="sec-title gsap-scroll-words" data-i18n-words="sec_sys">Sistem &amp; Proyek Produksi</h2>
           <div class="filters" id="svcFilters">
@@ -1677,13 +1848,13 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </section>
 
       <!-- EXPERIENCE -->
-      <section class="section" id="experience">
+      <section class="section curtain-page curtain-sheet curtain-z5" id="experience">
         <h2 class="sec-title gsap-scroll-words" data-i18n-words="sec_exp">Pengalaman &amp; Pendidikan</h2>
         <div class="exp-list" id="expList"></div>
       </section>
 
       <!-- RESEARCH -->
-      <section class="section" id="research" style="border-bottom:none;">
+      <section class="section curtain-page curtain-sheet curtain-z6" id="research" style="border-bottom:none;">
         <h2 class="sec-title gsap-scroll-words" data-i18n-words="sec_res">Riset Teknis &amp; Keamanan</h2>
         <div class="paper-grid">
           <a class="paper-card" data-anime-item href="/papers/01_bank_cybersecurity.pdf" target="_blank">
@@ -1720,7 +1891,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </section>
 
       <!-- MONUMENTAL CINEMATIC FOOTER (Scroll-Scrubbed Parallax Watermark & Cobalt Horizon) -->
-      <footer class="monolith-footer" id="monolithFooter">
+      <footer class="monolith-footer curtain-page curtain-sheet curtain-z7" id="monolithFooter">
         <div class="monolith-upper">
           <div class="monolith-watermark" aria-hidden="true">
             <span id="monolithWatermarkText">BINTANG</span>
@@ -1759,20 +1930,29 @@ const siteCfgJson = JSON.stringify(siteCfg);
           </div>
         </div>
       </footer>
-      </div><!-- /.curtain-layer -->
     </main>
 
-    <!-- RIGHT RAIL — Precision Telemetry & Skill Radar Dock -->
+    <!-- RIGHT RAIL — Engraving Artwork & Precision Telemetry Dock -->
     <aside class="right-rail" id="rightRail">
+      <div class="rail-art-bg" aria-hidden="true">
+        <img src="/assets/rail-engraving.jpg" alt="" loading="lazy" />
+      </div>
       <div class="rail-panel-head">
-        <button type="button" class="rail-toggle" id="btnRailToggle" title="Toggle System Telemetry & Skill Radar" aria-label="Toggle System Telemetry Panel">←</button>
+        <button type="button" class="rail-toggle" id="btnRailToggle" title="Toggle System Telemetry & Skill Radar" aria-label="Toggle System Telemetry Panel"><span class="rail-toggle-ico">←</span></button>
         <div class="rail-head-meta">
           <span class="rail-head-title">System Telemetry</span>
           <span class="rail-live-pill"><span class="rail-pulse-dot"></span>11ms</span>
         </div>
       </div>
 
-      <div class="rail-expanded-box">
+      <div class="rail-expanded-box" id="railExpandedBox">
+        <div class="rail-art-banner">
+          <img src="/assets/rail-engraving.jpg" alt="Backend Orchestration Engraving" loading="lazy" />
+          <div class="rail-art-banner-cap">
+            <span>ORCHESTRATOR // NODE-01</span>
+            <span>60 FPS</span>
+          </div>
+        </div>
         <div class="rail-radar-card">
           <div class="rail-radar-top">
             <span class="rail-radar-label">Skill Matrix</span>
@@ -3019,17 +3199,25 @@ const siteCfgJson = JSON.stringify(siteCfg);
       });
       if (expTrackST) { expTrackST.kill(); expTrackST = null; }
 
+      const expTags = ['BACKEND · LIVE', 'GPA 3.34 · S-1', 'F&B OPS', 'MANUFACTURING', 'LOGISTICS'];
       expEl.innerHTML = `
-        <div class="exp-track-rail" aria-hidden="true">
-          <div class="exp-track-fill" id="expTrackFill"></div>
-          <div class="exp-track-pulse" id="expTrackPulse"></div>
-        </div>
+        <svg class="exp-curve-svg" id="expCurveSvg" aria-hidden="true">
+          <defs>
+            <linearGradient id="expCurveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="55%" stop-color="#4f46e5" />
+              <stop offset="100%" stop-color="#1f2bff" />
+            </linearGradient>
+          </defs>
+          <path class="exp-curve-base" id="expCurveBase" d="" />
+          <path class="exp-curve-ink" id="expCurveInk" d="" />
+          <g id="expCurveNodes"></g>
+        </svg>
       ` + experiences.map((e, i) => `
         <article class="exp-row ${e.now ? 'is-now' : ''}" data-anime-item>
-          <div class="mono">
+          <div class="exp-meta-col mono">
             <div class="exp-date">${t.exp[i].date}</div>
-            ${e.now ? `<span class="exp-now">${t.current_role}</span>` : ''}
-            <div class="exp-ascii-meter" data-meter-idx="${i}">${expMeters[i] || '[███░░░░░]'}</div>
+            ${e.now ? `<span class="exp-now">${t.current_role}</span>` : `<span class="exp-tag-pill">${expTags[i] || 'MILESTONE'}</span>`}
           </div>
           <div>
             <h3 class="exp-role" data-final-role="${t.exp[i].role.replace(/"/g, '&quot;')}">${t.exp[i].role}</h3>
@@ -3054,9 +3242,54 @@ const siteCfgJson = JSON.stringify(siteCfg);
         });
       });
 
-      // Continuous Connected Beam scrubbed bi-directionally by Lenis + ScrollTrigger
-      const fillEl = document.getElementById('expTrackFill');
-      const pulseEl = document.getElementById('expTrackPulse');
+      // Build Organic Curved S-Wave SVG Path connecting each experience card
+      const curveSvg = document.getElementById('expCurveSvg');
+      const basePath = document.getElementById('expCurveBase');
+      const inkPath = document.getElementById('expCurveInk');
+      const nodesGroup = document.getElementById('expCurveNodes');
+      let pathLen = 1;
+      let nodeCircles = [];
+      let nodeHalos = [];
+
+      function buildExpCurve() {
+        if (!curveSvg || !basePath || !inkPath || !nodesGroup || !rows.length) return;
+        const isMob = window.innerWidth <= 960;
+        const w = isMob ? 34 : 56;
+        const xLeft = isMob ? 9 : 14;
+        const xRight = isMob ? 25 : 42;
+        const totalH = Math.max(200, expEl.offsetHeight);
+        curveSvg.setAttribute('viewBox', `0 0 ${w} ${totalH}`);
+        curveSvg.style.height = totalH + 'px';
+
+        const pts = rows.map((r, i) => ({
+          x: i % 2 === 0 ? xLeft : xRight,
+          y: r.offsetTop + Math.min(34, r.offsetHeight * 0.35)
+        }));
+
+        let d = `M ${pts[0].x} ${pts[0].y}`;
+        for (let i = 0; i < pts.length - 1; i++) {
+          const p0 = pts[i], p1 = pts[i + 1];
+          const midY = (p0.y + p1.y) * 0.5;
+          d += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
+        }
+
+        basePath.setAttribute('d', d);
+        inkPath.setAttribute('d', d);
+        pathLen = Math.max(1, inkPath.getTotalLength());
+        inkPath.style.strokeDasharray = `${pathLen}`;
+        inkPath.style.strokeDashoffset = `${pathLen}`;
+
+        nodesGroup.innerHTML = pts.map((p, i) => `
+          <circle class="exp-curve-halo ${i === 0 ? 'is-lit' : ''}" cx="${p.x}" cy="${p.y}" r="${isMob ? 8 : 11}" />
+          <circle class="exp-curve-node ${i === 0 ? 'is-lit' : ''}" cx="${p.x}" cy="${p.y}" r="${isMob ? 4 : 5.2}" />
+        `).join('');
+        nodeCircles = Array.from(nodesGroup.querySelectorAll('.exp-curve-node'));
+        nodeHalos = Array.from(nodesGroup.querySelectorAll('.exp-curve-halo'));
+      }
+
+      requestAnimationFrame(buildExpCurve);
+      window.addEventListener('resize', buildExpCurve, { passive: true });
+
       expTrackST = ScrollTrigger.create({
         trigger: expEl,
         start: 'top 76%',
@@ -3064,11 +3297,13 @@ const siteCfgJson = JSON.stringify(siteCfg);
         scrub: 0.35,
         onUpdate: (self) => {
           const pct = Math.max(0, Math.min(1, self.progress));
-          if (fillEl) fillEl.style.height = (pct * 100).toFixed(2) + '%';
-          if (pulseEl) pulseEl.style.top = (pct * 100).toFixed(2) + '%';
+          if (inkPath) inkPath.style.strokeDashoffset = `${(pathLen * (1 - pct)).toFixed(1)}`;
           rows.forEach((r, idx) => {
             const threshold = rows.length > 1 ? idx / (rows.length - 1) : 0;
-            r.classList.toggle('is-lit', pct >= threshold - 0.04);
+            const lit = idx === 0 || pct >= threshold - 0.04;
+            r.classList.toggle('is-lit', lit);
+            if (nodeCircles[idx]) nodeCircles[idx].classList.toggle('is-lit', lit);
+            if (nodeHalos[idx]) nodeHalos[idx].classList.toggle('is-lit', lit);
           });
         }
       });
@@ -3097,10 +3332,57 @@ const siteCfgJson = JSON.stringify(siteCfg);
       portalShell.classList.remove('sb-min');
       syncAfterLayout();
     });
+    let railAnimating = false;
     if (btnRailToggle) btnRailToggle.addEventListener('click', () => {
-      const open = portalShell.classList.toggle('rail-open');
-      btnRailToggle.textContent = open ? '→' : '←';
-      syncAfterLayout();
+      if (railAnimating) return;
+      const isOpen = portalShell.classList.contains('rail-open');
+      const expBox = document.getElementById('railExpandedBox');
+      const targets = expBox ? expBox.querySelectorAll('.rail-art-banner, .rail-radar-card, .rail-bento-item') : [];
+
+      if (!isOpen) {
+        railAnimating = true;
+        portalShell.classList.add('rail-open');
+        if (typeof anime === 'function' && targets.length) {
+          anime.remove(targets);
+          anime({
+            targets,
+            translateX: [22, 0],
+            opacity: [0, 1],
+            scale: [0.96, 1],
+            duration: 460,
+            delay: anime.stagger(55, { start: 90 }),
+            easing: 'easeOutQuart',
+            complete: () => { railAnimating = false; }
+          });
+        } else {
+          railAnimating = false;
+        }
+        syncAfterLayout();
+      } else {
+        railAnimating = true;
+        if (typeof anime === 'function' && targets.length) {
+          anime.remove(targets);
+          anime({
+            targets,
+            translateX: [0, 18],
+            opacity: [1, 0],
+            scale: [1, 0.97],
+            duration: 210,
+            delay: anime.stagger(24),
+            easing: 'easeInQuad',
+            complete: () => {
+              portalShell.classList.remove('rail-open');
+              targets.forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
+              railAnimating = false;
+              syncAfterLayout();
+            }
+          });
+        } else {
+          portalShell.classList.remove('rail-open');
+          railAnimating = false;
+          syncAfterLayout();
+        }
+      }
     });
 
     function applyLanguage(lang) {
@@ -3206,23 +3488,52 @@ const siteCfgJson = JSON.stringify(siteCfg);
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) {
-        // Sticky Hero Depth Recede as Foreground Curtain Layer overlaps it
-        const heroStage = document.getElementById('heroStage');
-        const curtainLayer = document.getElementById('curtainLayer');
-        if (heroStage && curtainLayer && window.innerWidth > 960) {
-          gsap.fromTo(heroStage,
-            { scale: 1, y: 0, opacity: 1, filter: 'blur(0px)' },
-            {
-              scale: 0.93, y: -28, opacity: 0.22, filter: 'blur(2.5px)', ease: 'none',
-              scrollTrigger: {
-                trigger: curtainLayer,
-                start: 'top 95%',
-                end: 'top 14%',
-                scrub: 0.6
+        // Per-Page Stacked Curtain Layer Overlap Scroll (All Sections)
+        let curtainSTs = [];
+        function initCurtainStack() {
+          curtainSTs.forEach(st => st.kill());
+          curtainSTs = [];
+          const pages = Array.from(document.querySelectorAll('.curtain-page'));
+          if (window.innerWidth <= 960) {
+            pages.forEach(p => {
+              p.style.top = '';
+              gsap.set(p, { clearProps: 'transform,opacity,filter' });
+            });
+            return;
+          }
+          const vh = window.innerHeight;
+          pages.forEach((page, idx) => {
+            // Sticky bottom-pin for tall sections (e.g. #systems) so full content scrolls before next sheet overlaps
+            const h = page.offsetHeight;
+            const pinTop = h > vh ? Math.round(vh - h) : (idx === 0 ? 20 : 0);
+            page.style.top = pinTop + 'px';
+
+            const nextPage = pages[idx + 1];
+            if (!nextPage) return;
+            const tween = gsap.fromTo(page,
+              { scale: 1, y: 0, opacity: 1, filter: 'blur(0px)' },
+              {
+                scale: 0.945, y: -20, opacity: 0.28, filter: 'blur(2px)', ease: 'none',
+                scrollTrigger: {
+                  trigger: nextPage,
+                  start: 'top 95%',
+                  end: 'top 15%',
+                  scrub: 0.55,
+                  invalidateOnRefresh: true
+                }
               }
-            }
-          );
+            );
+            if (tween.scrollTrigger) curtainSTs.push(tween.scrollTrigger);
+          });
         }
+
+        window.addEventListener('load', () => setTimeout(initCurtainStack, 180));
+        let curtainResizeTimer = 0;
+        window.addEventListener('resize', () => {
+          clearTimeout(curtainResizeTimer);
+          curtainResizeTimer = setTimeout(initCurtainStack, 160);
+        });
+        setTimeout(initCurtainStack, 280);
 
         // 3D Perspective Stage Scrub on major showcase panels
         document.querySelectorAll('.gh-panel, .paper-card').forEach(panel => {
