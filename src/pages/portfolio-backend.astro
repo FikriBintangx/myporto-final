@@ -660,60 +660,60 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .svc-stack { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; border-top: 1px dotted var(--line); }
     .chip { font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); border: 1px solid var(--line); padding: 2px 7px; border-radius: 2px; }
 
-    /* Experience List — Minimalist Grey ASCII Constellation Timeline (Zero Card Tips) */
+    /* Experience List — Orion-Style Grey/Silver Constellation Star-Map Timeline */
     .exp-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
       position: relative;
-      padding-left: 52px;
+      padding-left: 72px;
     }
     .exp-const-svg {
       position: absolute;
       left: 0;
       top: 0;
-      width: 44px;
+      width: 64px;
       height: 100%;
       pointer-events: none;
       overflow: visible;
       z-index: 1;
     }
+    .exp-const-branch {
+      fill: none;
+      stroke: rgba(148, 163, 184, 0.22);
+      stroke-width: 0.9;
+    }
     .exp-const-base {
       fill: none;
-      stroke: rgba(148, 163, 184, 0.24);
-      stroke-width: 1.2;
-      stroke-dasharray: 2 4;
+      stroke: rgba(148, 163, 184, 0.28);
+      stroke-width: 1.25;
     }
     .exp-const-ink {
       fill: none;
-      stroke: #94a3b8;
-      stroke-width: 1.5;
-      stroke-dasharray: 3 3;
-      filter: drop-shadow(0 0 4px rgba(148, 163, 184, 0.35));
+      stroke: #cbd5e1;
+      stroke-width: 1.65;
+      filter: drop-shadow(0 0 5px rgba(203, 213, 225, 0.55));
     }
-    .exp-const-star {
-      font-family: var(--mono);
-      font-size: 13px;
-      fill: rgba(148, 163, 184, 0.42);
-      text-anchor: middle;
-      dominant-baseline: central;
-      transition: fill 0.22s ease;
+    .exp-star-group {
+      opacity: 0.45;
+      transition: opacity 0.28s ease;
     }
-    .exp-const-star.is-lit {
-      fill: #cbd5e1;
-      filter: drop-shadow(0 0 6px rgba(203, 213, 225, 0.55));
+    .exp-star-group.is-lit {
+      opacity: 1;
+      filter: drop-shadow(0 0 7px rgba(226, 232, 240, 0.85));
     }
-    .exp-const-dust {
-      font-family: var(--mono);
-      font-size: 9px;
-      fill: rgba(148, 163, 184, 0.28);
-      text-anchor: middle;
-      dominant-baseline: central;
-    }
-    html.light .exp-const-base { stroke: rgba(100, 116, 139, 0.26); }
-    html.light .exp-const-ink { stroke: #64748b; filter: none; }
-    html.light .exp-const-star { fill: rgba(100, 116, 139, 0.45); }
-    html.light .exp-const-star.is-lit { fill: #334155; filter: none; }
+    .exp-star-core { fill: #e2e8f0; }
+    .exp-star-spike { stroke: #cbd5e1; stroke-width: 1; stroke-linecap: round; }
+    .exp-star-halo { fill: rgba(203, 213, 225, 0.16); }
+    .exp-star-sub { fill: rgba(148, 163, 184, 0.65); }
+    .exp-star-dust { fill: rgba(148, 163, 184, 0.35); }
+    html.light .exp-const-branch { stroke: rgba(100, 116, 139, 0.24); }
+    html.light .exp-const-base { stroke: rgba(100, 116, 139, 0.32); }
+    html.light .exp-const-ink { stroke: #475569; filter: none; }
+    html.light .exp-star-core { fill: #334155; }
+    html.light .exp-star-spike { stroke: #475569; }
+    html.light .exp-star-halo { fill: rgba(71, 85, 105, 0.14); }
+    html.light .exp-star-group.is-lit { filter: none; }
 
     .exp-row {
       position: relative;
@@ -1367,224 +1367,208 @@ const siteCfgJson = JSON.stringify(siteCfg);
       }
     }
 
-    /* Monumental Cinematic Footer & Scroll-Scrubbed Perspective Stage */
-    .scroll-perspective-wrap {
-      perspective: 1200px;
-    }
-    .scroll-stage-card {
-      transform-origin: center top;
-      will-change: transform, opacity;
-    }
+    /* Full Royal-Cobalt Editorial Footer (Dithered Hover-Wobble Portrait + 5-Column Directory) */
     .monolith-footer {
       position: relative;
-      margin-top: 24px;
-      border-top: 1px solid var(--line);
+      margin-top: 28px;
       overflow: hidden;
-      background: #0a0c1e;
+      background: linear-gradient(180deg, #09139e 0%, #050b7c 42%, #030663 100%);
+      color: #ffffff;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      border-top: 1px solid rgba(130, 160, 255, 0.38) !important;
     }
     html.light .monolith-footer {
-      background: #0e122d;
-      color: #f4f5ff;
+      background: linear-gradient(180deg, #09139e 0%, #050b7c 42%, #030663 100%);
+      color: #ffffff;
     }
-    .monolith-upper {
+    .monolith-horizon {
       position: relative;
-      padding: clamp(52px, 7vw, 88px) clamp(20px, 4vw, 48px) clamp(40px, 5.5vw, 64px);
+      height: clamp(210px, 28vw, 340px);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 60%), #080a1c;
+      background: #0b19c4;
+      cursor: crosshair;
+    }
+    .monolith-horizon-img {
+      position: absolute;
+      inset: -14% -4%;
+      width: 108%;
+      height: 128%;
+      object-fit: cover;
+      object-position: center 22%;
+      filter: grayscale(100%) contrast(1.45) brightness(0.92);
+      mix-blend-mode: screen;
+      opacity: 0.62;
+      will-change: transform;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+    }
+    .monolith-horizon:hover .monolith-horizon-img {
+      animation: horizonWobble 2.8s ease-in-out infinite;
+      filter: grayscale(100%) contrast(1.6) brightness(1.04);
+    }
+    @keyframes horizonWobble {
+      0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.03); }
+      25%  { transform: translate3d(-7px, -4px, 0) rotate(-0.8deg) scale(1.05); }
+      50%  { transform: translate3d(6px, 3px, 0) rotate(0.7deg) scale(1.04); }
+      75%  { transform: translate3d(-4px, 4px, 0) rotate(-0.5deg) scale(1.05); }
+      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1.03); }
+    }
+    .monolith-horizon-wash {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(16, 36, 232, 0.52) 0%, rgba(11, 24, 184, 0.38) 55%, rgba(5, 11, 124, 0.88) 100%);
+      background-size: 4px 4px, 100% 100%;
+      pointer-events: none;
     }
     .monolith-watermark {
       position: absolute;
-      inset: 0;
+      left: 0;
+      right: 0;
+      top: clamp(148px, 21vw, 255px);
+      z-index: 2;
       display: flex;
-      align-items: center;
       justify-content: center;
       pointer-events: none;
       user-select: none;
       overflow: hidden;
     }
     .monolith-watermark span {
-      font-family: var(--cond);
-      font-weight: 700;
-      font-size: clamp(110px, 21vw, 290px);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: rgba(160, 174, 255, 0.055);
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: clamp(68px, 12.8vw, 178px);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: rgba(165, 188, 255, 0.16);
       white-space: nowrap;
       will-change: transform;
     }
-    .monolith-cta-band {
+    .monolith-body {
       position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding-bottom: 28px;
-      border-bottom: 1px solid rgba(160, 174, 255, 0.14);
+      z-index: 3;
+      border-top: 1px solid rgba(145, 175, 255, 0.42);
+      padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 48px) clamp(28px, 4vw, 40px);
     }
-    .monolith-avail {
-      display: inline-flex;
+    .monolith-dir-grid {
+      display: grid;
+      grid-template-columns: 1.55fr repeat(4, 1fr);
+      gap: 24px 20px;
+      margin-bottom: clamp(44px, 7vw, 84px);
+    }
+    .monolith-brand-stamp {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .monolith-emblem {
+      width: 50px;
+      height: 60px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255, 255, 255, 0.78);
+      background: rgba(3, 6, 99, 0.55);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
+      font-family: var(--cond);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+    }
+    .monolith-emblem small {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 7px;
+      letter-spacing: 0.14em;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+    .monolith-brand-sub {
+      font-family: var(--mono);
+      font-size: 9.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #38e59d;
-      margin-bottom: 10px;
+      color: rgba(214, 224, 255, 0.78);
     }
-    .monolith-headline {
-      font-family: var(--cond);
-      font-size: clamp(2rem, 4.2vw, 3.1rem);
-      font-weight: 500;
-      line-height: 1.02;
-      color: #f4f5ff;
-      max-width: 520px;
-    }
-    .monolith-cta-btns {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .monolith-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: #1f2bff;
-      color: #ffffff;
+    .monolith-col-kicker {
       font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: background 0.18s ease, transform 0.15s ease;
-    }
-    .monolith-btn-primary:hover { background: #3541ff; transform: translateY(-1px); }
-    .monolith-btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(160, 174, 255, 0.24);
-      background: rgba(255, 255, 255, 0.03);
-      color: #e2e8ff;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: border-color 0.18s ease, background 0.18s ease;
-    }
-    .monolith-btn-ghost:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
-    .monolith-grid {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 28px;
-    }
-    .monolith-col-title {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 9px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(148, 163, 214, 0.65);
-      margin-bottom: 12px;
+      color: rgba(180, 198, 255, 0.65);
+      margin-bottom: 6px;
     }
-    .monolith-col-desc {
-      font-size: 13px;
-      line-height: 1.65;
-      color: rgba(214, 220, 255, 0.72);
-      max-width: 310px;
+    .monolith-col-head {
+      font-family: var(--cond);
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 400;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 16px;
     }
     .monolith-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 11.5px;
-      color: rgba(214, 220, 255, 0.8);
-    }
-    .monolith-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.16s ease, transform 0.16s ease;
-    }
-    .monolith-links a:hover { color: #38bdf8; transform: translateX(3px); }
-    .monolith-horizon {
-      position: relative;
-      height: clamp(160px, 22vw, 250px);
-      overflow: hidden;
-      background: linear-gradient(180deg, #0b1140 0%, #14228a 55%, #1d2be0 100%);
-      border-top: 1px solid rgba(129, 140, 248, 0.25);
-    }
-    .monolith-horizon-img {
-      position: absolute;
-      inset: -18% 0;
-      width: 100%;
-      height: 136%;
-      object-fit: cover;
-      object-position: center 24%;
-      filter: grayscale(100%) contrast(1.22) brightness(0.72) blur(2.5px);
-      mix-blend-mode: luminosity;
-      opacity: 0.48;
-      will-change: transform;
-    }
-    .monolith-horizon-wash {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.16), transparent 62%),
-        linear-gradient(180deg, rgba(8, 10, 28, 0.72) 0%, rgba(16, 26, 118, 0.48) 50%, rgba(10, 14, 58, 0.86) 100%);
-      background-size: 6px 6px, 100% 100%, 100% 100%;
-      pointer-events: none;
-    }
-    .monolith-horizon-caption {
-      position: absolute;
-      left: clamp(20px, 4vw, 48px);
-      right: clamp(20px, 4vw, 48px);
-      bottom: 18px;
-      z-index: 2;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 9px;
       font-family: var(--mono);
       font-size: 10px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: rgba(226, 232, 255, 0.82);
+      color: rgba(226, 234, 255, 0.82);
     }
+    .monolith-links a {
+      display: inline-block;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .monolith-links a:hover { color: #7dd3fc; transform: translateX(3px); }
+
+    .monolith-bottom-bar {
+      display: grid;
+      grid-template-columns: 1.55fr repeat(4, 1fr);
+      align-items: center;
+      gap: 14px 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(145, 175, 255, 0.22);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(196, 210, 255, 0.74);
+    }
+    .monolith-socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .monolith-socials a {
+      color: rgba(235, 240, 255, 0.85);
+      display: inline-flex;
+      transition: color 0.16s ease, transform 0.16s ease;
+    }
+    .monolith-socials a:hover { color: #7dd3fc; transform: translateY(-2px); }
     .monolith-top-btn {
-      padding: 6px 13px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(4, 4, 36, 0.48);
-      backdrop-filter: blur(8px);
+      justify-self: end;
+      background: transparent;
+      border: none;
       color: #ffffff;
       cursor: pointer;
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 9.5px;
       letter-spacing: 0.08em;
-      transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
-    .monolith-top-btn:hover { background: rgba(255, 255, 255, 0.16); border-color: #ffffff; transform: translateY(-1px); }
-    @media (max-width: 760px) {
-      .monolith-grid { grid-template-columns: 1fr; gap: 22px; }
+    .monolith-top-btn:hover { color: #7dd3fc; }
+    @media (max-width: 960px) {
+      .monolith-dir-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
+      .monolith-brand-stamp { grid-column: 1 / -1; }
+      .monolith-bottom-bar { grid-template-columns: 1fr 1fr; }
+      .monolith-top-btn { justify-self: start; }
     }
 
     /* Local Preview Switcher */
@@ -1963,56 +1947,83 @@ const siteCfgJson = JSON.stringify(siteCfg);
         </div>
       </section>
 
-      <!-- MONUMENTAL CINEMATIC FOOTER -->
+      <!-- FULL ROYAL-COBALT EDITORIAL FOOTER (100% Fikri Bintang Identity) -->
       <footer class="monolith-footer curtain-page curtain-sheet curtain-z7" id="monolithFooter">
-        <div class="monolith-upper">
-          <div class="monolith-watermark" aria-hidden="true">
-            <span id="monolithWatermarkText">BINTANG</span>
-          </div>
-
-          <div class="monolith-cta-band">
-            <div>
-              <div class="monolith-avail"><span class="rail-pulse-dot"></span>Available for Backend Engineering &amp; Architecture</div>
-              <h2 class="monolith-headline">Membangun sistem backend yang cepat, aman, dan deterministik.</h2>
-            </div>
-            <div class="monolith-cta-btns">
-              <a class="monolith-btn-primary" href="mailto:fikbintang01@gmail.com">Email Me →</a>
-              <a class="monolith-btn-ghost" href="/assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf">Download CV ↓</a>
-            </div>
-          </div>
-
-          <div class="monolith-grid">
-            <div>
-              <div class="monolith-col-title">Identity &amp; Core Stack</div>
-              <p class="monolith-col-desc">Fikri Bintang Purnomo — Backend Developer berbasis di Tangerang, Indonesia. Fokus pada Go, Python (FastAPI), Node.js, PostgreSQL/pgvector, Redis, dan gRPC.</p>
-            </div>
-            <div>
-              <div class="monolith-col-title">Navigation</div>
-              <ul class="monolith-links">
-                <li><a href="#overview">→ Ringkasan</a></li>
-                <li><a href="#architecture">→ Arsitektur</a></li>
-                <li><a href="#systems">→ Sistem (11)</a></li>
-                <li><a href="#experience">→ Pengalaman</a></li>
-                <li><a href="#research">→ Riset &amp; Jurnal</a></li>
-              </ul>
-            </div>
-            <div>
-              <div class="monolith-col-title">Direct Channels</div>
-              <ul class="monolith-links">
-                <li><a href="https://github.com/FikriBintangx" target="_blank" rel="noopener">↗ GitHub (@FikriBintangx)</a></li>
-                <li><a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener">↗ LinkedIn</a></li>
-                <li><a href="https://wa.me/6281292870932" target="_blank" rel="noopener">↗ WhatsApp (+62 812-9287-0932)</a></li>
-                <li><a href="mailto:fikbintang01@gmail.com">✉ fikbintang01@gmail.com</a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="monolith-horizon" id="monolithHorizon">
+          <img class="monolith-horizon-img" id="monolithHorizonImg" src="/assets/foto-hero.png" alt="Fikri Bintang Purnomo" loading="lazy" />
+          <div class="monolith-horizon-wash"></div>
         </div>
 
-        <div class="monolith-horizon">
-          <img class="monolith-horizon-img" id="monolithHorizonImg" src="/assets/foto-hero.png" alt="" aria-hidden="true" loading="lazy" />
-          <div class="monolith-horizon-wash"></div>
-          <div class="monolith-horizon-caption">
-            <span>© 2026 FIKRI BINTANG PURNOMO · TANGERANG, ID</span>
+        <div class="monolith-watermark" aria-hidden="true">
+          <span id="monolithWatermarkText">Fikri Bintang</span>
+        </div>
+
+        <div class="monolith-body">
+          <div class="monolith-dir-grid">
+            <div class="monolith-brand-stamp">
+              <div class="monolith-emblem">FB<small>2026</small></div>
+              <div class="monolith-brand-sub">BACKEND SYSTEMS ENGINEER</div>
+            </div>
+
+            <div>
+              <div class="monolith-col-kicker">ENGINEERING</div>
+              <h3 class="monolith-col-head">Profile</h3>
+              <ul class="monolith-links">
+                <li><a href="#overview">RINGKASAN</a></li>
+                <li><a href="#architecture">ARSITEKTUR</a></li>
+                <li><a href="#systems">SISTEM (11)</a></li>
+                <li><a href="#experience">PENGALAMAN</a></li>
+                <li><a href="#research">RISET &amp; JURNAL</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="monolith-col-kicker">SYSTEMS</div>
+              <h3 class="monolith-col-head">Projects</h3>
+              <ul class="monolith-links">
+                <li><a href="#systems">SMARTOPS GRPC</a></li>
+                <li><a href="#systems">JURNALKU AI</a></li>
+                <li><a href="#systems">NOTESBRAIN RAG</a></li>
+                <li><a href="#systems">WAHANA API</a></li>
+                <li><a href="#systems">MARIMATCHA</a></li>
+                <li><a href="#systems">TIARAFINN</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="monolith-col-kicker">RESOURCES</div>
+              <h3 class="monolith-col-head">Connect</h3>
+              <ul class="monolith-links">
+                <li><a href="https://github.com/FikriBintangx" target="_blank" rel="noopener">GO TO GITHUB</a></li>
+                <li><a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener">GO TO LINKEDIN</a></li>
+                <li><a href="https://instagram.com/biru.css" target="_blank" rel="noopener">GO TO INSTAGRAM</a></li>
+                <li><a href="https://wa.me/6281292870932" target="_blank" rel="noopener">GO TO WHATSAPP</a></li>
+                <li><a href="mailto:fikbintang01@gmail.com">EMAIL FIKRI</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="monolith-col-kicker">DOCUMENTS</div>
+              <h3 class="monolith-col-head">Portal</h3>
+              <ul class="monolith-links">
+                <li><a href="/assets/cv-fikri-bintang.pdf" download="CV-Fikri-Bintang.pdf">UNDUH CV (PDF)</a></li>
+                <li><a href="/assets/porto-fikri-bintang.pdf" target="_blank" rel="noopener">PORTOFOLIO PDF</a></li>
+                <li><a href="/papers/01_bank_cybersecurity.pdf" target="_blank" rel="noopener">PAPER CYBERSEC</a></li>
+                <li><a href="/papers/02_rag_hybrid_search.pdf" target="_blank" rel="noopener">PAPER HYBRID RAG</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="monolith-bottom-bar">
+            <div class="monolith-socials">
+              <a href="https://github.com/FikriBintangx" target="_blank" rel="noopener" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+              <a href="https://www.linkedin.com/in/fikribintangpurnomo" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="https://instagram.com/biru.css" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <a href="mailto:fikbintang01@gmail.com" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+            </div>
+            <span>© 2026, FIKRI BINTANG PURNOMO</span>
+            <span>TANGERANG, ID</span>
+            <span>GO · PYTHON · PG16</span>
             <button type="button" class="monolith-top-btn" id="btnMonolithTop">BACK TO TOP ↑</button>
           </div>
         </div>
@@ -3281,6 +3292,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
 
       expEl.innerHTML = `
         <svg class="exp-const-svg" id="expConstSvg" aria-hidden="true">
+          <g id="expConstBranches"></g>
           <polyline class="exp-const-base" id="expConstBase" points="" />
           <polyline class="exp-const-ink" id="expConstInk" points="" />
           <g id="expConstStars"></g>
@@ -3314,8 +3326,9 @@ const siteCfgJson = JSON.stringify(siteCfg);
         });
       });
 
-      // Build Subtle Grey ASCII Constellation Polyline (gentle ±7px star offsets, never overly slanted)
+      // Build Orion-Style Constellation Star-Map (Triangulated Star Branches + 4-Point Glint Stars + Starfield Dust)
       const constSvg = document.getElementById('expConstSvg');
+      const branchGroup = document.getElementById('expConstBranches');
       const basePoly = document.getElementById('expConstBase');
       const inkPoly = document.getElementById('expConstInk');
       const starsGroup = document.getElementById('expConstStars');
@@ -3323,18 +3336,21 @@ const siteCfgJson = JSON.stringify(siteCfg);
       let starEls = [];
 
       function buildExpConstellation() {
-        if (!constSvg || !basePoly || !inkPoly || !starsGroup || !rows.length) return;
+        if (!constSvg || !branchGroup || !basePoly || !inkPoly || !starsGroup || !rows.length) return;
         const isMob = window.innerWidth <= 960;
-        const w = isMob ? 34 : 44;
-        const cx = w * 0.5;
-        const offsets = [0, 6, -5, 7, -4];
+        const w = isMob ? 36 : 64;
+        const xA = isMob ? 12 : 20;
+        const xB = isMob ? 24 : 44;
+        const xMid = Math.round((xA + xB) * 0.5);
         const totalH = Math.max(200, expEl.offsetHeight);
         constSvg.setAttribute('viewBox', `0 0 ${w} ${totalH}`);
         constSvg.style.height = totalH + 'px';
 
+        // Orion-inspired vertical constellation spine
+        const spineX = [xA + 2, xB - 2, xMid - 4, xB - 4, xA + 4];
         const pts = rows.map((r, i) => ({
-          x: Math.round(cx + (offsets[i % offsets.length] * (isMob ? 0.65 : 1))),
-          y: Math.round(r.offsetTop + Math.min(28, r.offsetHeight * 0.34))
+          x: spineX[i % spineX.length],
+          y: Math.round(r.offsetTop + Math.min(30, r.offsetHeight * 0.34))
         }));
 
         const ptStr = pts.map(p => `${p.x},${p.y}`).join(' ');
@@ -3344,18 +3360,45 @@ const siteCfgJson = JSON.stringify(siteCfg);
         inkPoly.style.strokeDasharray = `${pathLen}`;
         inkPoly.style.strokeDashoffset = `${pathLen}`;
 
-        const glyphs = ['✦', '✧', '+', '✧', '·'];
+        // Secondary Orion-like constellation branches & triangles
+        let branchMarkup = '';
+        let subStars = [];
+        for (let i = 0; i < pts.length - 1; i++) {
+          const p0 = pts[i], p1 = pts[i + 1];
+          const midY = Math.round((p0.y + p1.y) * 0.5);
+          const sideX = i % 2 === 0 ? (isMob ? 5 : 8) : (isMob ? 31 : 56);
+          branchMarkup += `<line class="exp-const-branch" x1="${p0.x}" y1="${p0.y}" x2="${sideX}" y2="${midY}" />`;
+          branchMarkup += `<line class="exp-const-branch" x1="${sideX}" y1="${midY}" x2="${p1.x}" y2="${p1.y}" />`;
+          subStars.push({ x: sideX, y: midY });
+        }
+        branchGroup.innerHTML = branchMarkup;
+
+        // Primary 4-point glint stars + secondary branch stars + ambient starfield dust
         let starsMarkup = '';
+        for (let d = 0; d < 18; d++) {
+          const dx = Math.round(((d * 29 + 11) % (w - 6)) + 3);
+          const dy = Math.round(((d * 67 + 17) % Math.max(40, totalH - 20)) + 10);
+          const dr = (d % 3 === 0) ? 1.15 : 0.75;
+          starsMarkup += `<circle class="exp-star-dust" cx="${dx}" cy="${dy}" r="${dr}" />`;
+        }
+        subStars.forEach(s => {
+          starsMarkup += `<circle class="exp-star-sub" cx="${s.x}" cy="${s.y}" r="${isMob ? 1.6 : 2.1}" />`;
+        });
         pts.forEach((p, i) => {
-          starsMarkup += `<text class="exp-const-star ${i === 0 ? 'is-lit' : ''}" x="${p.x}" y="${p.y}">${glyphs[i % glyphs.length]}</text>`;
-          if (i < pts.length - 1) {
-            const mx = (p.x + pts[i + 1].x) * 0.5 + (i % 2 === 0 ? -9 : 9);
-            const my = (p.y + pts[i + 1].y) * 0.5;
-            starsMarkup += `<text class="exp-const-dust" x="${mx}" y="${my}">·</text>`;
-          }
+          const sp = isMob ? 5.5 : 8;
+          const cr = isMob ? 2.2 : 3.0;
+          const hr = isMob ? 6 : 9;
+          starsMarkup += `
+            <g class="exp-star-group ${i === 0 ? 'is-lit' : ''}">
+              <circle class="exp-star-halo" cx="${p.x}" cy="${p.y}" r="${hr}" />
+              <line class="exp-star-spike" x1="${p.x - sp}" y1="${p.y}" x2="${p.x + sp}" y2="${p.y}" />
+              <line class="exp-star-spike" x1="${p.x}" y1="${p.y - sp}" x2="${p.x}" y2="${p.y + sp}" />
+              <circle class="exp-star-core" cx="${p.x}" cy="${p.y}" r="${cr}" />
+            </g>
+          `;
         });
         starsGroup.innerHTML = starsMarkup;
-        starEls = Array.from(starsGroup.querySelectorAll('.exp-const-star'));
+        starEls = Array.from(starsGroup.querySelectorAll('.exp-star-group'));
       }
 
       requestAnimationFrame(buildExpConstellation);
@@ -3568,6 +3611,23 @@ const siteCfgJson = JSON.stringify(siteCfg);
       btnMonolithTop.addEventListener('click', () => {
         if (window.lenis) window.lenis.scrollTo(0, { duration: 1.1 });
         else window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Interactive Hover Sway / Wobble on Footer Portrait Banner
+    const monolithHorizon = document.getElementById('monolithHorizon');
+    const monolithHorizonImg = document.getElementById('monolithHorizonImg');
+    if (monolithHorizon && monolithHorizonImg) {
+      monolithHorizon.addEventListener('pointermove', (e) => {
+        const r = monolithHorizon.getBoundingClientRect();
+        const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        monolithHorizonImg.style.animation = 'none';
+        monolithHorizonImg.style.transform = `translate3d(${(nx * -12).toFixed(1)}px, ${(ny * -8).toFixed(1)}px, 0) rotate(${(nx * 1.1).toFixed(2)}deg) scale(1.05)`;
+      });
+      monolithHorizon.addEventListener('pointerleave', () => {
+        monolithHorizonImg.style.animation = '';
+        monolithHorizonImg.style.transform = '';
       });
     }
 
