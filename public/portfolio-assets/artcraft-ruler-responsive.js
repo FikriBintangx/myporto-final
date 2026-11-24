@@ -48,7 +48,9 @@
     VW: 0, VH: 0,
     RAIL_W: 68,
     CW: 16,
-    RAIL_X: 0,       // center of the rail track
+    RAIL_X: 0,       // horizontal center of vertical labels on the rail
+    TRACK_TOP: 0,    // top edge of rail track (below navbar on tablet/mobile)
+    TRACK_H: 0,      // height of rail track
     TOP: 80,         // first top-right pile row (below the navbar)
     BOTTOM: 0,       // last bottom-right queue row
     ROW: 22,         // row pitch of queue / pile words
@@ -60,25 +62,35 @@
   function recalcLayout() {
     L.VW = window.innerWidth;
     L.VH = window.innerHeight;
-    L.RAIL_W = L.VW <= 600 ? 32 : (L.VW <= 1024 ? 44 : 68);
+    const isPhone = L.VW <= 600;
+    const isTablet = !isPhone && L.VW <= 1024;
+    L.RAIL_W = isPhone ? 28 : (isTablet ? 44 : 68);
 
-    const fsize = L.VW <= 600 ? 9.5 : (L.VW <= 1024 ? 11 : 13.5);
+    const fsize = isPhone ? 8.5 : (isTablet ? 10.5 : 13.5);
     const ctx = document.createElement('canvas').getContext('2d');
     ctx.font = `800 ${fsize}px 'Space Mono', ui-monospace, monospace`;
-    L.CW = Math.max(L.VW <= 600 ? 10 : 13, Math.ceil(ctx.measureText('M').width) + 2);
+    L.CW = Math.max(isPhone ? 9 : (isTablet ? 12 : 14), Math.ceil(ctx.measureText('M').width) + (isPhone ? 1 : 2));
 
-    L.RAIL_X = L.VW - L.RAIL_W / 2;
+    // Place vertical text in the clear lane left of the right-edge ticks so it never collides.
+    L.RAIL_X = isPhone
+      ? L.VW - L.RAIL_W + 9.5
+      : (isTablet ? L.VW - L.RAIL_W + 15 : L.VW - L.RAIL_W / 2);
 
     const nav = document.getElementById('site-nav');
-    const navBottom = nav ? clamp(nav.getBoundingClientRect().bottom, 0, 140) : 64;
+    const navBottom = nav ? clamp(Math.round(nav.getBoundingClientRect().bottom), 0, 120) : (L.VW <= 960 ? 48 : 64);
+    L.TRACK_TOP = (isPhone || isTablet) ? navBottom : 0;
+    L.TRACK_H = Math.max(120, L.VH - L.TRACK_TOP);
+
     L.ROW = L.CW + ROW_GAP;
     L.TOP = navBottom + 12 + L.ROW / 2;
-    L.BOTTOM = L.VH - (L.VW <= 600 ? 20 : 28);
-    L.ROW_END_X = L.VW - L.RAIL_W - (L.VW <= 600 ? 6 : 10);
+    L.BOTTOM = L.VH - (isPhone ? 20 : 28);
+    L.ROW_END_X = L.VW - L.RAIL_W - (isPhone ? 6 : 10);
 
     const root = document.documentElement.style;
     root.setProperty('--ruler-rail-w', L.RAIL_W + 'px');
     root.setProperty('--ruler-cw', L.CW + 'px');
+    root.setProperty('--ruler-nav-h', navBottom + 'px');
+    root.setProperty('--ruler-top', L.TRACK_TOP + 'px');
   }
 
   function currentScroll() {
@@ -203,10 +215,19 @@
 
     // Rail span shared by every section: just above the queue block, down from
     // just below the pile block. Values are the center of character 0.
-    railStartY() { return L.BOTTOM - (L.COUNT - 1) * L.ROW - L.ROW; }
+    // On phones, queue/pile rows are hidden so the active vertical label uses
+    // the full clear span between the navbar and bottom edge.
+    railStartY() {
+      if (L.VW <= 600) return L.VH - 24;
+      return L.BOTTOM - (L.COUNT - 1) * L.ROW - L.ROW;
+    }
     railEndY() {
+      const startY = this.railStartY();
+      if (L.VW <= 600) {
+        return Math.min(startY, L.TRACK_TOP + 20 + (this.N - 0.5) * L.CW);
+      }
       const pileBottom = L.TOP + (L.COUNT - 1) * L.ROW + L.ROW;
-      return Math.min(this.railStartY(), pileBottom + (this.N - 0.5) * L.CW);
+      return Math.min(startY, pileBottom + (this.N - 0.5) * L.CW);
     }
 
     render(sy) {
@@ -287,7 +308,7 @@
   function drawTicks(canvas, sy) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = L.RAIL_W;
-    const h = L.VH;
+    const h = L.TRACK_H || L.VH;
     const W = Math.round(w * dpr);
     const H = Math.round(h * dpr);
     if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
@@ -296,29 +317,30 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    const total = 100;
+    const total = w <= 36 ? 50 : 100;
     const step = h / total;
     const compact = w <= 36;
-    ctx.font = compact ? "800 7.5px 'Space Mono', monospace" : "800 8.5px 'Space Mono', monospace";
+    const showNumbers = w >= 54;
+    ctx.font = "800 8.5px 'Space Mono', monospace";
 
     for (let i = 0; i <= total; i++) {
       const y = i * step;
-      const major = i % 10 === 0;
-      const mid = !major && i % 5 === 0;
-      const len = major ? (compact ? 12 : 18) : mid ? (compact ? 7 : 11) : (compact ? 4 : 6);
-      const alpha = major ? 0.8 : mid ? 0.45 : 0.22;
-      const dark = isDarkAt(L.VW - 10, y, sy);
+      const major = compact ? (i % 5 === 0) : (i % 10 === 0);
+      const mid = !major && (compact ? false : (i % 5 === 0));
+      const len = major ? (compact ? 7 : (w < 54 ? 10 : 18)) : mid ? (w < 54 ? 6 : 11) : (compact ? 3 : 6);
+      const alpha = major ? 0.78 : mid ? 0.45 : 0.24;
+      const dark = isDarkAt(L.VW - Math.min(10, w / 2), L.TRACK_TOP + y, sy);
 
       ctx.strokeStyle = dark ? `rgba(255,255,255,${alpha})` : `rgba(11,37,69,${alpha})`;
-      ctx.lineWidth = major ? 1.5 : mid ? 1 : 0.6;
+      ctx.lineWidth = major ? (compact ? 1.2 : 1.5) : mid ? 1 : 0.6;
       ctx.beginPath();
       ctx.moveTo(w - len - 2, y);
       ctx.lineTo(w - 2, y);
       ctx.stroke();
 
-      if (major && i > 0 && i < total) {
+      if (showNumbers && major && i > 0 && i < total) {
         ctx.fillStyle = dark ? 'rgba(255,255,255,0.95)' : 'rgba(11,37,69,0.9)';
-        ctx.fillText(String(i).padStart(2, '0'), compact ? 3 : 5, y + 3);
+        ctx.fillText(String(i).padStart(2, '0'), 5, y + 3);
       }
     }
   }
@@ -354,10 +376,10 @@
       lastSy = sy;
 
       const p = clamp(sy / L.maxScroll, 0, 1);
-      const travel = Math.max(0, (ruler.clientHeight || L.VH) - 24);
+      const travel = Math.max(0, (L.TRACK_H || ruler.clientHeight || L.VH) - 24);
       const thumbY = p * travel;
       thumb.style.transform = `translate3d(0,${thumbY.toFixed(1)}px,0)`;
-      ruler.classList.toggle('ruler-dark', isDarkAt(L.VW - 20, thumbY + 12, sy));
+      ruler.classList.toggle('ruler-dark', isDarkAt(L.VW - Math.min(20, L.RAIL_W / 2), L.TRACK_TOP + thumbY + 12, sy));
 
       drawTicks(canvas, sy);
 
@@ -408,11 +430,19 @@
     let measurePending = 0;
     const scheduleMeasure = () => {
       cancelAnimationFrame(measurePending);
-      measurePending = requestAnimationFrame(measure);
+      measurePending = requestAnimationFrame(() => {
+        measure();
+        frame();
+      });
     };
     window.addEventListener('resize', scheduleMeasure);
+    window.addEventListener('orientationchange', scheduleMeasure);
     window.addEventListener('load', scheduleMeasure);
-    if ('ResizeObserver' in window) new ResizeObserver(scheduleMeasure).observe(document.body);
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(scheduleMeasure);
+      ro.observe(document.documentElement);
+      ro.observe(document.body);
+    }
     if (window.ScrollTrigger && window.ScrollTrigger.addEventListener) {
       window.ScrollTrigger.addEventListener('refresh', scheduleMeasure);
     }

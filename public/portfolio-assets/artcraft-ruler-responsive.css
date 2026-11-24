@@ -7,6 +7,8 @@
 :root {
   --ruler-rail-w: 68px;
   --ruler-cw: 16px;
+  --ruler-top: 0px;
+  --ruler-nav-h: 48px;
   --ruler-line: rgba(11, 37, 69, 0.14);
   --ruler-dim: #475569;
   --ruler-fg: #0B2545;
@@ -18,13 +20,15 @@
   :root {
     --ruler-rail-w: 44px;
     --ruler-cw: 13px;
+    --ruler-top: var(--ruler-nav-h, 56px);
   }
 }
 
 @media (max-width: 600px) {
   :root {
-    --ruler-rail-w: 32px;
-    --ruler-cw: 11px;
+    --ruler-rail-w: 28px;
+    --ruler-cw: 10px;
+    --ruler-top: var(--ruler-nav-h, 48px);
   }
 }
 
@@ -46,8 +50,9 @@
 .artcraft-ruler {
   position: fixed !important;
   right: 0 !important;
-  top: 0 !important;
+  top: var(--ruler-top, 0px) !important;
   bottom: 0 !important;
+  height: auto !important;
   width: var(--ruler-rail-w) !important;
   z-index: 999990 !important;
   pointer-events: auto !important;
@@ -211,8 +216,27 @@
   transition: color 0.15s ease, text-shadow 0.15s ease;
 }
 
-@media (max-width: 1024px) { .k-ch { font-size: 11px; } }
-@media (max-width: 600px)  { .k-ch { font-size: 9.5px; } }
+@media (max-width: 1024px) {
+  .k-ch { font-size: 10.5px; }
+  .hero,
+  .works-head,
+  .cards-stack-wrapper,
+  .research-callout-section,
+  .process-header,
+  .process-cards,
+  .about,
+  .experience-wrap,
+  .academic-shelf-section,
+  .contact,
+  .footer {
+    padding-right: calc(var(--ruler-rail-w) + clamp(0.75rem, 2.5vw, 1.5rem)) !important;
+  }
+}
+@media (max-width: 600px) {
+  .k-ch { font-size: 8.5px; letter-spacing: 0.01em; }
+  .ruler-thumb-line { left: 4px; width: calc(100% - 4px); }
+  .ruler-thumb::before { right: 2px; width: 5px; height: 5px; }
+}
 
 /* Light backdrop -> navy */
 .k-ch.k-dim    { color: #334155; }
