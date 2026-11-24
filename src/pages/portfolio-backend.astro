@@ -122,13 +122,20 @@ const siteCfgJson = JSON.stringify(siteCfg);
     html.light .exp-row.is-now::before { color: var(--cobalt); text-shadow: none; }
     html.light .exp-row:hover { background: rgba(31, 43, 255, 0.05); }
     html.light .rail-radar-card,
-    html.light .rail-radar-canvas-wrap { background: #ffffff; border-color: var(--line-strong); }
+    html.light .rail-radar-canvas-wrap { background: #ffffff; border-color: var(--line-strong); box-shadow: 0 8px 24px rgba(7, 9, 43, 0.06); }
     html.light .rail-skill-table { border-top-color: var(--line); color: var(--text-muted); }
     html.light .rail-skill-head { color: var(--text); }
-    html.light .rail-skill-row .dots { border-bottom-color: var(--line); }
-    html.light .rail-radar-foot { background: #f4f6fb; border-top-color: var(--line); color: var(--text); }
-    html.light .rail-collapsed-art { color: var(--cobalt); }
-    html.light .rail-telemetry b { color: #15803d; }
+    html.light .rail-skill-bar-track { background: rgba(15, 23, 84, 0.08); }
+    html.light .rail-radar-foot { background: #f8faff; border-top-color: var(--line); color: var(--text); }
+    html.light .rail-tab-btn { background: #f1f5fb; border-color: var(--line); color: var(--text-muted); }
+    html.light .rail-tab-btn.active { background: var(--cobalt); border-color: var(--cobalt); color: #ffffff; }
+    html.light .rail-pill-btn { background: #ffffff; border-color: var(--line-strong); color: var(--text-muted); }
+    html.light .rail-pill-btn:hover { border-color: var(--cobalt); color: var(--cobalt); background: rgba(31, 43, 255, 0.05); }
+    html.light .rail-bento-item { background: #ffffff; border-color: var(--line-strong); }
+    html.light .rail-bento-val { color: var(--text); }
+    html.light .rail-bento-val.ok { color: #15803d; }
+    html.light .rail-panel-head { border-bottom-color: var(--line); }
+    html.light .rail-scroll-track { background: rgba(15, 23, 84, 0.12); }
     html.light .preview-bar { background: rgba(255, 255, 255, 0.94); box-shadow: 0 10px 28px rgba(7, 9, 43, 0.12); }
     html.light .avatar-modal { background: rgba(244, 246, 251, 0.84); }
     html.light .avatar-modal-card { background: #ffffff; box-shadow: 0 24px 60px rgba(7, 9, 43, 0.18); }
@@ -686,91 +693,417 @@ const siteCfgJson = JSON.stringify(siteCfg);
     .paper-card p { font-size: 13.5px; font-weight: 300; color: var(--text-muted); flex: 1; }
     .paper-cta { font-family: var(--cond); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #8c9bff; }
 
-    /* RIGHT RAIL — Backend Dev ASCII Art Panel (Collapsible/Expandable) */
+    /* RIGHT RAIL — Precision Telemetry & Skill Radar Dock */
     .right-rail {
       position: sticky;
       top: 0;
       height: 100vh;
       border-left: 1px solid var(--line);
       background:
-        radial-gradient(circle at 50% 30%, rgba(31, 43, 255, 0.14), transparent 60%),
+        radial-gradient(circle at 50% 18%, rgba(56, 189, 248, 0.08), transparent 52%),
+        radial-gradient(circle at 50% 85%, rgba(31, 43, 255, 0.12), transparent 55%),
         var(--bg-sidebar);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px 8px;
+      padding: 14px 8px 16px;
       gap: 14px;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
     }
+    .right-rail::-webkit-scrollbar { display: none; }
+    .shell.rail-open .right-rail {
+      align-items: stretch;
+      padding: 14px 14px 16px;
+      gap: 12px;
+    }
+
+    /* Header bar inside Right Rail */
+    .rail-panel-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .shell.rail-open .rail-panel-head {
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .rail-head-meta {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .shell.rail-open .rail-head-meta { display: flex; }
+    .rail-head-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .rail-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(56, 229, 157, 0.1);
+      border: 1px solid rgba(56, 229, 157, 0.25);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #38e59d;
+      letter-spacing: 0.04em;
+    }
+    .rail-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38e59d;
+      box-shadow: 0 0 8px rgba(56, 229, 157, 0.85);
+      animation: railPulse 2.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes railPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+
     .rail-toggle {
-      background: #020218; border: 1px solid var(--line-strong); color: var(--text-muted);
-      width: 28px; height: 28px; border-radius: 3px; cursor: pointer;
-      display: grid; place-items: center; font-family: var(--mono); font-size: 12px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line-strong);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.15s ease;
     }
-    .rail-toggle:hover { color: var(--white); border-color: var(--white); }
-    .rail-collapsed-art {
-      font-family: var(--mono); font-size: 9px; line-height: 1.25; color: rgba(140, 155, 255, 0.65);
-      white-space: pre; text-align: center; user-select: none;
+    .rail-toggle:hover {
+      color: var(--white);
+      border-color: rgba(56, 189, 248, 0.55);
+      background: rgba(56, 189, 248, 0.1);
     }
+    .rail-toggle:active { transform: scale(0.95); }
+
+    /* Collapsed Dock Stack */
+    .rail-collapsed-dock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      flex: 1;
+      padding-top: 6px;
+    }
+    .shell.rail-open .rail-collapsed-dock { display: none; }
+    .rail-status-mini {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 0 8px;
+      border-bottom: 1px solid var(--line);
+      width: 32px;
+    }
+    .rail-status-mini span {
+      font-family: var(--mono);
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #38e59d;
+    }
+    .rail-pill-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+    .rail-pill-btn {
+      width: 34px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, transform 0.15s ease;
+    }
+    .rail-pill-btn:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateX(-1px);
+    }
+    .rail-scroll-track {
+      width: 2px;
+      flex: 1;
+      min-height: 48px;
+      max-height: 150px;
+      margin: 6px 0;
+      background: rgba(160, 168, 255, 0.14);
+      border-radius: 999px;
+      position: relative;
+      overflow: visible;
+    }
+    .rail-scroll-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, #38bdf8, #6366f1);
+      border-radius: 999px;
+    }
+    .rail-scroll-knob {
+      position: absolute;
+      left: 50%;
+      top: 0%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.85);
+      transform: translate(-50%, -50%);
+    }
+
+    /* Expanded Panel */
     .rail-expanded-box {
-      display: none; width: 100%; flex: 1; flex-direction: column; gap: 12px; padding: 4px 6px;
+      display: none;
+      width: 100%;
+      flex: 1;
+      flex-direction: column;
+      gap: 12px;
     }
-    .shell.rail-open .rail-collapsed-art { display: none; }
     .shell.rail-open .rail-expanded-box { display: flex; }
+
     .rail-radar-card {
-      background: #05050a;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 4px;
+      background: linear-gradient(180deg, rgba(11, 13, 46, 0.92) 0%, rgba(6, 7, 29, 0.96) 100%);
+      border: 1px solid rgba(160, 168, 255, 0.18);
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 14px 32px rgba(0, 0, 0, 0.36);
     }
+    .rail-radar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px 6px;
+      gap: 6px;
+    }
+    .rail-radar-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .rail-tab-group {
+      display: inline-flex;
+      gap: 4px;
+    }
+    .rail-tab-btn {
+      padding: 3px 7px;
+      border-radius: 5px;
+      border: 1px solid rgba(160, 168, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .rail-tab-btn:hover { color: var(--white); border-color: rgba(160, 168, 255, 0.35); }
+    .rail-tab-btn.active {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: rgba(56, 189, 248, 0.55);
+      color: #38bdf8;
+    }
+
     .rail-radar-canvas-wrap {
       width: 100%;
-      height: 235px;
-      background: #05050a;
+      height: 210px;
+      background: transparent;
       position: relative;
     }
     .rail-radar-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+
     .rail-skill-table {
-      padding: 10px 14px 12px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding: 10px 12px 12px;
+      border-top: 1px solid rgba(160, 168, 255, 0.12);
       font-family: var(--mono);
       font-size: 10.5px;
-      line-height: 1.75;
-      color: #a1a1aa;
+      line-height: 1.5;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-    .rail-skill-head { color: #f4f4f5; font-weight: 600; margin-bottom: 4px; display: flex; justify-content: space-between; }
-    .rail-skill-legend { display: flex; gap: 12px; font-size: 10px; margin-bottom: 6px; }
-    .lg-a { color: #38bdf8; } .lg-b { color: #f59e0b; }
-    .rail-skill-row { display: grid; grid-template-columns: 76px 1fr 34px 34px 36px; align-items: center; gap: 4px; }
-    .rail-skill-row .dots { border-bottom: 1px dotted rgba(255,255,255,0.14); height: 1px; }
-    .v-a { color: #38bdf8; text-align: right; font-weight: 600; }
-    .v-b { color: #f59e0b; text-align: right; font-weight: 600; }
-    .v-pos { color: #4ade80; text-align: right; }
-    .v-neg { color: #f87171; text-align: right; }
+    .rail-skill-head {
+      color: var(--white);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+    .rail-skill-legend {
+      display: flex;
+      gap: 12px;
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+    .rail-skill-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .lg-dot { width: 6px; height: 6px; border-radius: 2px; display: inline-block; }
+    .lg-a { color: #38bdf8; } .lg-a .lg-dot { background: #38bdf8; }
+    .lg-b { color: #a5b4fc; } .lg-b .lg-dot { background: #818cf8; }
+
+    .rail-skill-row {
+      display: grid;
+      grid-template-columns: 64px 1fr 24px 24px 36px;
+      align-items: center;
+      gap: 6px;
+    }
+    .rail-skill-name { color: var(--text-muted); font-size: 10px; }
+    .rail-skill-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+    .rail-skill-bar-track {
+      width: 100%;
+      height: 3.5px;
+      border-radius: 999px;
+      background: rgba(160, 168, 255, 0.1);
+      overflow: hidden;
+    }
+    .rail-skill-bar-a { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0284c7, #38bdf8); }
+    .rail-skill-bar-b { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #4f46e5, #818cf8); }
+    .v-a { color: #38bdf8; text-align: right; font-weight: 600; font-size: 10px; }
+    .v-b { color: #a5b4fc; text-align: right; font-weight: 500; font-size: 10px; }
+    .v-delta {
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 600;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .v-pos { color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+    .v-neg { color: #f87171; background: rgba(248, 113, 113, 0.1); }
+
+    .rail-skill-avg {
+      margin-top: 4px;
+      padding-top: 7px;
+      border-top: 1px solid rgba(160, 168, 255, 0.12);
+      display: grid;
+      grid-template-columns: 64px 1fr 24px 24px 36px;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+    }
+
     .rail-radar-foot {
-      padding: 8px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: var(--sans); font-size: 11px; color: #d4d4d8; background: #07070d;
+      padding: 8px 12px;
+      border-top: 1px solid rgba(160, 168, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.02);
     }
-    .rail-radar-foot span:last-child { font-family: var(--mono); font-size: 10px; color: #71717a; }
-    .rail-telemetry {
-      background: #020218; border: 1px solid var(--line); border-radius: 3px;
-      padding: 10px; font-family: var(--mono); font-size: 10px; line-height: 1.7; color: var(--text-muted);
+    .rail-radar-foot span:last-child { font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+
+    /* 2x2 Bento System Telemetry Grid */
+    .rail-telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
     }
-    .rail-telemetry b { color: #38e59d; font-weight: 600; }
-    .rail-text {
-      writing-mode: vertical-rl;
-      font-family: var(--cond);
-      font-size: 11.5px;
-      letter-spacing: 0.14em;
+    .rail-bento-item {
+      background: rgba(9, 11, 42, 0.85);
+      border: 1px solid rgba(160, 168, 255, 0.15);
+      border-radius: 10px;
+      padding: 9px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .rail-bento-item:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(14, 17, 58, 0.92);
+    }
+    .rail-bento-k {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .shell.rail-open .rail-text { writing-mode: horizontal-tb; text-align: center; }
+    .rail-bento-val {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rail-bento-val.ok { color: #38e59d; }
+
+    .rail-text {
+      writing-mode: vertical-rl;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(179, 183, 220, 0.52);
+      margin-top: auto;
+      padding-top: 8px;
+    }
+    .shell.rail-open .rail-text {
+      writing-mode: horizontal-tb;
+      text-align: center;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      padding-top: 4px;
+    }
 
     /* Local Preview Switcher */
     .preview-bar {
@@ -1105,45 +1438,74 @@ const siteCfgJson = JSON.stringify(siteCfg);
       </section>
     </main>
 
-    <!-- RIGHT RAIL — Backend Server ASCII Art -->
+    <!-- RIGHT RAIL — Precision Telemetry & Skill Radar Dock -->
     <aside class="right-rail" id="rightRail">
-      <button type="button" class="rail-toggle" id="btnRailToggle" title="Toggle Backend ASCII Panel">←</button>
-      <pre class="rail-collapsed-art" id="railMiniArt" aria-hidden="true">┌──┐
-│◉◉│
-├──┤
-│▓▓│
-├──┤
-│░░│
-├──┤
-│◉░│
-└──┘
- ┆
-┌──┐
-│PG│
-└──┘
- ┆
-┌──┐
-│GO│
-└──┘</pre>
+      <div class="rail-panel-head">
+        <button type="button" class="rail-toggle" id="btnRailToggle" title="Toggle System Telemetry & Skill Radar" aria-label="Toggle System Telemetry Panel">←</button>
+        <div class="rail-head-meta">
+          <span class="rail-head-title">System Telemetry</span>
+          <span class="rail-live-pill"><span class="rail-pulse-dot"></span>11ms</span>
+        </div>
+      </div>
+
+      <div class="rail-collapsed-dock" id="railCollapsedDock">
+        <div class="rail-status-mini" title="Backend Node Online">
+          <span class="rail-pulse-dot"></span>
+          <span>UP</span>
+        </div>
+        <div class="rail-pill-stack">
+          <button type="button" class="rail-pill-btn" data-open-rail="0" title="Core API & Systems">GO</button>
+          <button type="button" class="rail-pill-btn" data-open-rail="1" title="PostgreSQL & pgvector">PG</button>
+          <button type="button" class="rail-pill-btn" data-open-rail="1" title="Redis Caching & Rate Limit">RD</button>
+          <button type="button" class="rail-pill-btn" data-open-rail="2" title="Security & Load Testing">K6</button>
+        </div>
+        <div class="rail-scroll-track" aria-hidden="true">
+          <div class="rail-scroll-fill" id="railScrollFill"></div>
+          <div class="rail-scroll-knob" id="railScrollKnob"></div>
+        </div>
+      </div>
+
       <div class="rail-expanded-box">
         <div class="rail-radar-card">
+          <div class="rail-radar-top">
+            <span class="rail-radar-label">Skill Matrix</span>
+            <div class="rail-tab-group" id="railTabGroup">
+              <button type="button" class="rail-tab-btn active" data-radar-tab="0">Core</button>
+              <button type="button" class="rail-tab-btn" data-radar-tab="1">Data</button>
+              <button type="button" class="rail-tab-btn" data-radar-tab="2">Sec</button>
+            </div>
+          </div>
           <div class="rail-radar-canvas-wrap">
             <canvas id="railRadarCanvas"></canvas>
           </div>
           <div class="rail-skill-table" id="railSkillTable"></div>
           <div class="rail-radar-foot">
-            <span>Radar Skill Profile</span>
-            <span id="radarProfileTag">Live Data</span>
+            <span>Capability Index</span>
+            <span id="radarProfileTag">Auto · 1/3</span>
           </div>
         </div>
-        <div class="rail-telemetry">
-          <div>NODE <b>fikribn-be-01</b></div>
-          <div>API  <b>200 OK · 11ms</b></div>
-          <div>DB   <b>PG16 + pgvector</b></div>
-          <div>MEM  <b>REDIS CACHE HIT 96%</b></div>
+
+        <div class="rail-telemetry-grid">
+          <div class="rail-bento-item">
+            <span class="rail-bento-k"><span class="rail-pulse-dot" style="width:5px;height:5px;"></span>NODE</span>
+            <span class="rail-bento-val">fikribn-be-01</span>
+          </div>
+          <div class="rail-bento-item">
+            <span class="rail-bento-k">API STATUS</span>
+            <span class="rail-bento-val ok">200 OK · 11ms</span>
+          </div>
+          <div class="rail-bento-item">
+            <span class="rail-bento-k">DATABASE</span>
+            <span class="rail-bento-val">PG16 + pgvec</span>
+          </div>
+          <div class="rail-bento-item">
+            <span class="rail-bento-k">REDIS CACHE</span>
+            <span class="rail-bento-val ok">96.4% HIT</span>
+          </div>
         </div>
       </div>
-      <div class="rail-text">// FIKRI BINTANG · BACKEND 2026</div>
+
+      <div class="rail-text">FIKRI BINTANG · 2026</div>
     </aside>
   </div>
 
@@ -1270,7 +1632,16 @@ const siteCfgJson = JSON.stringify(siteCfg);
       return probe < navItems[0].secTop ? navItems[0].linkCenterY : navItems[navItems.length - 1].linkCenterY;
     }
 
+    const railScrollFill = document.getElementById('railScrollFill');
+    const railScrollKnob = document.getElementById('railScrollKnob');
+
     function updateRulerVisuals(scrollY, immediate = false) {
+      if (railScrollFill && railScrollKnob) {
+        const maxS = Math.max(1, (window.lenis && window.lenis.limit) || (document.documentElement.scrollHeight - window.innerHeight));
+        const pct = Math.max(0, Math.min(100, (scrollY / maxS) * 100));
+        railScrollFill.style.height = pct.toFixed(1) + '%';
+        railScrollKnob.style.top = pct.toFixed(1) + '%';
+      }
       if (!navItems.length) return;
       targetNeedleY = computeNeedleTarget(scrollY);
       if (immediate) currentNeedleY = targetNeedleY;
@@ -1914,7 +2285,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
     const radarProfileTag = document.getElementById('radarProfileTag');
     let asciiT = 0;
 
-    // High-DPI Dual-Polygon Colored ASCII Radar Skill Profile (Sky Blue + Amber + Violet Overlap)
+    // Crisp Vector Dual-Layer Skill Radar (Sky Blue + Indigo) with Interactive Profile Tabs
     const radarLabels = ['API', 'Backend', 'DevOps', 'Data', 'Security', 'Testing'];
     const radarSets = [
       { labelA: 'Core API', labelB: 'Systems Ops', a: [92, 95, 78, 90, 84, 82], b: [76, 74, 92, 85, 91, 88] },
@@ -1922,40 +2293,75 @@ const siteCfgJson = JSON.stringify(siteCfg);
       { labelA: 'Security', labelB: 'Fullstack', a: [82, 86, 85, 78, 95, 90], b: [90, 92, 74, 86, 72, 80] }
     ];
     let lastRadarTableIdx = -1;
+    let lockedRadarTab = null;
+
+    const railTabBtns = Array.from(document.querySelectorAll('[data-radar-tab]'));
+    railTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.radarTab);
+        lockedRadarTab = (lockedRadarTab === idx) ? null : idx;
+        railTabBtns.forEach(b => b.classList.toggle('active', Number(b.dataset.radarTab) === (lockedRadarTab ?? idx)));
+        lastRadarTableIdx = -1;
+        renderRadarMorph(asciiT);
+      });
+    });
+
+    document.querySelectorAll('[data-open-rail]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.openRail);
+        lockedRadarTab = idx;
+        railTabBtns.forEach(b => b.classList.toggle('active', Number(b.dataset.radarTab) === idx));
+        const shell = document.getElementById('portalShell');
+        const toggleBtn = document.getElementById('btnRailToggle');
+        if (shell && !shell.classList.contains('rail-open')) {
+          shell.classList.add('rail-open');
+          if (toggleBtn) toggleBtn.textContent = '→';
+          if (typeof syncAfterLayout === 'function') syncAfterLayout();
+        }
+        lastRadarTableIdx = -1;
+        setTimeout(() => renderRadarMorph(asciiT), 60);
+      });
+    });
 
     function updateSkillTable(setIdx, valsA, valsB) {
       if (!railSkillTable) return;
       const s = radarSets[setIdx];
       const avgA = Math.round(valsA.reduce((p, c) => p + c, 0) / valsA.length);
       const avgB = Math.round(valsB.reduce((p, c) => p + c, 0) / valsB.length);
+      const avgD = avgA - avgB;
+      const avgDs = (avgD >= 0 ? '+' : '') + avgD;
       const rows = radarLabels.map((lbl, i) => {
         const va = Math.round(valsA[i]), vb = Math.round(valsB[i]);
         const d = va - vb;
         const ds = (d >= 0 ? '+' : '') + d;
         return `<div class="rail-skill-row">
-          <span>${lbl}</span><span class="dots"></span>
+          <span class="rail-skill-name">${lbl}</span>
+          <div class="rail-skill-bars">
+            <div class="rail-skill-bar-track"><div class="rail-skill-bar-a" style="width:${va}%"></div></div>
+            <div class="rail-skill-bar-track"><div class="rail-skill-bar-b" style="width:${vb}%"></div></div>
+          </div>
           <span class="v-a">${va}</span><span class="v-b">${vb}</span>
-          <span class="${d >= 0 ? 'v-pos' : 'v-neg'}">${ds}</span>
+          <span class="v-delta ${d >= 0 ? 'v-pos' : 'v-neg'}">${ds}</span>
         </div>`;
       }).join('');
       railSkillTable.innerHTML = `
-        <div class="rail-skill-head"><span>Skill profile</span><span style="color:#71717a;">${setIdx + 1}/3</span></div>
-        <div class="rail-skill-legend"><span class="lg-a">■ ${s.labelA}</span><span class="lg-b">■ ${s.labelB}</span></div>
+        <div class="rail-skill-head">
+          <span>Benchmark Matrix</span>
+          <span style="color:var(--text-dim); font-size:9.5px;">${setIdx + 1} / 3</span>
+        </div>
+        <div class="rail-skill-legend">
+          <span class="lg-a"><i class="lg-dot"></i>${s.labelA}</span>
+          <span class="lg-b"><i class="lg-dot"></i>${s.labelB}</span>
+        </div>
         ${rows}
-        <div class="rail-skill-row" style="margin-top:6px; padding-top:4px; border-top:1px dotted rgba(255,255,255,0.12);">
-          <span style="color:#71717a;">avg</span><span></span>
-          <span class="v-a">${avgA}</span><span class="v-b">${avgB}</span><span></span>
+        <div class="rail-skill-avg">
+          <span style="color:var(--text-dim); text-transform:uppercase; font-size:9px; letter-spacing:0.08em;">AVG</span>
+          <span></span>
+          <span class="v-a">${avgA}</span>
+          <span class="v-b">${avgB}</span>
+          <span class="v-delta ${avgD >= 0 ? 'v-pos' : 'v-neg'}">${avgDs}</span>
         </div>
       `;
-    }
-
-    function pointInPoly(px, py, verts) {
-      let inside = false;
-      for (let i = 0, j = verts.length - 1; i < verts.length; j = i++) {
-        const xi = verts[i].x, yi = verts[i].y, xj = verts[j].x, yj = verts[j].y;
-        if (((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi + 1e-6) + xi)) inside = !inside;
-      }
-      return inside;
     }
 
     function renderRadarMorph(t) {
@@ -1972,41 +2378,60 @@ const siteCfgJson = JSON.stringify(siteCfg);
       }
       railRadarCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const light = isLightMode();
-      railRadarCtx.fillStyle = light ? '#ffffff' : '#05050a';
-      railRadarCtx.fillRect(0, 0, w, h);
+      railRadarCtx.clearRect(0, 0, w, h);
 
-      const phase = (t * 0.22) % radarSets.length;
-      const i0 = Math.floor(phase);
-      const i1 = (i0 + 1) % radarSets.length;
-      const frac = phase - i0;
-      const ease = frac < 0.65 ? 0 : Math.pow((frac - 0.65) / 0.35, 2) * (3 - 2 * ((frac - 0.65) / 0.35));
-
-      const valsA = radarSets[i0].a.map((v, k) => v + (radarSets[i1].a[k] - v) * ease);
-      const valsB = radarSets[i0].b.map((v, k) => v + (radarSets[i1].b[k] - v) * ease);
+      let i0, valsA, valsB, ease = 0;
+      if (lockedRadarTab !== null) {
+        i0 = lockedRadarTab;
+        valsA = radarSets[i0].a;
+        valsB = radarSets[i0].b;
+      } else {
+        const phase = (t * 0.20) % radarSets.length;
+        i0 = Math.floor(phase);
+        const i1 = (i0 + 1) % radarSets.length;
+        const frac = phase - i0;
+        ease = frac < 0.7 ? 0 : Math.pow((frac - 0.7) / 0.3, 2) * (3 - 2 * ((frac - 0.7) / 0.3));
+        valsA = radarSets[i0].a.map((v, k) => v + (radarSets[i1].a[k] - v) * ease);
+        valsB = radarSets[i0].b.map((v, k) => v + (radarSets[i1].b[k] - v) * ease);
+        railTabBtns.forEach(b => b.classList.toggle('active', Number(b.dataset.radarTab) === i0));
+      }
 
       if (i0 !== lastRadarTableIdx || ease > 0) {
         lastRadarTableIdx = i0;
         updateSkillTable(i0, valsA, valsB);
       }
-      if (radarProfileTag) radarProfileTag.textContent = `Live Data · ${i0 + 1}/3`;
+      if (radarProfileTag) {
+        radarProfileTag.textContent = (lockedRadarTab !== null ? 'Pinned · ' : 'Auto · ') + `${i0 + 1}/3`;
+      }
 
-      const cx = w * 0.5, cy = h * 0.51;
-      const maxR = Math.min(w, h) * 0.35;
+      const cx = w * 0.5, cy = h * 0.52;
+      const maxR = Math.min(w, h) * 0.36;
 
-      // Subtle dashed hexagonal web rings
-      railRadarCtx.fillStyle = 'rgba(148, 163, 184, 0.26)';
-      for (let ring = 1; ring <= 3; ring++) {
-        const rr = (maxR * ring) / 3;
+      // Clean concentric hexagonal web rings + radial spokes
+      railRadarCtx.lineWidth = 1;
+      for (let ring = 1; ring <= 4; ring++) {
+        const rr = (maxR * ring) / 4;
+        railRadarCtx.beginPath();
         for (let a = 0; a < 6; a++) {
-          const a0 = (a * Math.PI) / 3 - Math.PI / 2;
-          const a1 = ((a + 1) * Math.PI) / 3 - Math.PI / 2;
-          for (let s = 0; s < 10; s++) {
-            const u = s / 10;
-            const px = cx + (Math.cos(a0) * (1 - u) + Math.cos(a1) * u) * rr;
-            const py = cy + (Math.sin(a0) * (1 - u) + Math.sin(a1) * u) * rr;
-            railRadarCtx.fillRect(Math.round(px), Math.round(py), 1.5, 1.5);
-          }
+          const ang = (a * Math.PI) / 3 - Math.PI / 2;
+          const px = cx + Math.cos(ang) * rr;
+          const py = cy + Math.sin(ang) * rr;
+          if (a === 0) railRadarCtx.moveTo(px, py);
+          else railRadarCtx.lineTo(px, py);
         }
+        railRadarCtx.closePath();
+        railRadarCtx.strokeStyle = light
+          ? `rgba(15, 23, 84, ${ring === 4 ? 0.16 : 0.08})`
+          : `rgba(160, 168, 255, ${ring === 4 ? 0.22 : 0.1})`;
+        railRadarCtx.stroke();
+      }
+      for (let a = 0; a < 6; a++) {
+        const ang = (a * Math.PI) / 3 - Math.PI / 2;
+        railRadarCtx.beginPath();
+        railRadarCtx.moveTo(cx, cy);
+        railRadarCtx.lineTo(cx + Math.cos(ang) * maxR, cy + Math.sin(ang) * maxR);
+        railRadarCtx.strokeStyle = light ? 'rgba(15, 23, 84, 0.08)' : 'rgba(160, 168, 255, 0.1)';
+        railRadarCtx.stroke();
       }
 
       const toVerts = (arr) => arr.map((v, a) => {
@@ -2017,51 +2442,47 @@ const siteCfgJson = JSON.stringify(siteCfg);
       const vA = toVerts(valsA);
       const vB = toVerts(valsB);
 
-      // High-density micro-block ASCII matrix fill (Sky Blue + Amber + Violet Overlap)
-      const step = 5;
-      for (let y = Math.floor(cy - maxR - 4); y <= Math.ceil(cy + maxR + 4); y += step) {
-        for (let x = Math.floor(cx - maxR - 4); x <= Math.ceil(cx + maxR + 4); x += step) {
-          const inA = pointInPoly(x, y, vA);
-          const inB = pointInPoly(x, y, vB);
-          if (inA && inB) {
-            railRadarCtx.fillStyle = '#a78bfa';
-            railRadarCtx.fillRect(x - 1.5, y - 1.5, 3.2, 3.2);
-          } else if (inA) {
-            railRadarCtx.fillStyle = 'rgba(56, 189, 248, 0.82)';
-            railRadarCtx.fillRect(x - 1, y - 1, 2.2, 2.2);
-          } else if (inB) {
-            railRadarCtx.fillStyle = 'rgba(245, 158, 11, 0.82)';
-            railRadarCtx.fillRect(x - 1, y - 1, 2.2, 2.2);
-          }
-        }
-      }
+      const drawPoly = (verts, stroke, fillTop, fillBot, dashed) => {
+        const grad = railRadarCtx.createLinearGradient(cx, cy - maxR, cx, cy + maxR);
+        grad.addColorStop(0, fillTop);
+        grad.addColorStop(1, fillBot);
 
-      // Crisp dotted polygon borders + glowing vertices
-      const drawBorder = (verts, color) => {
-        railRadarCtx.fillStyle = color;
-        for (let i = 0; i < verts.length; i++) {
-          const p0 = verts[i], p1 = verts[(i + 1) % verts.length];
-          for (let s = 0; s <= 18; s++) {
-            const u = s / 18;
-            railRadarCtx.fillRect(p0.x * (1 - u) + p1.x * u - 1, p0.y * (1 - u) + p1.y * u - 1, 2, 2);
-          }
+        railRadarCtx.save();
+        railRadarCtx.beginPath();
+        verts.forEach((p, i) => (i === 0 ? railRadarCtx.moveTo(p.x, p.y) : railRadarCtx.lineTo(p.x, p.y)));
+        railRadarCtx.closePath();
+        railRadarCtx.fillStyle = grad;
+        railRadarCtx.fill();
+
+        if (dashed) railRadarCtx.setLineDash([3, 3]);
+        railRadarCtx.strokeStyle = stroke;
+        railRadarCtx.lineWidth = dashed ? 1.4 : 1.8;
+        railRadarCtx.stroke();
+        railRadarCtx.restore();
+
+        verts.forEach(p => {
           railRadarCtx.beginPath();
-          railRadarCtx.arc(p0.x, p0.y, 3.2, 0, Math.PI * 2);
+          railRadarCtx.arc(p.x, p.y, dashed ? 2.4 : 3.0, 0, Math.PI * 2);
+          railRadarCtx.fillStyle = stroke;
           railRadarCtx.fill();
-        }
+          railRadarCtx.lineWidth = 1.2;
+          railRadarCtx.strokeStyle = light ? '#ffffff' : '#080924';
+          railRadarCtx.stroke();
+        });
       };
-      drawBorder(vB, '#f59e0b');
-      drawBorder(vA, '#38bdf8');
+
+      drawPoly(vB, '#818cf8', 'rgba(129, 140, 248, 0.22)', 'rgba(99, 102, 241, 0.05)', true);
+      drawPoly(vA, '#38bdf8', 'rgba(56, 189, 248, 0.28)', 'rgba(2, 132, 199, 0.06)', false);
 
       // Crisp axis labels
-      railRadarCtx.font = '600 10px "IBM Plex Mono", monospace';
-      railRadarCtx.fillStyle = light ? '#07092b' : '#f4f4f5';
+      railRadarCtx.font = '600 9.5px "IBM Plex Mono", monospace';
+      railRadarCtx.fillStyle = light ? '#3f456e' : '#cbd5e1';
       railRadarCtx.textAlign = 'center';
       railRadarCtx.textBaseline = 'middle';
       radarLabels.forEach((lbl, a) => {
         const ang = (a * Math.PI) / 3 - Math.PI / 2;
         const lx = cx + Math.cos(ang) * (maxR + 18);
-        const ly = cy + Math.sin(ang) * (maxR + 16);
+        const ly = cy + Math.sin(ang) * (maxR + 15);
         railRadarCtx.fillText(lbl, lx, ly);
       });
     }
