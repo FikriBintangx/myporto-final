@@ -1310,9 +1310,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
     }
     .curtain-sheet {
       position: sticky;
-      background: rgba(5, 6, 36, 0.84);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      background: var(--bg);
       margin-left: calc(clamp(16px, 4.5vw, 68px) * -1);
       margin-right: calc(clamp(16px, 4.5vw, 68px) * -1);
       padding-left: clamp(16px, 4.5vw, 68px);
@@ -1320,44 +1318,38 @@ const siteCfgJson = JSON.stringify(siteCfg);
       border-top: none !important;
       border-radius: 0 !important;
       box-shadow:
-        0 -56px 110px 6px rgba(0, 0, 10, 0.94),
-        0 -22px 48px rgba(0, 0, 16, 0.82),
-        0 -6px 18px rgba(0, 0, 20, 0.65);
+        0 -48px 96px -6px rgba(0, 0, 12, 0.78),
+        0 -16px 36px rgba(0, 0, 16, 0.52);
     }
     .curtain-sheet::before {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      top: -140px;
-      height: 140px;
+      top: -150px;
+      height: 150px;
       pointer-events: none;
       background: linear-gradient(
         180deg,
         rgba(0, 0, 10, 0) 0%,
-        rgba(0, 0, 10, 0.24) 30%,
-        rgba(0, 0, 14, 0.62) 64%,
-        rgba(4, 5, 30, 0.86) 88%,
-        rgba(5, 6, 36, 0.84) 100%
+        rgba(0, 0, 12, 0.16) 35%,
+        rgba(2, 3, 22, 0.48) 70%,
+        var(--bg) 100%
       );
     }
     html.light .curtain-sheet {
-      background: rgba(244, 246, 251, 0.84);
-      backdrop-filter: blur(18px) saturate(135%);
-      -webkit-backdrop-filter: blur(18px) saturate(135%);
+      background: var(--bg);
       box-shadow:
-        0 -48px 96px -4px rgba(7, 9, 43, 0.26),
-        0 -18px 40px rgba(7, 9, 43, 0.16),
-        0 -4px 14px rgba(7, 9, 43, 0.10);
+        0 -44px 88px -8px rgba(7, 9, 43, 0.18),
+        0 -14px 32px rgba(7, 9, 43, 0.10);
     }
     html.light .curtain-sheet::before {
       background: linear-gradient(
         180deg,
         rgba(15, 23, 84, 0) 0%,
-        rgba(15, 23, 84, 0.08) 34%,
-        rgba(15, 23, 84, 0.18) 68%,
-        rgba(220, 227, 244, 0.84) 88%,
-        rgba(244, 246, 251, 0.84) 100%
+        rgba(15, 23, 84, 0.05) 38%,
+        rgba(15, 23, 84, 0.12) 72%,
+        var(--bg) 100%
       );
     }
 
@@ -3427,8 +3419,15 @@ const siteCfgJson = JSON.stringify(siteCfg);
         constSvg.setAttribute('viewBox', `0 0 ${w} ${totalH}`);
         constSvg.style.height = totalH + 'px';
 
-        // Orion-inspired vertical constellation spine
+        // Orion-inspired vertical constellation spine + card horizontal stagger matching each star
         const spineX = [xA + 2, xB - 2, xMid - 4, xB - 4, xA + 4];
+        const minStarX = Math.min(...spineX);
+        rows.forEach((r, i) => {
+          const sx = spineX[i % spineX.length];
+          const shift = Math.round((sx - minStarX) * (isMob ? 0.65 : 1.05));
+          r.style.marginLeft = shift + 'px';
+        });
+
         const pts = rows.map((r, i) => ({
           x: spineX[i % spineX.length],
           y: Math.round(r.offsetTop + Math.min(30, r.offsetHeight * 0.34))
