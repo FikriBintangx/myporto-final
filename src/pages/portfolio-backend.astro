@@ -8,7 +8,7 @@ const siteCfg = await readThemeConfig(Astro.request.headers.get('cookie'));
 const siteCfgJson = JSON.stringify(siteCfg);
 ---
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class={siteCfg.colorMode === 'dark' ? 'dark' : 'light'}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -3741,7 +3741,7 @@ const siteCfgJson = JSON.stringify(siteCfg);
     }
     const initMode = __srvCfg.colorMode === 'system'
       ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
-      : (__srvCfg.colorMode || localStorage.getItem('p2_theme') || 'dark');
+      : (__srvCfg.colorMode || localStorage.getItem('p2_theme') || 'light');
     const initLang = __srvCfg.defaultLang || localStorage.getItem('p2_lang') || 'id';
     applyTheme(initMode);
     applyLanguage(initLang);
