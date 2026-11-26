@@ -2,6 +2,9 @@
 // Fikri Bintang Purnomo — Portfolio Dynamic Theme Router
 import { readThemeConfig } from '../lib/theme-store';
 
+Astro.response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+Astro.response.headers.set('Vary', 'Cookie');
+
 const queryTheme = Astro.url.searchParams.get('theme');
 const siteCfg = await readThemeConfig(Astro.request.headers.get('cookie'));
 const resolvedTheme = queryTheme || siteCfg.activeTheme;
